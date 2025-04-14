@@ -1,0 +1,9 @@
+i001 2025/02/05 :: hello world 👋 
+i002 2025/02/05 :: termux backup: tar -zcf /data/data/com.termux/files/home/storage/sdcard/termux-backup.tar.gz -C /data/data/com.termux/files ./home ./usr
+i003 2025/02/07 :: termux restore: tar -zxf /data/data/com.termux/files/home/storage/sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
+i004 2025/02/05 :: shortcut: ln -s /storage/0000-709B sdcard
+i005 2025/02/06 :: Python https://docs.python.org/3/tutorial/index.html
+i006 2025/02/06 :: Python https://youtube.com/playlist?list=PLcmhH1jyE42RYznW1IgYW1b2sLEcr9lp8
+i007 2025/02/07 :: nano NrLini: Alt + #
+i008 2025/02/07 :: nano ZawijanieTeksu: ESC + $
+i008 2025/02/07 :: show nano
