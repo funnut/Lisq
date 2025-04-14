@@ -2,6 +2,8 @@
 
 From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that work with `.txt` files.
 
+![Zrzut ekranu](img/screenshot.png)
+
 Code available under a non-commercial license (see LICENSE file).
 
 **Copyright © funnut**
