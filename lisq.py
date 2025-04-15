@@ -1,6 +1,6 @@
 ###### lisq #######
 ################### by © funnut
-
+#
 
 import os, sys, shlex, re # match() for reiterate()
 import shutil # szerokość terminalu
