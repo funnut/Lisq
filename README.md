@@ -4,7 +4,7 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 ![Zrzut ekranu](screenshot.jpg)
 
-Code available under a non-commercial license (see LICENSE file).
+*Code available under a non-commercial license (see LICENSE file).*
 
 **Copyright © funnut**
 
