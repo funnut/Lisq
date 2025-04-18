@@ -43,5 +43,6 @@ edit            # Open the notes file in editor
 ```bash
 lisq [command] [argument]
 lisq / sample note text
+lisq add sample note text
 alias lisq="python3 /file/path/lisq.py"
 ```
