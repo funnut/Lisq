@@ -10,7 +10,7 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 ## Instalation
 
-`apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && pkg install python3 -y && echo 'alias lisq="python3 ~/Lisq/lisq.py"' >> ~/.bashrc && cd Lisq`
+`apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && pkg install python -y && echo 'alias lisq="python3 ~/Lisq/lisq.py"' >> ~/.bashrc && cd Lisq`
 
 then type `lisq`
 
