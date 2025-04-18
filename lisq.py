@@ -185,7 +185,6 @@ def delete(arg):
     else:
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
-
         if numer > 0:
             yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{arg}'.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
@@ -240,8 +239,6 @@ if __name__ == "__main__":
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
             sys.exit()
-
-
     readline.set_history_length(100)
     print(fr"""
  _ _
