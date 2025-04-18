@@ -1,4 +1,4 @@
-# About
+# Lisq
 
 From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that work with `.txt` files.
 
@@ -12,9 +12,9 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 `apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && echo 'alias lisq="python3 ~/Lisq/lisq.py"' >> ~/.bashrc && cd Lisq`
 
-# Commands
+## Commands
 
-```
+```bash
 quit, q, exit   # Exit the app  
 clear, cls      # Clear the screen  
 
@@ -34,7 +34,7 @@ edit            # Open the notes file in editor
 ```
 
 
-# CLI Usage
+## CLI Usage
 
 ```bash
 lisq [command] [argument]
