@@ -73,7 +73,7 @@ def glowna_funkcja(command):
             ": edit         - open the notes file in editor\n\n"
             "# CLI Usage\n\n"
             "lisq [command] [argument]\n"
-            "lisq :: sample note text\n"
+            "lisq / sample note text\n"
             "alias lisq=\"python3 /file/path/lisq.py\"\n")
         return
 ### FILE
