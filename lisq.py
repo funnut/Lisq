@@ -74,6 +74,8 @@ def glowna_funkcja(command):
             "# CLI Usage\n\n"
             "lisq [command] [argument]\n"
             "lisq / sample note text\n"
+            "lisq add sample note text\n"
+            "~/.bashrc:\n"
             "alias lisq=\"python3 /file/path/lisq.py\"\n")
         return
 ### FILE
