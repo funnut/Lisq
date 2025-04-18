@@ -231,7 +231,7 @@ def pobierz_input():
 """Interfejs wiersza poleceń"""
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        if sys.argv[1].lower() in ['add','::','/']:
+        if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
             sys.exit()
