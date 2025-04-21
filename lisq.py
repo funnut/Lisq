@@ -8,7 +8,7 @@ from datetime import datetime
 from random import randrange, choice
 
 
-notesfilepath = '/data/data/com.termux/files/home/notatnik/notatnik.txt'
+notesfilepath = '/data/data/com.termux/files/home/_lisq/notatnik.txt'
 
 
 def glowna_funkcja(command):
