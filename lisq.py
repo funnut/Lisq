@@ -1,3 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/python3
+
 ###### lisq #######
 ################### by © funnut https://github.com/funnut
 
