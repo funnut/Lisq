@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/python3
+#!/data/data/com.termux/files/usr/bin/python
 
 ###### lisq #######
 ################### by © funnut https://github.com/funnut
@@ -10,11 +10,11 @@ from datetime import datetime
 from random import randrange, choice
 
 
-notesfilepath = '/data/data/com.termux/files/home/_lisq/notatnik.txt'
+notesfilepath = os.path.expanduser("~/kod/5challenge/3_lisq/notatnik.txt")
 
 
 def glowna_funkcja(command):
-    cmd, arg = command  # Rozpakowanie tuple
+    cmd, arg = command
 ### ADD
     if cmd == 'add':
         if not arg:
@@ -39,7 +39,7 @@ def glowna_funkcja(command):
         read_file(arg if arg else 'last')
         return
 ### CLEAR SCREEN
-    elif cmd in ['cls', 'clear']:
+    elif cmd in ['clear', 'c']:
         print("\n" * 50)
         return
 ### REITERATE
@@ -61,7 +61,7 @@ def glowna_funkcja(command):
             "https://github.com/funnut\n\n"
             "# Commands\n\n"
             ": quit, q, exit\n"
-            ": clear, cls   - clear screen\n"
+            ": clear, c     - clear screen\n"
             ": show, s      - show recent notes (default 10)\n"
             ": show [int]   - show number of recent notes\n"
             ": show [str]   - show notes containing [string]\n"
@@ -78,7 +78,7 @@ def glowna_funkcja(command):
             "lisq / sample note text\n"
             "lisq add sample note text\n"
             "~/.bashrc:\n"
-            "alias lisq=\"python3 /file/path/lisq.py\"\n")
+            "alias lisq=\"python /file/path/lisq.py\"\n")
         return
 ### FILE
     elif cmd == 'path':
@@ -154,8 +154,8 @@ def write_file(a):
     data_ = datetime.now().strftime("%Y/%m/%d")
     with open(notesfilepath, 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
-    read_file('1')
-    print("Notatka została dodana.\n")
+#    read_file('1')
+    print("\nNotatka została dodana.\n")
 
 
 def delete(arg):
