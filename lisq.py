@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange, choice
 
 
-notesfilepath = os.path.expanduser("~/kod/5challenge/3_lisq/notatnik.txt")
+notesfilepath = os.path.expanduser("~/kod/notatnik.txt")
 
 
 def glowna_funkcja(command):
