@@ -45,5 +45,5 @@ lisq [command] [argument]
 lisq / sample note text
 lisq add sample note text
 ~/.bashrc:
-alias lisq="python3 /file/path/lisq.py"
+alias lisq="python /file/path/lisq.py"
 ```
