@@ -95,6 +95,7 @@ def glowna_funkcja(command):
         sys.exit()
 ### INVALID COMMAND
     print("\nNieprawidłowe polecenie.\n")
+    print(cmd, arg)
 
 
 def sprawdz_input(usr_input):
