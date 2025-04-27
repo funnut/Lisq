@@ -61,24 +61,24 @@ def glowna_funkcja(command):
             "https://github.com/funnut\n\n"
             "# Commands\n\n"
             ": quit, q, exit\n"
-            ": clear, c     - clear screen\n"
-            ": show, s      - show recent notes (default 10)\n"
-            ": show [int]   - show number of recent notes\n"
-            ": show [str]   - show notes containing [string]\n"
-            ": show all     - show all notes\n"
-            ": show random  - show a random note\n"
-            ": del [str]    - delete notes containing [string]\n"
-            ": del last, l  - delete the last note\n"
-            ": del all      - delete all notes\n"
-            ": reiterate    - renumber notes' IDs\n"
-            ": path         - show the path to the notes file\n"
-            ": edit         - open the notes file in editor\n\n"
+            ": clear, c       - clear screen\n"
+            ": show, s        - show recent notes (default 10)\n"
+            ": show [int]     - show number of recent notes\n"
+            ": show [str]     - show notes containing [string]\n"
+            ": show all       - show all notes\n"
+            ": show random, r - show a random note\n"
+            ": del [str]      - delete notes containing [string]\n"
+            ": del last, l    - delete the last note\n"
+            ": del all        - delete all notes\n"
+            ": reiterate      - renumber notes' IDs\n"
+            ": path           - show the path to the notes file\n"
+            ": edit           - open the notes file in editor\n\n"
             "# CLI Usage\n\n"
             "lisq [command] [argument]\n"
-            "lisq / sample note text\n"
-            "lisq add sample note text\n"
+            "lisq / \'sample note text\'\n"
+            "lisq add \'sample note text\'\n"
             "~/.bashrc:\n"
-            "alias lisq=\"python /file/path/lisq.py\"\n")
+            "alias lisq=\'python /file/path/lisq.py\'\n")
         return
 ### FILE
     elif cmd == 'path':
@@ -95,7 +95,7 @@ def glowna_funkcja(command):
         sys.exit()
 ### INVALID COMMAND
     print("\nNieprawidłowe polecenie.\n")
-    print(cmd, arg)
+    print('command: [',command, ']\n')
 
 
 def sprawdz_input(usr_input):

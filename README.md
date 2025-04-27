@@ -10,7 +10,7 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 ## Instalation
 
-`apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && pkg install python -y && echo 'alias lisq="python3 ~/Lisq/lisq.py"' >> ~/.bashrc && cd Lisq`
+`apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && pkg install python -y && echo 'alias lisq="python ~/Lisq/lisq.py"' >> ~/.bashrc && cd Lisq`
 
 restart Termux or `source ~/.bashrc`
 
@@ -20,7 +20,7 @@ then type `lisq`
 
 ```bash
 quit, q, exit   # Exit the app  
-clear, cls      # Clear the screen  
+clear, c        # Clear the screen  
 
 show, s         # Show recent notes (default 10)  
 show [int]      # Show [integer] number of recent notes  
@@ -45,5 +45,5 @@ lisq [command] [argument]
 lisq / 'sample note text'
 lisq add 'sample note text'
 ~/.bashrc:
-alias lisq="python /file/path/lisq.py"
+alias lisq='python /file/path/lisq.py'
 ```
