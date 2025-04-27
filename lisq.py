@@ -47,7 +47,7 @@ def glowna_funkcja(command):
         return
 ### CLEAR SCREEN
     elif cmd in ['clear', 'c']:
-        print("\n" * 50)
+        print ("\n" * 50)
         return
 ### REITERATE
     elif cmd == 'reiterate':
@@ -61,7 +61,7 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print(f"{COLORS["green"]}\n# About\n\n"
+        print (f"{COLORS["green"]}\n# About\n\n"
             f"{COLORS["blue"]}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
@@ -89,20 +89,20 @@ def glowna_funkcja(command):
         return
 ### FILE
     elif cmd == 'path':
-        print(f"{COLORS["blue"]}\n{notesfilepath}{COLORS["reset"]}\n")
+        print (f"{COLORS["blue"]}\n{notesfilepath}{COLORS["reset"]}\n")
         return
 ### EDIT
     elif cmd == 'edit':
-        print('')
+        print ('')
         os.system(f"nano {notesfilepath}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
-        print('')
+        print ('')
         sys.exit()
 ### INVALID COMMAND
-    print("\nNieprawidłowe polecenie.\n")
-    print(f"{COLORS["green"]}command: [", command ,f"]{COLORS["reset"]}\n")
+    print ("\nNieprawidłowe polecenie.\n")
+    print (f"command: [ {COLORS['green']}{command}{COLORS['reset']} ]\n")
 
 
 def sprawdz_input(usr_input):
