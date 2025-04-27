@@ -17,7 +17,8 @@ COLORS = {
     "red": "\033[31m",
     "green": "\033[32m",
     "blue": "\033[34m",
-    "yellow": "\033[33m",}
+    "yellow": "\033[33m",
+}
 
 def glowna_funkcja(command):
     cmd, arg = command
@@ -60,13 +61,13 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print (f"{COLORS["green"]}\n# About\n\n"
-            f"{COLORS["blue"]}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
+        print (f"{COLORS["blue"]}\n# About\n\n"
+            f"{COLORS["reset"]}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
             "https://github.com/funnut\n\n"
-            f"{COLORS["green"]}# Commands\n\n"
-            f"{COLORS["blue"]}: quit, q, exit\n"
+            f"{COLORS["blue"]}# Commands\n\n"
+            f"{COLORS["reset"]}: quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
             ": show [int]     - show number of recent notes\n"
@@ -79,8 +80,8 @@ def glowna_funkcja(command):
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
             ": edit           - open the notes file in editor\n\n"
-            f"{COLORS["green"]}# CLI Usage\n\n"
-            f"{COLORS["blue"]}\033[34mlisq [command] [argument]\n"
+            f"{COLORS["blue"]}# CLI Usage\n\n"
+            f"{COLORS["reset"]}lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n"
             "~/.bashrc:\n"
@@ -194,7 +195,7 @@ def delete(arg):
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających {COLORS["blue"]}{arg}{COLORS["reset"]}.\nCzy chcesz kontynuować? (t/n): ")
+            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{COLORS["blue"]}{arg}{COLORS["reset"]}'.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(notesfilepath, "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
