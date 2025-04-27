@@ -101,7 +101,7 @@ def glowna_funkcja(command):
         print ('')
         sys.exit()
 ### INVALID COMMAND
-    print ("\nNieprawidłowe polecenie.\n")
+    print ("\n\aNieprawidłowe polecenie.\n")
     print (f"command: [ {COLORS['green']}{command}{COLORS['reset']} ]\n")
 
 
