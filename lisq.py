@@ -17,8 +17,7 @@ COLORS = {
     "red": "\033[31m",
     "green": "\033[32m",
     "blue": "\033[34m",
-    "yellow": "\033[33m",
-}
+    "yellow": "\033[33m",}
 
 def glowna_funkcja(command):
     cmd, arg = command
