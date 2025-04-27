@@ -26,7 +26,7 @@ show, s         # Show recent notes (default 10)
 show [int]      # Show [integer] number of recent notes  
 show [str]      # Show notes containing [string]  
 show all        # Show all notes  
-show random     # Show a random note  
+show random, r  # Show a random note  
 
 del [str]       # Delete notes containing [string]  
 del last, l     # Delete the last note  
@@ -42,8 +42,8 @@ edit            # Open the notes file in editor
 
 ```bash
 lisq [command] [argument]
-lisq / sample note text
-lisq add sample note text
+lisq / 'sample note text'
+lisq add 'sample note text'
 ~/.bashrc:
 alias lisq="python /file/path/lisq.py"
 ```
