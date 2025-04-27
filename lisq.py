@@ -61,12 +61,12 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print("\n# About\n\n"
+        print(f"{COLORS["green"]}\n# About\n\n"
             f"{COLORS["blue"]}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
-            f"https://github.com/funnut{COLORS["reset"]}\n\n"
-            "# Commands\n\n"
+            "https://github.com/funnut\n\n"
+            f"{COLORS["green"]}# Commands\n\n"
             f"{COLORS["blue"]}: quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
@@ -79,8 +79,8 @@ def glowna_funkcja(command):
             ": del all        - delete all notes\n"
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
-            f": edit           - open the notes file in editor{COLORS["reset"]}\n\n"
-            "# CLI Usage\n\n"
+            ": edit           - open the notes file in editor\n\n"
+            f"{COLORS["green"]}# CLI Usage\n\n"
             f"{COLORS["blue"]}\033[34mlisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n"
@@ -89,7 +89,7 @@ def glowna_funkcja(command):
         return
 ### FILE
     elif cmd == 'path':
-        print(f"\n{notesfilepath}\n")
+        print(f"{COLORS["blue"]}\n{notesfilepath}{COLORS["reset"]}\n")
         return
 ### EDIT
     elif cmd == 'edit':
