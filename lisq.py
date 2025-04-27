@@ -12,6 +12,13 @@ from random import randrange, choice
 
 notesfilepath = os.path.expanduser("~/kod/notatnik.txt")
 
+COLORS = {
+    "reset": "\033[0m",
+    "red": "\033[31m",
+    "green": "\033[32m",
+    "blue": "\033[34m",
+    "yellow": "\033[33m",
+}
 
 def glowna_funkcja(command):
     cmd, arg = command
@@ -55,12 +62,12 @@ def glowna_funkcja(command):
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
         print("\n# About\n\n"
-            "\033[34mFrom Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
+            f"{COLORS["blue"]}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
-            "https://github.com/funnut\033[0m\n\n"
+            f"https://github.com/funnut{COLORS["reset"]}\n\n"
             "# Commands\n\n"
-            "\033[34m: quit, q, exit\n"
+            f"{COLORS["blue"]}: quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
             ": show [int]     - show number of recent notes\n"
@@ -72,13 +79,13 @@ def glowna_funkcja(command):
             ": del all        - delete all notes\n"
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
-            ": edit           - open the notes file in editor\033[0m\n\n"
+            f": edit           - open the notes file in editor{COLORS["reset"]}\n\n"
             "# CLI Usage\n\n"
-            "\033[34mlisq [command] [argument]\n"
+            f"{COLORS["blue"]}\033[34mlisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n"
             "~/.bashrc:\n"
-            "alias lisq=\'python /file/path/lisq.py\'\033[0m\n")
+            f"alias lisq=\'python /file/path/lisq.py\'{COLORS["reset"]}\n")
         return
 ### FILE
     elif cmd == 'path':
@@ -95,7 +102,7 @@ def glowna_funkcja(command):
         sys.exit()
 ### INVALID COMMAND
     print("\nNieprawidłowe polecenie.\n")
-    print('\033[34mcommand: [',command, ']\033[0m\n')
+    print(f"{COLORS["green"]}command: [", command ,f"]{COLORS["reset"]}\n")
 
 
 def sprawdz_input(usr_input):
@@ -132,7 +139,7 @@ def read_file(a):
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
-                print(f"\033[34m{parts[0]} {formatted_date}\033[0m \033[32m{' '.join(parts[2:]).strip()}\033[0m")
+                print(f"{COLORS["blue"]}{parts[0]} {formatted_date}{COLORS["reset"]} {COLORS["green"]}{' '.join(parts[2:]).strip()}{COLORS["reset"]}")
             print(f'\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.\n')
     except FileNotFoundError:
         print(f"\n'{notesfilepath}'\n\nPlik nie został znaleziony.\n")
@@ -221,8 +228,8 @@ def pobierz_input():
     """Pobiera polecenie użytkownika w trybie interaktywnym."""
     while True:
         try:
-            print("\033[32m>>\033[0m add / del / show")
-            usr_input = shlex.split(input("\033[32m>> \033[0m").strip())
+            print(f"{COLORS["green"]}>>{COLORS["reset"]} add / del / show")
+            usr_input = shlex.split(input(f"{COLORS["green"]}>> {COLORS["reset"]}").strip())
             glowna_funkcja(sprawdz_input(usr_input))
         except EOFError:
             print("\n")
