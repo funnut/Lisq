@@ -41,7 +41,7 @@ edit            # Open the notes file in editor
 ## CLI Usage
 
 ```bash
-lisq [command] [argument]
+lisq [cmd] [arg]
 lisq / 'sample note text'
 lisq add 'sample note text'
 ~/.bashrc:

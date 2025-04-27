@@ -74,7 +74,7 @@ def glowna_funkcja(command):
             ": path           - show the path to the notes file\n"
             ": edit           - open the notes file in editor\n\n"
             "# CLI Usage\n\n"
-            "lisq [command] [argument]\n"
+            "lisq [cmd] [arg]\n"
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n"
             "~/.bashrc:\n"
