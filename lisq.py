@@ -194,7 +194,7 @@ def delete(arg):
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{arg}'.\nCzy chcesz kontynuować? (t/n): ")
+            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających {COLORS["blue"]}{arg}{COLORS["reset"]}.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(notesfilepath, "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
