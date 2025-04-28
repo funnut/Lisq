@@ -87,9 +87,9 @@ def glowna_funkcja(command):
             "~/.bashrc:\n"
             f"alias lisq=\'python /file/path/lisq.py\'{COLORS["reset"]}\n")
         return
-### FILE
+### PATH
     elif cmd == 'path':
-        print (f"{COLORS["blue"]}\n{notesfilepath}{COLORS["reset"]}\n")
+        print (f"{COLORS["green"]}\n{notesfilepath}{COLORS["reset"]}\n")
         return
 ### EDIT
     elif cmd == 'edit':
@@ -228,8 +228,8 @@ def pobierz_input():
     """Pobiera polecenie użytkownika w trybie interaktywnym."""
     while True:
         try:
-            print(f"{COLORS["green"]}>>{COLORS["reset"]} add / del / show")
-            usr_input = shlex.split(input(f"{COLORS["green"]}>> {COLORS["reset"]}").strip())
+            print(">> add / del / show")
+            usr_input = shlex.split(input(">> ").strip())
             glowna_funkcja(sprawdz_input(usr_input))
         except EOFError:
             print("\n")
