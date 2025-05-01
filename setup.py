@@ -14,7 +14,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "lisq = lisq.__main__:main"
+            "lisq = lisq.lisq:main"
         ]
     },
     license="Non-Commercial",
