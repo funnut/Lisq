@@ -102,7 +102,7 @@ def glowna_funkcja(command):
         sys.exit()
 ### INVALID COMMAND
     print ("\n\aNieprawidłowe polecenie.\n")
-    print (f"command: [ {COLORS['green']}{command}{COLORS['reset']} ]\n")
+    print (f"command: {COLORS['green']}{command}{COLORS['reset']}\n")
 
 
 def sprawdz_input(usr_input):
