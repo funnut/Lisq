@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="test",
+    version="0.0.5",
     description="Single file note-taking app that work with .txt files",
     url="https://github.com/funnut/Lisq.git",
     author="funnut",
