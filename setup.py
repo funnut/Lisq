@@ -3,7 +3,7 @@ from config import notesfilepath
 
 setup(
     name="lisq",
-    version="2025.05.01",
+    version="2025.05.02",
     description="Single file note-taking app that work with .txt files",
     author="funnut",
     author_email="essdoem@yahoo.com",
@@ -29,6 +29,6 @@ setup(
 )
 
 def post_install():
-    print(f"Lisq has been successfully installed. The default path to notes is {notesfilepath}")
+    print("Lisq has been successfully installed. The default path to notes is ~/notesdata.txt")
 
 post_install()
