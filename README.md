@@ -20,7 +20,7 @@ Default path to your notes is `~/notesdata.txt`.
 
 To change it, set the following environment variable in your system by adding it to `~/.bashrc` or `~/.zshrc`.
 
-```export NOTES_PATH="/my/file/path/notes.txt"```
+```export NOTES_PATH="/file/path/notes.txt"```
 
 ## Commands
 
