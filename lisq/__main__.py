@@ -1,5 +1,6 @@
 from lisq.core import pobierz_input, glowna_funkcja, sprawdz_input, write_file
 import sys
+from random import randrange
 
 def main():
     if len(sys.argv) > 1:
