@@ -17,7 +17,7 @@ setup(
     ],
     entry_points={
     'console_scripts': [
-        'lisq=lisq.lisq:glowna_funkcja(sprawdz_input(usr_input))',
+        'lisq=lisq.lisq:glowna_funkcja',
     ],
     },
     include_package_data=True,
