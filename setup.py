@@ -25,10 +25,4 @@ setup(
     ],
     python_requires=">=3.6",
     include_package_data=True,
-
-def post_install():
-    print("Lisq has been successfully installed. The default path to notes is ~/notesdata.txt")
-
-post_install()
-
 )
