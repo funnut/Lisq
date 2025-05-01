@@ -2,10 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="0.11.1",
+    version="2025.05.01",
     description="Single file note-taking app that work with .txt files",
     author="funnut",
-    author_email="",
+    author_email="essdoem@yahoo.com",
+    project_urls={
+        "Bug Trucker": "https://github.com/funnut/Lisq/issues",
+        "Source Code": "https://github.com/funnut/Lisq.git",
+    },
     url="https://github.com/funnut/Lisq",
     packages=find_packages(),
     entry_points={
@@ -13,10 +17,12 @@ setup(
             "lisq = lisq.__main__:main"
         ]
     },
+    license="Non-Commercial",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",  # zmień jeśli masz inny
+        "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.6",
+    include_package_data=True,
 )
