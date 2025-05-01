@@ -11,7 +11,7 @@ from datetime import datetime
 from random import randrange, choice
 
 
-notesfilepath = os.path.expanduser("~/kod/notatnik.txt")
+notesfilepath = os.path.expanduser("~/notesdata.txt")
 defaulteditor = "nano"
 
 COLORS = {
