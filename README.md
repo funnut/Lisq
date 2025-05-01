@@ -54,6 +54,4 @@ edit            # Open the notes file in editor
 lisq [command] [argument]
 lisq / 'sample note text'
 lisq add 'sample note text'
-~/.bashrc:
-alias lisq='python /file/path/lisq.py'
 ```

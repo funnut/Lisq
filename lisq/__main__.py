@@ -84,9 +84,7 @@ def glowna_funkcja(command):
             f"{COLORS['green']}# CLI Usage\n\n"
             f"{COLORS['purple']}lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
-            "lisq add \'sample note text\'\n"
-            "~/.bashrc:\n"
-            f"alias lisq=\'python /file/path/lisq.py\'{COLORS['reset']}\n")
+            f"lisq add \'sample note text\'{COLORS['reset']}\n")
         return
 ### PATH
     elif cmd == 'path':

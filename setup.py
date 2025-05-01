@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="2025.05.02",
+    version="1.1",
     description="Single file note-taking app that work with .txt files",
     author="funnut",
     author_email="essdoem@yahoo.com",
@@ -25,9 +25,10 @@ setup(
     ],
     python_requires=">=3.6",
     include_package_data=True,
-)
 
 def post_install():
     print("Lisq has been successfully installed. The default path to notes is ~/notesdata.txt")
 
 post_install()
+
+)
