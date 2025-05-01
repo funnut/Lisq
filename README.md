@@ -10,11 +10,11 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 ## Instalation
 
-`apt update && apt upgrade -y && cd && pkg install git -y && git clone https://github.com/funnut/Lisq.git && pkg install python -y && echo "alias lisq='python ~/Lisq/lisq.py'" >> ~/.bashrc && cd Lisq`
-
-restart Termux or `source ~/.bashrc`
+`pip install git+https://github.com/funnut/Lisq.git`
 
 then type `lisq`
+
+In '__main__.py' ('pip show lisq' look for Location) you can change default '~/notesdata.txt' path.
 
 ## Commands
 
