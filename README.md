@@ -22,8 +22,6 @@ To change it set following environment variable in your system by adding it to `
 
 ```export NOTES_PATH="/my/file/path/notes.txt"```
 
-(`pip show lisq` and look for Location)
-
 ## Commands
 
 ```bash
