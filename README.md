@@ -14,7 +14,7 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 then type `lisq`
 
-
+---
 
 Default path to your notes is `~/notesdata.txt`.
 
