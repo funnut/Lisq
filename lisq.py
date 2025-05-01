@@ -3,6 +3,7 @@
 ###### lisq #######
 ################### by © funnut https://github.com/funnut
 
+
 import os, sys, shlex, re # match() for reiterate()
 import shutil # szerokość terminalu
 import readline # historia poleceń
@@ -11,6 +12,7 @@ from random import randrange, choice
 
 
 notesfilepath = os.path.expanduser("~/kod/notatnik.txt")
+defaulteditor = "nano"
 
 COLORS = {
     "reset": "\033[0m",
@@ -93,7 +95,7 @@ def glowna_funkcja(command):
 ### EDIT
     elif cmd == 'edit':
         print ('')
-        os.system(f"nano {notesfilepath}")
+        os.system(f"{defaulteditor} {notesfilepath}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
