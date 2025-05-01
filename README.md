@@ -14,7 +14,7 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 then type `lisq`
 
-In '__main__.py' ('pip show lisq' look for Location) you can change default '~/notesdata.txt' path.
+In [__main__.py](lisq/__main__.py) (`pip show lisq` look for Location) you can change default '~/notesdata.txt' path.
 
 ## Commands
 
