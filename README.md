@@ -10,7 +10,9 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 ## Instalation
 
-`pip install git+https://github.com/funnut/Lisq.git`
+```bash
+pip install git+https://github.com/funnut/Lisq.git
+```
 
 then type `lisq`
 
