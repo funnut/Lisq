@@ -11,8 +11,8 @@ from datetime import datetime
 from random import randrange, choice
 
 
-notesfilepath = os.path.expanduser("~/notesdata.txt")
-defaulteditor = "nano"
+NOTES_PATH = os.getenv("NOTES_PATH",os.path.expanduser("~/notesdata.txt"))
+DEFAULT_EDITOR = os.getenv("DEFAULT_EDITOR","nano")
 
 COLORS = {
     "reset": "\033[0m",
@@ -90,12 +90,12 @@ def glowna_funkcja(command):
         return
 ### PATH
     elif cmd == 'path':
-        print (f"{COLORS['purple']}\n{notesfilepath}{COLORS['reset']}\n")
+        print (f"{COLORS['purple']}\n{NOTES_PATH}{COLORS['reset']}\n")
         return
 ### EDIT
     elif cmd == 'edit':
         print ('')
-        os.system(f"{defaulteditor} {notesfilepath}")
+        os.system(f"{DEFAULT_EDITOR} {NOTES_PATH}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
@@ -121,7 +121,7 @@ def read_file(a):
     terminal_width = shutil.get_terminal_size().columns
     print('\n _id _data','=' * (terminal_width-12))
     try:
-        with open(notesfilepath, 'r', encoding='utf-8') as plik:
+        with open(NOTES_PATH, 'r', encoding='utf-8') as plik:
             linie = plik.readlines()
             if a == 'all':
                 do_wyswietlenia = linie
@@ -143,13 +143,13 @@ def read_file(a):
                 print(f"{COLORS['purple']}{parts[0]} {formatted_date}{COLORS["reset"]} {COLORS['green']}{' '.join(parts[2:]).strip()}{COLORS['reset']}")
             print(f'\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.\n')
     except FileNotFoundError:
-        print(f"\n'{notesfilepath}'\n\nPlik nie został znaleziony.\n")
+        print(f"\n'{NOTES_PATH}'\n\nPlik nie został znaleziony.\n")
 
 
 def write_file(a):
     """Dodaje nową notatkę do pliku."""
     try:
-        with open(notesfilepath, 'r', encoding='utf-8') as file:
+        with open(NOTES_PATH, 'r', encoding='utf-8') as file:
             lines = file.readlines()
         if lines:
             last_line = lines[-1]
@@ -161,7 +161,7 @@ def write_file(a):
         id_ = 1
     formatted_id = f"i{str(id_).zfill(3)}"
     data_ = datetime.now().strftime("%Y/%m/%d")
-    with open(notesfilepath, 'a', encoding='utf-8') as file:
+    with open(NOTES_PATH, 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
     print("\nNotatka została dodana.\n")
 
@@ -172,12 +172,12 @@ def delete(arg):
     - 'l' - usuwa ostatnią notatkę,
     - 'all' - usuwa wszystkie notatki.
     """
-    with open(notesfilepath, "r", encoding="utf-8") as plik:
+    with open(NOTES_PATH, "r", encoding="utf-8") as plik:
         linie = plik.readlines()
     if arg == "all":
         yesno = input("\nTa operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): ")
         if yesno.lower() in ['y','yes','t','tak']:
-            open(notesfilepath, "w", encoding="utf-8").close()  # Czyścimy plik
+            open(NOTES_PATH, "w", encoding="utf-8").close()  # Czyścimy plik
             print("\nWszystkie notatki zostały usunięte.\n")
         else:
             print("\nOperacja anulowana.\n")
@@ -185,7 +185,7 @@ def delete(arg):
         if linie:
             yesno = input("\nTa operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
-                with open(notesfilepath, "w", encoding="utf-8") as plik:
+                with open(NOTES_PATH, "w", encoding="utf-8") as plik:
                     plik.writelines(linie[:-1])  # Zapisujemy plik bez ostatniej linii
                 print("\nOstatnia notatka została usunięta.\n")
             else:
@@ -198,7 +198,7 @@ def delete(arg):
         if numer > 0:
             yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{COLORS["purple"]}{arg}{COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
-                with open(notesfilepath, "w", encoding="utf-8") as plik:
+                with open(NOTES_PATH, "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
                 reiterate()
                 print(f"\nUsunięto {numer} notatki zawierające identyfikator {arg}.\n")
@@ -209,7 +209,7 @@ def delete(arg):
 
 
 def reiterate():
-    with open(notesfilepath, "r", encoding="utf-8") as f:
+    with open(NOTES_PATH, "r", encoding="utf-8") as f:
         linie = f.readlines()
     nowy_numer = 1
     poprawione_linie = []
@@ -221,7 +221,7 @@ def reiterate():
         else:
             nowa_linia = linia  # Zachowaj linię bez zmian
         poprawione_linie.append(nowa_linia)
-    with open(notesfilepath, "w", encoding="utf-8") as f:
+    with open(NOTES_PATH, "w", encoding="utf-8") as f:
         f.writelines(poprawione_linie)
 
 

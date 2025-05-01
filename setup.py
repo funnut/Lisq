@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+from config import notesfilepath
 
 setup(
     name="lisq",
@@ -26,3 +27,8 @@ setup(
     python_requires=">=3.6",
     include_package_data=True,
 )
+
+def post_install():
+    print(f"Lisq has been successfully installed. The default path to notes is {notesfilepath}")
+
+post_install()
