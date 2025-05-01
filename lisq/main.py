@@ -21,7 +21,7 @@ COLORS = {
     "red": "\033[31m",
 }
 
-def glowna_funkcja(command):
+def main(command):
     cmd, arg = command
 ### ADD
     if cmd == 'add':
@@ -231,7 +231,7 @@ def pobierz_input():
         try:
             print(">> add / del / show")
             usr_input = shlex.split(input(">> ").strip())
-            glowna_funkcja(sprawdz_input(usr_input))
+            main(sprawdz_input(usr_input))
         except EOFError:
             print("\n")
             usr_input = []
@@ -247,7 +247,7 @@ if __name__ == "__main__":
             sys.exit()
         else:
             usr_input = sys.argv[1:]
-            glowna_funkcja(sprawdz_input(usr_input))
+            main(sprawdz_input(usr_input))
             sys.exit()
     readline.set_history_length(100)
     print(fr"""
