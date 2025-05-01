@@ -15,6 +15,11 @@ setup(
     install_requires=[
         "requests",  # przykładowa zależność
     ],
+    entry_points={
+    'console_scripts': [
+        'lisq=lisq.cli:main',
+    ],
+    },
     include_package_data=True,
     zip_safe=False
 )
