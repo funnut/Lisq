@@ -10,4 +10,12 @@ def main():
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
     else:
+        print(fr"""
+ _ _
+| (_)___  __ _
+| | / __|/ _` |
+| | \__ \ (_| |
+|_|_|___/\__, |
+ quit - help|_|{randrange(0,1000)}
+""")
         pobierz_input()

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="0.1.0",
+    version="0.11.0",
     description="Minimalistyczny notatnik CLI na plik tekstowy",
     author="funnut",
     author_email="",
