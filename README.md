@@ -14,9 +14,12 @@ From Polish *"lisek / foxie"* – lisq is a **single file** note-taking app that
 
 then type `lisq`
 
+
+
 Default path to your notes is `~/notesdata.txt`.
 
-To change it set environment variable in your system by adding it to `~/.bashrc` or `~/.zshrc`.
+To change it set following environment variable in your system by adding it to `~/.bashrc` or `~/.zshrc`.
+
 ```export NOTES_PATH="/my/file/path/notes.txt"```
 
 (`pip show lisq` and look for Location)
