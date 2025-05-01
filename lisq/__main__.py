@@ -11,7 +11,7 @@ from datetime import datetime
 from random import randrange, choice
 
 
-NOTES_PATH = os.getenv("NOTES_PATH",os.path.expanduser("~/notesdata.txt"))
+NOTES_PATH = os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
 NOTES_EDITOR = os.getenv("NOTES_EDITOR","nano")
 
 COLORS = {
