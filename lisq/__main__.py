@@ -12,7 +12,7 @@ from random import randrange, choice
 
 
 NOTES_PATH = os.getenv("NOTES_PATH",os.path.expanduser("~/notesdata.txt"))
-DEFAULT_EDITOR = os.getenv("DEFAULT_EDITOR","nano")
+NOTES_EDITOR = os.getenv("NOTES_EDITOR","nano")
 
 COLORS = {
     "reset": "\033[0m",
@@ -95,7 +95,7 @@ def glowna_funkcja(command):
 ### EDIT
     elif cmd == 'edit':
         print ('')
-        os.system(f"{DEFAULT_EDITOR} {NOTES_PATH}")
+        os.system(f"{NOTES_EDITOR} {NOTES_PATH}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
