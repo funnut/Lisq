@@ -2,24 +2,21 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="0.11.0",
-    description="Single file note-taking app that work with .txt files",
-    url="https://github.com/funnut/Lisq.git",
+    version="0.1.0",
+    description="Minimalistyczny notatnik CLI na plik tekstowy",
     author="funnut",
-    author_email="twoj@email.com",
-    project_urls={
-        "Bug Trucker": "https://github.com/funnut/Lisq/issues",
-        "Source Code": "https://github.com/funnut/Lisq.git",
-    },
+    author_email="",
+    url="https://github.com/funnut/Lisq",
     packages=find_packages(),
-    install_requires=[
-        "requests",  # przykładowa zależność
-    ],
     entry_points={
-    'console_scripts': [
-        'lisq=lisq.lisq',
-    ],
+        "console_scripts": [
+            "lisq = lisq.__main__:main"
+        ]
     },
-    include_package_data=True,
-    zip_safe=False
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",  # zmień jeśli masz inny
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.6",
 )
