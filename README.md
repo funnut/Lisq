@@ -16,6 +16,8 @@ pip install lisq
 
 then type `lisq`
 
+> For basics of how to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+
 ---
 
 + Default path to your notes is `~/notes.txt`.
@@ -27,7 +29,6 @@ To change it, set the following variables in your system by adding it to `~/.bas
 export NOTES_PATH="/file/path/notes.txt"
 export NOTES_EDITOR="nano"
 ```
-> For basics of how to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 ## Commands
 
