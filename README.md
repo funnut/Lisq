@@ -16,7 +16,7 @@ pip install lisq
 
 then type `lisq`
 
-> For how to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+> How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 ---
 
