@@ -1,6 +1,6 @@
 # Lisq
 
-From Polish *"lisek / foxie"* – lisq is a [single file](lisq/lisq.py) note-taking app that work with `.txt` files.
+From Polish *"lisek / foxie"* – lisq is a [**single file**](lisq/lisq.py) note-taking app that work with `.txt` files.
 
 ![Zrzut ekranu](screenshot.jpg)
 
