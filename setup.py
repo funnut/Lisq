@@ -11,6 +11,8 @@ setup(
         "Source Code": "https://github.com/funnut/Lisq.git",
     },
     url="https://github.com/funnut/Lisq",
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     entry_points={
         "console_scripts": [
