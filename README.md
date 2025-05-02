@@ -21,7 +21,7 @@ then type `lisq`
 + Default path to your notes is `~/notes.txt`.
 + Default editor is `nano`.
 
-To change it, set the following environment variables in your system by adding it to `~/.bashrc` or `~/.zshrc`.
+To change it, set the following variables in your system by adding it to `~/.bashrc` or `~/.zshrc`.
 
 ```bash
 export NOTES_PATH="/file/path/notes.txt"
