@@ -7,14 +7,14 @@ setup(
     author="funnut",
     author_email="essdoem@yahoo.com",
     project_urls={
-        "Bug Trucker": "https://github.com/funnut/Lisq/issues",
-        "Source Code": "https://github.com/funnut/Lisq.git",
+        "Bug Tracker": "https://github.com/funnut/Lisq/issues",
+        "Source Code": "https://github.com/funnut/Lisq",
     },
     url="https://github.com/funnut/Lisq",
     license="Non-Commercial",
     license_files=["LICENSE"],
-    long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     packages=find_packages(),
     entry_points={
         "console_scripts": [

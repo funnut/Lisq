@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lisq"
+version = "2025.05.03"
+description = "Single file note-taking app that works with .txt files"
+authors = [
+    { name = "funnut", email = "essdoem@yahoo.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent"
+]
+dependencies = []
+
+[project.urls]
+"Bug Tracker" = "https://github.com/funnut/Lisq/issues"
+"Source Code" = "https://github.com/funnut/Lisq"
+
+[project.scripts]
+lisq = "lisq.lisq:main"
