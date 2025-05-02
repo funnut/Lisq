@@ -20,6 +20,8 @@ then type `lisq`
 
 ---
 
+### Important
+
 + Default path to your notes is `~/notes.txt`.
 + Default editor is `nano`.
 
