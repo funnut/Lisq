@@ -62,13 +62,13 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print (f"{COLORS['green']}\n# About\n\n"
-            f"{COLORS['purple']}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
+        print (f"{COLORS['purple']}\n# About\n\n"
+            f"{COLORS['green']}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
             "https://github.com/funnut\n\n"
-            f"{COLORS['green']}# Commands\n\n"
-            f"{COLORS['purple']}: quit, q, exit\n"
+            f"{COLORS['purple']}# Commands\n\n"
+            f"{COLORS['green']}: quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
             ": show [int]     - show number of recent notes\n"
@@ -81,8 +81,8 @@ def glowna_funkcja(command):
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
             ": edit           - open the notes file in editor\n\n"
-            f"{COLORS['green']}# CLI Usage\n\n"
-            f"{COLORS['purple']}lisq [command] [argument]\n"
+            f"{COLORS['purple']}# CLI Usage\n\n"
+            f"{COLORS['green']}lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
             f"lisq add \'sample note text\'{COLORS['reset']}\n")
         return
