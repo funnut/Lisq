@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="2025.05.01",
+    version="2025.05",
     description="Single file note-taking app that work with .txt files",
     author="funnut",
     author_email="essdoem@yahoo.com",
@@ -11,6 +11,8 @@ setup(
         "Source Code": "https://github.com/funnut/Lisq.git",
     },
     url="https://github.com/funnut/Lisq",
+    license="Non-Commercial",
+    license_files=["LICENSE"],
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     packages=find_packages(),
@@ -19,7 +21,6 @@ setup(
             "lisq = lisq.lisq:main"
         ]
     },
-    license="Non-Commercial",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: Other/Proprietary License",
