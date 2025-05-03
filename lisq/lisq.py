@@ -15,10 +15,11 @@ NOTES_EDITOR = os.getenv("NOTES_EDITOR","nano")
 
 COLORS = {
     "reset": "\033[0m",
-    "green": "\033[32m",
-    "purple": "\033[35m",
+    "green": "\033[92m",
+    "yellow": "\033[93m",
     "cyan": "\033[36m",
-    "red": "\033[31m",
+    "bgred": "\033[41m",
+    "bgpurple": "\033[45m",
 }
 
 def glowna_funkcja(command):
@@ -62,13 +63,13 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print (f"{COLORS['purple']}\n# About\n\n"
-            f"{COLORS['reset']}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
+        print (f"\n{COLORS['bgpurple']}# About{COLORS['reset']}\n\n"
+            "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
             "https://github.com/funnut\n\n"
-            f"{COLORS['purple']}# Commands\n\n"
-            f"{COLORS['reset']}: quit, q, exit\n"
+            f"{COLORS['bgpurple']}# Commands{COLORS['reset']}\n\n"
+            ": quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
             ": show [int]     - show number of recent notes\n"
@@ -81,14 +82,14 @@ def glowna_funkcja(command):
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
             ": edit           - open the notes file in editor\n\n"
-            f"{COLORS['purple']}# CLI Usage\n\n"
-            f"{COLORS['reset']}lisq [command] [argument]\n"
+            f"{COLORS['bgpurple']}# CLI Usage{COLORS['reset']}\n\n"
+            "lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
-            f"lisq add \'sample note text\'{COLORS['reset']}\n")
+            "lisq add \'sample note text\'\n")
         return
 ### PATH
-    elif cmd == 'path':
-        print (f"{COLORS['purple']}\n{NOTES_PATH}{COLORS['reset']}\n")
+    elif cmd in ['path','notes_path']:
+        print (f"\n{COLORS['green']}'{NOTES_PATH}'{COLORS['reset']}\n")
         return
 ### EDIT
     elif cmd == 'edit':
@@ -100,7 +101,7 @@ def glowna_funkcja(command):
         print ('')
         sys.exit()
 ### INVALID COMMAND
-    print ("\n\aNieprawidłowe polecenie.\n")
+    print (f"\n\a{COLORS['bgred']}Nieprawidłowe polecenie.{COLORS['reset']}\n")
     print (f"command: {COLORS['green']}{command}{COLORS['reset']}\n")
 
 
@@ -117,7 +118,7 @@ def sprawdz_input(usr_input):
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""
     terminal_width = shutil.get_terminal_size().columns
-    print('\n _id _data','=' * (terminal_width-12))
+    print(f"\n{COLORS['yellow']} _id _data","=" * (terminal_width-12),COLORS['reset'])
     try:
         with open(NOTES_PATH, 'r', encoding='utf-8') as plik:
             linie = plik.readlines()
@@ -138,10 +139,10 @@ def read_file(a):
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
-                print(f"{COLORS['purple']}{parts[0]} {formatted_date}{COLORS["reset"]} {COLORS['green']}{' '.join(parts[2:]).strip()}{COLORS['reset']}")
+                print(f"{COLORS['yellow']}{parts[0]} {formatted_date}{COLORS['reset']} {COLORS['green']}{' '.join(parts[2:]).strip()}{COLORS['reset']}")
             print(f'\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.\n')
     except FileNotFoundError:
-        print(f"\n'{NOTES_PATH}'\n\nPlik nie został znaleziony.\n")
+        print(f"\n'{NOTES_PATH}'\n\n{COLORS['bgred']}Plik nie został znaleziony.{COLORS['reset']}\n")
 
 
 def write_file(a):
@@ -194,7 +195,7 @@ def delete(arg):
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{COLORS["purple"]}{arg}{COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
+            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{COLORS["yellow"]}{arg}{COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(NOTES_PATH, "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
@@ -258,3 +259,4 @@ def main():
  quit - help|_|{randrange(0,1000)}
 """)
         pobierz_input()
+
