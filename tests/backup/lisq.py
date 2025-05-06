@@ -3,7 +3,6 @@
 ###### lisq #######
 ################### by © funnut https://github.com/funnut
 
-
 from . import encrypt, utils
 import os, sys, shlex, re # match() for reiterate()
 import shutil # szerokość terminalu
@@ -11,6 +10,20 @@ import readline # historia poleceń
 from datetime import datetime
 from random import randrange, choice
 from cryptography.fernet import InvalidToken
+
+
+NOTES_PATH = utils.get_setting("notes_path") or os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
+NOTES_EDITOR = utils.get_setting("notes_editor") or os.getenv("NOTES_EDITOR","nano")
+ENCRYPTION = utils.cfg_setting("encryption")
+
+COLORS = {
+    "reset": "\033[0m",
+    "green": "\033[92m",
+    "yellow": "\033[93m",
+    "cyan": "\033[36m",
+    "bgred": "\033[41m",
+    "bgpurple": "\033[45m",
+}
 
 
 def glowna_funkcja(command):
@@ -90,9 +103,9 @@ def glowna_funkcja(command):
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
         print ('')
-        if utils.cfg_encryption_setting():
-            print ('To jest if True w glowna_funkcja')
-            encrypt.encrypt(NOTES_PATH,False)
+        if ENCRYPTION:
+            print ('>> To jest if True w glowna_funkcja')
+            encrypt.encrypt(NOTES_PATH)
         sys.exit()
 ### ENCRYPTION
     elif cmd == 'encryption':
@@ -232,60 +245,43 @@ def pobierz_input():
         except EOFError:
             print("\n")
             usr_input = []
-            if utils.cfg_encryption_setting():
-                print ("To jest if True w pobierz_input()")
-                encrypt.encrypt(NOTES_PATH,encrypt.KEY_PATH)
+            if ENCRYPTION:
+                print (">> To jest if True w pobierz_input()")
+                encrypt.encrypt(NOTES_PATH)
             break
-
-
-NOTES_PATH = utils.get_setting("notes_path") or os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
-NOTES_EDITOR = utils.get_setting("notes_editor") or os.getenv("NOTES_EDITOR","nano")
-
-raw = (utils.get_setting("encryption") or '').upper()
-ENCRYPTION = None if raw in ('', 'OFF') else raw
-
-COLORS = {
-    "reset": "\033[0m",
-    "green": "\033[92m",
-    "yellow": "\033[93m",
-    "cyan": "\033[36m",
-    "bgred": "\033[41m",
-    "bgpurple": "\033[45m",
-}
 
 
 def main():
     """Interfejs wiersza poleceń"""
-    if utils.cfg_encryption_setting() == 'ON':
-        print ("To jest if ON w main()")
+    if ENCRYPTION == 'ON':
+        print (">> To jest if ON w main()")
         while True:
-            fernet = encrypt.generate_key(save_to_file=False)
+            fernet = encrypt.generate_key(save_to_file=True)
             try:
-                encrypt.decrypt(NOTES_PATH, fernet)
+                encrypt.decrypt(NOTES_PATH,fernet)
                 break
             except InvalidToken:
                 print ('Błędne hasło')
-    if utils.cfg_encryption_setting() == 'SET':
-        encrypt.decrypt(NOTES_PATH, encrypt.KEY_PATH)
-        print ("To jest if SET w main()")
+    if ENCRYPTION == 'SET':
+        print (">> To jest if SET w main()")
+        encrypt.decrypt(NOTES_PATH)
     if len(sys.argv) > 1:
         if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
-            if utils.cfg_encryption_setting():
-                print ("To jest if True po write_file()")
-                encrypt.encrypt(NOTES_PATH,encrypt.KEY_PATH)
+            if ENCRYPTION:
+                print (">> To jest if True po write_file()")
+                encrypt.encrypt(NOTES_PATH)
             sys.exit()
         else:
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
-            if utils.cfg_encryption_setting() == 'ON': # and lisq.key:
-                print ("To jest if ON po else glowna_funkcja")
-                fernet = encrypt.generate_key(save_to_file=False)
-                encrypt.encrypt(NOTES_PATH,fernet)
-            if utils.cfg_encryption_setting() == 'SET':
-                print ("To jest if SET po else glowna_funkcja")
-                encrypt.encrypt(NOTES_PATH,False)
+            if utils.cfg_setting("encryption") == 'ON':
+                print (">> To jest if ON po else glowna_funkcja")
+                encrypt.encrypt(NOTES_PATH)
+            if ENCRYPTION == 'SET':
+                print (">> To jest if SET po else glowna_funkcja")
+                encrypt.encrypt(NOTES_PATH)
             sys.exit()
     else:
         readline.set_history_length(100)

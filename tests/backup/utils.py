@@ -21,6 +21,6 @@ def set_setting(key, value):
     config[key] = value
     save_config(config)
 
-def cfg_encryption_setting():
-    raw = (get_setting("encryption") or "").upper()
+def cfg_setting(setting):
+    raw = (get_setting(setting) or "").upper()
     return None if raw in ("", "OFF") else raw
