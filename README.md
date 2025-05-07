@@ -39,14 +39,14 @@ quit, q, exit   # Exit the app
 clear, c        # Clear the screen  
 
 show, s         # Show recent notes (default 10)  
-show [int]      # Show [integer] number of recent notes  
-show [str]      # Show notes containing [string]  
-show all        # Show all notes  
-show random, r  # Show a random note  
+     [int]      # Show [integer] number of recent notes  
+     [str]      # Show notes containing [string]  
+     all        # Show all notes  
+     random, r  # Show a random note  
 
 del [str]       # Delete notes containing [string]  
-del last, l     # Delete the last note  
-del all         # Delete all notes  
+    last, l     # Delete the last note  
+    all         # Delete all notes  
 
 encryption on, off or set 
            delkey, newpass
