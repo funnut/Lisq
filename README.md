@@ -44,9 +44,9 @@ show, s         # Show recent notes (default 10)
      all        # Show all notes  
      random, r  # Show a random note  
 
-del [str]       # Delete notes containing [string]  
-    last, l     # Delete the last note  
-    all         # Delete all notes  
+del  [str]      # Delete notes containing [string]  
+     last, l    # Delete the last note  
+     all        # Delete all notes  
 
 encryption on, off or set 
            delkey, newpass
