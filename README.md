@@ -49,6 +49,7 @@ del last, l     # Delete the last note
 del all         # Delete all notes  
 
 encryption on, off or set 
+           delkey, newpass
 
 cfg keypath show, s, unset or [path]
     notespath s, unset or [path]
