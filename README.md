@@ -50,9 +50,9 @@ del all         # Delete all notes
 
 encryption on, off or set 
 
-cfg keypath show, s or [path] to set
-    notespath show, s or [path] to set
-    editor show, s or [editor] to set
+cfg keypath show, s or [path]
+    notespath show, s or [path]
+    editor show, s or [editor]
 
 reiterate       # Renumber notes' IDs  
 path            # Show the path to the notes file  
