@@ -51,8 +51,8 @@ del  [str]      # Delete notes containing [string]
 encryption on, off or set 
            del key, new pass
 
-cfg keypath show, s, unset or [path]
-    notespath s, unset or [path]
+cfg keypath show, s, unset, open or [path]
+    notespath s, unset, open or [path]
     editor s or [editor]
 
 reiterate       # Renumber notes' IDs  
