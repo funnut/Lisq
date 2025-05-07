@@ -9,24 +9,10 @@ import shutil # szerokość terminalu
 import readline # historia poleceń
 from datetime import datetime
 from random import randrange, choice
-from cryptography.fernet import InvalidToken
 
-
-NOTES_PATH = utils.get_setting("notes_path") or os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
-NOTES_EDITOR = utils.get_setting("notes_editor") or os.getenv("NOTES_EDITOR","nano")
-#ENCRYPTION = utils.cfg_setting("encryption")
-
-COLORS = {
-    "reset": "\033[0m",
-    "green": "\033[92m",
-    "yellow": "\033[93m",
-    "cyan": "\033[36m",
-    "bgred": "\033[41m",
-    "bgpurple": "\033[45m",
-}
 
 def glowna_funkcja(command):
-    cmd, arg = command
+    cmd, arg, arg1 = command
 ### ADD
     if cmd == 'add':
         if not arg:
@@ -66,12 +52,12 @@ def glowna_funkcja(command):
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print (f"\n{COLORS['bgpurple']}# About{COLORS['reset']}\n\n"
+        print (f"\n{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
             "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
             "https://github.com/funnut\n\n"
-            f"{COLORS['bgpurple']}# Commands{COLORS['reset']}\n\n"
+            f"{utils.COLORS['bgpurple']}# Commands{utils.COLORS['reset']}\n\n"
             ": quit, q, exit\n"
             ": clear, c       - clear screen\n"
             ": show, s        - show recent notes (default 10)\n"
@@ -85,52 +71,61 @@ def glowna_funkcja(command):
             ": reiterate      - renumber notes' IDs\n"
             ": path           - show the path to the notes file\n"
             ": edit           - open the notes file in editor\n\n"
-            f"{COLORS['bgpurple']}# CLI Usage{COLORS['reset']}\n\n"
+            f"{utils.COLORS['bgpurple']}# CLI Usage{utils.COLORS['reset']}\n\n"
             "lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n")
         return
 ### PATH
-    elif cmd in ['path','notes_path']:
-        print (f"\n{COLORS['green']}'{NOTES_PATH}'{COLORS['reset']}\n")
+    elif cmd in ['notespath']:
+        print (f"\n{utils.COLORS['green']}'{utils.NOTES_PATH()}'{utils.COLORS['reset']}\n")
         return
 ### EDIT
     elif cmd == 'edit':
         print ('')
-        os.system(f"{NOTES_EDITOR} {NOTES_PATH}")
+        os.system(f"{utils.NOTES_EDITOR()} {utils.NOTES_PATH()}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
         print ('')
         if utils.cfg_setting("encryption"):
 #            print ('>> To jest if True w glowna_funkcja')
-            encrypt.encrypt(NOTES_PATH)
+            encrypt.encrypt(utils.NOTES_PATH())
         sys.exit()
 ### ENCRYPTION
     elif cmd == 'encryption':
-        encrypt.switch(arg if arg else 'read')
+        encrypt.switch(arg if arg else 'read', arg1)
+        return
+### SETCFG
+    elif cmd == 'set':
+        encrypt.setcfg(arg if arg else 'read', arg1)
         return
 ### INVALID COMMAND
-    print (f"\n\a{COLORS['bgred']}Nieprawidłowe polecenie.{COLORS['reset']}\n")
-    print (f"command: {COLORS['green']}{command}{COLORS['reset']}\n")
+    print (f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
+    print (f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
 
 
 def sprawdz_input(usr_input):
     """Przetwarzanie wejścia od użytkownika na polecenie i argument."""
     if not usr_input:
-        return ('add', None)
+        return ('add', None, None)
     elif len(usr_input) == 1:
-        return (usr_input[0].lower(), None)
+        return (usr_input[0].lower(), None, None)
+    elif len(usr_input) == 2:
+        return (usr_input[0].lower(), usr_input[1], None)
     else:
-        return (usr_input[0].lower(), usr_input[1])
+        return (usr_input[0].lower(), usr_input[1], usr_input[2])
 
+# set notespath bla/bla/
+# set keypath path/
+# set editor nano
 
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""
     terminal_width = shutil.get_terminal_size().columns
-    print(f"\n{COLORS['yellow']} _id _data","=" * (terminal_width-12),COLORS['reset'])
+    print(f"\n{utils.COLORS['yellow']} _id _data","=" * (terminal_width-12),utils.COLORS['reset'])
     try:
-        with open(NOTES_PATH, 'r', encoding='utf-8') as plik:
+        with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as plik:
             linie = plik.readlines()
             if a == 'all':
                 do_wyswietlenia = linie
@@ -149,16 +144,16 @@ def read_file(a):
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
-                print(f"{COLORS['yellow']}{parts[0]} {formatted_date}{COLORS['reset']} {COLORS['green']}{' '.join(parts[2:]).strip()}{COLORS['reset']}")
+                print(f"{utils.COLORS['yellow']}{parts[0]} {formatted_date}{utils.COLORS['reset']} {utils.COLORS['green']}{' '.join(parts[2:]).strip()}{utils.COLORS['reset']}")
             print(f'\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.\n')
     except FileNotFoundError:
-        print(f"\n'{NOTES_PATH}'\n\n{COLORS['bgred']}Plik nie został znaleziony.{COLORS['reset']}\n")
+        print(f"\n'{utils.NOTES_PATH()}'\n\n{utils.COLORS['bgred']}Plik nie został znaleziony.{utils.COLORS['reset']}\n")
 
 
 def write_file(a):
     """Dodaje nową notatkę do pliku."""
     try:
-        with open(NOTES_PATH, 'r', encoding='utf-8') as file:
+        with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as file:
             lines = file.readlines()
         if lines:
             last_line = lines[-1]
@@ -170,7 +165,7 @@ def write_file(a):
         id_ = 1
     formatted_id = f"i{str(id_).zfill(3)}"
     data_ = datetime.now().strftime("%Y/%m/%d")
-    with open(NOTES_PATH, 'a', encoding='utf-8') as file:
+    with open(utils.NOTES_PATH(), 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
     print("\nNotatka została dodana.\n")
 
@@ -181,12 +176,12 @@ def delete(arg):
     - 'l' - usuwa ostatnią notatkę,
     - 'all' - usuwa wszystkie notatki.
     """
-    with open(NOTES_PATH, "r", encoding="utf-8") as plik:
+    with open(utils.NOTES_PATH(), "r", encoding="utf-8") as plik:
         linie = plik.readlines()
     if arg == "all":
         yesno = input("\nTa operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): ")
         if yesno.lower() in ['y','yes','t','tak']:
-            open(NOTES_PATH, "w", encoding="utf-8").close()  # Czyścimy plik
+            open(utils.NOTES_PATH(), "w", encoding="utf-8").close()  # Czyścimy plik
             print("\nWszystkie notatki zostały usunięte.\n")
         else:
             print("\nOperacja anulowana.\n")
@@ -194,7 +189,7 @@ def delete(arg):
         if linie:
             yesno = input("\nTa operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
-                with open(NOTES_PATH, "w", encoding="utf-8") as plik:
+                with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(linie[:-1])  # Zapisujemy plik bez ostatniej linii
                 print("\nOstatnia notatka została usunięta.\n")
             else:
@@ -205,9 +200,9 @@ def delete(arg):
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{COLORS["yellow"]}{arg}{COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
+            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
-                with open(NOTES_PATH, "w", encoding="utf-8") as plik:
+                with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
                 reiterate()
                 print(f"\nUsunięto {numer} notatki zawierające identyfikator {arg}.\n")
@@ -218,7 +213,7 @@ def delete(arg):
 
 
 def reiterate():
-    with open(NOTES_PATH, "r", encoding="utf-8") as f:
+    with open(utils.NOTES_PATH(), "r", encoding="utf-8") as f:
         linie = f.readlines()
     nowy_numer = 1
     poprawione_linie = []
@@ -230,7 +225,7 @@ def reiterate():
         else:
             nowa_linia = linia  # Zachowaj linię bez zmian
         poprawione_linie.append(nowa_linia)
-    with open(NOTES_PATH, "w", encoding="utf-8") as f:
+    with open(utils.NOTES_PATH(), "w", encoding="utf-8") as f:
         f.writelines(poprawione_linie)
 
 
@@ -246,7 +241,7 @@ def pobierz_input():
             usr_input = []
             if utils.cfg_setting("encryption"):
 #                print (">> To jest if True w pobierz_input()")
-                encrypt.encrypt(NOTES_PATH)
+                encrypt.encrypt(utils.NOTES_PATH())
             break
 
 
@@ -256,32 +251,32 @@ def main():
 #        print (">> To jest if ON w main()")
         while True:
             fernet = encrypt.generate_key(save_to_file=True)
-            result = encrypt.decrypt(NOTES_PATH,fernet)
+            result = encrypt.decrypt(utils.NOTES_PATH(),fernet)
             if result is not None:
                 break
 #            print ('Błąd: Nieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.')
     if utils.cfg_setting("encryption") == 'SET':
 #        print (">> To jest if SET w main()")
-        encrypt.decrypt(NOTES_PATH)
+        encrypt.decrypt(utils.NOTES_PATH())
     if len(sys.argv) > 1:
         if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
             if utils.cfg_setting("encryption"):
 #                print (">> To jest if True po write_file()")
-                encrypt.encrypt(NOTES_PATH)
+                encrypt.encrypt(utils.NOTES_PATH())
             sys.exit()
         else:
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
             if utils.cfg_setting("encryption") == 'ON':
 #                print (">> To jest if ON po else glowna_funkcja")
-                encrypt.encrypt(NOTES_PATH)
+                encrypt.encrypt(utils.NOTES_PATH())
             if utils.cfg_setting("encryption") == 'SET':
 #                print (">> To jest if SET po else glowna_funkcja")
-                if not os.path.exists(encrypt.KEY_PATH):
+                if not os.path.exists(utils.KEY_PATH()):
                     encrypt.generate_key(save_to_file=True)
-                encrypt.encrypt(NOTES_PATH)
+                encrypt.encrypt(utils.NOTES_PATH())
             sys.exit()
     else:
         readline.set_history_length(100)
