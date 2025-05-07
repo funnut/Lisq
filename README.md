@@ -49,7 +49,7 @@ del  [str]      # Delete notes containing [string]
      all        # Delete all notes  
 
 encryption on, off or set 
-           delkey, newpass
+           del key, new pass
 
 cfg keypath show, s, unset or [path]
     notespath s, unset or [path]
