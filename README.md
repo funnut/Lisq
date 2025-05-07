@@ -55,10 +55,7 @@ cfg keypath show, s or [path]
     editor show, s or [editor]
 
 reiterate       # Renumber notes' IDs  
-path            # Show the path to the notes file  
 edit            # Open the notes file in editor
-
-
 ```
 
 
