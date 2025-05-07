@@ -97,7 +97,7 @@ def glowna_funkcja(command):
         encrypt.switch(arg if arg else 'read', arg1)
         return
 ### SETCFG
-    elif cmd == 'set':
+    elif cmd == 'cfg':
         encrypt.setcfg(arg if arg else 'read', arg1)
         return
 ### INVALID COMMAND

@@ -4,9 +4,9 @@ import os, json
 
 
 def KEY_PATH():
-    return get_setting("keypath")  or Path.home() / ".keylisq"
+    return Path(get_setting("keypath"))  or Path.home() / ".keylisq"
 def NOTES_PATH():
-    return get_setting("notespath") or os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
+    return Path(get_setting("notespath")) or os.getenv("NOTES_PATH",os.path.expanduser("~/notes.txt"))
 def NOTES_EDITOR():
     return get_setting("editor") or os.getenv("NOTES_EDITOR","nano")
 

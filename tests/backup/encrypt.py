@@ -31,18 +31,18 @@ def encrypt(NOTES_PATH, fernet=None):
             fernet = Fernet(key)
 
         # Odczyt jako tekst
-        with open(NOTES_PATH, 'r', encoding='utf-8') as f:
+        with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as f:
             plaintext = f.read().encode('utf-8')
 
         # Szyfrowanie
         encrypted = fernet.encrypt(plaintext)
 
         # Zapis jako bajty
-        with open(NOTES_PATH, 'wb') as f:
+        with open(utils.NOTES_PATH(), 'wb') as f:
             f.write(encrypted)
 
         print("encrypted")
-#        print(f"Plik {NOTES_PATH} zaszyfrowany.")
+#        print(f"Plik {utils.NOTES_PATH()} zaszyfrowany.")
 
     except Exception as e:
         print(f"{utils.COLORS['bgred']}Błąd podczas szyfrowania.{utils.COLORS['reset']}\n{e}")
@@ -62,16 +62,16 @@ def decrypt(NOTES_PATH, fernet=None):
                 key = f.read()
             fernet = Fernet(key)
 
-        with open(NOTES_PATH, 'rb') as f:
+        with open(utils.NOTES_PATH(), 'rb') as f:
             encrypted = f.read()
 
         decrypted = fernet.decrypt(encrypted).decode('utf-8')
 
-        with open(NOTES_PATH, 'w', encoding='utf-8') as f:
+        with open(utils.NOTES_PATH(), 'w', encoding='utf-8') as f:
             f.write(decrypted)
 
         print("decrypted")
-#        print(f"Odszyfrowano notatkę: {NOTES_PATH}")
+#        print(f"Odszyfrowano notatkę: {utils.NOTES_PATH()}")
         return True
     except InvalidToken:
         print(f"\n\a{utils.COLORS['bgred']}Niepoprawne hasło.{utils.COLORS['reset']}\nNieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.\n")
@@ -133,7 +133,7 @@ def setcfg(arg, arg1):
     if arg == 'read':
         print(f"this is {arg}")
     elif arg == 'notespath': # NOTES
-        if not arg1 or arg1 in ['show','s']:
+        if arg1 in ['show','s']:
             path = utils.NOTES_PATH()
             print(f"\n{path}\n")
         elif arg1 == 'unset':
@@ -141,6 +141,8 @@ def setcfg(arg, arg1):
             path = utils.NOTES_PATH()
             print(f"\nUstawiono ścieżkę domyślną: {path}\n")
         else:
+            if not arg1:
+                arg1 = input("Podaj ścieżkę: ")
             path = Path(os.path.expanduser(arg1)).resolve()
             if str(path).endswith(".txt"):
                 utils.set_setting("notespath",str(path))
@@ -165,12 +167,13 @@ def setcfg(arg, arg1):
             else:
                 print("\nBłąd: ścieżka musi prowadzić do pliku .keylisq.\n")
     elif arg == 'editor':
-        if not arg1 or arg1 in ['show','s']:
+        if arg1 in ['show','s']:
             editor = utils.NOTES_EDITOR()
             print(f"\nEditor is set to: {editor}\n")
-        else:
-            utils.set_setting("editor",arg1)
-            print(f"Ustawiono edytor: {arg1}")
+        if not arg1:
+            arg1 = input("Podaj nazwę: ")
+        utils.set_setting("editor",arg1)
+        print(f"Ustawiono edytor: {arg1}")
     else:
         command = 'set', arg, arg1
         print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
