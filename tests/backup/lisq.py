@@ -88,10 +88,6 @@ def glowna_funkcja(command):
 #            print ('>> To jest if True w glowna_funkcja')
             encrypt.encrypt(utils.NOTES_PATH())
         sys.exit()
-### ENCRYPTION
-    elif cmd == 'encryption':
-        encrypt.switch(arg if arg else 'read', arg1)
-        return
 ### SETCFG
     elif cmd == 'cfg':
         encrypt.setcfg(arg if arg else 'read', arg1)

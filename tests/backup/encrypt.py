@@ -52,7 +52,7 @@ def encrypt(NOTES_PATH, fernet=None):
 def decrypt(NOTES_PATH, fernet=None):
     try:
         if fernet:
- #           print('decrypt(): używam podanego fernet')
+#           print('decrypt(): używam podanego fernet')
             pass
         else:
 #            print('decrypt(): ładuję klucz z pliku')
@@ -88,61 +88,21 @@ def del_file(path):
             os.remove(path)
             return True
         else:
-            print(f"Plik nie istnieje: {path}")
+#            print(f"Plik nie istnieje: {path}")
             return False
     except Exception as e:
         print(f"Nie udało się usunąć pliku '{path}': {e}")
         return False
 
 
-def switch(arg,arg1):
-    if arg == 'read':
-        setting = (utils.get_setting("encryption") or 'OFF').upper()
-        print(f"\nEncryption is set to {setting}\n")
-    elif arg == 'set':
-        key = utils.KEY_PATH()
-        del_file(key)
-        utils.set_setting("encryption", "set")
-        print("\nEncryption set to SET\n")
-    elif arg == 'on':
-        key = utils.KEY_PATH()
-        del_file(key)
-        utils.set_setting("encryption", "on")
-        print("\nEncryption set to ON\n")
-    elif arg == 'off':
-        key = utils.KEY_PATH()
-        del_file(key)
-        utils.set_setting("encryption", None)
-        print("\nEncryption set to OFF\n")
-    elif arg == 'del' and arg1 == 'key':
-        path = utils.KEY_PATH()
-        print(f"\n{path}")
-        yesno = input("\nCzy napewno chcesz usunąć klucz? (t/n): ")
-        if yesno.lower() in ['t','']:
-            key = utils.KEY_PATH()
-            del_file(key)
-            print("\nKlucz został usunięty.\n")
-        else:
-            print("\nAnulowano.\n")
-    elif arg == 'new' and arg1 == 'pass':
-        yesno = input("\nCzy napewno chcesz zmienić hasło? (t/n): ")
-        if yesno.lower() in ['t','']:
-            key = utils.KEY_PATH()
-            del_file(key)
-            generate_key(save_to_file=True)
-            print("\nHasło zostało zmienione.\n")
-        else:
-            print("\nAnulowano.\n")
-    else:
-        command = 'encryption', arg, arg1
-        print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
-        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
-
-
 def setcfg(arg, arg1):
     arg = arg.lower()
     if arg == 'read':
         utils.show_all_settings()
+    elif arg == '-encryption':
+        if arg1:
+            arg1 = arg1.lower()
+        handle_encryption(arg1)
     elif arg == 'open': # cfg open
         editor = utils.EDITOR()
         if not editor:
@@ -152,7 +112,7 @@ def setcfg(arg, arg1):
     elif arg in ['show','s']: # cfg show
         if not arg1:
             print("\n[show,s] Pokaż ustawienie")
-            print("keypath, notespath, editor\n")
+            print("encryption, keypath, notespath, editor\n")
         elif arg1 == 'keypath':
             path = utils.KEY_PATH()
             print(f"\n{path}\n")
@@ -162,6 +122,9 @@ def setcfg(arg, arg1):
         elif arg1 == 'editor':
             editor = utils.EDITOR()
             print(f"\nEditor is set to: {editor}\n")
+        elif arg1 == 'encryption':
+            setting = (utils.get_setting("encryption") or 'OFF').upper()
+            print(f"\nEncryption is set to: {setting}\n")
         else:
             print("\nBłąd: nie ma takiego ustawienia.\n")
     elif arg == '-notespath': # cfg -notespath
@@ -238,7 +201,7 @@ def handle_keypath_del():
     else:
         print("\nAnulowano usuwanie.\n")
 
-def handle_keypath(arg1=None):
+def handle_keypath(arg1=None): # -keypath
     path = utils.KEY_PATH()
     utils.color_block(["\nKey path is set to:"],
             bg_color=utils.COLORS["bgblack"])
@@ -307,3 +270,45 @@ def handle_cfg_open(arg1):
     except Exception as e:
         print(f"Wystąpił błąd przy otwieraniu edytora: {e}\n")
 
+
+def handle_encryption(arg1=None):
+    setting = (utils.get_setting("encryption") or 'OFF').upper()
+    utils.color_block(["\nEncryption is set to:"],
+            bg_color=utils.COLORS["bgblack"])
+    print(f"{setting}")
+    print("\n-ENCRYPTION: on, off, set, newpass\n")
+
+    if not arg1:
+        arg1 = input("Podaj ustawienie (q - anuluj): ").strip()
+    if arg1.lower() == 'q':
+        print('')
+        return
+
+    elif arg1 == 'set':
+        key = utils.KEY_PATH()
+        del_file(key)
+        utils.set_setting("encryption", "set")
+        print("\nEncryption set to SET\n")
+    elif arg1 == 'on':
+        key = utils.KEY_PATH()
+        del_file(key)
+        utils.set_setting("encryption", "on")
+        print("\nEncryption set to ON\n")
+    elif arg1 == 'off':
+        key = utils.KEY_PATH()
+        del_file(key)
+        utils.set_setting("encryption", None)
+        print("\nEncryption set to OFF\n")
+    elif arg1 == 'newpass':
+        yesno = input("\nCzy napewno chcesz zmienić hasło? (t/n): ")
+        if yesno.lower() in ['t','']:
+            key = utils.KEY_PATH()
+            del_file(key)
+            generate_key(save_to_file=True)
+            print("\nHasło zostało zmienione.\n")
+        else:
+            print("\nAnulowano.\n")
+    else:
+        command = 'cfg', 'encryption', arg1
+        print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
+        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")

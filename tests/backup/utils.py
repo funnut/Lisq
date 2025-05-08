@@ -24,6 +24,7 @@ COLORS = {
 # Domyślna ścieżka do config.json
 CONFIG_PATH = Path.home() / "config.json"
 
+
 # Funkcje konfiguracji
 def load_config():
     if not CONFIG_PATH.exists():
@@ -71,7 +72,7 @@ def show_all_settings():
         bg_color=COLORS["bgpurple"])
         print(f"{CONFIG_PATH}\n")
 
-        print("open, show, -keypath, -notespath, -editor\n")
+        print("open, show, -encryption, -keypath, -notespath, -editor\n")
 
         for key, value in config.items():
             print(f"  {key}: {value}")
@@ -93,6 +94,4 @@ def NOTES_PATH():
 
 def EDITOR():
     return get_setting("editor") or os.getenv("NOTES_EDITOR", "nano")
-
-
 
