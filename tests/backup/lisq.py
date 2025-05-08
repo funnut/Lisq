@@ -112,9 +112,6 @@ def sprawdz_input(usr_input):
     else:
         return (usr_input[0].lower(), usr_input[1], usr_input[2])
 
-# set notespath bla/bla/
-# set keypath path/
-# set editor nano
 
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""

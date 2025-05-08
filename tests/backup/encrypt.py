@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def generate_key(save_to_file=True):
-    password = getpass.getpass(utils.COLORS['bgblue'] + "hasło: " + utils.COLORS['reset']).encode("utf-8")
+    password = getpass.getpass(utils.COLORS['blue'] + "hasło: " + utils.COLORS['reset']).encode("utf-8")
     key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 #    print ('generate_key()')
     if save_to_file:
@@ -148,10 +148,10 @@ def setcfg(arg, arg1):
         if not editor:
             print("Błąd: Edytor nie jest ustawiony.")
         else:
-            cfg_open(arg1)
+            handle_cfg_open(arg1)
     elif arg in ['show','s']: # cfg show
         if not arg1:
-            print("\n[show,s] Pokaż ustawienie\n")
+            print("\n[show,s] Pokaż ustawienie")
             print("keypath, notespath, editor\n")
         elif arg1 == 'keypath':
             path = utils.KEY_PATH()
@@ -162,55 +162,68 @@ def setcfg(arg, arg1):
         elif arg1 == 'editor':
             editor = utils.EDITOR()
             print(f"\nEditor is set to: {editor}\n")
+        else:
+            print("\nBłąd: nie ma takiego ustawienia.\n")
     elif arg == '-notespath': # cfg -notespath
-        if arg1 == 'del':
+        if arg1 == 'unset':
             utils.del_setting("notespath")
             path = utils.NOTES_PATH()
             print(f"\nUstawiono ścieżkę domyślną: {path}\n")
         elif arg1 == 'open':
             os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
         else:
-            if not arg1: # cfg -notespath
-                arg1 = input("Podaj ścieżkę: ")
-            path = Path(os.path.expanduser(arg1)).resolve()
-            if str(path).endswith(".txt"):
-                utils.set_setting("notespath",str(path))
-                print(f"\nUstawiono ścieżkę: {path}\n")
-            else:
-                print("\nBłąd: ścieżka musi prowadzić do pliku.\n")
-    elif arg == '-keypath':
-        if arg1 == 'unset':
+            handle_notespath(arg1)
+    elif arg == '-keypath': # cfg -keypath
+        if arg1 == 'open':
+            os.system(f"{utils.EDITOR()} {utils.KEY_PATH()}")
+        elif arg1 == 'unset':
             handle_keypath_unset()
         elif arg1 == 'del':
             handle_keypath_del()
         else:
-            handle_keypath_set_interactive()
+            handle_keypath(arg1)
     elif arg == '-editor':  # cfg -editor
-        if not arg1:
-            handle_editor()
-        elif arg1 == 'open':
+        if arg1 == 'open':
             handle_editor_open()
         else:
-            if shutil.which(arg1):
-                utils.set_setting("editor", arg1)
-                print(f"Ustawiono edytor: {arg1}")
-            else:
-                print(f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.")
+            handle_editor(arg1)
     else:
         command = 'cfg', arg, arg1
         print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
         print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
 
+# -notespath
+
+def handle_notespath(arg1=None):
+    path = utils.NOTES_PATH()
+    utils.color_block(["\nNotes path is set to:"],
+            bg_color=utils.COLORS["bgblack"])
+    print(f"{path}")
+    print("\n-NOTESPATH: open, unset, <ścieżka>\n")
+
+    if not arg1:
+        arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
+    if arg1.lower() == 'q':
+        print('')
+        return
+
+    path = Path(os.path.expanduser(arg1)).resolve()
+    if str(path).endswith(".txt"):
+        utils.set_setting("notespath",str(path))
+        print(f"Ustawiono ścieżkę: {path}\n")
+    else:
+        print("Błąd: ścieżka musi prowadzić do pliku .txt.\n")
+
 # -keypath
 
 def handle_keypath_unset():
-    confirm = input("Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): ").strip().lower()
+    confirm = input("\nCzy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): ").strip().lower()
     if confirm in ['t', '']:
         utils.del_setting("keypath")
         path = utils.KEY_PATH()
         print(f"\nUstawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {path}\n")
     else:
-        print("Anulowano usuwanie.")
+        print("\nAnulowano usuwanie.\n")
 
 def handle_keypath_del():
     path = utils.KEY_PATH()
@@ -221,47 +234,53 @@ def handle_keypath_del():
             os.remove(path)
             print("\nKlucz usunięty.\n")
         else:
-            print("Plik nie istnieje.\n")
+            print("\nPlik nie istnieje.\n")
     else:
-        print("Anulowano usuwanie.")
+        print("\nAnulowano usuwanie.\n")
 
-def handle_keypath_set_interactive():
+def handle_keypath(arg1=None):
     path = utils.KEY_PATH()
-    utils.color_block(["Path is set to:"], bg_color=utils.COLORS["bgblue"])
-    print(f"    {path}")
-    print("\n-keypath: open, set, del, <ścieżka>, unset\n")
+    utils.color_block(["\nKey path is set to:"],
+            bg_color=utils.COLORS["bgblack"])
+    print(f"{path}")
+    print("\n-KEYPATH: open, unset, del, <ścieżka>\n")
 
-    arg1 = input("Podaj ścieżkę (q - anuluj): ").strip()
+    if not arg1:
+        arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
+    if arg1.lower() == 'q':
+        print('')
+        return
+
+    expanded_path = Path(os.path.expanduser(arg1)).resolve()
+
+    if not str(expanded_path).endswith(".keylisq"):
+        print("\nBłąd: ścieżka musi prowadzić do pliku .keylisq.\n")
+        return
+
+    utils.set_setting("keypath", str(expanded_path))
+    print(f"Ustawiono ścieżkę: {expanded_path}\n")
+
+# -editor
+
+def handle_editor(arg1=None):
+    editor = utils.EDITOR()
+    utils.color_block(
+        ["\nEditor is set to:"],
+        bg_color=utils.COLORS["bgblack"])
+    print(f"{editor}")
+    print("\n-EDITOR: open, <name>\n")
+
+    if not arg1:
+        arg1 = input("Podaj nazwę edytora (q - anuluj): ").strip()
     if arg1 == 'q':
         print('')
         return
 
-    path = Path(os.path.expanduser(arg1)).resolve()
-    if str(path).endswith(".keylisq"):
-        utils.set_setting("keypath", str(path))
-        print(f"\nUstawiono ścieżkę: {path}\n")
+    if shutil.which(arg1):
+        utils.set_setting("editor", arg1)
+        print(f"Ustawiono edytor: {arg1}\n")
     else:
-        print("\nBłąd: ścieżka musi prowadzić do pliku .keylisq.\n")
-
-# -editor
-
-def handle_editor():
-    editor = utils.EDITOR()
-    utils.color_block(
-        [f"Editor is set to:"],
-        bg_color=utils.COLORS["bgblue"])
-    print(f"    {editor}")
-    print("\n-editor: open, set, <name>\n")
-
-    new_editor = input("Podaj nazwę edytora (q - anuluj): ").strip()
-    if new_editor == 'q':
-        print('')
-        return
-    elif shutil.which(new_editor):
-        utils.set_setting("editor", new_editor)
-        print(f"Ustawiono edytor: {new_editor}\n")
-    else:
-        print(f"Błąd: '{new_editor}' nie istnieje w $PATH. Nie zapisano.\n")
+        print(f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.\n")
 
 def handle_editor_open():
     editor = utils.EDITOR()
@@ -270,7 +289,7 @@ def handle_editor_open():
     else:
         print(f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH.\n")
 
-def cfg_open(arg1):
+def handle_cfg_open(arg1):
     editor = utils.EDITOR()
     try:
         if arg1 in ['-notespath','notes','txt']:
@@ -282,9 +301,9 @@ def cfg_open(arg1):
         else:
             config_path = utils.CONFIG_PATH
             if not os.path.exists(config_path):
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {config_path}")
+                print(f"Błąd: Plik konfiguracyjny nie istnieje: {config_path}\n")
             else:
-                os.system(f"{editor} '{config_path}'")
+                os.system(f"{editor} '{config_path}'\n")
     except Exception as e:
-        print(f"Wystąpił błąd przy otwieraniu edytora: {e}")
+        print(f"Wystąpił błąd przy otwieraniu edytora: {e}\n")
 

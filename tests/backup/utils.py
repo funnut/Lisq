@@ -17,7 +17,7 @@ COLORS = {
     "bgred": "\033[41m",
     "bgblue": "\033[44m",
     "bgpurple": "\033[45m",
-    "bgblack": "\033[0;100",
+    "bgblack": "\033[0;100m",
 }
 
 
@@ -67,9 +67,11 @@ def show_all_settings():
         with open(CONFIG_PATH, 'r') as file:
             config = json.load(file)
 
-        color_block([COLORS["bold"]+"\nAktualne ustawienia:"],
+        color_block(["\nAktualne ustawienia:"],
         bg_color=COLORS["bgpurple"])
-        print(CONFIG_PATH,'\n')
+        print(f"{CONFIG_PATH}\n")
+
+        print("open, show, -keypath, -notespath, -editor\n")
 
         for key, value in config.items():
             print(f"  {key}: {value}")
