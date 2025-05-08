@@ -55,5 +55,6 @@ def switch(arg):
     else:
         print("Nieznana komenda:", arg)
 
+
 decrypt(generate_key())
 

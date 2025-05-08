@@ -76,14 +76,10 @@ def glowna_funkcja(command):
             "lisq / \'sample note text\'\n"
             "lisq add \'sample note text\'\n")
         return
-### PATH
-    elif cmd in ['notespath']:
-        print (f"\n{utils.COLORS['green']}'{utils.NOTES_PATH()}'{utils.COLORS['reset']}\n")
-        return
 ### EDIT
     elif cmd == 'edit':
         print ('')
-        os.system(f"{utils.NOTES_EDITOR()} {utils.NOTES_PATH()}")
+        os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
