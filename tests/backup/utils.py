@@ -22,7 +22,7 @@ COLORS = {
 
 
 # Domyślna ścieżka do config.json
-CONFIG_PATH = Path.home() / "config.json"
+CONFIG_PATH = Path.home() / ".lisq.json"
 
 
 # Funkcje konfiguracji
@@ -68,7 +68,7 @@ def show_all_settings():
         with open(CONFIG_PATH, 'r') as file:
             config = json.load(file)
 
-        color_block(["\nAktualne ustawienia:"],
+        color_block(["Aktualne ustawienia:"],
         bg_color=COLORS["bgpurple"])
         print(f"{CONFIG_PATH}\n")
 
@@ -76,12 +76,11 @@ def show_all_settings():
 
         for key, value in config.items():
             print(f"  {key}: {value}")
-        print(''+COLORS["reset"])
 
     except FileNotFoundError:
-        print("Plik config.json nie został znaleziony.")
+        print("Plik .lisq.json nie został znaleziony.")
     except json.JSONDecodeError:
-        print("Błąd przy wczytywaniu pliku config.json – niepoprawny JSON.")
+        print("Błąd przy wczytywaniu pliku .lisq.json – niepoprawny JSON.")
 
 
 # Dodatkowe ścieżki

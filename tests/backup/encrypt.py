@@ -47,7 +47,7 @@ def encrypt(NOTES_PATH, fernet=None):
 #        print(f"Plik {utils.NOTES_PATH()} zaszyfrowany.")
 
     except Exception as e:
-        print(f"{utils.COLORS['bgred']}Błąd podczas szyfrowania.{utils.COLORS['reset']}\n{e}")
+        print(f"Błąd podczas szyfrowania. {e}")
 
 
 def decrypt(NOTES_PATH, fernet=None):
@@ -72,14 +72,14 @@ def decrypt(NOTES_PATH, fernet=None):
         with open(utils.NOTES_PATH(), 'w', encoding='utf-8') as f:
             f.write(decrypted)
 
-        print("decrypted")
+#        print("decrypted")
 #        print(f"Odszyfrowano notatkę: {utils.NOTES_PATH()}")
         return True
     except InvalidToken:
-        print(f"\n\a{utils.COLORS['bgred']}Niepoprawne hasło.{utils.COLORS['reset']}\nNieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.\n")
+        print("\aBłąd: nieprawidłow token – klucz nie pasuje lub dane są uszkodzone.")
         return None
     except Exception as e:
-        print(f"\n{utils.COLORS['bgred']}Wystąpił błąd podczas odszyfrowywania: {e}{utils.COLORS['reset']}\n")
+        print(f"Wystąpił błąd podczas odszyfrowywania: {e}")
         return None
 
 
@@ -105,7 +105,7 @@ def setcfg(arg, arg1):
         if arg1:
             arg1 = arg1.lower()
         handle_encryption(arg1)
-    elif arg in ['open','o']: # Open
+    elif arg in ['open']: # Open
         editor = utils.EDITOR()
         if not editor:
             print("Błąd: Edytor nie jest ustawiony.")
@@ -113,34 +113,34 @@ def setcfg(arg, arg1):
             handle_cfg_open(arg1)
     elif arg in ['show','s']: # Show
         if not arg1:
-            print("\n[show,s] Pokaż ustawienie")
-            print("encryption, keypath, notespath, editor\n")
-        elif arg1 == 'keypath':
+            print("[show,s] Pokaż ustawienie:",
+            "\n-encryption, -keypath, -notespath, -editor")
+        elif arg1 in ['-keypath','keypath']:
             path = utils.KEY_PATH()
-            print(f"\n{path}\n")
-        elif arg1 == 'notespath':
+            print(f"{path}")
+        elif arg1 in ['-notespath','notespath']:
             path = utils.NOTES_PATH()
-            print(f"\n{path}\n")
-        elif arg1 == 'editor':
+            print(f"{path}")
+        elif arg1 in ['-editor','editor']:
             editor = utils.EDITOR()
-            print(f"\nEditor is set to: {editor}\n")
-        elif arg1 == 'encryption':
+            print(f"Editor is set to: {editor}")
+        elif arg1 in ['-encryption','encryption']:
             setting = (utils.get_setting("encryption") or 'OFF').upper()
-            print(f"\nEncryption is set to: {setting}\n")
+            print(f"Encryption is set to: {setting}")
         else:
-            print("\nBłąd: nie ma takiego ustawienia.\n")
+            print("Błąd: nie ma takiego ustawienia.")
     elif arg in ['-notespath','notespath']: # cfg -notespath
         if arg1 == 'unset':
             utils.del_setting("notespath")
             path = utils.NOTES_PATH()
-            print(f"\nUstawiono ścieżkę domyślną: {path}\n")
+            print(f"Ustawiono ścieżkę domyślną: {path}")
         elif arg1 == 'open':
-            os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
+            subprocess.run([utils.EDITOR(),utils.NOTES_PATH()])
         else:
             handle_notespath(arg1)
     elif arg in ['-keypath','keypath']: # cfg -keypath
         if arg1 == 'open':
-            os.system(f"{utils.EDITOR()} {utils.KEY_PATH()}")
+            subprocess.run([utils.EDITOR(),utils.KEY_PATH()])
         elif arg1 == 'unset':
             handle_keypath_unset()
         elif arg1 == 'del':
@@ -153,9 +153,9 @@ def setcfg(arg, arg1):
         else:
             handle_editor(arg1)
     else:
-        command = 'cfg', arg, arg1
-        print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
-        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
+#        command = 'cfg', arg, arg1
+        print("\aBłąd: nieprawidłowe polecenie.")
+#        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")
 
 
 # -------------------------------------------------
@@ -164,58 +164,60 @@ def setcfg(arg, arg1):
 
 def handle_notespath(arg1=None):
     path = utils.NOTES_PATH()
-    utils.color_block(["\nNotes path is set to:"],
+    utils.color_block(["Notes path is set to:"],
                  bg_color=utils.COLORS["bgblack"])
     print(f"{path}")
     print("\n-NOTESPATH: open, unset, <ścieżka>\n")
 
     if not arg1:
         arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
-    if arg1.lower() == 'q':
         print('')
+    if arg1.lower() == 'q':
         return
 
     if arg1 == 'open':
-        os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
+        subprocess.run([utils.EDITOR(), utils.NOTES_PATH()])
     if arg1 == 'unset':
         utils.del_setting("notespath")
         path = utils.NOTES_PATH()
-        print(f"\nUstawiono ścieżkę domyślną: {path}\n")
+        print(f"Ustawiono ścieżkę domyślną: {path}")
     else:
         path = Path(os.path.expanduser(arg1)).resolve()
         if str(path).endswith(".txt"):
             utils.set_setting("notespath",str(path))
-            print(f"Ustawiono nową ścieżkę: {path}\n")
+            print(f"Ustawiono nową ścieżkę: {path}")
         else:
-            print("Błąd: ścieżka musi prowadzić do pliku .txt.\n")
+            print("Błąd: ścieżka musi prowadzić do pliku .txt.")
 
 # -keypath
 
 def handle_keypath_unset():
-    confirm = input("\nCzy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): ").strip().lower()
+    confirm = input("Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): ").strip().lower()
+    print('')
     if confirm in ['t', '']:
         utils.del_setting("keypath")
         path = utils.KEY_PATH()
-        print(f"\nUstawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {path}\n")
+        print(f"Ustawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {path}")
     else:
-        print("\nAnulowano usuwanie.\n")
+        print("Anulowano usuwanie.")
 
 def handle_keypath_del():
     path = utils.KEY_PATH()
-    print(f"\n{path}")
+    print(f"{path}")
     confirm = input("Czy na pewno chcesz usunąć klucz? (t/n): ").strip().lower()
+    print('')
     if confirm in ['t', '']:
         if os.path.exists(path):
             os.remove(path)
-            print("\nKlucz usunięty.\n")
+            print("Klucz usunięty.")
         else:
-            print("\nPlik nie istnieje.\n")
+            print("Plik nie istnieje.")
     else:
-        print("\nAnulowano usuwanie.\n")
+        print("Anulowano usuwanie.")
 
 def handle_keypath(arg1=None):
     path = utils.KEY_PATH()
-    utils.color_block(["\nKey path is set to:"],
+    utils.color_block(["Key path is set to:"],
                bg_color=utils.COLORS["bgblack"])
     print(f"{path}")
     print("\n-KEYPATH: open, unset, del, <ścieżka>\n")
@@ -223,23 +225,22 @@ def handle_keypath(arg1=None):
     if not arg1:
         arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
     if arg1.lower() == 'q':
-        print('')
         return
 
     expanded_path = Path(os.path.expanduser(arg1)).resolve()
 
     if not str(expanded_path).endswith(".keylisq"):
-        print("\nBłąd: ścieżka musi prowadzić do pliku .keylisq.\n")
+        print("Błąd: ścieżka musi prowadzić do pliku .keylisq.")
         return
 
     utils.set_setting("keypath", str(expanded_path))
-    print(f"Ustawiono nową ścieżkę: {expanded_path}\n")
+    print(f"Ustawiono nową ścieżkę: {expanded_path}")
 
 # -editor
 
 def handle_editor(arg1=None):
     editor = utils.EDITOR()
-    utils.color_block(["\nEditor is set to:"],
+    utils.color_block(["Editor is set to:"],
             bg_color=utils.COLORS["bgblack"])
     print(f"{editor}")
     print("\n-EDITOR: open, <name>\n")
@@ -247,24 +248,23 @@ def handle_editor(arg1=None):
     if not arg1:
         arg1 = input("Podaj nazwę edytora (q - anuluj): ").strip()
     if arg1 == 'q':
-        print('')
         return
+
     if arg1 == 'open':
         handle_editor_open()
-        print('')
         return
     if shutil.which(arg1):
         utils.set_setting("editor", arg1)
-        print(f"Ustawiono edytor: {arg1}\n")
+        print(f"Ustawiono edytor: {arg1}")
     else:
-        print(f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.\n")
+        print(f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.")
 
 def handle_editor_open():
     editor = utils.EDITOR()
     if shutil.which(editor):
         os.system(f"{editor}")
     else:
-        print(f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH.\n")
+        print(f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH.")
 
 # Open
 
@@ -278,7 +278,7 @@ def handle_cfg_open(arg1):
         if arg1 is None:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}\n")
+                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
             subprocess.run([editor, str(plik)])
             return
@@ -293,22 +293,22 @@ def handle_cfg_open(arg1):
         elif arg1 in ['-config', 'config', '.lisq']:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}\n")
+                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
         else:
-            print(f"\nBłąd: Nieznana opcja '{arg1}'\n")
+            print(f"Błąd: Nieznana opcja '{arg1}'")
             return
 
         subprocess.run([editor, str(plik)])
 
     except Exception as e:
-        print(f"Wystąpił błąd przy otwieraniu edytora: {e}\n")
+        print(f"Wystąpił błąd przy otwieraniu edytora: {e}")
 
 # Encryption
 
 def handle_encryption(arg1=None):
     setting = (utils.get_setting("encryption") or 'OFF').upper()
-    utils.color_block(["\nEncryption is set to:"],
+    utils.color_block(["Encryption is set to:"],
                 bg_color=utils.COLORS["bgblack"])
     print(f"{setting}")
     print("\n-ENCRYPTION: on, off, set, newpass\n")
@@ -316,34 +316,33 @@ def handle_encryption(arg1=None):
     if not arg1:
         arg1 = input("Podaj ustawienie (q - anuluj): ").strip()
     if arg1.lower() == 'q':
-        print('')
         return
 
     elif arg1 == 'set':
         key = utils.KEY_PATH()
         del_file(key)
         utils.set_setting("encryption", "set")
-        print("\nEncryption set to SET\n")
+        print("Encryption set to SET")
     elif arg1 == 'on':
         key = utils.KEY_PATH()
         del_file(key)
         utils.set_setting("encryption", "on")
-        print("\nEncryption set to ON\n")
+        print("Encryption set to ON")
     elif arg1 == 'off':
         key = utils.KEY_PATH()
         del_file(key)
         utils.set_setting("encryption", None)
-        print("\nEncryption set to OFF\n")
+        print("Encryption set to OFF")
     elif arg1 == 'newpass':
-        yesno = input("Czy napewno chcesz zmienić hasło? (t/n): ")
+        yesno = input("\nCzy napewno chcesz zmienić hasło? (t/n): ")
         if yesno.lower() in ['t','']:
             key = utils.KEY_PATH()
             del_file(key)
             generate_key(save_to_file=True)
-            print("\nHasło zostało zmienione.\n")
+            print("Hasło zostało zmienione.")
         else:
-            print("\nAnulowano.\n")
+            print("Anulowano.")
     else:
-        command = 'cfg', 'encryption', arg1
-        print(f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
-        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
+#        command = 'cfg', 'encryption', arg1
+        print("\aBłąd: nieprawidłowe polecenie.")
+#        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")

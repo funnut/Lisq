@@ -18,7 +18,7 @@ def glowna_funkcja(command):
         if not arg:
             arg = input("Wpisz notatkę: ").strip()
             if not arg:
-                print ("\nAnulowano dodawanie – nie podano treści notatki.\n")
+                print ("Anulowano dodawanie – nie podano treści notatki.")
                 return
         if arg:
             write_file(arg)
@@ -28,7 +28,7 @@ def glowna_funkcja(command):
         if not arg:
             arg = input("Wpisz ID: ").strip().lower()
             if not arg:
-                print("\nAnulowano usuwanie – nie podano ID.\n")
+                print("Anulowano usuwanie – nie podano ID.")
                 return
         delete(arg)
         return
@@ -42,17 +42,17 @@ def glowna_funkcja(command):
         return
 ### REITERATE
     elif cmd == 'reiterate':
-        yesno = input (f'\nCzy chcesz reiterować wszystkie notatki? (t/n): ')
+        yesno = input (f'Czy chcesz reiterować wszystkie notatki? (t/n): ')
         if yesno.lower() in ['y', 'yes','t','tak', '']:
             reiterate()
-            print ('\nReiteracja ukończona.\n')
+            print ('Reiteracja ukończona.')
             return
         else:
-            print ('\nReiteracja anulowana.\n')
+            print ('Reiteracja anulowana.')
             return
 ### HELP
     elif cmd in ['help', 'h', 'lisq']:
-        print (f"\n{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
+        print (f"{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
             "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
             "Code available under a non-commercial license (see LICENSE file).\n\n"
             "Copyright © funnut\n"
@@ -74,7 +74,7 @@ def glowna_funkcja(command):
             f"{utils.COLORS['bgpurple']}# CLI Usage{utils.COLORS['reset']}\n\n"
             "lisq [command] [argument]\n"
             "lisq / \'sample note text\'\n"
-            "lisq add \'sample note text\'\n")
+            "lisq add \'sample note text\'")
         return
 ### EDIT
     elif cmd == 'edit':
@@ -83,7 +83,6 @@ def glowna_funkcja(command):
         return
 ### EXIT
     elif cmd in ['quit', 'q', 'exit']:
-        print ('')
         if utils.cfg_setting("encryption"):
 #            print ('>> To jest if True w glowna_funkcja')
             encrypt.encrypt(utils.NOTES_PATH())
@@ -93,8 +92,7 @@ def glowna_funkcja(command):
         encrypt.setcfg(arg if arg else 'read', arg1)
         return
 ### INVALID COMMAND
-    print (f"\n\a{utils.COLORS['bgred']}Nieprawidłowe polecenie.{utils.COLORS['reset']}\n")
-    print (f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}\n")
+    print ("\aBłąd: nieprawidłowe polecenie.")
 
 
 def sprawdz_input(usr_input):
@@ -112,7 +110,7 @@ def sprawdz_input(usr_input):
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""
     terminal_width = shutil.get_terminal_size().columns
-    print(f"\n{utils.COLORS['yellow']} _id _data","=" * (terminal_width-12),utils.COLORS['reset'])
+    print(f"{utils.COLORS['yellow']} _id _data","=" * (terminal_width-12),utils.COLORS['reset'])
     try:
         with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as plik:
             linie = plik.readlines()
@@ -129,14 +127,14 @@ def read_file(a):
                 if znalezione:
                     do_wyswietlenia = znalezione
                 else:
-                    return print("\nNie znaleziono pasujących elementów.\n")
+                    return print("\nNie znaleziono pasujących elementów.")
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
                 print(f"{utils.COLORS['yellow']}{parts[0]} {formatted_date}{utils.COLORS['reset']} {utils.COLORS['green']}{' '.join(parts[2:]).strip()}{utils.COLORS['reset']}")
-            print(f'\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.\n')
+            print(f"\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.")
     except FileNotFoundError:
-        print(f"\n'{utils.NOTES_PATH()}'\n\n{utils.COLORS['bgred']}Plik nie został znaleziony.{utils.COLORS['reset']}\n")
+        print(f"\a\n'{utils.NOTES_PATH()}'\n\nPlik nie został znaleziony.")
 
 
 def write_file(a):
@@ -156,7 +154,7 @@ def write_file(a):
     data_ = datetime.now().strftime("%Y/%m/%d")
     with open(utils.NOTES_PATH(), 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
-    print("\nNotatka została dodana.\n")
+    print("Notatka została dodana.")
 
 
 def delete(arg):
@@ -168,37 +166,37 @@ def delete(arg):
     with open(utils.NOTES_PATH(), "r", encoding="utf-8") as plik:
         linie = plik.readlines()
     if arg == "all":
-        yesno = input("\nTa operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): ")
+        yesno = input("Ta operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): ")
         if yesno.lower() in ['y','yes','t','tak']:
-            open(utils.NOTES_PATH(), "w", encoding="utf-8").close()  # Czyścimy plik
-            print("\nWszystkie notatki zostały usunięte.\n")
+            open(utils.NOTES_PATH(), "w", encoding="utf-8").close()
+            print("Wszystkie notatki zostały usunięte.")
         else:
-            print("\nOperacja anulowana.\n")
+            print("Operacja anulowana.")
     elif arg in ["l","last"]:
         if linie:
-            yesno = input("\nTa operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): ")
+            yesno = input("Ta operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
-                    plik.writelines(linie[:-1])  # Zapisujemy plik bez ostatniej linii
-                print("\nOstatnia notatka została usunięta.\n")
+                    plik.writelines(linie[:-1])
+                print("Ostatnia notatka została usunięta.")
             else:
-                print("\nOperacja anulowana.\n")
+                print("Operacja anulowana.")
         else:
-            print("\nBrak notatek do usunięcia.\n")
+            print("Brak notatek do usunięcia.")
     else:
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"\nTa operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
+            yesno = input(f"Ta operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
                 reiterate()
-                print(f"\nUsunięto {numer} notatki zawierające identyfikator {arg}.\n")
+                print(f"Usunięto {numer} notatki zawierające identyfikator {arg}.")
             else:
-                print("\nOperacja anulowana.\n")
+                print("Operacja anulowana.")
         else:
-            print("\nNie znaleziono notatek do usunięcia.\n")
+            print("Nie znaleziono notatek do usunięcia.")
 
 
 def reiterate():
@@ -222,15 +220,23 @@ def pobierz_input():
     """Pobiera polecenie użytkownika w trybie interaktywnym."""
     while True:
         try:
+            print('')
             print(">> add / del / show")
             usr_input = shlex.split(input(">> ").strip())
+            print('')
             glowna_funkcja(sprawdz_input(usr_input))
+        except ValueError as e:
+            print('')
+            print("Błąd składni: ", e)
+            continue
         except EOFError:
-            print("\n")
             usr_input = []
             if utils.cfg_setting("encryption"):
 #                print (">> To jest if True w pobierz_input()")
                 encrypt.encrypt(utils.NOTES_PATH())
+            else:
+                print("closed")
+            print('')
             break
 
 
@@ -269,13 +275,11 @@ def main():
             sys.exit()
     else:
         readline.set_history_length(100)
-        print(fr"""
- _ _
+        print(fr""" _ _
 | (_)___  __ _
 | | / __|/ _` |
 | | \__ \ (_| |
 |_|_|___/\__, |
- quit - help|_|{randrange(0,1000)}
-""")
+ quit - help|_|{randrange(0,1000)}""")
         pobierz_input()
 

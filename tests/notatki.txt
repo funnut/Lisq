@@ -10,9 +10,9 @@ i009 2025/05/06 :: note
 i010 2025/05/06 :: hii
 i011 2025/05/06 :: key path
 i012 2025/05/06 :: set notes path i set key path
-i013 2025/05/06 :: set notes editor
-i014 2025/05/07 :: show przed editor
-i015 2025/05/07 :: encryption pod cfg
-i016 2025/05/07 :: f ktora tworzy cfg z default
-i017 2025/05/08 :: od urodzenia, zycie sukcesywnie niszczy to co mi sie podobało
-i018 2025/05/08 :: chce biegać po ulicach Mediolanu
+i013 2025/05/07 :: show przed editor
+i014 2025/05/07 :: encryption pod cfg
+i015 2025/05/07 :: f ktora tworzy cfg z default
+i016 2025/05/08 :: od urodzenia, zycie sukcesywnie niszczy to co mi sie podobało
+i017 2025/05/08 :: chce biegać po ulicach Mediolanu
+i018 2025/05/09 :: nowa notatka
