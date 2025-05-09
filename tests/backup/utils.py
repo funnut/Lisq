@@ -55,7 +55,7 @@ def cfg_setting(setting):
     return None if raw in ("", "OFF") else raw
 
 
-def color_block(lines, bg_color="\x1b[44m"):
+def color_block(lines, bg_color="\x1b[0;100m"):
     reset = "\x1b[0m"
     width = os.get_terminal_size().columns
     for line in lines:
@@ -72,7 +72,7 @@ def show_all_settings():
         bg_color=COLORS["bgpurple"])
         print(f"{CONFIG_PATH}\n")
 
-        print("open, show, -encryption, -keypath, -notespath, -editor\n")
+        print("open, show or -encryption, -keypath, -notespath, -editor\n")
 
         for key, value in config.items():
             print(f"  {key}: {value}")
