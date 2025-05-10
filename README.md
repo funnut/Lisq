@@ -35,7 +35,7 @@ or type `lisq cfg -notespath ~/path/notes.txt`
 
 ## Commands
 
-```bash
+```
 quit, q, exit   # Exit the app  
 clear, c        # Clear the screen  
 
