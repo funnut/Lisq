@@ -50,9 +50,9 @@ del  [str]      # Delete notes containing [string]
 
      open, show
 cfg -encryption on, off, set, newpass
-    -keypath open, unset, del or `<path>`
-    -notespath open, unset or `<path>`
-    -editor open or `<editor>`
+    -keypath open, unset, del or <path>
+    -notespath open, unset or <path>
+    -editor open or <editor>
 
 reiterate       # Renumber notes' IDs  
 edit            # Open the notes file in editor
