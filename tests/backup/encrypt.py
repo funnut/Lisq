@@ -7,7 +7,7 @@ import subprocess
 
 
 def generate_key(save_to_file=True):
-    password = getpass.getpass(utils.COLORS['blue'] + "hasło: " + utils.COLORS['reset']).encode("utf-8")
+    password = getpass.getpass(utils.COLORS['bold'] + "hasło: " + utils.COLORS['reset']).encode("utf-8")
     key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 #    print ('generate_key()')
     if save_to_file:
@@ -47,7 +47,7 @@ def encrypt(NOTES_PATH, fernet=None):
 #        print(f"Plik {utils.NOTES_PATH()} zaszyfrowany.")
 
     except Exception as e:
-        print(f"Błąd podczas szyfrowania. {e}")
+        print(f"\aBłąd podczas szyfrowania. {e}")
 
 
 def decrypt(NOTES_PATH, fernet=None):
@@ -76,10 +76,10 @@ def decrypt(NOTES_PATH, fernet=None):
 #        print(f"Odszyfrowano notatkę: {utils.NOTES_PATH()}")
         return True
     except InvalidToken:
-        print("\aBłąd: nieprawidłow token – klucz nie pasuje lub dane są uszkodzone.")
+        print("\aBłąd: nieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.")
         return None
     except Exception as e:
-        print(f"Wystąpił błąd podczas odszyfrowywania: {e}")
+        print(f"\aWystąpił błąd podczas odszyfrowywania: {e}")
         return None
 
 
@@ -92,7 +92,7 @@ def del_file(path):
 #            print(f"Plik nie istnieje: {path}")
             return False
     except Exception as e:
-        print(f"Nie udało się usunąć pliku '{path}': {e}")
+        print(f"\aNie udało się usunąć pliku '{path}': {e}")
         return False
 
 # SETCFG
@@ -113,8 +113,7 @@ def setcfg(arg, arg1):
             handle_cfg_open(arg1)
     elif arg in ['show','s']: # Show
         if not arg1:
-            print("[show,s] Pokaż ustawienie:",
-            "\n-encryption, -keypath, -notespath, -editor")
+            print("[show,s] Pokaż ustawienie: -encryption, -keypath, -notespath, -editor")
         elif arg1 in ['-keypath','keypath']:
             path = utils.KEY_PATH()
             print(f"{path}")
@@ -154,7 +153,7 @@ def setcfg(arg, arg1):
             handle_editor(arg1)
     else:
 #        command = 'cfg', arg, arg1
-        print("\aBłąd: nieprawidłowe polecenie.")
+        raise ValueError("Nieprawidłowe polecenie.")
 #        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")
 
 
@@ -171,7 +170,6 @@ def handle_notespath(arg1=None):
 
     if not arg1:
         arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
-        print('')
     if arg1.lower() == 'q':
         return
 
@@ -278,7 +276,7 @@ def handle_cfg_open(arg1):
         if arg1 is None:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(f"\aBłąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
             subprocess.run([editor, str(plik)])
             return
@@ -293,16 +291,16 @@ def handle_cfg_open(arg1):
         elif arg1 in ['-config', 'config', '.lisq']:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(f"\aBłąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
         else:
-            print(f"Błąd: Nieznana opcja '{arg1}'")
+            print(f"\aBłąd: Nieznana opcja '{arg1}'")
             return
 
         subprocess.run([editor, str(plik)])
 
     except Exception as e:
-        print(f"Wystąpił błąd przy otwieraniu edytora: {e}")
+        print(f"\aWystąpił błąd przy otwieraniu edytora: {e}")
 
 # Encryption
 
@@ -344,5 +342,5 @@ def handle_encryption(arg1=None):
             print("Anulowano.")
     else:
 #        command = 'cfg', 'encryption', arg1
-        print("\aBłąd: nieprawidłowe polecenie.")
+        raise ValueError("Nieprawidłowe polecenie.")
 #        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")

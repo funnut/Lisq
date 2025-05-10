@@ -14,85 +14,95 @@ from random import randrange, choice
 def glowna_funkcja(command):
     cmd, arg, arg1 = command
 ### ADD
-    if cmd == 'add':
-        if not arg:
-            arg = input("Wpisz notatkę: ").strip()
+    try:
+        if cmd == 'add':
             if not arg:
-                print ("Anulowano dodawanie – nie podano treści notatki.")
-                return
-        if arg:
-            write_file(arg)
-        return
+                arg = input("Wpisz notatkę: ").strip()
+                if not arg:
+                    print ("Anulowano dodawanie – nie podano treści notatki.")
+                    return
+            if arg:
+                write_file(arg)
+            return
 ### DELETE
-    elif cmd == 'del':
-        if not arg:
-            arg = input("Wpisz ID: ").strip().lower()
+        elif cmd == 'del':
             if not arg:
-                print("Anulowano usuwanie – nie podano ID.")
-                return
-        delete(arg)
-        return
+                arg = input("Wpisz ID: ").strip().lower()
+                if not arg:
+                    print("Anulowano usuwanie – nie podano ID.")
+                    return
+            delete(arg)
+            return
 ### SHOW
-    elif cmd in ['show', 's']:
-        read_file(arg if arg else 'last')
-        return
+        elif cmd in ['show', 's']:
+            read_file(arg if arg else 'last')
+            return
 ### CLEAR SCREEN
-    elif cmd in ['clear', 'c']:
-        print ("\n" * 50)
-        return
+        elif cmd in ['clear', 'c']:
+            print ("\n" * 50)
+            return
 ### REITERATE
-    elif cmd == 'reiterate':
-        yesno = input (f'Czy chcesz reiterować wszystkie notatki? (t/n): ')
-        if yesno.lower() in ['y', 'yes','t','tak', '']:
-            reiterate()
-            print ('Reiteracja ukończona.')
-            return
-        else:
-            print ('Reiteracja anulowana.')
-            return
+        elif cmd == 'reiterate':
+            yesno = input (f'Czy chcesz reiterować wszystkie notatki? (t/n): ')
+            if yesno.lower() in ['y', 'yes','t','tak', '']:
+                reiterate()
+                print ('Reiteracja ukończona.')
+                return
+            else:
+                print ('Reiteracja anulowana.')
+                return
 ### HELP
-    elif cmd in ['help', 'h', 'lisq']:
-        print (f"{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
-            "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
-            "Code available under a non-commercial license (see LICENSE file).\n\n"
-            "Copyright © funnut\n"
-            "https://github.com/funnut\n\n"
-            f"{utils.COLORS['bgpurple']}# Commands{utils.COLORS['reset']}\n\n"
-            ": quit, q, exit\n"
-            ": clear, c       - clear screen\n"
-            ": show, s        - show recent notes (default 10)\n"
-            ": show [int]     - show number of recent notes\n"
-            ": show [str]     - show notes containing [string]\n"
-            ": show all       - show all notes\n"
-            ": show random, r - show a random note\n"
-            ": del [str]      - delete notes containing [string]\n"
-            ": del last, l    - delete the last note\n"
-            ": del all        - delete all notes\n"
-            ": reiterate      - renumber notes' IDs\n"
-            ": path           - show the path to the notes file\n"
-            ": edit           - open the notes file in editor\n\n"
-            f"{utils.COLORS['bgpurple']}# CLI Usage{utils.COLORS['reset']}\n\n"
-            "lisq [command] [argument]\n"
-            "lisq / \'sample note text\'\n"
-            "lisq add \'sample note text\'")
-        return
+        elif cmd in ['help', 'h', 'lisq']:
+            print (f"{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
+                "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
+                "Code available under a non-commercial license (see LICENSE file).\n\n"
+                "Copyright © funnut\n"
+                "https://github.com/funnut\n\n"
+                f"{utils.COLORS['bgpurple']}# Commands{utils.COLORS['reset']}\n\n"
+                ": quit, q, exit\n"
+                ": clear, c        - clear screen\n"
+                ":\n"
+                ": show, s         - show recent notes (default 10)\n"
+                ":      [int]      - show number of recent notes\n"
+                ":      [str]      - show notes containing [string]\n"
+                ":      all        - show all notes\n"
+                ":      random, r  - show a random note\n"
+                ":\n"
+                ": del  [str]      - delete notes containing [string]\n"
+                ":      last, l    - delete the last note\n"
+                ":      all        - delete all notes\n"
+                ":\n"
+                ": cfg  open, show\n"
+                ": cfg -encryption on, off, set, newpass\n"
+                ":     -keypath open, unset, del or <path>\n"
+                ":     -notespath open, unset or <path>\n"
+                ":     -editor open or <editor>\n"
+                ":\n"
+                ": reiterate   - renumber notes' IDs\n"
+                ": edit        - open the notes file in editor\n\n"
+                f"{utils.COLORS['bgpurple']}# CLI Usage{utils.COLORS['reset']}\n\n"
+                "lisq [command] [argument] [argument-1]\n"
+                "lisq add or / \'sample note text\'")
+            return
 ### EDIT
-    elif cmd == 'edit':
-        print ('')
-        os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
-        return
+        elif cmd == 'edit':
+            print ('')
+            os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
+            return
 ### EXIT
-    elif cmd in ['quit', 'q', 'exit']:
-        if utils.cfg_setting("encryption"):
-#            print ('>> To jest if True w glowna_funkcja')
-            encrypt.encrypt(utils.NOTES_PATH())
-        sys.exit()
+        elif cmd in ['quit', 'q', 'exit']:
+            if utils.cfg_setting("encryption"):
+#                print ('>> To jest if True w glowna_funkcja')
+                encrypt.encrypt(utils.NOTES_PATH())
+            sys.exit()
 ### SETCFG
-    elif cmd == 'cfg':
-        encrypt.setcfg(arg if arg else 'read', arg1)
-        return
+        elif cmd == 'cfg':
+            encrypt.setcfg(arg if arg else 'read', arg1)
+            return
 ### INVALID COMMAND
-    print ("\aBłąd: nieprawidłowe polecenie.")
+        raise ValueError("Nieprawidłowe polecenie.")
+    except Exception as e:
+        print(f"\aBłąd: {e}")
 
 
 def sprawdz_input(usr_input):
