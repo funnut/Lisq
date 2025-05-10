@@ -2,7 +2,7 @@
 
 From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/lisq/lisq.py) note-taking app that work with `.txt` files.
 
-![Zrzut ekranu](https://raw.githubusercontent.com/funnut/Lisq/refs/heads/main/screenshot.jpg)
+![Zrzut ekranu](https://raw.githubusercontent.com/funnut/Lisq/refs/heads/dev/screenshot.jpg)
 
 *Code available under a non-commercial license (see LICENSE file).*
 
@@ -31,25 +31,34 @@ To change it, set the following variables in your system by adding it to `~/.bas
 export NOTES_PATH="/file/path/notes.txt"
 export NOTES_EDITOR="nano"
 ```
+or type `lisq cfg -notespath ~/path/notes.txt`
 
 ## Commands
 
-```bash
+```
 quit, q, exit   # Exit the app  
 clear, c        # Clear the screen  
 
 show, s         # Show recent notes (default 10)  
-show [int]      # Show [integer] number of recent notes  
-show [str]      # Show notes containing [string]  
-show all        # Show all notes  
-show random, r  # Show a random note  
+     [int]      # Show [integer] number of recent notes  
+     [str]      # Show notes containing [string]  
+     all        # Show all notes  
+     random, r  # Show a random note  
 
-del [str]       # Delete notes containing [string]  
-del last, l     # Delete the last note  
-del all         # Delete all notes  
+del  [str]      # Delete notes containing [string]  
+     last, l    # Delete the last note  
+     all        # Delete all notes  
+
+cfg  open, show, s
+cfg -encryption on, off, set, newpass
+    -keypath open, unset, del or <path>
+    -notespath open, unset or <path>
+    -editor open or <editor>
+
+encrypt ~/file.txt  # Encrypting any file
+decrypt ~/file.txt  # Decrypting any file
 
 reiterate       # Renumber notes' IDs  
-path            # Show the path to the notes file  
 edit            # Open the notes file in editor
 ```
 
@@ -57,7 +66,6 @@ edit            # Open the notes file in editor
 ## CLI Usage
 
 ```bash
-lisq [command] [argument]
-lisq / 'sample note text'
-lisq add 'sample note text'
+lisq [command] [argument] [argument-1]
+lisq add or / 'sample note text'
 ```
