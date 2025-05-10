@@ -49,7 +49,7 @@ del  [str]      # Delete notes containing [string]
      last, l    # Delete the last note  
      all        # Delete all notes  
 
-     open, show
+cfg  open, show
 cfg -encryption on, off, set, newpass
     -keypath open, unset, del or <path>
     -notespath open, unset or <path>
