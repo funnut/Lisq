@@ -31,7 +31,7 @@ To change it, set the following variables in your system by adding it to `~/.bas
 export NOTES_PATH="/file/path/notes.txt"
 export NOTES_EDITOR="nano"
 ```
-or type `cfg -notespath ~/path/notes.txt`
+or type `lisq cfg -notespath ~/path/notes.txt`
 
 ## Commands
 
