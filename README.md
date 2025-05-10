@@ -48,12 +48,11 @@ del  [str]      # Delete notes containing [string]
      last, l    # Delete the last note  
      all        # Delete all notes  
 
-encryption on, off or set 
-           del key, new pass
-
-cfg keypath show, s, unset, open or [path]
-    notespath s, unset, open or [path]
-    editor s or [editor]
+     open, show
+cfg -encryption on, off, set, newpass
+    -keypath open, unset, del or <path>
+    -notespath open, unset or <path>
+    -editor open or <editor>
 
 reiterate       # Renumber notes' IDs  
 edit            # Open the notes file in editor
