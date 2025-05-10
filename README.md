@@ -55,8 +55,8 @@ cfg -encryption on, off, set, newpass
     -notespath open, unset or <path>
     -editor open or <editor>
 
-encrypt ~/file.txt  # Encrypting any files
-decrypt ~/file.txt  # Decrypting any files
+encrypt ~/file.txt  # Encrypting any file
+decrypt ~/file.txt  # Decrypting any file
 
 reiterate       # Renumber notes' IDs  
 edit            # Open the notes file in editor
