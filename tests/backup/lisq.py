@@ -9,6 +9,7 @@ import shutil # szerokość terminalu
 import readline # historia poleceń
 from datetime import datetime
 from random import randrange, choice
+from pathlib import Path
 
 
 def glowna_funkcja(command):
@@ -99,8 +100,14 @@ def glowna_funkcja(command):
         elif cmd == 'cfg':
             encrypt.setcfg(arg if arg else 'read', arg1)
             return
+### ENCRYPT/DECRYPT
+        elif cmd == 'encrypt':
+            encrypt.process_file(cmd,arg if arg else None)
+        elif cmd == 'decrypt':
+            encrypt.process_file(cmd,arg if arg else None)
 ### INVALID COMMAND
-        raise ValueError("Nieprawidłowe polecenie.")
+        else:
+            raise ValueError("Nieprawidłowe polecenie.")
     except Exception as e:
         print(f"\aBłąd: {e}")
 

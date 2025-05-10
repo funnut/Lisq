@@ -47,7 +47,7 @@ def encrypt(NOTES_PATH, fernet=None):
 #        print(f"Plik {utils.NOTES_PATH()} zaszyfrowany.")
 
     except Exception as e:
-        print(f"\aBłąd podczas szyfrowania. {e}")
+        raise RuntimeError(f"\aBłąd podczas szyfrowania. {e}")
 
 
 def decrypt(NOTES_PATH, fernet=None):
@@ -76,10 +76,10 @@ def decrypt(NOTES_PATH, fernet=None):
 #        print(f"Odszyfrowano notatkę: {utils.NOTES_PATH()}")
         return True
     except InvalidToken:
-        print("\aBłąd: nieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.")
+        raise ValueError("\aNieprawidłowy klucz lub plik nie jest zaszyfrowany.")
         return None
     except Exception as e:
-        print(f"\aWystąpił błąd podczas odszyfrowywania: {e}")
+        raise RuntimeError(f"Nie udało się odszyfrować pliku: {e}")
         return None
 
 
@@ -344,3 +344,40 @@ def handle_encryption(arg1=None):
 #        command = 'cfg', 'encryption', arg1
         raise ValueError("Nieprawidłowe polecenie.")
 #        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")
+
+
+from pathlib import Path
+
+
+
+def process_file(cmd, arg=None):
+    # Określenie ścieżki
+    if arg:
+        path = Path(arg).expanduser()
+    else:
+        path = Path(input("Podaj ścieżkę: ")).expanduser()
+
+    # Sprawdzanie istnienia pliku
+    if not path.exists():
+        print("Ścieżka nie istnieje.")
+        return
+
+    if not path.is_file():
+        print("To nie jest plik.")
+        return
+
+    # Przetwarzanie na podstawie komendy (encrypt lub decrypt)
+    try:
+        fernet = generate_key(save_to_file=None)
+
+        if cmd == 'encrypt':
+            encrypt(path, fernet)
+            print(f"\n{path}\n\nfile encrypted")
+
+        elif cmd == 'decrypt':
+            decrypt(path, fernet)
+            print(f"\n{path}\n\nfile decrypted")
+
+    except Exception as e:
+        print(f"Błąd podczas {cmd} pliku: {e}")
+    return
