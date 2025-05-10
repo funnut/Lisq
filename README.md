@@ -31,6 +31,7 @@ To change it, set the following variables in your system by adding it to `~/.bas
 export NOTES_PATH="/file/path/notes.txt"
 export NOTES_EDITOR="nano"
 ```
+or type `cfg -notespath ~/path/notes.txt`
 
 ## Commands
 
@@ -62,7 +63,6 @@ edit            # Open the notes file in editor
 ## CLI Usage
 
 ```bash
-lisq [command] [argument]
-lisq / 'sample note text'
-lisq add 'sample note text'
+lisq [command] [argument] [argument-1]
+lisq add or / 'sample note text'
 ```
