@@ -3,7 +3,7 @@
 ###### lisq #######
 ################### by © funnut https://github.com/funnut
 
-from . import encrypt, utils
+from . import encryption, utils
 import os, sys, shlex, re # match() for reiterate()
 import shutil # szerokość terminalu
 import readline # historia poleceń
@@ -100,7 +100,7 @@ def glowna_funkcja(command):
             sys.exit()
 ### SETCFG
         elif cmd == 'cfg':
-            encryption.setcfg(arg if arg else 'read', arg1)
+            utils.setcfg(arg if arg else 'read', arg1)
             return
 ### ENCRYPT/DECRYPT
         elif cmd == 'encrypt':
