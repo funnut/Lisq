@@ -7,7 +7,7 @@ COLORS = {
     "reset": "\033[0m",
     "bold": "\033[1m",
     "italic": "\033[3m",
-    "bitalic": "\033[3m\033e",
+    "bitalic": "\033[1m\033[3m",
     "underline": "\033[4m",
     "strikethrough": "\033[9m",
 
@@ -20,6 +20,27 @@ COLORS = {
     "bgblack": "\033[0;100m",
 }
 
+# lisq, matrix, neon
+THEMES = {
+    "dark": {
+        "header": COLORS["bgpurple"],
+        "text": COLORS["blue"],
+        "important": COLORS["yellow"],
+    },
+    "light": {
+        "header": COLORS["bgblue"],
+        "text": COLORS["green"],
+        "important": COLORS["bold"],
+    }
+}
+
+
+def get_theme():
+    theme_name = get_setting("theme", "dark").lower()
+    return THEMES.get(theme_name, THEMES["dark"])
+
+# theme = get_theme()
+# print(f"{theme['header']}Tytuł{COLORS['reset']}")
 
 # Domyślna ścieżka do config.json
 CONFIG_PATH = Path.home() / ".lisq.json"
@@ -61,7 +82,7 @@ def color_block(lines, bg_color="\x1b[0;100m"):
     for line in lines:
         print(f"{bg_color}{line.ljust(width)}{reset}")
 
-    # color_block(["  jakiś_tekst"], bg_color=COLORS["bgpurple"])
+    # color_block(["tekst"], bg_color=COLORS["bgpurple"])
 
 def show_all_settings():
     try:

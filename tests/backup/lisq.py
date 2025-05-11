@@ -96,17 +96,17 @@ def glowna_funkcja(command):
 ### EXIT
         elif cmd in ['quit', 'q', 'exit']:
             if utils.cfg_setting("encryption"):
-                encrypt.encrypt(utils.NOTES_PATH())
+                encryption.encrypt(utils.NOTES_PATH())
             sys.exit()
 ### SETCFG
         elif cmd == 'cfg':
-            encrypt.setcfg(arg if arg else 'read', arg1)
+            encryption.setcfg(arg if arg else 'read', arg1)
             return
 ### ENCRYPT/DECRYPT
         elif cmd == 'encrypt':
-            encrypt.process_file(cmd,arg if arg else None)
+            encryption.process_file(cmd,arg if arg else None)
         elif cmd == 'decrypt':
-            encrypt.process_file(cmd,arg if arg else None)
+            encryption.process_file(cmd,arg if arg else None)
 ### INVALID COMMAND
         else:
             raise ValueError("Nieprawidłowe polecenie.")
@@ -251,7 +251,7 @@ def pobierz_input():
         except EOFError:
             usr_input = []
             if utils.cfg_setting("encryption"):
-                encrypt.encrypt(utils.NOTES_PATH())
+                encryption.encrypt(utils.NOTES_PATH())
             else:
                 print("closed")
             print('')
@@ -261,10 +261,10 @@ def pobierz_input():
 def main():
     """Interfejs wiersza poleceń"""
     if utils.cfg_setting("encryption") == 'ON':
-        for attempt in range(5):
-            fernet = encrypt.generate_key(save_to_file=False)
+        for attempt in range(3):
+            fernet = encryption.generate_key(save_to_file=False)
             try:
-                result = encrypt.decrypt(utils.NOTES_PATH(),fernet)
+                result = encryption.decrypt(utils.NOTES_PATH(),fernet)
                 if result:
                     print("decrypted")
                     break
@@ -274,23 +274,23 @@ def main():
             print("\a\nZbyt wiele nieudanych prób.")
             sys.exit(1)
     if utils.cfg_setting("encryption") == 'SET':
-        encrypt.decrypt(utils.NOTES_PATH())
+        encryption.decrypt(utils.NOTES_PATH())
     if len(sys.argv) > 1:
         if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
             if utils.cfg_setting("encryption"):
-                encrypt.encrypt(utils.NOTES_PATH())
+                encryption.encrypt(utils.NOTES_PATH())
             sys.exit()
         else:
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
             if utils.cfg_setting("encryption") == 'ON':
-                encrypt.encrypt(utils.NOTES_PATH())
+                encryption.encrypt(utils.NOTES_PATH())
             if utils.cfg_setting("encryption") == 'SET':
                 if not os.path.exists(utils.KEY_PATH()):
-                    encrypt.generate_key(save_to_file=True)
-                encrypt.encrypt(utils.NOTES_PATH())
+                    encryption.generate_key(save_to_file=True)
+                encryption.encrypt(utils.NOTES_PATH())
             sys.exit()
     else:
         readline.set_history_length(100)
