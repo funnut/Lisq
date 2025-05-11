@@ -1,6 +1,6 @@
 # Lisq
 
-From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/lisq/lisq.py) note-taking app that work with `.txt` files.
+From Polish *"lisek / foxie"* – lisq is a [**lightweight**](https://github.com/funnut/Lisq/blob/main/lisq/) note-taking app that work with `.txt` files.
 
 ![Zrzut ekranu](https://raw.githubusercontent.com/funnut/Lisq/refs/heads/dev/screenshot.jpg)
 

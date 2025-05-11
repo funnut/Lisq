@@ -266,7 +266,7 @@ def pobierz_input():
 
 
 def main():
-"""Interfejs wiersza poleceń"""
+    """Interfejs wiersza poleceń"""
     if ENCRYPTION == 'on':
         input ("hasło: ")
         print ("file decrypted")
