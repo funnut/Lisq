@@ -96,7 +96,6 @@ def glowna_funkcja(command):
 ### EXIT
         elif cmd in ['quit', 'q', 'exit']:
             if utils.cfg_setting("encryption"):
-#                print ('>> To jest if True w glowna_funkcja')
                 encrypt.encrypt(utils.NOTES_PATH())
             sys.exit()
 ### SETCFG
@@ -247,12 +246,11 @@ def pobierz_input():
             glowna_funkcja(sprawdz_input(usr_input))
         except ValueError as e:
             print('')
-            print("Błąd składni: ", e)
+            print("\aBłąd składni: ", e)
             continue
         except EOFError:
             usr_input = []
             if utils.cfg_setting("encryption"):
-#                print (">> To jest if True w pobierz_input()")
                 encrypt.encrypt(utils.NOTES_PATH())
             else:
                 print("closed")
@@ -263,32 +261,33 @@ def pobierz_input():
 def main():
     """Interfejs wiersza poleceń"""
     if utils.cfg_setting("encryption") == 'ON':
-#        print (">> To jest if ON w main()")
-        while True:
-            fernet = encrypt.generate_key(save_to_file=True)
-            result = encrypt.decrypt(utils.NOTES_PATH(),fernet)
-            if result is not None:
-                break
-#            print ('Błąd: Nieprawidłowy token – klucz nie pasuje lub dane są uszkodzone.')
+        for attempt in range(5):
+            fernet = encrypt.generate_key(save_to_file=False)
+            try:
+                result = encrypt.decrypt(utils.NOTES_PATH(),fernet)
+                if result:
+                    print("decrypted")
+                    break
+            except Exception as e:
+                print(f"\aBłąd: {e}")
+        else:
+            print("\a\nZbyt wiele nieudanych prób.")
+            sys.exit(1)
     if utils.cfg_setting("encryption") == 'SET':
-#        print (">> To jest if SET w main()")
         encrypt.decrypt(utils.NOTES_PATH())
     if len(sys.argv) > 1:
         if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
             if utils.cfg_setting("encryption"):
-#                print (">> To jest if True po write_file()")
                 encrypt.encrypt(utils.NOTES_PATH())
             sys.exit()
         else:
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
             if utils.cfg_setting("encryption") == 'ON':
-#                print (">> To jest if ON po else glowna_funkcja")
                 encrypt.encrypt(utils.NOTES_PATH())
             if utils.cfg_setting("encryption") == 'SET':
-#                print (">> To jest if SET po else glowna_funkcja")
                 if not os.path.exists(utils.KEY_PATH()):
                     encrypt.generate_key(save_to_file=True)
                 encrypt.encrypt(utils.NOTES_PATH())
@@ -302,4 +301,5 @@ def main():
 |_|_|___/\__, |
  quit - help|_|{randrange(0,1000)}""")
         pobierz_input()
+
 

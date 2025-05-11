@@ -9,24 +9,18 @@ import subprocess
 def generate_key(save_to_file=True):
     password = getpass.getpass(utils.COLORS['bold'] + "hasło: " + utils.COLORS['reset']).encode("utf-8")
     key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
-#    print ('generate_key()')
     if save_to_file:
-#        print ('generate_key()save_to_file')
         with open(utils.KEY_PATH(), "wb") as f:
             f.write(key)
-#        print(f"Klucz zapisany do: {utils.KEY_PATH()}")
     return Fernet(key)
 
 
 def encrypt(NOTES_PATH, fernet=None):
     try:
         if fernet:
-#            print('encrypt(): używam podanego fernet')
             pass
         else:
-#            print('encrypt(): ładuję lub generuję klucz')
             if not utils.KEY_PATH().exists():
-#                print(f"Brak pliku z kluczem: {utils.KEY_PATH()}")
                 generate_key(save_to_file=True)
             with open(utils.KEY_PATH(), 'rb') as f:
                 key = f.read()
@@ -44,21 +38,17 @@ def encrypt(NOTES_PATH, fernet=None):
             f.write(encrypted)
 
         print("encrypted")
-#        print(f"Plik {utils.NOTES_PATH()} zaszyfrowany.")
 
     except Exception as e:
-        raise RuntimeError(f"\aBłąd podczas szyfrowania. {e}")
+        raise RuntimeError(f"Błąd podczas szyfrowania. {e}")
 
 
 def decrypt(NOTES_PATH, fernet=None):
     try:
         if fernet:
-#           print('decrypt(): używam podanego fernet')
             pass
         else:
-#            print('decrypt(): ładuję klucz z pliku')
             if not utils.KEY_PATH().exists():
-#                print(f"Brak pliku z kluczem: {utils.KEY_PATH()}")
                 generate_key(save_to_file=True)
             with open(utils.KEY_PATH(), 'rb') as f:
                 key = f.read()
@@ -73,10 +63,9 @@ def decrypt(NOTES_PATH, fernet=None):
             f.write(decrypted)
 
 #        print("decrypted")
-#        print(f"Odszyfrowano notatkę: {utils.NOTES_PATH()}")
         return True
     except InvalidToken:
-        raise ValueError("\aNieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+        raise ValueError("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
         return None
     except Exception as e:
         raise RuntimeError(f"Nie udało się odszyfrować pliku: {e}")
@@ -89,10 +78,9 @@ def del_file(path):
             os.remove(path)
             return True
         else:
-#            print(f"Plik nie istnieje: {path}")
             return False
     except Exception as e:
-        print(f"\aNie udało się usunąć pliku '{path}': {e}")
+        print(f"Nie udało się usunąć pliku '{path}': {e}")
         return False
 
 # SETCFG
@@ -152,9 +140,7 @@ def setcfg(arg, arg1):
         else:
             handle_editor(arg1)
     else:
-#        command = 'cfg', arg, arg1
         raise ValueError("Nieprawidłowe polecenie.")
-#        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")
 
 
 # -------------------------------------------------
@@ -276,7 +262,7 @@ def handle_cfg_open(arg1):
         if arg1 is None:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"\aBłąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
             subprocess.run([editor, str(plik)])
             return
@@ -291,10 +277,10 @@ def handle_cfg_open(arg1):
         elif arg1 in ['-config', 'config', '.lisq']:
             plik = utils.CONFIG_PATH
             if not Path(plik).exists():
-                print(f"\aBłąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
                 return
         else:
-            print(f"\aBłąd: Nieznana opcja '{arg1}'")
+            print(f"Błąd: Nieznana opcja '{arg1}'")
             return
 
         subprocess.run([editor, str(plik)])
@@ -341,13 +327,7 @@ def handle_encryption(arg1=None):
         else:
             print("Anulowano.")
     else:
-#        command = 'cfg', 'encryption', arg1
         raise ValueError("Nieprawidłowe polecenie.")
-#        print(f"command: {utils.COLORS['green']}{command}{utils.COLORS['reset']}")
-
-
-from pathlib import Path
-
 
 
 def process_file(cmd, arg=None):
@@ -356,7 +336,6 @@ def process_file(cmd, arg=None):
         path = Path(arg).expanduser()
     else:
         path = Path(input("Podaj ścieżkę: ")).expanduser()
-
     # Sprawdzanie istnienia pliku
     if not path.exists():
         print("Ścieżka nie istnieje.")
@@ -365,7 +344,6 @@ def process_file(cmd, arg=None):
     if not path.is_file():
         print("To nie jest plik.")
         return
-
     # Przetwarzanie na podstawie komendy (encrypt lub decrypt)
     try:
         fernet = generate_key(save_to_file=None)
