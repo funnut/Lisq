@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 import os
 import json
@@ -11,36 +12,128 @@ COLORS = {
     "underline": "\033[4m",
     "strikethrough": "\033[9m",
 
-    "green": "\033[92m",
-    "yellow": "\033[93m",
+    "black": "\033[30m",
+    "red": "\033[31m",
+    "green": "\033[32m",
+    "yellow": "\033[33m",
     "blue": "\033[34m",
-    "bgred": "\033[41m",
-    "bgblue": "\033[44m",
-    "bgpurple": "\033[45m",
-    "bgblack": "\033[0;100m",
+    "purple": "\033[35m",
+    "cyan": "\033[36m",
+    "white": "\033[37m",
+
+    "bold-black": "\033[1;30m",
+    "bold-red": "\033[1;31m",
+    "bold-green": "\033[1;32m",
+    "bold-yellow": "\033[1;33m",
+    "bold-blue": "\033[1;34m",
+    "bold-purple": "\033[1;35m",
+    "bold-cyan": "\033[1;36m",
+    "bold-white": "\033[1;37m",
+
+    "underline-black": "\033[4;30m",
+    "underline-red": "\033[4;31m",
+    "underline-green": "\033[4;32m",
+    "underline-yellow": "\033[4;33m",
+    "underline-blue": "\033[4;34m",
+    "underline-purple": "\033[4;35m",
+    "underline-cyan": "\033[4;36m",
+    "underline-white": "\033[4;37m",
+
+    "bg-black": "\033[40m",
+    "bg-red": "\033[41m",
+    "bg-green": "\033[42m",
+    "bg-yellow": "\033[43m",
+    "bg-blue": "\033[44m",
+    "bg-purple": "\033[45m",
+    "bg-cyan": "\033[46m",
+    "bg-white": "\033[47m",
+
+    "high-black": "\033[90m",
+    "high-red": "\033[91m",
+    "high-green": "\033[92m",
+    "high-yellow": "\033[93m",
+    "high-blue": "\033[94m",
+    "high-purple": "\033[95m",
+    "high-cyan": "\033[96m",
+    "high-white": "\033[97m",
+
+    "bold-high-black": "\033[1;90m",
+    "bold-high-red": "\033[1;91m",
+    "bold-high-green": "\033[1;92m",
+    "bold-high-yellow": "\033[1;93m",
+    "bold-high-blue": "\033[1;94m",
+    "bold-high-purple": "\033[1;95m",
+    "bold-high-cyan": "\033[1;96m",
+    "bold-high-white": "\033[1;97m",
+
+    "bg-high-black": "\033[0;100m",
+    "bg-high-red": "\033[0;101m",
+    "bg-high-green": "\033[0;102m",
+    "bg-high-yellow": "\033[0;103m",
+    "bg-high-blue": "\033[0;104m",
+    "bg-high-purple": "\033[0;105m",
+    "bg-high-cyan": "\033[0;106m",
+    "bg-high-white": "\033[0;107m",
+
 }
 
 # lisq, matrix, neon
 THEMES = {
-    "dark": {
-        "header": COLORS["bgpurple"],
-        "text": COLORS["blue"],
-        "important": COLORS["yellow"],
-    },
-    "light": {
-        "header": COLORS["bgblue"],
-        "text": COLORS["green"],
+    "lisq": {
+        "intro": COLORS["white"],
+        "nav": COLORS["white"],
+        "header": COLORS["bg-purple"],
+        "text": COLORS["white"],
         "important": COLORS["bold"],
+        "password": COLORS["blue"],
+        "error": COLORS["bg-red"],
+        "notes-text": COLORS["high-green"],
+        "notes-top": COLORS["high-yellow"],
+        "notes-side": COLORS["high-yellow"],
+        "cfg-main-topbar": COLORS["bg-purple"],
+        "cfg-topbar": COLORS["bg-high-black"],
+    },
+    "matrix": {
+        "intro": COLORS["green"],
+        "nav": COLORS["green"],
+        "header": COLORS["bold-high-green"],
+        "text": COLORS["green"],
+        "important": COLORS["bold-high-green"],
+        "password": COLORS["white"],
+        "error": COLORS["red"],
+        "notes-text": COLORS["high-green"],
+        "notes-top": COLORS["green"],
+        "notes-side": COLORS["green"],
+        "cfg-main-topbar": COLORS["bold-green"],
+        "cfg-topbar": COLORS["bold-green"],
     }
 }
 
 
+THEMES["cli-default"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
+THEMES["white"] = {key: COLORS["white"] for key in THEMES["lisq"].keys()}
+
+
 def get_theme():
-    theme_name = get_setting("theme", "dark").lower()
-    return THEMES.get(theme_name, THEMES["dark"])
+    theme_name = get_setting("theme", "lisq").lower()
+    return THEMES.get(theme_name, THEMES["lisq"])
+
 
 # theme = get_theme()
 # print(f"{theme['header']}Tytuł{COLORS['reset']}")
+
+def color_block(lines, bg_color="\x1b[0;100m"):
+    reset = "\x1b[0m"
+    try:
+        width = os.get_terminal_size().columns
+    except OSError:
+        width = 80  # fallback
+    for line in lines:
+        print(f"{bg_color}{line.ljust(width)}{reset}")
+
+    # color_block(["tekst"], bg_color=COLORS["bgpurple"])
+
+
 
 # Domyślna ścieżka do config.json
 CONFIG_PATH = Path.home() / ".lisq.json"
@@ -75,14 +168,12 @@ def cfg_setting(setting):
     raw = (get_setting(setting) or "").upper()
     return None if raw in ("", "OFF") else raw
 
-
-def color_block(lines, bg_color="\x1b[0;100m"):
-    reset = "\x1b[0m"
-    width = os.get_terminal_size().columns
-    for line in lines:
-        print(f"{bg_color}{line.ljust(width)}{reset}")
-
-    # color_block(["tekst"], bg_color=COLORS["bgpurple"])
+def set_theme(name):
+    if name.lower() in THEMES:
+        set_setting("theme", name.lower())
+        print(theme['text']+f"Motyw ustawiony na: {name}"+reset)
+    else:
+        print(theme['error']+"Nieznany motyw. Dostępne:", ", ".join(THEMES.keys())+reset)
 
 def show_all_settings():
     try:
@@ -90,19 +181,29 @@ def show_all_settings():
             config = json.load(file)
 
         color_block(["Aktualne ustawienia:"],
-        bg_color=COLORS["bgpurple"])
-        print(f"{CONFIG_PATH}\n")
+        bg_color=theme["cfg-main-topbar"])
+        print(theme['text']+theme['important']+f"{CONFIG_PATH}\n"+reset)
 
-        print("open, show or -encryption, -keypath, -notespath, -editor\n")
+        print(theme['text']+"open, show or -encryption, -keypath, -notespath, -editor\n"+reset)
 
         for key, value in config.items():
-            print(f"  {key}: {value}")
+            print(f"  {theme['text']}{key}: {theme['important']}{value}{reset}")
 
     except FileNotFoundError:
-        print("Plik .lisq.json nie został znaleziony.")
+        print(theme['error']+"Plik .lisq.json nie został znaleziony."+reset)
     except json.JSONDecodeError:
-        print("Błąd przy wczytywaniu pliku .lisq.json – niepoprawny JSON.")
+        print(theme['error']+"Błąd przy wczytywaniu pliku .lisq.json – niepoprawny JSON."+reset)
 
+def del_file(path):
+    try:
+        if os.path.exists(path):
+            os.remove(path)
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(theme['error']+f"Nie udało się usunąć pliku '{path}': {e}"+reset)
+        return False
 
 # Dodatkowe ścieżki
 
@@ -120,7 +221,13 @@ def EDITOR():
 
 def setcfg(arg, arg1):
     arg = arg.lower()
-    if arg == 'read':
+    reset = COLORS['reset']
+    if arg == 'theme':
+        if not arg1:
+            print(theme['text']+"Dostępne:", ", ".join(THEMES.keys())+reset)
+        else:
+            set_theme(arg1)
+    elif arg == 'read':
         show_all_settings()
     elif arg in ['-encryption','encryption']:
         if arg1:
@@ -129,31 +236,31 @@ def setcfg(arg, arg1):
     elif arg in ['open']: # Open
         editor = EDITOR()
         if not editor:
-            print("Błąd: Edytor nie jest ustawiony.")
+            print(theme['error']+"Błąd: Edytor nie jest ustawiony."+reset)
         else:
             handle_cfg_open(arg1)
     elif arg in ['show','s']: # Show
         if not arg1:
-            print("[show,s] Pokaż ustawienie: -encryption, -keypath, -notespath, -editor")
+            print(theme['text']+"[show,s] Pokaż ustawienie: -encryption, -keypath, -notespath, -editor"+reset)
         elif arg1 in ['-keypath','keypath']:
             path = KEY_PATH()
-            print(f"{path}")
+            print(theme['text']+theme['important']+f"{path}"+reset)
         elif arg1 in ['-notespath','notespath']:
             path = NOTES_PATH()
-            print(f"{path}")
+            print(theme['text']+theme['important']+f"{path}"+reset)
         elif arg1 in ['-editor','editor']:
             editor = EDITOR()
-            print(f"Editor is set to: {editor}")
+            print(f"{theme['text']}Editor is set to: {theme['important']}{editor}{reset}")
         elif arg1 in ['-encryption','encryption']:
             setting = (get_setting("encryption") or 'OFF').upper()
-            print(f"Encryption is set to: {setting}")
+            print(f"{theme['text']}Encryption is set to: {theme['important']}{setting}{reset}")
         else:
-            print("Błąd: nie ma takiego ustawienia.")
+            print(theme['error']+"Błąd: nie ma takiego ustawienia."+reset)
     elif arg in ['-notespath','notespath']: # cfg -notespath
         if arg1 == 'unset':
             del_setting("notespath")
             path = NOTES_PATH()
-            print(f"Ustawiono ścieżkę domyślną: {path}")
+            print(f"{theme['text']}Ustawiono ścieżkę domyślną: {theme['important']}{path}{reset}")
         elif arg1 == 'open':
             subprocess.run([EDITOR(),NOTES_PATH()])
         else:
@@ -173,7 +280,7 @@ def setcfg(arg, arg1):
         else:
             handle_editor(arg1)
     else:
-        raise ValueError("Nieprawidłowe polecenie.")
+        raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
 
 
 # -------------------------------------------------
@@ -183,12 +290,12 @@ def setcfg(arg, arg1):
 def handle_notespath(arg1=None):
     path = NOTES_PATH()
     color_block(["Notes path is set to:"],
-                 bg_color=COLORS["bgblack"])
-    print(f"{path}")
-    print("\n-NOTESPATH: open, unset, <ścieżka>\n")
+                 bg_color=theme['cfg-topbar'])
+    print(theme['text']+theme['important']+f"{path}"+reset)
+    print(theme['text']+"\n-NOTESPATH: open, unset, <ścieżka>\n"+reset)
 
     if not arg1:
-        arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
+        arg1 = input(theme['text']+"Podaj nową ścieżkę (q - anuluj): "+reset).strip()
     if arg1.lower() == 'q':
         return
 
@@ -197,73 +304,73 @@ def handle_notespath(arg1=None):
     if arg1 == 'unset':
         del_setting("notespath")
         path = NOTES_PATH()
-        print(f"Ustawiono ścieżkę domyślną: {path}")
+        print(f"{theme['text']}Ustawiono ścieżkę domyślną: {theme['important']}{path}{reset}")
     else:
         path = Path(os.path.expanduser(arg1)).resolve()
         if str(path).endswith(".txt"):
             set_setting("notespath",str(path))
-            print(f"Ustawiono nową ścieżkę: {path}")
+            print(f"{theme['text']}Ustawiono nową ścieżkę: {theme['important']}{path}{reset}")
         else:
-            print("Błąd: ścieżka musi prowadzić do pliku .txt.")
+            print(theme['error']+"Błąd: ścieżka musi prowadzić do pliku .txt."+reset)
 
 # -keypath
 
 def handle_keypath_unset():
-    confirm = input("Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): ").strip().lower()
+    confirm = input(theme['text']+"Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): "+reset).strip().lower()
     print('')
     if confirm in ['t', '']:
         del_setting("keypath")
         path = KEY_PATH()
-        print(f"Ustawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {path}")
+        print(f"{theme['text']}Ustawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {theme['important']}{path}{reset}")
     else:
-        print("Anulowano usuwanie.")
+        print(theme['text']+"Anulowano usuwanie."+reset)
 
 def handle_keypath_del():
     path = KEY_PATH()
-    print(f"{path}")
-    confirm = input("Czy na pewno chcesz usunąć klucz? (t/n): ").strip().lower()
+    print(theme['text']+theme['important']+f"{path}"+reset)
+    confirm = input(theme['text']+"Czy na pewno chcesz usunąć klucz? (t/n): "+reset).strip().lower()
     print('')
     if confirm in ['t', '']:
         if os.path.exists(path):
             os.remove(path)
-            print("Klucz usunięty.")
+            print(theme['text']+"Klucz usunięty."+reset)
         else:
-            print("Plik nie istnieje.")
+            print(theme['error']+"Plik nie istnieje."+reset)
     else:
-        print("Anulowano usuwanie.")
+        print(theme['text']+"Anulowano usuwanie."+reset)
 
 def handle_keypath(arg1=None):
     path = KEY_PATH()
     color_block(["Key path is set to:"],
-               bg_color=COLORS["bgblack"])
-    print(f"{path}")
-    print("\n-KEYPATH: open, unset, del, <ścieżka>\n")
+               bg_color=theme['cfg-topbar'])
+    print(theme['text']+theme['important']+f"{path}"+reset)
+    print(theme['text']+"\n-KEYPATH: open, unset, del, <ścieżka>\n"+reset)
 
     if not arg1:
-        arg1 = input("Podaj nową ścieżkę (q - anuluj): ").strip()
+        arg1 = input(theme['text']+"Podaj nową ścieżkę (q - anuluj): "+reset).strip()
     if arg1.lower() == 'q':
         return
 
     expanded_path = Path(os.path.expanduser(arg1)).resolve()
 
     if not str(expanded_path).endswith(".keylisq"):
-        print("Błąd: ścieżka musi prowadzić do pliku .keylisq.")
+        print(theme['error']+"Błąd: ścieżka musi prowadzić do pliku .keylisq."+reset)
         return
 
     set_setting("keypath", str(expanded_path))
-    print(f"Ustawiono nową ścieżkę: {expanded_path}")
+    print(f"{theme['text']}Ustawiono nową ścieżkę: {theme['important']}{expanded_path}{reset}")
 
 # -editor
 
 def handle_editor(arg1=None):
     editor = EDITOR()
     color_block(["Editor is set to:"],
-            bg_color=COLORS["bgblack"])
-    print(f"{editor}")
-    print("\n-EDITOR: open, <name>\n")
+            bg_color=theme['cfg-topbar'])
+    print(theme['text']+theme['important']+f"{editor}"+reset)
+    print(theme['text']+"\n-EDITOR: open, <name>\n"+reset)
 
     if not arg1:
-        arg1 = input("Podaj nazwę edytora (q - anuluj): ").strip()
+        arg1 = input(theme['text']+"Podaj nazwę edytora (q - anuluj): "+reset).strip()
     if arg1 == 'q':
         return
 
@@ -272,16 +379,16 @@ def handle_editor(arg1=None):
         return
     if shutil.which(arg1):
         set_setting("editor", arg1)
-        print(f"Ustawiono edytor: {arg1}")
+        print(f"{theme['text']}Ustawiono edytor: {theme['important']}{arg1}{reset}")
     else:
-        print(f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.")
+        print(theme['error']+f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano."+reset)
 
 def handle_editor_open():
     editor = EDITOR()
     if shutil.which(editor):
         os.system(f"{editor}")
     else:
-        print(f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH.")
+        print(theme['error']+f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH."+reset)
 
 # Open
 
@@ -289,13 +396,13 @@ def handle_cfg_open(arg1):
     editor = EDITOR()
     try:
         if not editor:
-            print("Błąd: Edytor nie został określony.")
+            print(theme['error']+"Błąd: Edytor nie został określony."+reset)
             return
 
         if arg1 is None:
             plik = CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(theme['text']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
                 return
             subprocess.run([editor, str(plik)])
             return
@@ -310,28 +417,28 @@ def handle_cfg_open(arg1):
         elif arg1 in ['-config', 'config', '.lisq']:
             plik = CONFIG_PATH
             if not Path(plik).exists():
-                print(f"Błąd: Plik konfiguracyjny nie istnieje: {plik}")
+                print(theme['error']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
                 return
         else:
-            print(f"Błąd: Nieznana opcja '{arg1}'")
+            print(theme['error']+f"Błąd: Nieznana opcja '{arg1}'"+reset)
             return
 
         subprocess.run([editor, str(plik)])
 
     except Exception as e:
-        print(f"\aWystąpił błąd przy otwieraniu edytora: {e}")
+        print(theme['error']+f"Wystąpił błąd przy otwieraniu edytora: {e}"+reset)
 
 # Encryption
 
 def handle_encryption(arg1=None):
     setting = (get_setting("encryption") or 'OFF').upper()
     color_block(["Encryption is set to:"],
-                bg_color=COLORS["bgblack"])
-    print(f"{setting}")
-    print("\n-ENCRYPTION: on, off, set, newpass\n")
+                bg_color=theme['cfg-topbar'])
+    print(theme['text']+theme['important']+f"{setting}"+reset)
+    print(theme['text']+"\n-ENCRYPTION: on, off, set, newpass\n"+reset)
 
     if not arg1:
-        arg1 = input("Podaj ustawienie (q - anuluj): ").strip()
+        arg1 = input(theme['text']+"Podaj ustawienie (q - anuluj): "+reset).strip()
     if arg1.lower() == 'q':
         return
 
@@ -339,26 +446,31 @@ def handle_encryption(arg1=None):
         key = KEY_PATH()
         del_file(key)
         set_setting("encryption", "set")
-        print("Encryption set to SET")
+        print(f"{theme['text']}Encryption set to {theme['important']}SET"+reset)
     elif arg1 == 'on':
         key = KEY_PATH()
         del_file(key)
         set_setting("encryption", "on")
-        print("Encryption set to ON")
+        print(f"{theme['text']}Encryption set to {theme['important']}ON"+reset)
     elif arg1 == 'off':
         key = KEY_PATH()
         del_file(key)
         set_setting("encryption", None)
-        print("Encryption set to OFF")
+        print(f"{theme['text']}Encryption set to {theme['important']}OFF"+reset)
     elif arg1 == 'newpass':
-        yesno = input("\nCzy napewno chcesz zmienić hasło? (t/n): ")
+        yesno = input(theme['text']+"\nCzy napewno chcesz zmienić hasło? (t/n): "+reset)
         if yesno.lower() in ['t','']:
             key = KEY_PATH()
             del_file(key)
             generate_key(save_to_file=True)
-            print("Hasło zostało zmienione.")
+            print(theme['text']+"Hasło zostało zmienione."+reset)
         else:
-            print("Anulowano.")
+            print(theme['text']+"Anulowano."+reset)
     else:
-        raise ValueError("Nieprawidłowe polecenie.")
+        raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
 
+
+
+
+theme = get_theme()
+reset = COLORS['reset']

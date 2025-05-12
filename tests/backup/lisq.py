@@ -11,6 +11,8 @@ from datetime import datetime
 from random import randrange, choice
 from pathlib import Path
 
+theme = utils.get_theme()
+reset = utils.COLORS['reset']
 
 def glowna_funkcja(command):
     cmd, arg, arg1 = command
@@ -18,9 +20,9 @@ def glowna_funkcja(command):
     try:
         if cmd == 'add':
             if not arg:
-                arg = input("Wpisz notatkę: ").strip()
+                arg = input(theme['text']+"Wpisz notatkę: "+reset).strip()
                 if not arg:
-                    print ("Anulowano dodawanie – nie podano treści notatki.")
+                    print (theme['text']+"Anulowano dodawanie – nie podano treści notatki."+reset)
                     return
             if arg:
                 write_file(arg)
@@ -28,9 +30,9 @@ def glowna_funkcja(command):
 ### DELETE
         elif cmd == 'del':
             if not arg:
-                arg = input("Wpisz ID: ").strip().lower()
+                arg = input(theme['text']+"Wpisz ID: "+reset).strip().lower()
                 if not arg:
-                    print("Anulowano usuwanie – nie podano ID.")
+                    print(theme['text']+"Anulowano usuwanie – nie podano ID."+reset)
                     return
             delete(arg)
             return
@@ -44,49 +46,55 @@ def glowna_funkcja(command):
             return
 ### REITERATE
         elif cmd == 'reiterate':
-            yesno = input (f'Czy chcesz reiterować wszystkie notatki? (t/n): ')
+            yesno = input (theme['text']+"Czy chcesz reiterować wszystkie notatki? (t/n): "+reset)
             if yesno.lower() in ['y', 'yes','t','tak', '']:
                 reiterate()
-                print ('Reiteracja ukończona.')
+                print(theme['text']+"Reiteracja ukończona."+reset)
                 return
             else:
-                print ('Reiteracja anulowana.')
+                print(theme['text']+"Reiteracja anulowana."+reset)
                 return
 ### HELP
         elif cmd in ['help', 'h', 'lisq']:
-            print (f"{utils.COLORS['bgpurple']}# About{utils.COLORS['reset']}\n\n"
-                "From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.\n\n"
-                "Code available under a non-commercial license (see LICENSE file).\n\n"
-                "Copyright © funnut\n"
-                "https://github.com/funnut\n\n"
-                f"{utils.COLORS['bgpurple']}# Commands{utils.COLORS['reset']}\n\n"
-                ": quit, q, exit\n"
-                ": clear, c        - clear screen\n"
-                ":\n"
-                ": show, s         - show recent notes (default 10)\n"
-                ":      [int]      - show number of recent notes\n"
-                ":      [str]      - show notes containing [string]\n"
-                ":      all        - show all notes\n"
-                ":      random, r  - show a random note\n"
-                ":\n"
-                ": del  [str]      - delete notes containing [string]\n"
-                ":      last, l    - delete the last note\n"
-                ":      all        - delete all notes\n"
-                ":\n"
-                ": cfg  open, show\n"
-                ": cfg -encryption on, off, set, newpass\n"
-                ":     -keypath open, unset, del or <path>\n"
-                ":     -notespath open, unset or <path>\n"
-                ":     -editor open or <editor>\n"
-                ":\n"
-                ": encrypt ~/file.txt - encrypting any file\n"
-                ": decrypt ~/file.txt - decrypting any file\n"
-                ":\n"
-                ": reiterate   - renumber notes' IDs\n"
-                ": edit        - open the notes file in editor\n\n"
-                f"{utils.COLORS['bgpurple']}# CLI Usage{utils.COLORS['reset']}\n\n"
-                "lisq [command] [argument] [argument-1]\n"
-                "lisq add or / \'sample note text\'")
+            print (f"""{theme['header']}# About{reset}
+
+{theme['text']}From Polish \"lisek / foxie\" - lisq is a lightweight note-taking app that work with .txt files.
+
+Code available under a non-commercial license (see LICENSE file).
+
+Copyright © funnut https://github.com/funnut{reset}
+
+{theme['header']}# Commands{reset}
+
+{theme['text']}: quit, q, exit
+: clear, c        - clear screen
+:
+: show, s         - show recent notes (default 10)
+:      [int]      - show number of recent notes
+:      [str]      - show notes containing [string]
+:      all        - show all notes
+:      random, r  - show a random note
+:
+: del  [str]      - delete notes containing [string]
+:      last, l    - delete the last note
+:      all        - delete all notes
+:
+: cfg  open, show
+: cfg -encryption on, off, set, newpass
+:     -keypath open, unset, del or <path>
+:     -notespath open, unset or <path>
+:     -editor open or <editor>
+:
+: encrypt ~/file.txt - encrypting any file
+: decrypt ~/file.txt - decrypting any file
+:
+: reiterate   - renumber notes' IDs
+: edit        - open the notes file in editor{reset}
+
+{theme['header']}# CLI Usage{reset}
+
+{theme['text']}lisq [command] [argument] [argument-1]
+lisq add or / \'sample note text\'{reset}""")
             return
 ### EDIT
         elif cmd == 'edit':
@@ -109,9 +117,9 @@ def glowna_funkcja(command):
             encryption.process_file(cmd,arg if arg else None)
 ### INVALID COMMAND
         else:
-            raise ValueError("Nieprawidłowe polecenie.")
+            raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
     except Exception as e:
-        print(f"\aBłąd: {e}")
+        print(theme['error']+f"Błąd: {e}"+reset)
 
 
 def sprawdz_input(usr_input):
@@ -129,7 +137,7 @@ def sprawdz_input(usr_input):
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""
     terminal_width = shutil.get_terminal_size().columns
-    print(f"{utils.COLORS['yellow']} _id _data","=" * (terminal_width-12),utils.COLORS['reset'])
+    print(f"{theme['notes-top']} _id _data{'=' * (terminal_width - 12)}{reset}")
     try:
         with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as plik:
             linie = plik.readlines()
@@ -146,14 +154,14 @@ def read_file(a):
                 if znalezione:
                     do_wyswietlenia = znalezione
                 else:
-                    return print("\nNie znaleziono pasujących elementów.")
+                    return print(theme['text']+"\nNie znaleziono pasujących elementów."+reset)
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
-                print(f"{utils.COLORS['yellow']}{parts[0]} {formatted_date}{utils.COLORS['reset']} {utils.COLORS['green']}{' '.join(parts[2:]).strip()}{utils.COLORS['reset']}")
-            print(f"\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.")
+                print(f"{theme['notes-side']}{parts[0]} {formatted_date}{reset} {theme['notes-text']}{' '.join(parts[2:]).strip()}{reset}")
+            print(theme['text']+f"\nZnaleziono {len(do_wyswietlenia)} pasujących elementów."+reset)
     except FileNotFoundError:
-        print(f"\a\n'{utils.NOTES_PATH()}'\n\nPlik nie został znaleziony.")
+        print(theme['error']+f"\n'{utils.NOTES_PATH()}'\n\nPlik nie został znaleziony."+reset)
 
 
 def write_file(a):
@@ -173,7 +181,7 @@ def write_file(a):
     data_ = datetime.now().strftime("%Y/%m/%d")
     with open(utils.NOTES_PATH(), 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
-    print("Notatka została dodana.")
+    print(theme['text']+"Notatka została dodana."+reset)
 
 
 def delete(arg):
@@ -185,37 +193,37 @@ def delete(arg):
     with open(utils.NOTES_PATH(), "r", encoding="utf-8") as plik:
         linie = plik.readlines()
     if arg == "all":
-        yesno = input("Ta operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): ")
+        yesno = input(theme['text']+"Ta operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): "+reset)
         if yesno.lower() in ['y','yes','t','tak']:
             open(utils.NOTES_PATH(), "w", encoding="utf-8").close()
-            print("Wszystkie notatki zostały usunięte.")
+            print(theme['text']+"Wszystkie notatki zostały usunięte."+reset)
         else:
-            print("Operacja anulowana.")
+            print(theme['text']+"Operacja anulowana."+reset)
     elif arg in ["l","last"]:
         if linie:
-            yesno = input("Ta operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): ")
+            yesno = input(theme['text']+"Ta operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): "+reset)
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(linie[:-1])
-                print("Ostatnia notatka została usunięta.")
+                print(theme['text']+"Ostatnia notatka została usunięta."+reset)
             else:
-                print("Operacja anulowana.")
+                print(theme['text']+"Operacja anulowana."+reset)
         else:
-            print("Brak notatek do usunięcia.")
+            print(theme['text']+"Brak notatek do usunięcia."+reset)
     else:
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(f"Ta operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): ")
+            yesno = input(theme['text']+f"Ta operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): "+reset)
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
                 reiterate()
-                print(f"Usunięto {numer} notatki zawierające identyfikator {arg}.")
+                print(theme['text']+f"Usunięto {numer} notatki zawierające identyfikator {arg}."+reset)
             else:
-                print("Operacja anulowana.")
+                print(theme['text']+"Operacja anulowana."+reset)
         else:
-            print("Nie znaleziono notatek do usunięcia.")
+            print(theme['text']+"Nie znaleziono notatek do usunięcia."+reset)
 
 
 def reiterate():
@@ -240,20 +248,20 @@ def pobierz_input():
     while True:
         try:
             print('')
-            print(">> add / del / show")
-            usr_input = shlex.split(input(">> ").strip())
+            print(theme['nav']+">> add / del / show"+reset)
+            usr_input = shlex.split(input(theme['nav']+">> "+reset).strip())
             print('')
             glowna_funkcja(sprawdz_input(usr_input))
         except ValueError as e:
             print('')
-            print("\aBłąd składni: ", e)
+            print(theme['error']+"Błąd składni: ", e+reset)
             continue
         except EOFError:
             usr_input = []
             if utils.cfg_setting("encryption"):
                 encryption.encrypt(utils.NOTES_PATH())
             else:
-                print("closed")
+                print(theme['text']+"closed"+reset)
             print('')
             break
 
@@ -266,12 +274,12 @@ def main():
             try:
                 result = encryption.decrypt(utils.NOTES_PATH(),fernet)
                 if result:
-                    print("decrypted")
+                    print(theme['text']+"decrypted"+reset)
                     break
             except Exception as e:
-                print(f"\aBłąd: {e}")
+                print(f"{theme['error']}Błąd:{reset} {e}")
         else:
-            print("\a\nZbyt wiele nieudanych prób.")
+            print(theme['text']+"\nZbyt wiele nieudanych prób."+reset)
             sys.exit(1)
     if utils.cfg_setting("encryption") == 'SET':
         encryption.decrypt(utils.NOTES_PATH())
@@ -294,12 +302,12 @@ def main():
             sys.exit()
     else:
         readline.set_history_length(100)
-        print(fr""" _ _
+        print(fr"""{theme['intro']} _ _
 | (_)___  __ _
 | | / __|/ _` |
 | | \__ \ (_| |
 |_|_|___/\__, |
- quit - help|_|{randrange(0,1000)}""")
+ quit - help|_|{randrange(0,1000)}{reset}""")
         pobierz_input()
 
 
