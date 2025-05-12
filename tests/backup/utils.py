@@ -112,6 +112,7 @@ THEMES = {
     "modern": {
         "intro": COLORS["white"],
         "nav": COLORS["white"],
+        "nav-a": COLORS["cyan"],
         "header": COLORS["bg-purple"],
         "text": COLORS["white"],
         "important": COLORS["bold-white"],
@@ -188,7 +189,7 @@ def del_setting(key):
 def set_theme(name):
     if name.lower() in THEMES:
         set_setting("theme", name.lower())
-        print(f"{theme['text']}Motyw ustawiony na: {name}{reset}")
+        print(f"{theme['text']}Motyw ustawiony na: {theme['important']}{name}{reset}")
     else:
         print(f"{theme['error']}Nieznany motyw. Dostępne:", ", ".join(THEMES.keys())+reset)
 
@@ -197,12 +198,13 @@ def show_all_settings():
         with open(CONFIG_PATH, 'r') as file:
             config = json.load(file)
 
-        color_block(["Aktualne ustawienia:"],
+        color_block(["AKTUALNE USTAWIENIA:"],
         bg_color=theme["cfg-main-topbar"])
         print(f"{theme['text']}{theme['important']}{CONFIG_PATH}{reset}\n")
 
         print(f"{theme['text']}open, show or -encryption, -keypath, -notespath, -theme, -editor{reset}\n")
 
+        print(f"{theme['important']}.lisq.json{reset}")
         for key, value in config.items():
             print(f"   {theme['text']}{key}: {theme['important']}{value}{reset}")
 
@@ -394,22 +396,23 @@ def handle_keypath(arg1=None):
 # -editor
 
 def handle_editor(arg1=None):
-    editor = EDITOR()
-    color_block(["Editor is set to:"],
+    editor = EDITOR().upper()
+    color_block(["EDITOR IS SET TO:"],
             bg_color=theme['cfg-topbar'])
     print(f"{theme['important']}{editor}{reset}")
 
-    print(f"\n{theme['text']}-EDITOR: open, <name>{reset}\n")
+    print(f"\n{theme['text']}-editor: open, DODAC UNSET <name>{reset}\n")
 
     if not arg1:
-        arg1 = input(f"{theme['text']}Podaj nazwę edytora (q): {reset}").strip()
-    if arg1 == 'q':
+        arg1 = input(f"{theme['text']}Podaj nową nazwę edytora (q): {reset}").strip()
+    if arg1 in ['q','']:
         return
 
     if arg1 == 'open':
         handle_editor_open()
         return
     if shutil.which(arg1):
+        arg1 = arg1.lower()
         set_setting("editor", arg1)
         print(f"{theme['text']}Ustawiono edytor: {theme['important']}{arg1}{reset}")
     else:
@@ -464,11 +467,11 @@ def handle_cfg_open(arg1):
 
 def handle_encryption(arg1=None):
     setting = (get_setting("encryption") or 'OFF').upper()
-    color_block(["Encryption is set to:"],
+    color_block(["ENCRYPTION IS SET TO:"],
                 bg_color=theme['cfg-topbar'])
     print(f"{theme['important']}{setting}{reset}")
 
-    print(f"\n{theme['text']}-ENCRYPTION: on, off, set, newpass{reset}\n")
+    print(f"\n{theme['text']}-encryption: on, off, set, newpass{reset}\n")
 
     if not arg1:
         arg1 = input(f"{theme['text']}Podaj ustawienie (q): {reset}").strip()

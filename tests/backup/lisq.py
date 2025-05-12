@@ -228,6 +228,7 @@ def delete(arg):
 
 
 def reiterate():
+    """Przenumerowuje ID wszystkich notatek"""
     with open(utils.NOTES_PATH(), "r", encoding="utf-8") as f:
         linie = f.readlines()
     nowy_numer = 1
