@@ -2,7 +2,6 @@ from . import utils
 from cryptography.fernet import Fernet, InvalidToken
 import getpass, base64, os, sys
 from pathlib import Path
-import subprocess
 
 theme = utils.get_theme()
 reset = utils.COLORS['reset']

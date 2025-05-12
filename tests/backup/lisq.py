@@ -10,6 +10,7 @@ import readline # historia poleceń
 from datetime import datetime
 from random import randrange, choice
 from pathlib import Path
+import subprocess
 
 theme = utils.get_theme()
 reset = utils.COLORS['reset']
@@ -99,7 +100,7 @@ lisq add or / \'sample note text\'{reset}""")
 ### EDIT
         elif cmd == 'edit':
             print ('')
-            os.system(f"{utils.EDITOR()} {utils.NOTES_PATH()}")
+            subprocess.run([utils.EDITOR(),utils.NOTES_PATH()])
             return
 ### EXIT
         elif cmd in ['quit', 'q', 'exit']:
@@ -302,7 +303,8 @@ def main():
             sys.exit()
     else:
         readline.set_history_length(100)
-        print(fr"""{theme['intro']} _ _
+        print(fr"""{theme['intro']}
+ _ _
 | (_)___  __ _
 | | / __|/ _` |
 | | \__ \ (_| |

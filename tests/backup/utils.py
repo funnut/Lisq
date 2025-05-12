@@ -1,4 +1,4 @@
-import shutil
+import shutil, subprocess
 from pathlib import Path
 import os
 import json
@@ -82,16 +82,16 @@ THEMES = {
     "lisq": {
         "intro": COLORS["white"],
         "nav": COLORS["white"],
-        "header": COLORS["bg-purple"],
+        "header": COLORS["cyan"],
         "text": COLORS["white"],
-        "important": COLORS["bold"],
-        "password": COLORS["blue"],
-        "error": COLORS["bg-red"],
-        "notes-text": COLORS["high-green"],
-        "notes-top": COLORS["high-yellow"],
-        "notes-side": COLORS["high-yellow"],
-        "cfg-main-topbar": COLORS["bg-purple"],
-        "cfg-topbar": COLORS["bg-high-black"],
+        "important": COLORS["cyan"],
+        "password": COLORS["white"],
+        "error": COLORS["yellow"],
+        "notes-text": COLORS["white"],
+        "notes-top": COLORS["cyan"],
+        "notes-side": COLORS["cyan"],
+        "cfg-main-topbar": COLORS["bold-white"],
+        "cfg-topbar": COLORS["bold-white"],
     },
     "matrix": {
         "intro": COLORS["green"],
@@ -106,12 +106,26 @@ THEMES = {
         "notes-side": COLORS["green"],
         "cfg-main-topbar": COLORS["bold-green"],
         "cfg-topbar": COLORS["bold-green"],
+    },
+    "modern": {
+        "intro": COLORS["white"],
+        "nav": COLORS["white"],
+        "header": COLORS["bg-purple"],
+        "text": COLORS["white"],
+        "important": COLORS["bold"],
+        "password": COLORS["blue"],
+        "error": COLORS["bg-red"],
+        "notes-text": COLORS["high-green"],
+        "notes-top": COLORS["high-yellow"],
+        "notes-side": COLORS["high-yellow"],
+        "cfg-main-topbar": COLORS["bg-purple"],
+        "cfg-topbar": COLORS["bg-high-black"],
     }
+
 }
 
 
 THEMES["cli-default"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
-THEMES["white"] = {key: COLORS["white"] for key in THEMES["lisq"].keys()}
 
 
 def get_theme():
@@ -386,7 +400,7 @@ def handle_editor(arg1=None):
 def handle_editor_open():
     editor = EDITOR()
     if shutil.which(editor):
-        os.system(f"{editor}")
+        subprocess.run([editor])
     else:
         print(theme['error']+f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH."+reset)
 
@@ -402,7 +416,7 @@ def handle_cfg_open(arg1):
         if arg1 is None:
             plik = CONFIG_PATH
             if not Path(plik).exists():
-                print(theme['text']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
+                print(theme['error']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
                 return
             subprocess.run([editor, str(plik)])
             return
