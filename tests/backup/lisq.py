@@ -21,9 +21,9 @@ def glowna_funkcja(command):
     try:
         if cmd == 'add':
             if not arg:
-                arg = input(theme['text']+"Wpisz notatkę: "+reset).strip()
+                arg = input(f"{theme['text']}Wpisz notatkę: {reset}").strip()
                 if not arg:
-                    print (theme['text']+"Anulowano dodawanie – nie podano treści notatki."+reset)
+                    print(f"{theme['text']}Anulowano dodawanie – nie podano treści notatki.{reset}")
                     return
             if arg:
                 write_file(arg)
@@ -31,9 +31,9 @@ def glowna_funkcja(command):
 ### DELETE
         elif cmd == 'del':
             if not arg:
-                arg = input(theme['text']+"Wpisz ID: "+reset).strip().lower()
+                arg = input(f"{theme['text']}Wpisz ID: {reset}").strip().lower()
                 if not arg:
-                    print(theme['text']+"Anulowano usuwanie – nie podano ID."+reset)
+                    print(f"{theme['text']}Anulowano usuwanie – nie podano ID.{reset}")
                     return
             delete(arg)
             return
@@ -47,13 +47,13 @@ def glowna_funkcja(command):
             return
 ### REITERATE
         elif cmd == 'reiterate':
-            yesno = input (theme['text']+"Czy chcesz reiterować wszystkie notatki? (t/n): "+reset)
+            yesno = input (f"{theme['text']}Czy chcesz reiterować wszystkie notatki? (t/n): {reset}")
             if yesno.lower() in ['y', 'yes','t','tak', '']:
                 reiterate()
-                print(theme['text']+"Reiteracja ukończona."+reset)
+                print(f"{theme['text']}Reiteracja ukończona.{reset}")
                 return
             else:
-                print(theme['text']+"Reiteracja anulowana."+reset)
+                print(f"{theme['text']}Reiteracja anulowana.{reset}")
                 return
 ### HELP
         elif cmd in ['help', 'h', 'lisq']:
@@ -104,7 +104,7 @@ lisq add or / \'sample note text\'{reset}""")
             return
 ### EXIT
         elif cmd in ['quit', 'q', 'exit']:
-            if utils.cfg_setting("encryption"):
+            if utils.get_setting("encryption"):
                 encryption.encrypt(utils.NOTES_PATH())
             sys.exit()
 ### SETCFG
@@ -118,9 +118,9 @@ lisq add or / \'sample note text\'{reset}""")
             encryption.process_file(cmd,arg if arg else None)
 ### INVALID COMMAND
         else:
-            raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
+            raise ValueError(f"{theme['error']}Nieprawidłowe polecenie.{reset}")
     except Exception as e:
-        print(theme['error']+f"Błąd: {e}"+reset)
+        print(f"{theme['error']}Błąd: {e}{reset}")
 
 
 def sprawdz_input(usr_input):
@@ -141,7 +141,7 @@ def read_file(a):
     print(f"{theme['notes-top']} _id _data{'=' * (terminal_width - 12)}{reset}")
     try:
         with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as plik:
-            linie = plik.readlines()
+            linie = [linia for linia in plik.readlines() if linia.strip()]
             if a == 'all':
                 do_wyswietlenia = linie
             elif a == 'last':
@@ -155,14 +155,14 @@ def read_file(a):
                 if znalezione:
                     do_wyswietlenia = znalezione
                 else:
-                    return print(theme['text']+"\nNie znaleziono pasujących elementów."+reset)
+                    return print(f"{theme['text']}\nNie znaleziono pasujących elementów.{reset}")
             for linia in do_wyswietlenia:
                 parts = linia.split()
                 formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
                 print(f"{theme['notes-side']}{parts[0]} {formatted_date}{reset} {theme['notes-text']}{' '.join(parts[2:]).strip()}{reset}")
-            print(theme['text']+f"\nZnaleziono {len(do_wyswietlenia)} pasujących elementów."+reset)
+            print(f"{theme['text']}\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.{reset}")
     except FileNotFoundError:
-        print(theme['error']+f"\n'{utils.NOTES_PATH()}'\n\nPlik nie został znaleziony."+reset)
+        print(f"\n{theme['error']}'{utils.NOTES_PATH()}'\n\nPlik nie został znaleziony.{reset}")
 
 
 def write_file(a):
@@ -182,7 +182,7 @@ def write_file(a):
     data_ = datetime.now().strftime("%Y/%m/%d")
     with open(utils.NOTES_PATH(), 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
-    print(theme['text']+"Notatka została dodana."+reset)
+    print(f"{theme['text']}Notatka została dodana.{reset}")
 
 
 def delete(arg):
@@ -194,37 +194,37 @@ def delete(arg):
     with open(utils.NOTES_PATH(), "r", encoding="utf-8") as plik:
         linie = plik.readlines()
     if arg == "all":
-        yesno = input(theme['text']+"Ta operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): "+reset)
+        yesno = input(f"{theme['text']}Ta operacja trwale usunie wszystkie notatki.\nCzy chcesz kontynuować? (t/n): {reset}")
         if yesno.lower() in ['y','yes','t','tak']:
             open(utils.NOTES_PATH(), "w", encoding="utf-8").close()
-            print(theme['text']+"Wszystkie notatki zostały usunięte."+reset)
+            print(f"{theme['text']}Wszystkie notatki zostały usunięte.{reset}")
         else:
-            print(theme['text']+"Operacja anulowana."+reset)
+            print(f"{theme['text']}Operacja anulowana.{reset}")
     elif arg in ["l","last"]:
         if linie:
-            yesno = input(theme['text']+"Ta operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): "+reset)
+            yesno = input(f"{theme['text']}Ta operacja trwale usunie ostatnio dodaną notatkę.\nCzy chcesz kontynuować? (t/n): {reset}")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(linie[:-1])
-                print(theme['text']+"Ostatnia notatka została usunięta."+reset)
+                print(f"{theme['text']}Ostatnia notatka została usunięta.{reset}")
             else:
-                print(theme['text']+"Operacja anulowana."+reset)
+                print(f"{theme['text']}Operacja anulowana.{reset}")
         else:
-            print(theme['text']+"Brak notatek do usunięcia."+reset)
+            print(f"{theme['text']}Brak notatek do usunięcia.{reset}")
     else:
         nowe_linie = [linia for linia in linie if arg not in linia]
         numer = len(linie) - len(nowe_linie)
         if numer > 0:
-            yesno = input(theme['text']+f"Ta operacja trwale usunie {numer} notatek zawierających '{utils.COLORS["yellow"]}{arg}{utils.COLORS["reset"]}'. Czy chcesz kontynuować? (t/n): "+reset)
+            yesno = input(f"{theme['text']}Ta operacja trwale usunie {numer} notatek zawierających '{arg}'. Czy chcesz kontynuować? (t/n): {reset}")
             if yesno.lower() in ['y','yes','t','tak','']:
                 with open(utils.NOTES_PATH(), "w", encoding="utf-8") as plik:
                     plik.writelines(nowe_linie)
                 reiterate()
-                print(theme['text']+f"Usunięto {numer} notatki zawierające identyfikator {arg}."+reset)
+                print(f"{theme['text']}Usunięto {numer} notatki zawierające identyfikator {arg}.{reset}")
             else:
-                print(theme['text']+"Operacja anulowana."+reset)
+                print(f"{theme['text']}Operacja anulowana.{reset}")
         else:
-            print(theme['text']+"Nie znaleziono notatek do usunięcia."+reset)
+            print(f"{theme['text']}Nie znaleziono notatek do usunięcia.{reset}")
 
 
 def reiterate():
@@ -249,17 +249,17 @@ def pobierz_input():
     while True:
         try:
             print('')
-            print(theme['nav']+">> add / del / show"+reset)
-            usr_input = shlex.split(input(theme['nav']+">> "+reset).strip())
+            print(f"{theme['nav']}>> add / del / show"+reset)
+            usr_input = shlex.split(input(f"{theme['nav-a']} > {reset}").strip())
             print('')
             glowna_funkcja(sprawdz_input(usr_input))
         except ValueError as e:
             print('')
-            print(theme['error']+"Błąd składni: ", e+reset)
+            print(f"{theme['error']}Błąd składni: str(e){reset}")
             continue
         except EOFError:
             usr_input = []
-            if utils.cfg_setting("encryption"):
+            if utils.get_setting("encryption"):
                 encryption.encrypt(utils.NOTES_PATH())
             else:
                 print(theme['text']+"closed"+reset)
@@ -269,34 +269,34 @@ def pobierz_input():
 
 def main():
     """Interfejs wiersza poleceń"""
-    if utils.cfg_setting("encryption") == 'ON':
+    if utils.get_setting("encryption") == 'on':
         for attempt in range(3):
             fernet = encryption.generate_key(save_to_file=False)
             try:
                 result = encryption.decrypt(utils.NOTES_PATH(),fernet)
                 if result:
-                    print(theme['text']+"decrypted"+reset)
+                    print(f"{theme['text']}decrypted{reset}")
                     break
             except Exception as e:
                 print(f"{theme['error']}Błąd:{reset} {e}")
         else:
-            print(theme['text']+"\nZbyt wiele nieudanych prób."+reset)
+            print(f"{theme['text']}\nZbyt wiele nieudanych prób.{reset}")
             sys.exit(1)
-    if utils.cfg_setting("encryption") == 'SET':
+    if utils.get_setting("encryption") == 'set':
         encryption.decrypt(utils.NOTES_PATH())
     if len(sys.argv) > 1:
         if sys.argv[1].lower() in ['add','/']:
             note = " ".join(sys.argv[2:])
             write_file(note)
-            if utils.cfg_setting("encryption"):
+            if utils.get_setting("encryption"):
                 encryption.encrypt(utils.NOTES_PATH())
             sys.exit()
         else:
             usr_input = sys.argv[1:]
             glowna_funkcja(sprawdz_input(usr_input))
-            if utils.cfg_setting("encryption") == 'ON':
+            if utils.get_setting("encryption") == 'on':
                 encryption.encrypt(utils.NOTES_PATH())
-            if utils.cfg_setting("encryption") == 'SET':
+            if utils.get_setting("encryption") == 'set':
                 if not os.path.exists(utils.KEY_PATH()):
                     encryption.generate_key(save_to_file=True)
                 encryption.encrypt(utils.NOTES_PATH())

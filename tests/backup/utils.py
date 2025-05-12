@@ -82,6 +82,7 @@ THEMES = {
     "lisq": {
         "intro": COLORS["white"],
         "nav": COLORS["white"],
+        "nav-a": COLORS["cyan"],
         "header": COLORS["cyan"],
         "text": COLORS["white"],
         "important": COLORS["cyan"],
@@ -96,6 +97,7 @@ THEMES = {
     "matrix": {
         "intro": COLORS["green"],
         "nav": COLORS["green"],
+        "nav-a": COLORS["green"],
         "header": COLORS["bold-high-green"],
         "text": COLORS["green"],
         "important": COLORS["bold-high-green"],
@@ -112,7 +114,7 @@ THEMES = {
         "nav": COLORS["white"],
         "header": COLORS["bg-purple"],
         "text": COLORS["white"],
-        "important": COLORS["bold"],
+        "important": COLORS["bold-white"],
         "password": COLORS["blue"],
         "error": COLORS["bg-red"],
         "notes-text": COLORS["high-green"],
@@ -125,8 +127,8 @@ THEMES = {
 }
 
 
-THEMES["cli-default"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
-
+THEMES["cli-text"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
+THEMES["yellow"] = {key: COLORS["yellow"] for key in THEMES["lisq"].keys()}
 
 def get_theme():
     theme_name = get_setting("theme", "lisq").lower()
@@ -157,15 +159,20 @@ CONFIG_PATH = Path.home() / ".lisq.json"
 def load_config():
     if not CONFIG_PATH.exists():
         return {}
-    with open(CONFIG_PATH, "r") as f:
-        return json.load(f)
+    try:
+        with open(CONFIG_PATH, "r") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {}
 
 def save_config(config):
     with open(CONFIG_PATH, "w") as f:
         json.dump(config, f, indent=2)
 
 def get_setting(key, default=None):
-    return load_config().get(key, default)
+    key = key.lower()
+    config = {k.lower(): v for k, v in load_config().items()}
+    return config.get(key, default)
 
 def set_setting(key, value):
     config = load_config()
@@ -177,10 +184,6 @@ def del_setting(key):
     if key in config:
         del config[key]
         save_config(config)
-
-def cfg_setting(setting):
-    raw = (get_setting(setting) or "").upper()
-    return None if raw in ("", "OFF") else raw
 
 def set_theme(name):
     if name.lower() in THEMES:
@@ -201,7 +204,7 @@ def show_all_settings():
         print(theme['text']+"open, show or -encryption, -keypath, -notespath, -editor\n"+reset)
 
         for key, value in config.items():
-            print(f"  {theme['text']}{key}: {theme['important']}{value}{reset}")
+            print(f"   {theme['text']}{key}: {theme['important']}{value}{reset}")
 
     except FileNotFoundError:
         print(theme['error']+"Plik .lisq.json nie został znaleziony."+reset)
@@ -236,11 +239,21 @@ def EDITOR():
 def setcfg(arg, arg1):
     arg = arg.lower()
     reset = COLORS['reset']
-    if arg == 'theme':
+    if arg in ['-theme','theme']:
+        setting = get_setting('theme','lisq')
+        color_block(["Theme is set to:"],
+                 bg_color=theme['cfg-topbar'])
+        print(theme['text']+theme['important']+f"{setting}"+reset)
+
+        print(theme['text']+"\nDostępne motywy:", ", ".join(THEMES.keys())+reset+"\n")
+
         if not arg1:
-            print(theme['text']+"Dostępne:", ", ".join(THEMES.keys())+reset)
-        else:
-            set_theme(arg1)
+            arg1 = input(theme['text']+"Podaj nowy theme (q - anuluj): "+reset).strip()
+        if arg1.lower() == 'q':
+            return
+
+        set_theme(arg1)
+
     elif arg == 'read':
         show_all_settings()
     elif arg in ['-encryption','encryption']:
@@ -455,7 +468,6 @@ def handle_encryption(arg1=None):
         arg1 = input(theme['text']+"Podaj ustawienie (q - anuluj): "+reset).strip()
     if arg1.lower() == 'q':
         return
-
     elif arg1 == 'set':
         key = KEY_PATH()
         del_file(key)
@@ -482,8 +494,6 @@ def handle_encryption(arg1=None):
             print(theme['text']+"Anulowano."+reset)
     else:
         raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
-
-
 
 
 theme = get_theme()

@@ -1,6 +1,6 @@
 from . import utils
 from cryptography.fernet import Fernet, InvalidToken
-import getpass, base64, os, sys
+import getpass, base64, sys
 from pathlib import Path
 
 theme = utils.get_theme()
@@ -38,10 +38,10 @@ def encrypt(NOTES_PATH, fernet=None):
         with open(utils.NOTES_PATH(), 'wb') as f:
             f.write(encrypted)
 
-        print(theme['text']+"encrypted"+reset)
+        print(f"{theme['text']}encrypted{reset}")
 
     except Exception as e:
-        raise RuntimeError(theme['error']+f"Błąd podczas szyfrowania. {e}"+reset)
+        raise RuntimeError(f"{theme['error']}Błąd podczas szyfrowania. {e}{reset}")
 
 
 def decrypt(NOTES_PATH, fernet=None):
@@ -63,13 +63,13 @@ def decrypt(NOTES_PATH, fernet=None):
         with open(utils.NOTES_PATH(), 'w', encoding='utf-8') as f:
             f.write(decrypted)
 
-#        print(theme['text']+"decrypted"+reset)
+#        print(f"{theme['text']}decrypted{reset}")
         return True
     except InvalidToken:
-        raise ValueError(theme['error']+"Nieprawidłowy klucz lub plik nie jest zaszyfrowany."+reset)
+        raise ValueError(f"{theme['error']}Nieprawidłowy klucz lub plik nie jest zaszyfrowany.{reset}")
         return None
     except Exception as e:
-        raise RuntimeError(theme['error']+f"Nie udało się odszyfrować pliku: {e}"+reset)
+        raise RuntimeError(f"{theme['error']}Nie udało się odszyfrować pliku: {e}{reset}")
         return None
 
 
@@ -79,14 +79,14 @@ def process_file(cmd, arg=None):
     if arg:
         path = Path(arg).expanduser()
     else:
-        path = Path(input(theme['text']+"Podaj ścieżkę: "+reset)).expanduser()
+        path = Path(input(f"{theme['text']}Podaj ścieżkę: {reset}")).expanduser()
     # Sprawdzanie istnienia pliku
     if not path.exists():
-        print(theme['error']+"Ścieżka nie istnieje."+reset)
+        print(f"{theme['error']}Ścieżka nie istnieje.{reset}")
         return
 
     if not path.is_file():
-        print(theme['error']+"To nie jest plik."+reset)
+        print(f"{theme['error']}To nie jest plik.{reset}")
         return
     # Przetwarzanie na podstawie komendy (encrypt lub decrypt)
     try:
@@ -94,14 +94,13 @@ def process_file(cmd, arg=None):
 
         if cmd == 'encrypt':
             encrypt(path, fernet)
-            print(f"\n{theme['text']}{theme['important']}{path}\n\n{theme['text']}file encrypted"+reset)
+            print(f"{theme['text']}{path}\n\nfile encrypted{reset}")
 
         elif cmd == 'decrypt':
             decrypt(path, fernet)
-            print(f"\n{theme['text']}{theme['important']}{path}\n\nfile decrypted"+reset)
+            print(f"{theme['text']}{path}\n\nfile decrypted{reset}")
 
     except Exception as e:
-        print(theme['error']+f"Błąd podczas {cmd} pliku: {e}"+reset)
+        print(f"{theme['error']}Błąd podczas {cmd} pliku: {e}{reset}")
     return
-
 
