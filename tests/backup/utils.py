@@ -130,6 +130,7 @@ THEMES = {
 THEMES["cli-text"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
 THEMES["yellow"] = {key: COLORS["yellow"] for key in THEMES["lisq"].keys()}
 
+
 def get_theme():
     theme_name = get_setting("theme", "lisq").lower()
     return THEMES.get(theme_name, THEMES["lisq"])
@@ -148,7 +149,6 @@ def color_block(lines, bg_color="\x1b[0;100m"):
         print(f"{bg_color}{line.ljust(width)}{reset}")
 
     # color_block(["tekst"], bg_color=COLORS["bgpurple"])
-
 
 
 # Domyślna ścieżka do config.json
@@ -188,9 +188,9 @@ def del_setting(key):
 def set_theme(name):
     if name.lower() in THEMES:
         set_setting("theme", name.lower())
-        print(theme['text']+f"Motyw ustawiony na: {name}"+reset)
+        print(f"{theme['text']}Motyw ustawiony na: {name}{reset}")
     else:
-        print(theme['error']+"Nieznany motyw. Dostępne:", ", ".join(THEMES.keys())+reset)
+        print(f"{theme['error']}Nieznany motyw. Dostępne:", ", ".join(THEMES.keys())+reset)
 
 def show_all_settings():
     try:
@@ -199,17 +199,17 @@ def show_all_settings():
 
         color_block(["Aktualne ustawienia:"],
         bg_color=theme["cfg-main-topbar"])
-        print(theme['text']+theme['important']+f"{CONFIG_PATH}\n"+reset)
+        print(f"{theme['text']}{theme['important']}{CONFIG_PATH}{reset}\n")
 
-        print(theme['text']+"open, show or -encryption, -keypath, -notespath, -editor\n"+reset)
+        print(f"{theme['text']}open, show or -encryption, -keypath, -notespath, -theme, -editor{reset}\n")
 
         for key, value in config.items():
             print(f"   {theme['text']}{key}: {theme['important']}{value}{reset}")
 
     except FileNotFoundError:
-        print(theme['error']+"Plik .lisq.json nie został znaleziony."+reset)
+        print(f"{theme['error']}Plik .lisq.json nie został znaleziony.{reset}")
     except json.JSONDecodeError:
-        print(theme['error']+"Błąd przy wczytywaniu pliku .lisq.json – niepoprawny JSON."+reset)
+        print(f"{theme['error']}Błąd przy wczytywaniu pliku .lisq.json – niepoprawny JSON.{reset}")
 
 def del_file(path):
     try:
@@ -219,7 +219,7 @@ def del_file(path):
         else:
             return False
     except Exception as e:
-        print(theme['error']+f"Nie udało się usunąć pliku '{path}': {e}"+reset)
+        print(f"{theme['error']}Nie udało się usunąć pliku '{path}': {e}{reset}")
         return False
 
 # Dodatkowe ścieżki
@@ -243,13 +243,13 @@ def setcfg(arg, arg1):
         setting = get_setting('theme','lisq')
         color_block(["Theme is set to:"],
                  bg_color=theme['cfg-topbar'])
-        print(theme['text']+theme['important']+f"{setting}"+reset)
+        print(f"{theme['important']}{setting}{reset}")
 
-        print(theme['text']+"\nDostępne motywy:", ", ".join(THEMES.keys())+reset+"\n")
+        print(f"\n{theme['text']}Dostępne motywy:", ", ".join(THEMES.keys())+f"{reset}\n")
 
         if not arg1:
-            arg1 = input(theme['text']+"Podaj nowy theme (q - anuluj): "+reset).strip()
-        if arg1.lower() == 'q':
+            arg1 = input(f"{theme['text']}Podaj nowy theme (q): {reset}").strip()
+        if arg1.lower() in ['q','']:
             return
 
         set_theme(arg1)
@@ -263,26 +263,29 @@ def setcfg(arg, arg1):
     elif arg in ['open']: # Open
         editor = EDITOR()
         if not editor:
-            print(theme['error']+"Błąd: Edytor nie jest ustawiony."+reset)
+            print(f"{theme['error']}Błąd: Edytor nie jest ustawiony.{reset}")
         else:
             handle_cfg_open(arg1)
     elif arg in ['show','s']: # Show
         if not arg1:
-            print(theme['text']+"[show,s] Pokaż ustawienie: -encryption, -keypath, -notespath, -editor"+reset)
+            print(f"{theme['text']}[show,s] Pokaż ustawienie: -encryption, -keypath, -notespath, -theme, -editor{reset}")
         elif arg1 in ['-keypath','keypath']:
             path = KEY_PATH()
-            print(theme['text']+theme['important']+f"{path}"+reset)
+            print(f"{theme['text']}{theme['important']}{path}{reset}")
         elif arg1 in ['-notespath','notespath']:
             path = NOTES_PATH()
-            print(theme['text']+theme['important']+f"{path}"+reset)
+            print(f"{theme['text']}{theme['important']}{path}{reset}")
         elif arg1 in ['-editor','editor']:
             editor = EDITOR()
             print(f"{theme['text']}Editor is set to: {theme['important']}{editor}{reset}")
+        elif arg1 in ['-theme','theme']:
+            setting = get_setting("theme","lisq")
+            print(f"{theme['text']}Theme is set to: {theme['important']}{setting}{reset}")
         elif arg1 in ['-encryption','encryption']:
-            setting = (get_setting("encryption") or 'OFF').upper()
+            setting = get_setting("encryption").upper()
             print(f"{theme['text']}Encryption is set to: {theme['important']}{setting}{reset}")
         else:
-            print(theme['error']+"Błąd: nie ma takiego ustawienia."+reset)
+            print(f"{theme['error']}Błąd: nie ma takiego ustawienia.{reset}")
     elif arg in ['-notespath','notespath']: # cfg -notespath
         if arg1 == 'unset':
             del_setting("notespath")
@@ -307,7 +310,7 @@ def setcfg(arg, arg1):
         else:
             handle_editor(arg1)
     else:
-        raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
+        raise ValueError(f"{theme['error']}Nieprawidłowe polecenie.{reset}")
 
 
 # -------------------------------------------------
@@ -318,12 +321,12 @@ def handle_notespath(arg1=None):
     path = NOTES_PATH()
     color_block(["Notes path is set to:"],
                  bg_color=theme['cfg-topbar'])
-    print(theme['text']+theme['important']+f"{path}"+reset)
-    print(theme['text']+"\n-NOTESPATH: open, unset, <ścieżka>\n"+reset)
+    print(f"{theme['important']}{path}{reset}")
+    print(f"\n{theme['text']}-NOTESPATH: open, unset, <ścieżka>{reset}\n")
 
     if not arg1:
-        arg1 = input(theme['text']+"Podaj nową ścieżkę (q - anuluj): "+reset).strip()
-    if arg1.lower() == 'q':
+        arg1 = input(f"{theme['text']}Podaj nową ścieżkę (q): {reset}").strip()
+    if arg1.lower() in ['q','']:
         return
 
     if arg1 == 'open':
@@ -338,53 +341,54 @@ def handle_notespath(arg1=None):
             set_setting("notespath",str(path))
             print(f"{theme['text']}Ustawiono nową ścieżkę: {theme['important']}{path}{reset}")
         else:
-            print(theme['error']+"Błąd: ścieżka musi prowadzić do pliku .txt."+reset)
+            print(f"{theme['error']}Błąd: ścieżka musi prowadzić do pliku .txt.{reset}")
 
 # -keypath
 
 def handle_keypath_unset():
-    confirm = input(theme['text']+"Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): "+reset).strip().lower()
+    confirm = input(f"{theme['text']}Czy na pewno chcesz usunąć ustawioną ścieżkę? (t/n): {reset}").strip().lower()
     print('')
     if confirm in ['t', '']:
         del_setting("keypath")
         path = KEY_PATH()
         print(f"{theme['text']}Ustawiona ścieżka została usunięta.\nUstawiono ścieżkę domyślną: {theme['important']}{path}{reset}")
     else:
-        print(theme['text']+"Anulowano usuwanie."+reset)
+        print(f"{theme['text']}Anulowano usuwanie.{reset}")
 
 def handle_keypath_del():
     path = KEY_PATH()
-    print(theme['text']+theme['important']+f"{path}"+reset)
-    confirm = input(theme['text']+"Czy na pewno chcesz usunąć klucz? (t/n): "+reset).strip().lower()
+    print(f"{theme['text']}{theme['important']}{path}{reset}")
+    confirm = input(f"{theme['text']}Czy na pewno chcesz usunąć klucz? (t/n): {reset}").strip().lower()
     print('')
     if confirm in ['t', '']:
         if os.path.exists(path):
             os.remove(path)
-            print(theme['text']+"Klucz usunięty."+reset)
+            print(f"{theme['text']}Klucz usunięty.{reset}")
         else:
-            print(theme['error']+"Plik nie istnieje."+reset)
+            print(f"{theme['error']}Plik nie istnieje.{reset}")
     else:
-        print(theme['text']+"Anulowano usuwanie."+reset)
+        print(f"{theme['text']}Anulowano usuwanie.{reset}")
 
 def handle_keypath(arg1=None):
     path = KEY_PATH()
     color_block(["Key path is set to:"],
                bg_color=theme['cfg-topbar'])
-    print(theme['text']+theme['important']+f"{path}"+reset)
-    print(theme['text']+"\n-KEYPATH: open, unset, del, <ścieżka>\n"+reset)
+    print(f"{theme['important']}{path}{reset}")
+
+    print(f"{theme['text']}\n-KEYPATH: open, unset, del, <ścieżka>{reset}\n")
 
     if not arg1:
-        arg1 = input(theme['text']+"Podaj nową ścieżkę (q - anuluj): "+reset).strip()
-    if arg1.lower() == 'q':
+        arg1 = input(f"{theme['text']}Podaj nową ścieżkę (q): {reset}").strip()
+    if arg1.lower() in ['q','']:
         return
 
     expanded_path = Path(os.path.expanduser(arg1)).resolve()
-
     if not str(expanded_path).endswith(".keylisq"):
-        print(theme['error']+"Błąd: ścieżka musi prowadzić do pliku .keylisq."+reset)
+        print(f"{theme['error']}Błąd: ścieżka musi prowadzić do pliku .keylisq.{reset}")
         return
 
     set_setting("keypath", str(expanded_path))
+
     print(f"{theme['text']}Ustawiono nową ścieżkę: {theme['important']}{expanded_path}{reset}")
 
 # -editor
@@ -393,11 +397,12 @@ def handle_editor(arg1=None):
     editor = EDITOR()
     color_block(["Editor is set to:"],
             bg_color=theme['cfg-topbar'])
-    print(theme['text']+theme['important']+f"{editor}"+reset)
-    print(theme['text']+"\n-EDITOR: open, <name>\n"+reset)
+    print(f"{theme['important']}{editor}{reset}")
+
+    print(f"\n{theme['text']}-EDITOR: open, <name>{reset}\n")
 
     if not arg1:
-        arg1 = input(theme['text']+"Podaj nazwę edytora (q - anuluj): "+reset).strip()
+        arg1 = input(f"{theme['text']}Podaj nazwę edytora (q): {reset}").strip()
     if arg1 == 'q':
         return
 
@@ -408,14 +413,14 @@ def handle_editor(arg1=None):
         set_setting("editor", arg1)
         print(f"{theme['text']}Ustawiono edytor: {theme['important']}{arg1}{reset}")
     else:
-        print(theme['error']+f"Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano."+reset)
+        print(f"{theme['error']}Błąd: '{arg1}' nie istnieje w $PATH. Nie zapisano.{reset}")
 
 def handle_editor_open():
     editor = EDITOR()
     if shutil.which(editor):
         subprocess.run([editor])
     else:
-        print(theme['error']+f"Błąd: Edytor '{editor}' nie został znaleziony w $PATH."+reset)
+        print(f"{theme['error']}Błąd: Edytor '{editor}' nie został znaleziony w $PATH.{reset}")
 
 # Open
 
@@ -423,37 +428,37 @@ def handle_cfg_open(arg1):
     editor = EDITOR()
     try:
         if not editor:
-            print(theme['error']+"Błąd: Edytor nie został określony."+reset)
+            print(f"{theme['error']}Błąd: Edytor nie został określony.{reset}")
             return
 
         if arg1 is None:
             plik = CONFIG_PATH
             if not Path(plik).exists():
-                print(theme['error']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
+                print(f"{theme['error']}Błąd: Plik konfiguracyjny nie istnieje: {plik}{reset}")
                 return
             subprocess.run([editor, str(plik)])
             return
 
-        if arg1 in ['-notespath', 'notes', 'txt']:
+        if arg1 in ['-notespath', 'notespath']:
             plik = NOTES_PATH()
-        elif arg1 in ['-keypath', 'key', 'keylisq', '.keylisq']:
+        elif arg1 in ['-keypath','keypath', 'key', '.keylisq']:
             plik = KEY_PATH()
-        elif arg1 == '-editor':
+        elif arg1 in ['-editor','editor']:
             subprocess.run([editor])
             return
-        elif arg1 in ['-config', 'config', '.lisq']:
+        elif arg1 in ['-config', 'config', '.lisq.json']:
             plik = CONFIG_PATH
             if not Path(plik).exists():
-                print(theme['error']+f"Błąd: Plik konfiguracyjny nie istnieje: {plik}"+reset)
+                print(f"{theme['error']}Błąd: Plik konfiguracyjny nie istnieje: {plik}{reset}")
                 return
         else:
-            print(theme['error']+f"Błąd: Nieznana opcja '{arg1}'"+reset)
+            print(f"{theme['error']}Błąd: Nieznana opcja '{arg1}'{reset}")
             return
 
         subprocess.run([editor, str(plik)])
 
     except Exception as e:
-        print(theme['error']+f"Wystąpił błąd przy otwieraniu edytora: {e}"+reset)
+        print(f"{theme['error']}Wystąpił błąd przy otwieraniu edytora: {e}{reset}")
 
 # Encryption
 
@@ -461,13 +466,15 @@ def handle_encryption(arg1=None):
     setting = (get_setting("encryption") or 'OFF').upper()
     color_block(["Encryption is set to:"],
                 bg_color=theme['cfg-topbar'])
-    print(theme['text']+theme['important']+f"{setting}"+reset)
-    print(theme['text']+"\n-ENCRYPTION: on, off, set, newpass\n"+reset)
+    print(f"{theme['important']}{setting}{reset}")
+
+    print(f"\n{theme['text']}-ENCRYPTION: on, off, set, newpass{reset}\n")
 
     if not arg1:
-        arg1 = input(theme['text']+"Podaj ustawienie (q - anuluj): "+reset).strip()
-    if arg1.lower() == 'q':
+        arg1 = input(f"{theme['text']}Podaj ustawienie (q): {reset}").strip()
+    if arg1.lower() in ['q','']:
         return
+
     elif arg1 == 'set':
         key = KEY_PATH()
         del_file(key)
@@ -484,16 +491,16 @@ def handle_encryption(arg1=None):
         set_setting("encryption", None)
         print(f"{theme['text']}Encryption set to {theme['important']}OFF"+reset)
     elif arg1 == 'newpass':
-        yesno = input(theme['text']+"\nCzy napewno chcesz zmienić hasło? (t/n): "+reset)
+        yesno = input(f"\n{theme['text']}Czy napewno chcesz zmienić hasło? (t/n): {reset}")
         if yesno.lower() in ['t','']:
             key = KEY_PATH()
             del_file(key)
             generate_key(save_to_file=True)
-            print(theme['text']+"Hasło zostało zmienione."+reset)
+            print(f"{theme['text']}Hasło zostało zmienione.{reset}")
         else:
-            print(theme['text']+"Anulowano."+reset)
+            print(f"{theme['text']}Anulowano.{reset}")
     else:
-        raise ValueError(theme['error']+"Nieprawidłowe polecenie."+reset)
+        raise ValueError(f"{theme['error']}Nieprawidłowe polecenie.{reset}")
 
 
 theme = get_theme()
