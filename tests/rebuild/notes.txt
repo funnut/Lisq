@@ -1,0 +1,23 @@
+this is first notethis is another note
+i003 this is next note
+i004 2025-05-14 :: ['this', 'is', 'sample', 'note']
+i005 2025-05-14 :: ['this', 'is', 'sample', 'note', '2']
+i006 2025-05-14 :: this is sample note 3
+i007 2025-05-14 :: this is h)ard test
+i008 2025-05-14 :: new note
+i009 2025-05-14 :: this is another note
+i010 2025-05-14 :: next note
+i011 2025-05-14 :: new note
+i012 2025-05-14 :: n o w a   n o t a t k a
+i013 2025-05-14 :: nowa notatka
+i014 2025-05-14 :: nowa
+i015 2025-05-14 :: test
+i016 2025-05-14 :: test
+i017 2025-05-14 :: to jest notatka
+i019 2025-05-14 :: raz dwa trzy 6 )(
+i020 2025-05-14 :: Seriously, this is an impressive reimagining of the hit racing game and one that’s begging for an official release, if Need For Speed ever comes back that is.
+i021 2025-05-14 :: nowa notatka
+i024 2025-05-14 :: to jest treść notatki
+i025 2025-05-14 :: new note with add
+i026 2025-05-14 :: nie pokazuj daty lub id setting?
+i027 2025-05-14 :: podwójny enter dla cfg

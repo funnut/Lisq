@@ -1,0 +1,980 @@
+2025-05-14 05:55:46,835 - INFO - START FUNKCJI main()
+2025-05-14 05:55:46,835 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 05:56:02,676 - INFO - Start write_file(args)
+2025-05-14 05:56:02,681 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 05:56:08,066 - INFO - WYJŚCIE Z PROGRAMU EOFError
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 47, in main
+    raw = input("> ").strip()
+          ^^^^^^^^^^^
+EOFError
+2025-05-14 06:15:13,581 - INFO - START FUNKCJI main()
+2025-05-14 06:15:13,581 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:15:26,026 - INFO - Start write_file(args)
+2025-05-14 06:15:26,027 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:15:56,439 - INFO - WYJŚCIE Z PROGRAMU EOFError
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 44, in main
+    raw = input("> ").strip()
+          ^^^^^^^^^^^
+EOFError
+2025-05-14 06:16:22,976 - INFO - START FUNKCJI main()
+2025-05-14 06:16:22,976 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:16:33,728 - INFO - Start write_file(args)
+2025-05-14 06:16:33,728 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:16:40,863 - INFO - WYJŚCIE Z PROGRAMU EOFError
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 45, in main
+    raw = input("> ").strip()
+          ^^^^^^^^^^^
+EOFError
+2025-05-14 06:17:09,534 - INFO - START FUNKCJI main()
+2025-05-14 06:17:09,535 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:17:12,219 - INFO - Start write_file(args)
+2025-05-14 06:17:12,219 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:17:32,500 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 06:25:10,562 - INFO - START FUNKCJI main()
+2025-05-14 06:25:10,562 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:25:17,217 - INFO - Start write_file(args)
+2025-05-14 06:25:17,217 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:28:45,537 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 06:29:46,580 - INFO - START FUNKCJI main()
+2025-05-14 06:29:46,580 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:30:05,709 - INFO - Start write_file(args)
+2025-05-14 06:30:05,710 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:30:25,135 - INFO - Start write_file(args)
+2025-05-14 06:30:25,135 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:30:51,499 - INFO - Start write_file(args)
+2025-05-14 06:30:51,500 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:31:09,781 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 06:34:01,279 - INFO - START FUNKCJI main()
+2025-05-14 06:34:01,279 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:34:08,955 - INFO - Start write_file(args)
+2025-05-14 06:34:08,955 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:35:20,816 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 06:44:13,011 - INFO - START FUNKCJI main()
+2025-05-14 06:44:13,011 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:44:24,259 - INFO - Start write_file(args)
+2025-05-14 06:44:24,259 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:45:10,477 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 06:46:17,150 - INFO - START FUNKCJI main()
+2025-05-14 06:46:17,150 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:46:20,028 - INFO - Start write_file(args)
+2025-05-14 06:46:20,028 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 06:46:24,851 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:04:02,522 - INFO - START FUNKCJI main()
+2025-05-14 07:04:02,523 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:04:06,864 - INFO - Start write_file(args)
+2025-05-14 07:04:06,864 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:06:07,639 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:08:32,427 - INFO - START FUNKCJI main()
+2025-05-14 07:08:32,427 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:08:35,077 - INFO - Start write_file(args)
+2025-05-14 07:08:35,077 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:08:42,238 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:37:23,847 - INFO - START FUNKCJI main()
+2025-05-14 07:37:23,847 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:37:34,471 - INFO - Start write_file(args)
+2025-05-14 07:37:34,475 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:37:38,696 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:42:20,430 - INFO - START FUNKCJI main()
+2025-05-14 07:42:20,430 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:42:27,467 - INFO - Start write_file(args)
+2025-05-14 07:42:27,468 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:42:30,351 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:44:50,561 - INFO - START FUNKCJI main()
+2025-05-14 07:44:50,561 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:44:57,711 - INFO - Start write_file(args)
+2025-05-14 07:44:57,712 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:45:00,057 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:46:55,257 - INFO - START FUNKCJI main()
+2025-05-14 07:46:55,257 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:47:16,449 - INFO - Start write_file(args)
+2025-05-14 07:47:16,451 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:47:19,293 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:48:18,381 - INFO - START FUNKCJI main()
+2025-05-14 07:48:18,381 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:48:22,197 - INFO - Start _test(args)
+2025-05-14 07:48:22,198 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:51:12,419 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 07:55:14,585 - INFO - START FUNKCJI main()
+2025-05-14 07:55:14,585 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:55:41,392 - INFO - Start _test(args)
+2025-05-14 07:55:41,393 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 07:56:40,434 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 08:22:42,344 - INFO - START FUNKCJI main()
+2025-05-14 08:22:42,344 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:22:49,766 - INFO - ValueError: Nieprawidłowe polecenie: show 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 86, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: show 
+2025-05-14 08:22:49,776 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:22:54,687 - INFO - Start read_file()
+2025-05-14 08:22:54,688 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:23:36,493 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 08:27:50,425 - INFO - START FUNKCJI main()
+2025-05-14 08:27:50,425 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:27:56,032 - INFO - Start read_file()
+2025-05-14 08:27:56,032 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:28:25,147 - INFO - Start write_file()
+2025-05-14 08:28:25,148 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:28:33,087 - INFO - ValueError: Nieprawidłowe polecenie: show 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 87, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: show 
+2025-05-14 08:28:33,121 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:28:38,378 - INFO - Start read_file()
+2025-05-14 08:28:38,380 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:29:16,561 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 08:30:35,779 - INFO - START FUNKCJI main()
+2025-05-14 08:30:35,779 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:30:38,369 - INFO - Start read_file()
+2025-05-14 08:30:38,369 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:31:14,415 - INFO - Start write_file()
+2025-05-14 08:31:14,417 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:31:32,085 - INFO - Start read_file()
+2025-05-14 08:31:32,086 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:32:27,507 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 88, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 08:32:27,538 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-14 08:32:38,126 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 08:38:25,044 - INFO - START FUNKCJI main()
+2025-05-14 08:38:27,504 - INFO - ValueError: Nieprawidłowe polecenie: nvjk 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 88, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: nvjk 
+2025-05-14 08:38:31,792 - INFO - Start _test()
+2025-05-14 08:38:34,475 - INFO - Start read_file()
+2025-05-14 08:38:45,719 - INFO - Start write_file()
+2025-05-14 08:38:48,159 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 08:44:29,924 - INFO - START FUNKCJI main()
+2025-05-14 08:44:34,141 - INFO - Start _test()
+2025-05-14 08:44:40,581 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-14 09:00:52,160 - INFO - START FUNKCJI main()
+2025-05-14 09:01:00,393 - INFO - Start read_file()
+2025-05-14 09:01:33,581 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:14:39,868 - INFO - START FUNKCJI main()
+2025-05-14 09:14:59,297 - INFO - ValueError: Nieprawidłowe polecenie: h 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 98, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: h 
+2025-05-14 09:15:20,913 - INFO - Start read_file()
+2025-05-14 09:15:30,027 - INFO - Start read_file()
+2025-05-14 09:15:44,063 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:16:11,925 - INFO - START FUNKCJI main()
+2025-05-14 09:16:18,191 - INFO - Start read_file()
+2025-05-14 09:16:45,134 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:22:54,262 - INFO - START FUNKCJI main()
+2025-05-14 09:23:00,287 - INFO - Start read_file()
+2025-05-14 09:23:03,287 - INFO - Start read_file()
+2025-05-14 09:23:05,029 - INFO - Start read_file()
+2025-05-14 09:23:12,487 - INFO - Start read_file()
+2025-05-14 09:23:14,434 - INFO - Start read_file()
+2025-05-14 09:23:16,049 - INFO - Start read_file()
+2025-05-14 09:23:18,387 - INFO - Start read_file()
+2025-05-14 09:23:20,612 - INFO - Start read_file()
+2025-05-14 09:23:30,376 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:26:57,524 - INFO - START FUNKCJI main()
+2025-05-14 09:27:02,911 - INFO - Start read_file()
+2025-05-14 09:27:02,912 - ERROR - Inny błąd: bad operand type for unary -: 'str'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 102, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 33, in read_file
+    to_show = lines[-arg:]
+                    ^^^^
+TypeError: bad operand type for unary -: 'str'
+2025-05-14 09:27:31,739 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:28:07,235 - INFO - START FUNKCJI main()
+2025-05-14 09:28:09,809 - INFO - Start read_file()
+2025-05-14 09:28:14,518 - INFO - Start read_file()
+2025-05-14 09:28:31,829 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:39:46,669 - INFO - START FUNKCJI main()
+2025-05-14 09:39:55,813 - INFO - Start read_file()
+2025-05-14 09:40:06,149 - INFO - Start read_file()
+2025-05-14 09:40:19,232 - INFO - Start read_file()
+2025-05-14 09:40:29,144 - INFO - Start read_file()
+2025-05-14 09:41:12,767 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-14 09:43:35,144 - INFO - START FUNKCJI main()
+2025-05-14 09:43:51,426 - INFO - ValueError: Nieprawidłowe polecenie: k 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 111, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: k 
+2025-05-14 09:44:16,935 - INFO - Start read_file()
+2025-05-14 09:44:33,620 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:49:54,792 - INFO - START FUNKCJI main()
+2025-05-14 09:50:01,515 - INFO - Start read_file()
+2025-05-14 09:50:07,366 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:53:36,315 - INFO - START FUNKCJI main()
+2025-05-14 09:53:38,922 - INFO - ValueError: Nieprawidłowe polecenie: t 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 113, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: t 
+2025-05-14 09:53:47,905 - INFO - Start read_file()
+2025-05-14 09:53:47,906 - ERROR - Inny błąd: cannot access local variable 'found' where it is not associated with a value
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 111, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 47, in read_file
+    if found:
+       ^^^^^
+UnboundLocalError: cannot access local variable 'found' where it is not associated with a value
+2025-05-14 09:53:56,286 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:55:35,667 - INFO - START FUNKCJI main()
+2025-05-14 09:55:43,726 - INFO - Start read_file()
+2025-05-14 09:55:50,895 - INFO - Start read_file()
+2025-05-14 09:56:00,284 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:56:53,729 - INFO - START FUNKCJI main()
+2025-05-14 09:56:56,022 - INFO - ValueError: Nieprawidłowe polecenie: n 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 113, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: n 
+2025-05-14 09:57:45,412 - INFO - Start read_file()
+2025-05-14 09:57:55,845 - INFO - Start read_file()
+2025-05-14 09:58:08,789 - INFO - Start read_file()
+2025-05-14 09:58:42,373 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 09:59:16,874 - INFO - START FUNKCJI main()
+2025-05-14 09:59:18,343 - INFO - Start read_file()
+2025-05-14 09:59:18,344 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 111, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 26, in read_file
+    arg = args[0]
+          ~~~~^^^
+IndexError: list index out of range
+2025-05-14 09:59:30,054 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:05:31,867 - INFO - START FUNKCJI main()
+2025-05-14 10:05:36,862 - INFO - Start read_file()
+2025-05-14 10:05:40,823 - INFO - Start read_file()
+2025-05-14 10:05:40,823 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 111, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 26, in read_file
+    arg = args[0]
+          ~~~~^^^
+IndexError: list index out of range
+2025-05-14 10:05:46,428 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:07:27,596 - INFO - START FUNKCJI main()
+2025-05-14 10:07:30,174 - INFO - Start read_file()
+2025-05-14 10:07:36,558 - INFO - ValueError: Nieprawidłowe polecenie: 1 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 113, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: 1 
+2025-05-14 10:07:43,455 - INFO - Start read_file()
+2025-05-14 10:07:54,065 - INFO - Start read_file()
+2025-05-14 10:08:02,164 - INFO - Start read_file()
+2025-05-14 10:08:12,897 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:20:27,645 - INFO - START FUNKCJI main()
+2025-05-14 10:20:30,875 - INFO - Start read_file()
+2025-05-14 10:20:48,062 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:27:39,967 - INFO - START FUNKCJI main()
+2025-05-14 10:27:42,688 - INFO - Start read_file()
+2025-05-14 10:28:16,199 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:30:11,938 - INFO - START FUNKCJI main()
+2025-05-14 10:30:14,136 - INFO - Start read_file()
+2025-05-14 10:30:24,762 - INFO - Start read_file()
+2025-05-14 10:31:02,754 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:43:47,689 - INFO - START FUNKCJI main()
+2025-05-14 10:43:53,225 - INFO - Start _test()
+2025-05-14 10:44:02,896 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:44:06,341 - INFO - START FUNKCJI main()
+2025-05-14 10:44:18,993 - INFO - ValueError: Nieprawidłowe polecenie: jjk 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 115, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: jjk 
+2025-05-14 10:44:23,456 - INFO - ValueError: Nieprawidłowe polecenie: u 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 115, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: u 
+2025-05-14 10:44:28,637 - INFO - ValueError: Nieprawidłowe polecenie: text 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 115, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: text 
+2025-05-14 10:44:33,350 - INFO - Start read_file()
+2025-05-14 10:44:49,067 - INFO - Start write_file()
+2025-05-14 10:44:51,848 - INFO - Start read_file()
+2025-05-14 10:45:13,494 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 115, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-14 10:45:18,041 - INFO - ValueError: Nieprawidłowe polecenie: u-6h7 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 115, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: u-6h7 
+2025-05-14 10:45:29,886 - INFO - Start write_file()
+2025-05-14 10:45:39,195 - INFO - Start read_file()
+2025-05-14 10:45:48,806 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 10:54:49,025 - INFO - START FUNKCJI main()
+2025-05-14 10:54:53,270 - INFO - Start read_file()
+2025-05-14 10:54:58,874 - INFO - Start write_file()
+2025-05-14 10:54:58,875 - ERROR - Inny błąd: cannot access local variable 'id_number' where it is not associated with a value
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 116, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 76, in write_file
+    id_ = f"i{str(id_number).zfill(3)}"
+                  ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'id_number' where it is not associated with a value
+2025-05-14 10:55:10,788 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:00:21,860 - INFO - START FUNKCJI main()
+2025-05-14 11:00:32,341 - INFO - Start write_file()
+2025-05-14 11:00:35,663 - INFO - Start read_file()
+2025-05-14 11:00:40,177 - INFO - Start read_file()
+2025-05-14 11:00:43,348 - INFO - Start write_file()
+2025-05-14 11:00:54,468 - INFO - ValueError: Nieprawidłowe polecenie: r 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: r 
+2025-05-14 11:00:56,607 - INFO - Start read_file()
+2025-05-14 11:01:02,147 - INFO - Start write_file()
+2025-05-14 11:01:08,310 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:06:09,349 - INFO - START FUNKCJI main()
+2025-05-14 11:06:11,684 - INFO - Start read_file()
+2025-05-14 11:06:11,685 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 116, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 47, in read_file
+    date_ = "-".join(parts[1].split("-")[1:])
+                     ~~~~~^^^
+IndexError: list index out of range
+2025-05-14 11:06:19,288 - INFO - Start read_file()
+2025-05-14 11:06:19,289 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 116, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 47, in read_file
+    date_ = "-".join(parts[1].split("-")[1:])
+                     ~~~~~^^^
+IndexError: list index out of range
+2025-05-14 11:06:29,140 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:09:08,631 - INFO - START FUNKCJI main()
+2025-05-14 11:09:11,732 - INFO - Start read_file()
+2025-05-14 11:09:28,035 - INFO - Start read_file()
+2025-05-14 11:09:38,213 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:11:04,840 - INFO - START FUNKCJI main()
+2025-05-14 11:11:06,862 - INFO - Start read_file()
+2025-05-14 11:11:15,579 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:11:31,666 - INFO - START FUNKCJI main()
+2025-05-14 11:11:42,732 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:12:17,919 - INFO - START FUNKCJI main()
+2025-05-14 11:12:21,313 - INFO - ValueError: Nieprawidłowe polecenie: ghjm 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: ghjm 
+2025-05-14 11:12:24,473 - INFO - ValueError: Nieprawidłowe polecenie: t 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: t 
+2025-05-14 11:12:30,046 - INFO - Start read_file()
+2025-05-14 11:12:35,883 - INFO - Start read_file()
+2025-05-14 11:12:51,340 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:13:05,505 - INFO - START FUNKCJI main()
+2025-05-14 11:13:09,018 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:14:03,911 - INFO - START FUNKCJI main()
+2025-05-14 11:14:14,259 - INFO - Start _test()
+2025-05-14 11:14:50,755 - INFO - ValueError: Nieprawidłowe polecenie: arg 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: arg 
+2025-05-14 11:15:01,688 - INFO - ValueError: Nieprawidłowe polecenie: bool 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: bool 
+2025-05-14 11:15:06,102 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 11:15:21,992 - INFO - ValueError: Nieprawidłowe polecenie: exit 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 118, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: exit 
+2025-05-14 11:15:25,129 - INFO - Start read_file()
+2025-05-14 11:15:34,781 - INFO - Start write_file()
+2025-05-14 11:16:10,285 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:18:35,525 - INFO - START FUNKCJI main()
+2025-05-14 11:18:41,737 - INFO - Start write_file()
+2025-05-14 11:19:18,486 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:26:37,887 - INFO - START FUNKCJI main()
+2025-05-14 11:26:43,953 - INFO - Start write_file()
+2025-05-14 11:26:56,778 - INFO - Start read_file()
+2025-05-14 11:27:32,450 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:29:11,016 - INFO - START FUNKCJI main()
+2025-05-14 11:29:16,323 - INFO - ValueError: Nieprawidłowe polecenie: nowa notatka
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 117, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: nowa notatka
+2025-05-14 11:29:23,061 - INFO - Start write_file()
+2025-05-14 11:29:31,442 - INFO - Start read_file()
+2025-05-14 11:29:42,203 - INFO - Start write_file()
+2025-05-14 11:29:50,169 - INFO - Start read_file()
+2025-05-14 11:29:59,579 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:31:17,348 - INFO - START FUNKCJI main()
+2025-05-14 11:31:18,772 - INFO - Start write_file()
+2025-05-14 11:31:24,979 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 111, in main
+    cmd = parts[0].lower()
+          ~~~~~^^^
+IndexError: list index out of range
+2025-05-14 11:31:39,721 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:33:21,115 - INFO - START FUNKCJI main()
+2025-05-14 11:33:21,768 - ERROR - Inny błąd: write_file() missing 1 required positional argument: 'args'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 105, in main
+    write_file()
+TypeError: write_file() missing 1 required positional argument: 'args'
+2025-05-14 11:33:34,097 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:33:58,641 - INFO - START FUNKCJI main()
+2025-05-14 11:33:59,376 - INFO - Start write_file()
+2025-05-14 11:34:04,771 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 112, in main
+    cmd = parts[0].lower()
+          ~~~~~^^^
+IndexError: list index out of range
+2025-05-14 11:34:16,753 - INFO - Start write_file()
+2025-05-14 11:34:28,510 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 112, in main
+    cmd = parts[0].lower()
+          ~~~~~^^^
+IndexError: list index out of range
+2025-05-14 11:34:40,331 - INFO - Start read_file()
+2025-05-14 11:34:50,568 - INFO - Start read_file()
+2025-05-14 11:34:58,110 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:39:17,043 - INFO - START FUNKCJI main()
+2025-05-14 11:39:18,072 - INFO - Start write_file()
+2025-05-14 11:39:24,526 - INFO - Start read_file()
+2025-05-14 11:39:36,627 - INFO - Start write_file()
+2025-05-14 11:39:57,992 - INFO - Start read_file()
+2025-05-14 11:40:28,685 - INFO - Start read_file()
+2025-05-14 11:40:33,350 - INFO - ValueError: Nieprawidłowe polecenie: 1 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 119, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: 1 
+2025-05-14 11:40:52,727 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:51:53,717 - INFO - START FUNKCJI main()
+2025-05-14 11:51:55,342 - INFO - Start read_file()
+2025-05-14 11:52:29,382 - INFO - Start read_file()
+2025-05-14 11:52:33,776 - INFO - Start read_file()
+2025-05-14 11:53:43,516 - INFO - Start write_file()
+2025-05-14 11:53:53,583 - INFO - Start read_file()
+2025-05-14 11:54:19,072 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 11:58:31,863 - INFO - START FUNKCJI main()
+2025-05-14 11:58:40,455 - INFO - Start read_file()
+2025-05-14 11:59:21,867 - INFO - Start read_file()
+2025-05-14 11:59:49,949 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:01:58,541 - INFO - START FUNKCJI main()
+2025-05-14 12:02:00,482 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:05:19,559 - INFO - START FUNKCJI main()
+2025-05-14 12:05:26,475 - INFO - Start read_file()
+2025-05-14 12:05:26,475 - ERROR - Inny błąd: name 'shutil' is not defined
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 119, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 25, in read_file
+    terminal_width = shutil.get_terminal_size().columns
+                     ^^^^^^
+NameError: name 'shutil' is not defined. Did you forget to import 'shutil'
+2025-05-14 12:05:34,989 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:06:05,261 - INFO - START FUNKCJI main()
+2025-05-14 12:06:08,456 - INFO - Start read_file()
+2025-05-14 12:06:08,456 - ERROR - Inny błąd: can't multiply sequence by non-int of type 'set'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 120, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 27, in read_file
+    print (f" _id _date {'_' * {terminal_width} - 12}")
+                         ~~~~^~~~~~~~~~~~~~~~~~
+TypeError: can't multiply sequence by non-int of type 'set'
+2025-05-14 12:06:20,053 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:07:30,636 - INFO - START FUNKCJI main()
+2025-05-14 12:07:41,011 - INFO - Start write_file()
+2025-05-14 12:07:48,271 - INFO - Start read_file()
+2025-05-14 12:07:48,271 - ERROR - Inny błąd: unsupported operand type(s) for -: 'str' and 'int'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 120, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 27, in read_file
+    print (f" _id _date {'_' * (terminal_width) - 12}")
+                         ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+2025-05-14 12:08:09,827 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:09:08,626 - INFO - START FUNKCJI main()
+2025-05-14 12:09:13,744 - INFO - Start write_file()
+2025-05-14 12:09:16,340 - INFO - Start read_file()
+2025-05-14 12:09:37,536 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:09:43,203 - INFO - START FUNKCJI main()
+2025-05-14 12:09:46,719 - INFO - Start read_file()
+2025-05-14 12:09:57,882 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 122, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 12:10:04,347 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 122, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 12:10:06,148 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:10:09,233 - INFO - START FUNKCJI main()
+2025-05-14 12:10:11,460 - INFO - Start read_file()
+2025-05-14 12:10:50,492 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:12:29,476 - INFO - START FUNKCJI main()
+2025-05-14 12:12:31,195 - INFO - Start read_file()
+2025-05-14 12:12:43,581 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:15:15,524 - INFO - START FUNKCJI main()
+2025-05-14 12:15:21,394 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 122, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-14 12:15:34,424 - INFO - ValueError: Nieprawidłowe polecenie: bh-j 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 122, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: bh-j 
+2025-05-14 12:15:38,505 - INFO - ValueError: Nieprawidłowe polecenie: ggjk 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 122, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: ggjk 
+2025-05-14 12:15:42,736 - INFO - Start write_file()
+2025-05-14 12:15:56,744 - INFO - Start read_file()
+2025-05-14 12:16:07,200 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:17:40,367 - INFO - START FUNKCJI main()
+2025-05-14 12:17:41,639 - INFO - Start write_file()
+2025-05-14 12:17:53,862 - INFO - Start read_file()
+2025-05-14 12:18:16,892 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:19:01,397 - INFO - START FUNKCJI main()
+2025-05-14 12:19:01,913 - INFO - Start write_file()
+2025-05-14 12:19:10,102 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:20:21,051 - INFO - START FUNKCJI main()
+2025-05-14 12:20:21,949 - INFO - Start write_file()
+2025-05-14 12:20:26,184 - INFO - Start write_file()
+2025-05-14 12:20:34,133 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 124, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 12:20:44,236 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 12:21:07,016 - INFO - START FUNKCJI main()
+2025-05-14 12:21:11,539 - INFO - Start _test()
+2025-05-14 12:21:25,922 - INFO - Start write_file()
+2025-05-14 12:21:51,354 - INFO - Start read_file()
+2025-05-14 12:22:10,346 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:31:54,971 - INFO - START FUNKCJI main()
+2025-05-14 14:31:58,259 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-14 14:32:01,772 - INFO - START FUNKCJI main()
+2025-05-14 14:32:05,040 - INFO - ValueError: Nieprawidłowe polecenie: hi 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: hi 
+2025-05-14 14:32:12,889 - INFO - Start _test()
+2025-05-14 14:33:33,967 - INFO - Start _test()
+2025-05-14 14:33:45,537 - INFO - Start _test()
+2025-05-14 14:33:56,381 - INFO - Start _test()
+2025-05-14 14:34:43,684 - INFO - Start _test()
+2025-05-14 14:34:55,302 - INFO - Start _test()
+2025-05-14 14:35:36,447 - INFO - Start _test()
+2025-05-14 14:36:35,764 - INFO - Start _test()
+2025-05-14 14:36:42,794 - INFO - Start _test()
+2025-05-14 14:36:52,417 - INFO - Start _test()
+2025-05-14 14:37:04,388 - INFO - Start _test()
+2025-05-14 14:37:12,435 - INFO - Start _test()
+2025-05-14 14:37:20,862 - INFO - Start _test()
+2025-05-14 14:38:08,172 - INFO - Start _test()
+2025-05-14 14:38:14,278 - INFO - Start _test()
+2025-05-14 14:38:19,749 - INFO - Start _test()
+2025-05-14 14:38:56,768 - INFO - Start _test()
+2025-05-14 14:39:09,998 - INFO - Start _test()
+2025-05-14 14:39:14,677 - INFO - Start _test()
+2025-05-14 14:39:19,155 - INFO - Start _test()
+2025-05-14 14:39:22,925 - INFO - Start _test()
+2025-05-14 14:39:56,267 - INFO - ValueError: Nieprawidłowe polecenie: -4 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: -4 
+2025-05-14 14:40:01,341 - INFO - Start _test()
+2025-05-14 14:40:20,200 - INFO - Start _test()
+2025-05-14 14:41:09,990 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:44:14,570 - INFO - START FUNKCJI main()
+2025-05-14 14:44:18,204 - INFO - Start write_file()
+2025-05-14 14:44:24,961 - INFO - ValueError: Nieprawidłowe polecenie: abc 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: abc 
+2025-05-14 14:44:43,972 - INFO - ValueError: Nieprawidłowe polecenie: t 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: t 
+2025-05-14 14:45:00,390 - INFO - ValueError: Nieprawidłowe polecenie: abc 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: abc 
+2025-05-14 14:45:21,636 - INFO - Start _test()
+2025-05-14 14:45:21,637 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 156, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 124, in _test
+    s = args[0]
+        ~~~~^^^
+IndexError: list index out of range
+2025-05-14 14:45:28,974 - INFO - Start _test()
+2025-05-14 14:46:44,569 - INFO - Start _test()
+2025-05-14 14:46:52,378 - INFO - Start _test()
+2025-05-14 14:47:45,279 - INFO - Start _test()
+2025-05-14 14:47:54,854 - INFO - Start _test()
+2025-05-14 14:48:01,307 - INFO - Start _test()
+2025-05-14 14:48:17,006 - INFO - Start _test()
+2025-05-14 14:48:35,778 - INFO - ValueError: Nieprawidłowe polecenie: 1: 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: 1: 
+2025-05-14 14:48:43,568 - INFO - Start _test()
+2025-05-14 14:49:06,830 - INFO - Start _test()
+2025-05-14 14:49:57,986 - INFO - Start _test()
+2025-05-14 14:50:07,663 - INFO - Start _test()
+2025-05-14 14:50:07,664 - ERROR - Inny błąd: invalid syntax (<string>, line 1)
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 156, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 125, in _test
+    print (eval(f"tablica[{s}]"))
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1
+    tablica[:1-]
+               ^
+SyntaxError: invalid syntax
+2025-05-14 14:50:23,492 - INFO - Start _test()
+2025-05-14 14:50:44,534 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:51:31,477 - INFO - START FUNKCJI main()
+2025-05-14 14:51:35,154 - INFO - Start _test()
+2025-05-14 14:51:35,155 - ERROR - Inny błąd: list indices must be integers or slices, not set
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 156, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 125, in _test
+    print (eval(f"{tablica[{s}]}"))
+                   ~~~~~~~^^^^^
+TypeError: list indices must be integers or slices, not set
+2025-05-14 14:51:47,997 - INFO - ValueError: Nieprawidłowe polecenie: 1 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 158, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: 1 
+2025-05-14 14:51:49,727 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:53:59,175 - INFO - START FUNKCJI main()
+2025-05-14 14:54:08,726 - INFO - Start _test()
+2025-05-14 14:54:21,029 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:55:21,391 - INFO - START FUNKCJI main()
+2025-05-14 14:55:30,217 - INFO - Start _test()
+2025-05-14 14:55:50,044 - INFO - Start _test()
+2025-05-14 14:56:22,995 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 14:59:57,413 - INFO - START FUNKCJI main()
+2025-05-14 15:00:00,432 - INFO - Start _test()
+2025-05-14 15:03:34,907 - INFO - Start _test()
+2025-05-14 18:39:33,153 - INFO - Start write_file()
+2025-05-14 18:39:37,233 - INFO - ValueError: Nieprawidłowe polecenie: c 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 159, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: c 
+2025-05-14 18:39:46,047 - INFO - Start _test()
+2025-05-14 18:39:58,259 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 18:40:14,814 - INFO - START FUNKCJI main()
+2025-05-14 18:40:16,397 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 159, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-14 18:40:35,037 - INFO - Start write_file()
+2025-05-14 18:40:40,850 - INFO - Start write_file()
+2025-05-14 18:41:32,952 - INFO - ValueError: Nieprawidłowe polecenie: lisq 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 159, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: lisq 
+2025-05-14 18:41:38,007 - INFO - ValueError: Nieprawidłowe polecenie: lisq s
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 159, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: lisq s
+2025-05-14 18:41:43,835 - INFO - Start read_file()
+2025-05-14 18:42:02,664 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-14 18:54:47,296 - INFO - START FUNKCJI main()
+2025-05-14 18:54:49,341 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 161, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-14 18:54:53,444 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 18:55:20,256 - INFO - START FUNKCJI main()
+2025-05-14 18:55:25,039 - INFO - Start read_file()
+2025-05-14 18:55:43,080 - INFO - Start delete()
+2025-05-14 18:55:56,945 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 18:58:46,252 - INFO - START FUNKCJI main()
+2025-05-14 18:58:53,620 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 162, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-14 18:58:56,495 - INFO - Start read_file()
+2025-05-14 18:59:19,071 - INFO - Start delete()
+2025-05-14 18:59:22,531 - INFO - Start read_file()
+2025-05-14 18:59:30,240 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:10:05,377 - INFO - START FUNKCJI main()
+2025-05-14 19:10:09,672 - INFO - Start delete()
+2025-05-14 19:10:33,027 - INFO - Start read_file()
+2025-05-14 19:10:56,042 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:13:47,243 - INFO - START FUNKCJI main()
+2025-05-14 19:13:48,739 - INFO - Start read_file()
+2025-05-14 19:14:00,476 - INFO - Start delete()
+2025-05-14 19:14:13,772 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:16:01,008 - INFO - START FUNKCJI main()
+2025-05-14 19:16:07,126 - INFO - Start read_file()
+2025-05-14 19:16:17,217 - INFO - Start delete()
+2025-05-14 19:16:28,873 - INFO - Start read_file()
+2025-05-14 19:16:36,916 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:21:01,373 - INFO - START FUNKCJI main()
+2025-05-14 19:21:10,072 - INFO - Start delete()
+2025-05-14 19:21:48,077 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:24:34,991 - INFO - START FUNKCJI main()
+2025-05-14 19:24:37,109 - INFO - Start read_file()
+2025-05-14 19:25:05,370 - INFO - Start delete()
+2025-05-14 19:25:21,898 - INFO - Start delete()
+2025-05-14 19:26:06,276 - INFO - Start write_file()
+2025-05-14 19:26:35,312 - INFO - Start read_file()
+2025-05-14 19:26:46,838 - INFO - Start write_file()
+2025-05-14 19:27:54,716 - INFO - Start write_file()
+2025-05-14 19:29:02,831 - INFO - Start read_file()
+2025-05-14 19:29:15,162 - INFO - Start read_file()
+2025-05-14 19:29:38,106 - INFO - ValueError: Nieprawidłowe polecenie: qc 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 170, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: qc 
+2025-05-14 19:30:27,007 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:38:07,493 - INFO - START FUNKCJI main()
+2025-05-14 19:38:10,922 - INFO - Start _test()
+2025-05-14 19:38:22,245 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:45:45,405 - INFO - START FUNKCJI main()
+2025-05-14 19:45:53,320 - INFO - Start delete()
+2025-05-14 19:46:08,971 - INFO - Start delete()
+2025-05-14 19:46:23,553 - INFO - Start delete()
+2025-05-14 19:46:35,727 - INFO - Start delete()
+2025-05-14 19:47:37,923 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:48:08,724 - INFO - START FUNKCJI main()
+2025-05-14 19:48:11,447 - INFO - Start delete()
+2025-05-14 19:48:26,835 - INFO - Start read_file()
+2025-05-14 19:48:32,980 - INFO - Start delete()
+2025-05-14 19:48:52,668 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:51:22,402 - INFO - START FUNKCJI main()
+2025-05-14 19:51:24,633 - INFO - Start delete()
+2025-05-14 19:51:37,280 - INFO - Start delete()
+2025-05-14 19:51:43,913 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 19:52:27,895 - INFO - START FUNKCJI main()
+2025-05-14 19:52:30,926 - INFO - Start delete()
+2025-05-14 19:53:04,481 - INFO - Start delete()
+2025-05-14 19:53:18,748 - INFO - Start delete()
+2025-05-14 19:53:40,677 - INFO - Start delete()
+2025-05-14 19:54:10,954 - INFO - Start write_file()
+2025-05-14 19:54:13,425 - INFO - Start write_file()
+2025-05-14 19:54:37,089 - INFO - Start delete()
+2025-05-14 19:54:51,847 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-14 19:58:30,248 - INFO - START FUNKCJI main()
+2025-05-14 19:58:39,043 - INFO - Start delete()
+2025-05-14 19:59:11,389 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:04:13,417 - INFO - START FUNKCJI main()
+2025-05-14 20:04:15,639 - INFO - Start delete()
+2025-05-14 20:04:30,216 - INFO - Start read_file()
+2025-05-14 20:04:50,271 - INFO - Start delete()
+2025-05-14 20:05:30,760 - INFO - Start delete()
+2025-05-14 20:05:45,704 - INFO - Start delete()
+2025-05-14 20:06:08,124 - INFO - Start delete()
+2025-05-14 20:06:31,357 - INFO - Start delete()
+2025-05-14 20:07:11,825 - INFO - Start delete()
+2025-05-14 20:08:05,777 - INFO - Start delete()
+2025-05-14 20:08:17,711 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:18:08,286 - INFO - START FUNKCJI main()
+2025-05-14 20:18:10,494 - INFO - Start write_file()
+2025-05-14 20:18:14,197 - INFO - Start delete()
+2025-05-14 20:18:25,522 - INFO - Start read_file()
+2025-05-14 20:18:27,852 - INFO - Start write_file()
+2025-05-14 20:18:46,599 - INFO - Start delete()
+2025-05-14 20:18:52,082 - INFO - Start write_file()
+2025-05-14 20:19:04,134 - INFO - Start delete()
+2025-05-14 20:19:56,293 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:21:14,558 - INFO - START FUNKCJI main()
+2025-05-14 20:21:16,924 - INFO - Start delete()
+2025-05-14 20:21:26,417 - INFO - Start delete()
+2025-05-14 20:21:55,719 - INFO - Start delete()
+2025-05-14 20:22:16,992 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:24:43,822 - INFO - START FUNKCJI main()
+2025-05-14 20:24:50,894 - INFO - Start read_file()
+2025-05-14 20:25:53,439 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:32:28,957 - INFO - START FUNKCJI main()
+2025-05-14 20:32:37,098 - INFO - Start delete()
+2025-05-14 20:33:04,141 - INFO - Start read_file()
+2025-05-14 20:33:25,123 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:36:20,787 - INFO - START FUNKCJI main()
+2025-05-14 20:36:26,720 - INFO - Start read_file()
+2025-05-14 20:36:50,136 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:49:22,575 - INFO - START FUNKCJI main()
+2025-05-14 20:49:24,425 - INFO - Start read_file()
+2025-05-14 20:49:34,241 - INFO - Start read_file()
+2025-05-14 20:49:41,585 - INFO - Start read_file()
+2025-05-14 20:50:07,721 - INFO - Start read_file()
+2025-05-14 20:50:19,799 - INFO - Start read_file()
+2025-05-14 20:50:41,624 - INFO - Start read_file()
+2025-05-14 20:50:58,904 - INFO - Start read_file()
+2025-05-14 20:51:37,202 - INFO - Start read_file()
+2025-05-14 20:51:37,203 - INFO - ValueError: invalid literal for int() with base 10: '05-13'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 178, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 86, in read_file
+    to_show = lines[-int(arg):]
+                     ^^^^^^^^
+ValueError: invalid literal for int() with base 10: '05-13'
+2025-05-14 20:51:43,415 - INFO - Start read_file()
+2025-05-14 20:51:43,416 - INFO - ValueError: invalid literal for int() with base 10: '05-13'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 178, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 86, in read_file
+    to_show = lines[-int(arg):]
+                     ^^^^^^^^
+ValueError: invalid literal for int() with base 10: '05-13'
+2025-05-14 20:51:50,259 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 20:52:50,981 - INFO - START FUNKCJI main()
+2025-05-14 20:52:53,299 - INFO - Start read_file()
+2025-05-14 20:52:53,300 - ERROR - Inny błąd: cannot access local variable 'to_show' where it is not associated with a value
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 178, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 98, in read_file
+    for line in to_show:
+                ^^^^^^^
+UnboundLocalError: cannot access local variable 'to_show' where it is not associated with a value
+2025-05-14 20:53:01,209 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:00:46,792 - INFO - START FUNKCJI main()
+2025-05-14 21:00:54,114 - INFO - Start read_file()
+2025-05-14 21:01:02,440 - INFO - Start read_file()
+2025-05-14 21:01:02,441 - ERROR - Inny błąd: cannot access local variable 'to_show' where it is not associated with a value
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 178, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 98, in read_file
+    for line in to_show:
+                ^^^^^^^
+UnboundLocalError: cannot access local variable 'to_show' where it is not associated with a value
+2025-05-14 21:02:10,953 - INFO - Start read_file()
+2025-05-14 21:02:15,887 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:02:53,156 - INFO - START FUNKCJI main()
+2025-05-14 21:02:55,436 - INFO - Start read_file()
+2025-05-14 21:03:06,456 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:05:35,941 - INFO - START FUNKCJI main()
+2025-05-14 21:05:38,506 - INFO - Start read_file()
+2025-05-14 21:06:05,617 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:18:52,116 - INFO - START FUNKCJI main()
+2025-05-14 21:18:54,940 - INFO - Start delete()
+2025-05-14 21:19:13,424 - INFO - Start delete()
+2025-05-14 21:19:37,070 - INFO - Start delete()
+2025-05-14 21:19:46,474 - INFO - Start write_file()
+2025-05-14 21:20:00,018 - INFO - Start read_file()
+2025-05-14 21:20:09,747 - INFO - Start delete()
+2025-05-14 21:20:31,253 - INFO - Start delete()
+2025-05-14 21:20:40,502 - INFO - Start write_file()
+2025-05-14 21:20:46,608 - INFO - Start delete()
+2025-05-14 21:21:13,457 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:21:54,221 - INFO - START FUNKCJI main()
+2025-05-14 21:21:56,951 - INFO - Start delete()
+2025-05-14 21:23:39,963 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:24:09,350 - INFO - START FUNKCJI main()
+2025-05-14 21:24:11,933 - INFO - Start delete()
+2025-05-14 21:24:23,469 - INFO - Start delete()
+2025-05-14 21:24:50,881 - INFO - Start write_file()
+2025-05-14 21:24:57,625 - INFO - Start delete()
+2025-05-14 21:25:26,202 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 21:26:59,833 - INFO - START FUNKCJI main()
+2025-05-14 21:27:02,832 - INFO - Start delete()
+2025-05-14 21:27:23,209 - INFO - Start delete()
+2025-05-14 21:29:29,235 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 22:02:32,501 - INFO - START FUNKCJI main()
+2025-05-14 22:02:40,666 - INFO - Start delete([])
+2025-05-14 22:03:21,479 - INFO - Start delete([])
+2025-05-14 22:03:28,112 - ERROR - Inny błąd: 'in <string>' requires string as left operand, not NoneType
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 180, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 57, in delete
+    new_lines = [line for line in lines if arg not in line]
+                                           ^^^^^^^^^^^^^^^
+TypeError: 'in <string>' requires string as left operand, not NoneType
+2025-05-14 22:03:43,597 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 22:11:27,498 - INFO - START FUNKCJI main()
+2025-05-14 22:11:31,173 - INFO - Start delete([])
+2025-05-14 22:11:47,205 - INFO - Start delete([])
+2025-05-14 22:11:58,618 - INFO - Start read_file([])
+2025-05-14 22:12:03,274 - INFO - Start delete([])
+2025-05-14 22:12:35,142 - INFO - Start delete([])
+2025-05-14 22:12:49,898 - INFO - Start delete([])
+2025-05-14 22:13:04,625 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-14 22:41:46,953 - INFO - START FUNKCJI main()
+2025-05-14 22:41:46,955 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:41:50,693 - INFO - Start delete([])
+2025-05-14 22:41:50,693 - DEBUG - arg: None
+2025-05-14 22:41:51,795 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:41:54,834 - INFO - Start write_file(None)
+2025-05-14 22:41:56,813 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:41:59,417 - INFO - Start delete([])
+2025-05-14 22:41:59,417 - DEBUG - arg: None
+2025-05-14 22:42:02,120 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:42:19,657 - INFO - ValueError: Nieprawidłowe polecenie: ad 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 185, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: ad 
+2025-05-14 22:42:19,691 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:42:22,657 - INFO - Start write_file([])
+2025-05-14 22:42:25,988 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:42:30,023 - INFO - Start read_file([])
+2025-05-14 22:42:30,024 - DEBUG - arg: recent
+2025-05-14 22:42:30,025 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-14 22:42:41,828 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
