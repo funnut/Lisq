@@ -1,6 +1,6 @@
 import logging
 import readline
-import shutil
+import os
 from pathlib import Path
 from datetime import date
 from random import choice
@@ -20,6 +20,18 @@ if histfile.exists():
     readline.read_history_file(histfile)
 readline.set_history_length(100)
 
+def NOTES_PATH(): # - pathlib, os
+    path = Path("~/_lisq/tests/rebuild/").expanduser() / "notes.txt"
+    if path.exists():
+        return path
+    env_path = os.getenv("NOTES_PATH")
+    if env_path:
+        return Path(os.path.expandvars(env_path)).expanduser()
+    return Path.home() / "notes.txt"
+
+def clear(args): # - os
+    terminal_hight = os.get_terminal_size().lines
+    print("\n"*terminal_hight*2)
 
 def delete(args):
     """Usuwanie notatek."""
@@ -30,18 +42,18 @@ def delete(args):
         while not arg:
             arg = input("  - ").strip()
             if ' ' in arg:
-                print ("must be a single word!")
+                print ("Polecenie musi być pojedynczym słowem!")
                 arg = None
             if arg in ["q",""]:
                 return
 
-        with open("notes.txt","r",encoding="utf-8") as f:
+        with open(NOTES_PATH(),"r",encoding="utf-8") as f:
             lines = f.readlines()
 
         if arg == "all":
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y"]:
-                open("notes.txt","w",encoding="utf-8").close()
+                open(NOTES_PATH(),"w",encoding="utf-8").close()
                 print ("Wszystkie notatki zostały usunięte.")
             else:
                 print ("Anulowano.")
@@ -49,19 +61,18 @@ def delete(args):
         elif arg in ["last","l"]:
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
-                with open("notes.txt","w",encoding="utf-8") as f:
+                with open(NOTES_PATH(),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
                 print ("Usunięto ostatnią notatkę.")
             else:
                 print ("Anulowano.")
-
         else:
             new_lines = [line for line in lines if arg not in line]
             number = len(lines)-len(new_lines)
             if number > 0:
                 yesno = input(f"Czy usunąć {number} notatek zawierających '{arg}'? (y/n): ").strip().lower()
                 if yesno in ["yes","y",""]:
-                    with open("notes.txt","w",encoding="utf-8") as f:
+                    with open(NOTES_PATH(),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
                     print ("Usunięto notatkę/i.")
                 else:
@@ -75,14 +86,14 @@ def delete(args):
 
 
 def read_file(args):
-    """Odczyt pliku notatek""" # - random, shutil
+    """Odczyt pliku notatek""" # - random, os
     logging.info(f"Start read_file({args})")
-    terminal_width = shutil.get_terminal_size().columns
+    terminal_width = os.get_terminal_size().columns
     print (f" _id _date {'_' * (terminal_width - 12)}")
     try:
         arg = args[0] if args else 'recent'
         logging.debug(f"arg: {arg}")
-        with open("notes.txt","r",encoding="utf-8") as f:
+        with open(NOTES_PATH(),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
         if arg == "recent":
             to_show = lines[-10:]
@@ -104,8 +115,7 @@ def read_file(args):
             parts = line.split()
             date_ = "-".join(parts[1].split("-")[1:])
             print (f"{parts[0]} {date_} {" ".join(parts[2:]).strip()}")
-
-        print (f"\nZnaleziono {len(to_show)} pasujących elementów.")
+#        print (f"\nZnaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError:
         logging.error("FileNotFoundError w read_file()")
@@ -120,7 +130,7 @@ def write_file(args): # - datetime
         if not args:
             return
     try:
-        with open("notes.txt","r",encoding="utf-8") as f:
+        with open(NOTES_PATH(),"r",encoding="utf-8") as f:
             lines = f.readlines()
         if lines:
             last_line = lines[-1]
@@ -134,30 +144,35 @@ def write_file(args): # - datetime
         id_number = 1
     id_ = f"i{str(id_number).zfill(3)}"
     date_ = date.today().strftime("%Y-%m-%d")
-    with open("notes.txt","a",encoding="utf-8") as f:
+    with open(NOTES_PATH(),"a",encoding="utf-8") as f:
         f.write(f"{id_} {date_} :: {' '.join(args)}\n") # args to lista!
     print ("Notatka dodana.")
 
+def echo(text):
+    print(text)
 
 def _test(args):
     logging.info(f"Start _test({args})")
-    print ("Hello sir!")
-    print ("args:",args)
-    print ("bool(args):",bool(args))
-    print ("type(args):",type(args))
+    print(NOTES_PATH())
+    print("Hello sir!")
+    print("args:",args)
+    print("bool(args):",bool(args))
+    print("type(args):",type(args))
 
     tablica = ["abc","1","3","cb a", " al i on"]
-    print ("tablica=",tablica)
-    s = ":-1" # args[80]
-    print ("tablica=",eval(f"tablica[{s}]"))
+    print("tablica=",tablica)
+    s = ":-1" # args[0]
+    print("tablica=",eval(f"tablica[{s}]"))
 
 # dispatch table
 commands = {
+    "echo": lambda args: echo(" ".join(args)),
     "test": _test,
     "add": write_file,
     "show": read_file,
     "s": read_file,
     "del": delete,
+    "c": clear,
 }
 
 def main():

@@ -1,100 +1,100 @@
-s all
+a
+n
 q
-s 05-13
+del
+c
+show
+show nowa
+nowsza notka
+s 1
+c
+s
+show
+q
+clear
+q
+clear
+q
+clear
+c
+clear
+q
+clear
+up
+q
+clear
+q
+test
 q
 s
-q
-del
-del cfg
-n
-del test
-n
-new note to 
+sh
 s
-del note to
-n
-del i028
-del
+show
 q
-del
-q
-del
-del test
-n
-add
-del
-q
-del
-this to del
-del
-this
-q
-del
-tis del
-del
-l
-q
-del
-new test
-del
-t
-n
 s
-del
-treść
-n
-del
-l
-n
-del
-all
-n
+show
 q
-del
-last
-n
+s
+test
+q
+show
+q
+s
+show
+q
+c
+show
+q
+s
+show
+q
+test
+a b c d
+echo a b c d
 c
 q
-del
-new
-del
-l
+la
+c
+echo la la la
+q
+multi 3 4
+q
+multi 2 5
+q
+multi 2 5
+multi 2 9
+multi 2 9 4
+q
 s
 q
-del
-n k
-o k
-ok
-del
-last
+c
+new note right here
+s 1
 q
-del
-o k
-ok
-n
+s
+q
+s
+q
+c
+s 1
+s
 del
 l
-n
-del
+del l
+s
 q
-del
-t
-n
-del
-n m
-del
-k n
-q
-k n
-del
-m n
-del
+test
+echo this is message
 l
-n
-del
+k
+s
 q
-del
-ad
-add
-show
+test
+q
+echo
+echo k
+echo smthging
+c
+q
+l
 q
