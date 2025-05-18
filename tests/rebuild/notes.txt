@@ -1,8 +1,4 @@
-i001 2025-05-15 :: hhkk
-i002 2025-05-15 :: hjk
-i003 2025-05-15 :: on more
-i004 2025-05-15 :: el
-i005 2025-05-16 :: hhko
-i006 2025-05-16 :: dsw3tg
-i007 2025-05-16 :: hhjoo
-i008 2025-05-16 :: llll
+i001 2025-05-17 :: dodać help, szyfrowanie, obsługę z CLI
+i002 2025-05-17 :: Only in it for the whirlwind
+i003 2025-05-18 :: adding new note
+i004 2025-05-18 :: hmm

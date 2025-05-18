@@ -1,100 +1,100 @@
-el
-s
-test i002 i007
-del i002 i007
-n
-del i002
-n
-s
-del i003
-n
-del i00
-n
 q
-del i002
-n
-del i003 i004
-s
-q
-test
-test hjij
-test i002
-q
-test i002
-q
-test i002
-test i007
+math
 q
 s
-test
-test i001
+s 1
 q
 s
-test i002
-test i002 i007
+s all
 q
 s
-i003
-del i003
-n
-del i002 i003
-n
-del i002 i007
-n
+s 1
+qq
 q
 s
-del i003 i006
-n
-del i003 i004
-n
-del i003
-n
-del jfg hjj
+s 1
+s r
+s
 q
 s
-del 001 hjk
-n
+/ adding new note
 q
-l
-s
-del 001 hjk
-n
-test
-q
-test
-q
-test
 c
+new note
+s
+del l
+s
+del note i003
+s
+q
+c
+this is note
+c
+this is note
+that is note
+new note hatd# tes(ing
+s
+perhaps '
+s
+znak :: zamiast / ma więcej sensu?
+s
+del
+i006 i005 i004 i003
+y
+q
+new note here
+s
+c
+testing
+s
+new note
+q
+testin'
+s
+q
+sr
+s r
+sr
+s r
+s 2
+s
+del i007 i006 i005 i004 i003
+s
+test
+test 1 2 abc
+q
 del
 q
-test
+del
+testin
+jjik
 q
-tesl
-test
-q
-test
-q
-c
-l
-q
-reiterate
-q
-test
-q
-kk
 s
 q
-test
-show
-l
+co tam
+cmds
+q
+d
+s
+c
+s
+adding new note
+del
+delete last
+s
+delete
+last
 n
 s
-hhko
-dsw3tg
-hhjoo
-llll
-s
-del all
+delete i004
+q
+delete i004
 q
 s
+q
+s r
+s
+hmm
+s
+c
 q

@@ -1212,3 +1212,421 @@ ValueError: Nieprawidłowe polecenie: l
 2025-05-16 01:59:26,683 - INFO - START FUNKCJI main()
 2025-05-16 01:59:26,684 - DEBUG - START GŁÓWNEJ PĘTLI
 2025-05-16 01:59:31,888 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:46:53,944 - INFO - START FUNKCJI main()
+2025-05-16 19:46:53,946 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:46:55,520 - INFO - ValueError: Nieprawidłowe polecenie: l 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 226, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: l 
+2025-05-16 19:46:55,530 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:46:59,270 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:07,826 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:17,834 - INFO - Start delete([])0
+2025-05-16 19:47:18,906 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:24,916 - INFO - Start delete(['all'])1
+2025-05-16 19:47:24,918 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:31,314 - INFO - Start read_file([])
+2025-05-16 19:47:31,314 - DEBUG - arg: recent
+2025-05-16 19:47:31,316 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:32,136 - INFO - Start write_file(None)
+2025-05-16 19:47:34,202 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:37,904 - INFO - Start delete(['all'])1
+2025-05-16 19:47:37,906 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:43,253 - INFO - Start read_file([])
+2025-05-16 19:47:43,254 - DEBUG - arg: recent
+2025-05-16 19:47:43,255 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:46,515 - INFO - Start delete(['all'])1
+2025-05-16 19:47:46,519 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:47:52,737 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:50:31,967 - INFO - START FUNKCJI main()
+2025-05-16 19:50:31,967 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:50:34,728 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:50:39,941 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:51:17,597 - INFO - START FUNKCJI main()
+2025-05-16 19:51:17,597 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:51:21,001 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:51:28,959 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:51:43,092 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:51:46,910 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:52:06,401 - INFO - START FUNKCJI main()
+2025-05-16 19:52:06,401 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:52:08,227 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:53:42,966 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:55:30,528 - INFO - START FUNKCJI main()
+2025-05-16 19:55:30,528 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:55:33,456 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:55:38,352 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:55:54,671 - INFO - START FUNKCJI main()
+2025-05-16 19:55:54,671 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:55:59,434 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:56:05,850 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 19:56:12,162 - INFO - START FUNKCJI main()
+2025-05-16 19:56:12,163 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:56:18,355 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 19:56:27,155 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:06:10,056 - INFO - START FUNKCJI main()
+2025-05-16 20:06:10,056 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:06:14,450 - INFO - Start delete([])0
+2025-05-16 20:06:25,602 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-16 20:08:17,907 - INFO - START FUNKCJI main()
+2025-05-16 20:08:17,907 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:20,795 - INFO - ValueError: Nieprawidłowe polecenie: h 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 221, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: h 
+2025-05-16 20:08:20,806 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:24,392 - INFO - Start delete([])0
+2025-05-16 20:08:26,603 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:29,455 - INFO - Start delete([])0
+2025-05-16 20:08:35,848 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:37,262 - INFO - Start read_file([])
+2025-05-16 20:08:37,263 - DEBUG - arg: recent
+2025-05-16 20:08:37,264 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:45,620 - INFO - Start delete(['001'])1
+2025-05-16 20:08:49,234 - INFO - Start reiterate()
+2025-05-16 20:08:49,236 - INFO - Zaktualizowano identyfikatory dla 0 linii.
+2025-05-16 20:08:49,237 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:51,508 - INFO - Start read_file([])
+2025-05-16 20:08:51,508 - DEBUG - arg: recent
+2025-05-16 20:08:51,510 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:52,233 - INFO - Start write_file(None)
+2025-05-16 20:08:54,083 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:54,456 - INFO - Start write_file(None)
+2025-05-16 20:08:55,819 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:08:56,295 - INFO - Start write_file(None)
+2025-05-16 20:08:57,591 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:00,735 - INFO - Start delete([])0
+2025-05-16 20:09:03,788 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:05,128 - INFO - Start read_file([])
+2025-05-16 20:09:05,129 - DEBUG - arg: recent
+2025-05-16 20:09:05,130 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:17,495 - INFO - Start delete(['i001', 'i002'])2
+2025-05-16 20:09:19,539 - INFO - Start reiterate()
+2025-05-16 20:09:19,542 - INFO - Zaktualizowano identyfikatory dla 1 linii.
+2025-05-16 20:09:19,542 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:22,486 - INFO - Start write_file(None)
+2025-05-16 20:09:23,769 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:24,260 - INFO - Start write_file(None)
+2025-05-16 20:09:25,618 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:27,480 - INFO - Start read_file([])
+2025-05-16 20:09:27,481 - DEBUG - arg: recent
+2025-05-16 20:09:27,483 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:09:35,395 - INFO - Start delete([])0
+2025-05-16 20:10:21,570 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:10:23,076 - INFO - Start read_file([])
+2025-05-16 20:10:23,077 - DEBUG - arg: recent
+2025-05-16 20:10:23,079 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:10:29,107 - INFO - Start delete([])0
+2025-05-16 20:10:34,294 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:10:36,772 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:13:02,026 - INFO - START FUNKCJI main()
+2025-05-16 20:13:02,027 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:13:05,936 - INFO - Start delete([])0
+2025-05-16 20:13:09,259 - ERROR - Inny błąd: name 'raw' is not defined
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 219, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 64, in delete
+    if ' ' in raw:
+              ^^^
+NameError: name 'raw' is not defined
+2025-05-16 20:13:09,270 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:13:16,908 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:14:26,163 - INFO - START FUNKCJI main()
+2025-05-16 20:14:26,163 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:14:27,858 - INFO - Start read_file([])
+2025-05-16 20:14:27,858 - DEBUG - arg: recent
+2025-05-16 20:14:27,859 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:14:31,162 - INFO - Start delete([])0
+2025-05-16 20:14:55,129 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:14:59,422 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:15:48,363 - INFO - START FUNKCJI main()
+2025-05-16 20:15:48,363 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:15:55,011 - INFO - Start delete([])0
+2025-05-16 20:16:06,132 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:16:09,747 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:18:01,954 - INFO - START FUNKCJI main()
+2025-05-16 20:18:01,954 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:18:05,937 - INFO - Start delete([])0
+2025-05-16 20:18:08,419 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:18:10,840 - INFO - Start delete([])0
+2025-05-16 20:18:23,549 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:18:25,162 - INFO - Start read_file([])
+2025-05-16 20:18:25,163 - DEBUG - arg: recent
+2025-05-16 20:18:25,164 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:18:38,648 - INFO - Start delete(['i002'])1
+2025-05-16 20:18:42,978 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:18:49,417 - INFO - Start delete([])0
+2025-05-16 20:19:00,302 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:19:02,291 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:22:26,608 - INFO - START FUNKCJI main()
+2025-05-16 20:22:26,608 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:22:28,662 - INFO - Start delete([])0
+2025-05-16 20:22:42,203 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-16 20:24:22,526 - INFO - START FUNKCJI main()
+2025-05-16 20:24:22,527 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:24,789 - INFO - ValueError: Nieprawidłowe polecenie: h 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 223, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: h 
+2025-05-16 20:24:24,798 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:28,048 - INFO - Start delete([])0
+2025-05-16 20:24:29,187 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:31,467 - INFO - Start delete([])0
+2025-05-16 20:24:38,850 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:41,048 - INFO - Start read_file([])
+2025-05-16 20:24:41,048 - DEBUG - arg: recent
+2025-05-16 20:24:41,049 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:47,666 - INFO - Start delete([])0
+2025-05-16 20:24:56,490 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:24:59,487 - INFO - Start write_file(None)
+2025-05-16 20:25:00,330 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:25:02,718 - INFO - Start delete([])0
+2025-05-16 20:25:04,289 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:25:06,466 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:26:46,977 - INFO - START FUNKCJI main()
+2025-05-16 20:26:46,977 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:26:50,835 - INFO - ValueError: Nieprawidłowe polecenie: g 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 225, in main
+    raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+ValueError: Nieprawidłowe polecenie: g 
+2025-05-16 20:26:50,845 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:26:58,762 - INFO - Start delete([])0
+2025-05-16 20:27:07,137 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:27:09,859 - INFO - Start read_file([])
+2025-05-16 20:27:09,859 - DEBUG - arg: recent
+2025-05-16 20:27:09,860 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:27:13,258 - INFO - Start delete([])0
+2025-05-16 20:27:23,683 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:27:39,405 - INFO - Start delete([])0
+2025-05-16 20:27:48,498 - ERROR - Inny błąd: 'list' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 223, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 68, in delete
+    args = raw.split().strip()
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'strip'
+2025-05-16 20:27:48,505 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:27:58,714 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:29:22,870 - INFO - START FUNKCJI main()
+2025-05-16 20:29:22,871 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:29:28,148 - INFO - Start delete([])0
+2025-05-16 20:29:43,957 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:29:46,134 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:39:20,361 - INFO - START FUNKCJI main()
+2025-05-16 20:39:20,362 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:39:23,481 - INFO - Start read_file([])
+2025-05-16 20:39:23,482 - DEBUG - arg: recent
+2025-05-16 20:39:23,482 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:39:26,535 - INFO - Start delete([])0
+2025-05-16 20:39:42,405 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:39:42,671 - INFO - Start write_file(None)
+2025-05-16 20:39:44,341 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:39:46,496 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:42:02,577 - INFO - START FUNKCJI main()
+2025-05-16 20:42:02,578 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:42:08,538 - INFO - Start delete([])0
+2025-05-16 20:42:11,514 - ERROR - Inny błąd: name 'join' is not defined
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 222, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 69, in delete
+    args = join(raw)
+           ^^^^
+NameError: name 'join' is not defined
+2025-05-16 20:42:11,526 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:42:15,480 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:46:10,161 - INFO - START FUNKCJI main()
+2025-05-16 20:46:10,161 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:14,240 - INFO - Start delete([])0
+2025-05-16 20:46:21,733 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:23,781 - INFO - Start read_file([])
+2025-05-16 20:46:23,781 - DEBUG - arg: recent
+2025-05-16 20:46:23,783 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:28,327 - INFO - Start delete([])0
+2025-05-16 20:46:43,343 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:47,055 - INFO - Start delete([])0
+2025-05-16 20:46:49,842 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:52,537 - INFO - Start delete([])0
+2025-05-16 20:46:53,476 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:46:55,732 - INFO - Start delete([])0
+2025-05-16 20:47:09,414 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:47:20,021 - INFO - Start delete([])0
+2025-05-16 20:47:26,279 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:47:28,144 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:52:26,242 - INFO - START FUNKCJI main()
+2025-05-16 20:52:26,242 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:52:29,332 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:52:46,333 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:52:58,630 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:53:02,350 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 20:54:23,033 - INFO - START FUNKCJI main()
+2025-05-16 20:54:23,033 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:54:26,049 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:54:37,446 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 20:54:46,756 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 21:15:49,447 - INFO - START FUNKCJI main()
+2025-05-16 21:15:49,447 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:16:02,429 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:16:07,007 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-16 21:17:41,549 - INFO - START FUNKCJI main()
+2025-05-16 21:17:41,549 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:17:44,084 - INFO - Start read_file([])
+2025-05-16 21:17:44,084 - DEBUG - arg: recent
+2025-05-16 21:17:44,085 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:17:57,362 - INFO - Start delete([])0
+2025-05-16 21:18:11,608 - INFO - Start reiterate()
+2025-05-16 21:18:11,609 - INFO - Zaktualizowano identyfikatory dla 1 linii.
+2025-05-16 21:18:11,610 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:18:13,919 - INFO - Start read_file([])
+2025-05-16 21:18:13,919 - DEBUG - arg: recent
+2025-05-16 21:18:13,921 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:18:18,814 - INFO - Start write_file(None)
+2025-05-16 21:18:20,277 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:18:22,415 - INFO - Start delete([])0
+2025-05-16 21:18:26,227 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:18:33,781 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-16 21:18:36,619 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-17 02:38:46,100 - INFO - START FUNKCJI main()
+2025-05-17 02:38:46,100 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:39:18,883 - INFO - Start write_file(None)
+2025-05-17 02:39:19,607 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:39:30,259 - INFO - Start read_file([])
+2025-05-17 02:39:30,259 - DEBUG - arg: recent
+2025-05-17 02:39:30,260 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:39:51,110 - INFO - Start read_file([])
+2025-05-17 02:39:51,111 - DEBUG - arg: recent
+2025-05-17 02:39:51,113 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:39:56,510 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:40:00,453 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-17 02:53:43,509 - INFO - START FUNKCJI main()
+2025-05-17 02:53:43,509 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:54:05,228 - ERROR - Odebrano KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 233, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 182, in dancy
+    print("     .    ")
+KeyboardInterrupt
+2025-05-17 02:54:38,609 - INFO - START FUNKCJI main()
+2025-05-17 02:54:38,609 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:54:49,774 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 02:54:52,275 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-17 20:52:44,822 - INFO - START FUNKCJI main()
+2025-05-17 20:52:44,823 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:52:48,078 - INFO - Start read_file([])
+2025-05-17 20:52:48,078 - DEBUG - arg: recent
+2025-05-17 20:52:48,079 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:54:18,464 - INFO - Start write_file(['dodać', 'help,', 'szyfrowanie,', 'obsługę', 'z', 'CLI'])
+2025-05-17 20:54:18,468 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:54:22,071 - INFO - Start read_file([])
+2025-05-17 20:54:22,072 - DEBUG - arg: recent
+2025-05-17 20:54:22,073 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:54:58,667 - INFO - Start read_file([])
+2025-05-17 20:54:58,667 - DEBUG - arg: recent
+2025-05-17 20:54:58,669 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:55:22,226 - INFO - Start write_file(None)
+2025-05-17 20:55:22,690 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:55:35,198 - INFO - Start write_file(None)
+2025-05-17 20:56:20,609 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:56:22,460 - INFO - Start read_file([])
+2025-05-17 20:56:22,460 - DEBUG - arg: recent
+2025-05-17 20:56:22,461 - DEBUG - START GŁÓWNEJ PĘTLI
+2025-05-17 20:57:04,089 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-17 21:18:23,540 - ERROR - FileNotFoundError w read_file()
+2025-05-17 21:18:42,626 - ERROR - FileNotFoundError w read_file()
+2025-05-17 21:38:10,076 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:42:50,531 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:43:25,060 - ERROR - FileNotFoundError w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:43:39,693 - ERROR - FileNotFoundError w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:43:55,365 - ERROR - FileNotFoundError w write_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:45:50,419 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:45:55,329 - ERROR - FileNotFoundError w write_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:54:49,651 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 21:54:58,009 - ERROR - FileNotFoundError w reiterate()
+2025-05-17 22:00:18,035 - ERROR - Exception w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:00:18,035 - ERROR - Inny błąd: 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 73, in delete
+    with open(NOTES_PATH(),"r",encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 238, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 110, in delete
+    raise Exception
+Exception
+2025-05-17 22:04:12,846 - ERROR - Exception w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:04:45,393 - ERROR - Exception w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:05:37,633 - ERROR - FileNotFoundError w delete()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:09:56,007 - ERROR - Exception w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:14:29,834 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:14:34,287 - ERROR - FileNotFoundError w write_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:29:47,319 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:30:00,952 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:31:05,956 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:31:31,563 - ERROR - FileNotFoundError w reiterate()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:33:15,469 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 22:35:21,743 - ERROR - Odebrano KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 245, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 190, in dancy
+    print("  .       ")
+KeyboardInterrupt
+2025-05-17 22:36:25,488 - ERROR - Odebrano KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 245, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 194, in dancy
+    print("     .    ")
+KeyboardInterrupt
+2025-05-17 22:37:12,978 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_lisq/tests/rebuild/notes.txt.'
+2025-05-17 23:17:00,921 - ERROR - Inny błąd: list index out of range
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 252, in main
+    commands[cmd](args)
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 208, in _test
+    s = args[0]
+        ~~~~^^^
+IndexError: list index out of range
+2025-05-18 00:32:32,034 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_l.isq/tests/rebuild/notes.txt'
+2025-05-18 00:45:31,331 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_l.isq/tests/rebuild/notes.txt'
+2025-05-18 00:46:16,751 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_l.isq/tests/rebuild/notes.txt'
+2025-05-18 00:48:28,544 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_l.isq/tests/rebuild/notes.txt'
+2025-05-18 00:53:37,602 - ERROR - FileNotFoundError w read_file()
+[Errno 2] No such file or directory: '/data/data/com.termux/files/home/_l.isq/tests/rebuild/notes.txt'
