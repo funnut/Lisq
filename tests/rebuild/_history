@@ -1,100 +1,34 @@
-q
-math
-q
-s
-s 1
-q
-s
-s all
-q
-s
-s 1
-qq
-q
-s
-s 1
-s r
-s
-q
-s
-/ adding new note
-q
-c
-new note
-s
-del l
-s
-del note i003
-s
-q
-c
-this is note
-c
-this is note
-that is note
-new note hatd# tes(ing
-s
-perhaps '
-s
-znak :: zamiast / ma więcej sensu?
-s
-del
-i006 i005 i004 i003
-y
-q
-new note here
-s
-c
-testing
-s
-new note
-q
-testin'
-s
-q
-sr
-s r
-sr
-s r
-s 2
-s
-del i007 i006 i005 i004 i003
-s
-test
-test 1 2 abc
-q
-del
-q
-del
-testin
-jjik
-q
-s
-q
-co tam
+s 
 cmds
+type 123
+echo 123
+type 123456789
+q
+s r
+s 
+cmds
+q
+cmds
+q
+hjk
 q
 d
 s
+q
+ghi
+vhjm
+q
+hii
+hii buik
+hii buik jk jk
+hii buik jk jk ffh
+hii "buik jk jk ffh"
+s
+j
+q
+s
 c
-s
-adding new note
-del
-delete last
-s
-delete
-last
-n
-s
-delete i004
-q
-delete i004
-q
-s
-q
+test
 s r
 s
-hmm
-s
-c
 q

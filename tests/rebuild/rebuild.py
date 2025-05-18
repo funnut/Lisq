@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Konfiguracja log - logging
 logging.basicConfig(
-    level=logging.ERROR, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
     filename="debug.log",  # rm by logować na konsolę
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
@@ -15,7 +15,7 @@ script_dir = Path(__file__).parent.resolve()
 histfile = script_dir / "_history"
 if histfile.exists():
     readline.read_history_file(histfile)
-readline.set_history_length(100)
+readline.set_history_length(1000)
 
 def type(text, delay=0.05):
     import time
@@ -34,7 +34,7 @@ def spinner(args=None):
     spinner = itertools.cycle(['-', '/', '|', '\\'])
 
     for _ in range(20):
-        sys.stdout.write('\r'+next(spinner))
+        sys.stdout.write('\rŁadowanie '+next(spinner))
         sys.stdout.flush()
         time.sleep(0.2)
 
@@ -74,6 +74,9 @@ def reiterate(args=None):
     except FileNotFoundError as e:
         logging.error(f"FileNotFoundError w reiterate()\n%s",e)
         print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
+    except Exception as e:
+        logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
+        print (f"Wystąpił inny błąd: ",e)
 
 def delete(args):
     """Usuwanie notatek."""
@@ -127,7 +130,7 @@ def delete(args):
         logging.error("FileNotFoundError w delete()\n%s",e)
         print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
-        logging.error("Exception w delete()\n%s",e)
+        logging.error(f"Exception w delete({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: ",e)
 
 def read_file(args):
@@ -137,38 +140,46 @@ def read_file(args):
     terminal_width = os.get_terminal_size().columns
     print (f" _id _date {'_' * (terminal_width - 12)}")
     try:
-        arg = args[0] if args else 'recent'
-        logging.debug(f"arg: {arg}")
+        args = args if args else "recent"
+        found_notes = None
         with open(NOTES_PATH(),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
-        if arg == "recent":
+        if args == "recent":
             to_show = lines[-10:]
-        elif arg.isdigit():
-            to_show = lines[-int(arg):]
-        elif arg in ["random", "r"]:
+        elif args[0].isdigit():
+            to_show = lines[-int(args[0]):]
+        elif args[0] in ["random", "r"]:
             to_show = [choice(lines)]
-        elif arg == "all":
+        elif args[0] == "all":
             to_show = lines
         else:
-            found = [line for line in lines if arg.lower() in line.lower()]
-            if not found:
+            found_notes = [line for line in lines if any(arg.lower() in line.lower() for arg in args)]
+            found_args = [arg.lower() for arg in args if any(arg.lower() in line.lower() for line in lines)]
+            not_found_args = [arg.lower() for arg in args if not any(arg.lower() in line.lower() for line in lines)]
+            if not found_notes:
                 print ("Nie znaleziono pasujących elementów.")
                 return
             else:
-                to_show = found
+                to_show = found_notes
 
         for line in to_show:
             parts = line.split()
             date_ = "-".join(parts[1].split("-")[1:])
             print (f"{parts[0]} {date_} {" ".join(parts[2:]).strip()}")
+        print('')
 
-        print (f"\nZnaleziono {len(to_show)} pasujących elementów.")
+        if found_notes:
+            print (f"Znaleziono {len(to_show)} notatek zawierających {found_args}")
+            if not all(any(arg.lower() in line.lower() for line in lines) for arg in args) and len(found_notes) > 0:
+                print (f"Nie znaleziono {not_found_args}")
+        else:
+            print (f"Znaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError as e:
         logging.error("FileNotFoundError w read_file()\n%s",e)
         print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
-        logging.error("Exception w read_file()\n%s",e)
+        logging.error(f"Exception w read_file({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: {e}")
 
 def write_file(args): # - datetime
@@ -180,6 +191,10 @@ def write_file(args): # - datetime
             args = input(" : ").strip().split()
             if not args:
                 return
+        if len(args) > 1:
+            args = [" ".join(args)]
+        for element in args:
+            args = [" ".join(element.split("\n"))]
         try:
             with open(NOTES_PATH(),"r",encoding="utf-8") as f:
                 lines = f.readlines()
@@ -193,13 +208,14 @@ def write_file(args): # - datetime
             logging.error("FileNotFoundError w write_file()\n%s",e)
             print ("Utworzono nowy notatnik.")
             id_number = 1
+
         id_ = f"i{str(id_number).zfill(3)}"
         date_ = date.today().strftime("%Y-%m-%d")
         with open(NOTES_PATH(),"a",encoding="utf-8") as f:
-            f.write(f"{id_} {date_} :: {' '.join(args)}\n") # args to lista!
+            f.write(f"{id_} {date_} :: {' '.join(args)}\n")
         print ("Notatka dodana.")
     except Exception as e:
-        logging.error("Exception w write_file()\n%s",e)
+        logging.error(f"Exception w write_file({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: {e}")
 
 def echo(text):
@@ -211,18 +227,19 @@ def _test(args):
 # dispatch table
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
-    "edit": lambda args: os.system(f"nano {NOTES_PATH()}"),
-    "echo": lambda args: echo(" ".join(args)),
-    "type": lambda args: type(" ".join(args)),
-    "test": _test,
     "add": write_file,
     "show": read_file,
     "s": read_file,
-    "del": delete,
     "delete": delete,
+    "del": delete,
+    "edit": lambda args: os.system(f"nano {NOTES_PATH()}"),
     "c": clear,
     "reiterate": reiterate,
+    "BLANK": "BLANK",
+    "echo": lambda args: echo(" ".join(args)),
+    "type": lambda args: type(" ".join(args)),
     "spinner": spinner,
+    "test": _test,
 }
 
 def main(): # - sys
@@ -230,16 +247,18 @@ def main(): # - sys
     if len(sys.argv) > 1:
         """Obsługa CLI"""
         logging.info(f"Start if sys.argv({sys.argv})")
-        cmd = sys.argv[1]
+        cmd = sys.argv[1].lower()
         args = sys.argv[2:]
+
         if cmd in commands:
             commands[cmd](args)
         else:
-            print("Nieprawidłowe polecenie.")
+            logging.error(f"Nieprawidłowe polecenie: sys.argv={sys.argv}")
+            print("Błąd: Nieprawidłowe polecenie.")
         return
 
     while True:
-        logging.debug("START GŁÓWNEJ PĘTLI")
+        logging.info("START GŁÓWNEJ PĘTLI")
         try:
             raw = input(f"> ").strip()
             if not raw:
@@ -257,11 +276,11 @@ def main(): # - sys
             if cmd in commands:
                 commands[cmd](args)
             else:
-                raise ValueError(f"Nieprawidłowe polecenie: {cmd} {' '.join(args) if args else ''}")
+                raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args}")
 
         except ValueError as e:
-            logging.info("ValueError: %s", e, exc_info=True)
-            print ("Nieprawidłowe polecenie.")
+            logging.error("ValueError: %s", e)
+            print (f"Błąd: {e}")
         except KeyboardInterrupt as e:
             logging.error("Odebrano KeyboardInterrupt: %s", e, exc_info=True)
             print ("Błąd: KeyboardInterrupt")
@@ -269,7 +288,7 @@ def main(): # - sys
         except EOFError as e:
             logging.info("WYJŚCIE Z PROGRAMU - EOFError", exc_info=False)
             readline.write_history_file(histfile)
-            print ("Zamknięto")
+            print('')
             return
         except Exception as e:
             logging.error("Inny błąd: %s", e, exc_info=True)
