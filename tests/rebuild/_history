@@ -32,3 +32,74 @@ test
 s r
 s
 q
+s
+q
+s r
+s all
+s i001 i003
+c
+s i001 i003
+q
+sr
+s r
+s 1
+s
+s i003
+s
+s i003
+s
+s i003
+s
+s jk
+ji
+jkk
+s hjok
+del hikn
+add 
+del
+add bla 
+s
+del l
+s
+s r
+hjknn
+hjknn hj
+hjknn hj j
+c
+q
+fhj
+c
+q
+s
+q
+s r
+s
+del l
+s
+c
+dgj
+q
+dgj
+q
+dgj
+s
+q
+cmds
+test
+test 4 5 7
+q
+s r
+s
+q
+s
+s r
+q
+s
+q
+s
+s r
+q
+a
+l
+jkl
+cmds

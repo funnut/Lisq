@@ -16,6 +16,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
+    include_package_data=True,
     entry_points={
         "console_scripts": [
             "lisq = lisq.lisq:main"
@@ -27,5 +28,4 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.6",
-    include_package_data=True,
 )

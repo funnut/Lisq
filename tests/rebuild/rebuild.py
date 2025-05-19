@@ -17,6 +17,7 @@ if histfile.exists():
     readline.read_history_file(histfile)
 readline.set_history_length(1000)
 
+
 def type(text, delay=0.05):
     import time
     import sys
