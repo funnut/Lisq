@@ -138,7 +138,7 @@ def sprawdz_input(usr_input):
 def read_file(a):
     """Odczytuje plik i wyświetla notatki."""
     terminal_width = shutil.get_terminal_size().columns
-    print(f"{theme['notes-top']} _id _data{'=' * (terminal_width - 12)}{reset}")
+    print(f"{theme['notes-top']} _id _data {'=' * (terminal_width - 12)}{reset}")
     try:
         with open(utils.NOTES_PATH(), 'r', encoding='utf-8') as plik:
             linie = [linia for linia in plik.readlines() if linia.strip()]
@@ -158,7 +158,7 @@ def read_file(a):
                     return print(f"{theme['text']}\nNie znaleziono pasujących elementów.{reset}")
             for linia in do_wyswietlenia:
                 parts = linia.split()
-                formatted_date = "/".join(parts[1].split("/")[1:])  # Usunięcie roku
+                formatted_date = "-".join(parts[1].split("-")[1:])  # Usunięcie roku
                 print(f"{theme['notes-side']}{parts[0]} {formatted_date}{reset} {theme['notes-text']}{' '.join(parts[2:]).strip()}{reset}")
             print(f"{theme['text']}\nZnaleziono {len(do_wyswietlenia)} pasujących elementów.{reset}")
     except FileNotFoundError:
@@ -179,7 +179,7 @@ def write_file(a):
     except FileNotFoundError:
         id_ = 1
     formatted_id = f"i{str(id_).zfill(3)}"
-    data_ = datetime.now().strftime("%Y/%m/%d")
+    data_ = datetime.now().strftime("%Y-%m-%d")
     with open(utils.NOTES_PATH(), 'a', encoding='utf-8') as file:
         file.write(f"{formatted_id} {data_} :: {a}\n")
     print(f"{theme['text']}Notatka została dodana.{reset}")

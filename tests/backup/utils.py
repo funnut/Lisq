@@ -77,20 +77,34 @@ COLORS = {
 
 }
 
-# lisq, matrix, neon
 THEMES = {
     "lisq": {
-        "intro": COLORS["white"],
-        "nav": COLORS["white"],
+        "intro": COLORS["reset"],
+        "nav": COLORS["reset"],
         "nav-a": COLORS["cyan"],
         "header": COLORS["cyan"],
-        "text": COLORS["white"],
+        "text": COLORS["reset"],
         "important": COLORS["cyan"],
         "password": COLORS["white"],
-        "error": COLORS["yellow"],
-        "notes-text": COLORS["white"],
+        "error": COLORS["high-red"],
+        "notes-text": COLORS["reset"],
         "notes-top": COLORS["cyan"],
         "notes-side": COLORS["cyan"],
+        "cfg-main-topbar": COLORS["bold-white"],
+        "cfg-topbar": COLORS["bold-white"],
+    },
+    "custom": {
+        "intro": COLORS["white"],
+        "nav": COLORS["white"],
+        "nav-a": COLORS["yellow"],
+        "header": COLORS["yellow"],
+        "text": COLORS["white"],
+        "important": COLORS["yellow"],
+        "password": COLORS["white"],
+        "error": COLORS["red"],
+        "notes-text": COLORS["white"],
+        "notes-top": COLORS["yellow"],
+        "notes-side": COLORS["yellow"],
         "cfg-main-topbar": COLORS["bold-white"],
         "cfg-topbar": COLORS["bold-white"],
     },
@@ -153,7 +167,7 @@ def color_block(lines, bg_color="\x1b[0;100m"):
 
 
 # Domyślna ścieżka do config.json
-CONFIG_PATH = Path.home() / ".lisq.json"
+CONFIG_PATH = Path.home() / ".lisq.cfg"
 
 
 # Funkcje konfiguracji
@@ -230,7 +244,7 @@ def KEY_PATH():
     return Path(get_setting("keypath") or Path.home() / ".keylisq")
 
 def NOTES_PATH():
-    return Path(get_setting("notespath") or os.getenv("NOTES_PATH", os.path.expanduser("~/notes.txt")))
+    return Path(get_setting("notespath") or os.getenv("LISQ_NOTES_PATH", os.path.expanduser("~/notes.txt")))
 
 def EDITOR():
     return get_setting("editor") or os.getenv("NOTES_EDITOR", "nano")

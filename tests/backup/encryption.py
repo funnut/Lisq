@@ -6,7 +6,6 @@ from pathlib import Path
 theme = utils.get_theme()
 reset = utils.COLORS['reset']
 
-
 def generate_key(save_to_file=True):
     password = getpass.getpass(theme['password'] + "hasło: " + reset).encode("utf-8")
     key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
@@ -14,7 +13,6 @@ def generate_key(save_to_file=True):
         with open(utils.KEY_PATH(), "wb") as f:
             f.write(key)
     return Fernet(key)
-
 
 def encrypt(NOTES_PATH, fernet=None):
     try:
@@ -43,7 +41,6 @@ def encrypt(NOTES_PATH, fernet=None):
     except Exception as e:
         raise RuntimeError(f"{theme['error']}Błąd podczas szyfrowania. {e}{reset}")
 
-
 def decrypt(NOTES_PATH, fernet=None):
     try:
         if fernet:
@@ -71,8 +68,6 @@ def decrypt(NOTES_PATH, fernet=None):
     except Exception as e:
         raise RuntimeError(f"{theme['error']}Nie udało się odszyfrować pliku: {e}{reset}")
         return None
-
-
 
 def process_file(cmd, arg=None):
     # Określenie ścieżki
