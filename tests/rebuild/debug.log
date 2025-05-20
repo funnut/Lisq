@@ -278,3 +278,22 @@
 2025-05-19 02:46:15,759 - INFO - START GŁÓWNEJ PĘTLI
 2025-05-19 02:46:24,576 - INFO - START GŁÓWNEJ PĘTLI
 2025-05-19 02:47:16,941 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-19 19:12:54,742 - INFO - START FUNKCJI main()
+2025-05-19 19:12:54,743 - INFO - Start if sys.argv(['rebuild.py', '--test', 'bla', 'bla'])
+2025-05-20 06:23:41,499 - INFO - START FUNKCJI main()
+2025-05-20 06:23:41,499 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 06:23:49,257 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 06:23:55,434 - INFO - Start read_file([])
+2025-05-20 06:23:55,450 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 06:24:28,248 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-20 06:25:56,674 - INFO - START FUNKCJI main()
+2025-05-20 06:25:56,674 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 06:26:03,246 - INFO - Start write_file(None)
+2025-05-20 06:26:04,810 - ERROR - Exception w write_file(None)
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/kod/5challenge/3_lisq/tests/rebuild/rebuild.py", line 192, in write_file
+    args = input(" : ").strip().split()
+           ^^^^^^^^^^^^
+EOFError
+2025-05-20 06:26:04,824 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 06:26:07,920 - INFO - WYJŚCIE Z PROGRAMU - EOFError

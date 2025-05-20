@@ -236,11 +236,10 @@ commands = {
     "edit": lambda args: os.system(f"nano {NOTES_PATH()}"),
     "c": clear,
     "reiterate": reiterate,
-    "BLANK": "BLANK",
-    "echo": lambda args: echo(" ".join(args)),
-    "type": lambda args: type(" ".join(args)),
-    "spinner": spinner,
-    "test": _test,
+    "--echo": lambda args: echo(" ".join(args)),
+    "--type": lambda args: type(" ".join(args)),
+    "--spinner": spinner,
+    "--test": _test,
 }
 
 def main(): # - sys
