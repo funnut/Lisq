@@ -71,8 +71,6 @@ COLORS = {
 
 }
 
-
-
 THEMES = {
     "lisq": {
         "intro": COLORS["white"],

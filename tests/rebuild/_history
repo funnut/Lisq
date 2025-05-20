@@ -104,3 +104,21 @@ l
 jkl
 cmds
 s
+test
+--test 123 raz dwa
+--test 123 raz dwa "cztery pięć"
+--test 123 raz dwa 'cztery pięć'
+--test 123 raz dwa "cztery pięć"
+q
+l
+s
+dodać czytanie NOTES_PATH
+s
+q
+s
+q
+cmds
+--test 123
+add
+edit
+q

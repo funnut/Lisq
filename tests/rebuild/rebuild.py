@@ -15,8 +15,7 @@ script_dir = Path(__file__).parent.resolve()
 histfile = script_dir / "_history"
 if histfile.exists():
     readline.read_history_file(histfile)
-readline.set_history_length(1000)
-
+readline.set_history_length(10000)
 
 def type(text, delay=0.05):
     import time
@@ -31,9 +30,7 @@ def spinner(args=None):
     import itertools
     import sys
     import time
-
     spinner = itertools.cycle(['-', '/', '|', '\\'])
-
     for _ in range(20):
         sys.stdout.write('\rŁadowanie '+next(spinner))
         sys.stdout.flush()
@@ -43,10 +40,16 @@ def NOTES_PATH(): # - pathlib, os
     path = Path("~/_lisq/tests/rebuild/").expanduser() / "notes.txt"
     if path:
         return path
-    env_path = os.getenv("NOTES_PATH")
+    env_path = os.getenv("LISQ_NOTES_PATH")
     if env_path:
         return Path(os.path.expandvars(env_path)).expanduser()
-    return Path.home() / "notes.txt"
+    return Path.home() / "notesq.txt"
+
+def EDITOR(args): # - shutil
+    import shutil
+    editor = args[0]
+    if shutil.which(editor):
+        print("edytor dostępny")
 
 def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
@@ -77,7 +80,7 @@ def reiterate(args=None):
         print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
-        print (f"Wystąpił inny błąd: ",e)
+        print (f"Wystąpił inny błąd: {e}")
 
 def delete(args):
     """Usuwanie notatek."""
@@ -101,6 +104,7 @@ def delete(args):
                 print ("Usunięto.")
             else:
                 print ("Anulowano.")
+
         elif args[0] in ["last","l"]: # last
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
@@ -109,6 +113,7 @@ def delete(args):
                 print ("Usunięto.")
             else:
                 print ("Anulowano.")
+
         else:
             new_lines = [line for line in lines if not any(el in line for el in args)]
             found = [arg for arg in args if any(arg in line for line in lines)]
@@ -239,13 +244,13 @@ commands = {
     "--echo": lambda args: echo(" ".join(args)),
     "--type": lambda args: type(" ".join(args)),
     "--spinner": spinner,
-    "--test": _test,
+    "--test": EDITOR,
 }
 
-def main(): # - sys
+def main(): # - sys, random
     logging.info("START FUNKCJI main()")
     if len(sys.argv) > 1:
-        """Obsługa CLI"""
+        """CLI Usage"""
         logging.info(f"Start if sys.argv({sys.argv})")
         cmd = sys.argv[1].lower()
         args = sys.argv[2:]
@@ -257,6 +262,14 @@ def main(): # - sys
             print("Błąd: Nieprawidłowe polecenie.")
         return
 
+    from random import randrange
+    print(fr"""
+ _ _
+| (_)___  __ _
+| | / __|/ _` |
+| | \__ \ (_| |
+|_|_|___/\__, |
+ cmds - help|_|{randrange(0,1000)}""")
     while True:
         logging.info("START GŁÓWNEJ PĘTLI")
         try:

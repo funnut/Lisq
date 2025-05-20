@@ -297,3 +297,103 @@ Traceback (most recent call last):
 EOFError
 2025-05-20 06:26:04,824 - INFO - START GŁÓWNEJ PĘTLI
 2025-05-20 06:26:07,920 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-20 11:17:50,082 - INFO - START FUNKCJI main()
+2025-05-20 11:17:50,082 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:17:59,200 - INFO - Start read_file([])
+2025-05-20 11:17:59,210 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:18:43,856 - ERROR - ValueError: Nieprawidłowe polecenie: test []
+2025-05-20 11:18:43,857 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:19:04,418 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:19:34,986 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:20:14,843 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:20:22,423 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:20:28,807 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-20 11:23:59,556 - INFO - START FUNKCJI main()
+2025-05-20 11:23:59,557 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:24:12,880 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 11:24:29,892 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 12:35:59,255 - INFO - START FUNKCJI main()
+2025-05-20 12:35:59,257 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 12:36:02,937 - ERROR - ValueError: Nieprawidłowe polecenie: l []
+2025-05-20 12:36:02,938 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 12:36:15,761 - INFO - Start read_file([])
+2025-05-20 12:36:15,769 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 12:36:55,566 - INFO - Start write_file(None)
+2025-05-20 12:37:20,727 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 12:37:25,074 - INFO - Start read_file([])
+2025-05-20 12:37:25,076 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 12:38:32,808 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 13:46:40,519 - INFO - START FUNKCJI main()
+2025-05-20 13:46:40,523 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:46:53,552 - INFO - Start read_file([])
+2025-05-20 13:46:53,555 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:47:10,234 - INFO - Start write_file(None)
+2025-05-20 13:47:15,865 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:47:22,877 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-20 13:47:26,021 - INFO - START FUNKCJI main()
+2025-05-20 13:47:26,024 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:48:26,413 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 13:51:32,939 - INFO - START FUNKCJI main()
+2025-05-20 13:51:32,942 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:51:48,818 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 13:52:59,842 - INFO - START FUNKCJI main()
+2025-05-20 13:52:59,846 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:53:23,230 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 13:54:46,870 - INFO - START FUNKCJI main()
+2025-05-20 13:54:46,874 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:55:06,430 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:57:44,193 - INFO - Start write_file(None)
+2025-05-20 13:57:45,327 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 13:57:56,569 - INFO - WYJŚCIE Z PROGRAMU - EOFError
+2025-05-20 13:58:03,296 - INFO - START FUNKCJI main()
+2025-05-20 13:58:03,296 - INFO - Start if sys.argv(['rebuild.py', 'cmds'])
+2025-05-20 13:58:49,494 - INFO - START FUNKCJI main()
+2025-05-20 13:58:49,494 - INFO - Start if sys.argv(['rebuild.py', '--spiner'])
+2025-05-20 13:58:49,495 - ERROR - Nieprawidłowe polecenie: sys.argv=['rebuild.py', '--spiner']
+2025-05-20 13:58:56,390 - INFO - START FUNKCJI main()
+2025-05-20 13:58:56,391 - INFO - Start if sys.argv(['rebuild.py', '--spinner'])
+2025-05-20 13:59:27,781 - INFO - START FUNKCJI main()
+2025-05-20 13:59:27,782 - INFO - Start if sys.argv(['rebuild.py', 'cmds'])
+2025-05-20 13:59:32,349 - INFO - START FUNKCJI main()
+2025-05-20 13:59:32,349 - INFO - Start if sys.argv(['rebuild.py', 'cmds'])
+2025-05-20 13:59:54,462 - INFO - START FUNKCJI main()
+2025-05-20 13:59:54,462 - INFO - Start if sys.argv(['rebuild.py', '--echo', '123'])
+2025-05-20 14:00:38,475 - INFO - START FUNKCJI main()
+2025-05-20 14:00:38,475 - INFO - Start if sys.argv(['rebuild.py', '--type', 'cmds,', 'add,', 'show,', 's,', 'delete,', 'del,', 'edit,', 'c,', 'reiterate,', '--echo,', '--type,', '--spinner,', '--test'])
+2025-05-20 14:01:10,542 - INFO - START FUNKCJI main()
+2025-05-20 14:01:10,542 - INFO - Start if sys.argv(['rebuild.py', '--type'])
+2025-05-20 14:34:44,926 - INFO - START FUNKCJI main()
+2025-05-20 14:34:44,932 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 14:34:50,629 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 14:36:22,137 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 14:37:35,172 - INFO - Start write_file([])
+2025-05-20 14:37:36,154 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 14:37:51,340 - INFO - START GŁÓWNEJ PĘTLI
+2025-05-20 14:37:54,398 - INFO - WYJŚCIE Z PROGRAMU ( quit, q )
+2025-05-20 14:50:59,493 - INFO - START FUNKCJI main()
+2025-05-20 14:50:59,493 - INFO - Start if sys.argv(['rebuild.py', 'test'])
+2025-05-20 14:50:59,493 - ERROR - Nieprawidłowe polecenie: sys.argv=['rebuild.py', 'test']
+2025-05-20 14:51:10,316 - INFO - START FUNKCJI main()
+2025-05-20 14:51:10,316 - INFO - Start if sys.argv(['rebuild.py', '--test'])
+2025-05-20 14:51:46,662 - INFO - START FUNKCJI main()
+2025-05-20 14:51:46,662 - INFO - Start if sys.argv(['rebuild.py', '--test'])
+2025-05-20 14:52:35,728 - INFO - START FUNKCJI main()
+2025-05-20 14:52:35,729 - INFO - Start if sys.argv(['rebuild.py', '--test'])
+2025-05-20 14:59:17,917 - INFO - START FUNKCJI main()
+2025-05-20 14:59:17,917 - INFO - Start if sys.argv(['rebuild.py', '--test'])
+2025-05-20 14:59:26,590 - INFO - START FUNKCJI main()
+2025-05-20 14:59:26,590 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
+2025-05-20 15:00:35,002 - INFO - START FUNKCJI main()
+2025-05-20 15:00:35,002 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
+2025-05-20 15:00:40,153 - INFO - START FUNKCJI main()
+2025-05-20 15:00:40,153 - INFO - Start if sys.argv(['rebuild.py', '--test', 'n'])
+2025-05-20 15:00:45,820 - INFO - START FUNKCJI main()
+2025-05-20 15:00:45,820 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
+2025-05-20 15:01:48,016 - INFO - START FUNKCJI main()
+2025-05-20 15:01:48,016 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
+2025-05-20 15:01:51,358 - INFO - START FUNKCJI main()
+2025-05-20 15:01:51,359 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nan'])
+2025-05-20 15:01:53,892 - INFO - START FUNKCJI main()
+2025-05-20 15:01:53,892 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
+2025-05-20 15:48:47,272 - INFO - START FUNKCJI main()
+2025-05-20 15:48:47,272 - INFO - Start if sys.argv(['rebuild.py', '--test', 'nano'])
