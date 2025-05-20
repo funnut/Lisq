@@ -1,4 +1,0 @@
-i001 2025-05-17 :: dodać help, szyfrowanie, obsługę z CLI
-i002 2025-05-17 :: Only in it for the whirlwind
-i003 2025-05-18 :: nauczyć się przeszukiwania list
-i004 2025-05-20 :: dodać czytanie NOTES_PATH
