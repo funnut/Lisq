@@ -1,3 +1,5 @@
+# v000 Ogólna struktura programu
+
 import logging
 
 logging.basicConfig(
