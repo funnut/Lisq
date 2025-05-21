@@ -17,7 +17,7 @@ if histfile.exists():
     readline.read_history_file(histfile)
 readline.set_history_length(10000)
 
-def type(text, delay=0.05):
+def type_write(text, delay=0.05):
     import time
     import sys
     for char in text:
@@ -37,19 +37,45 @@ def spinner(args=None):
         time.sleep(0.2)
 
 def NOTES_PATH(): # - pathlib, os
-    path = Path("~/_lisq/tests/rebuild/").expanduser() / "notes.txt"
-    if path:
-        return path
-    env_path = os.getenv("LISQ_NOTES_PATH")
-    if env_path:
-        return Path(os.path.expandvars(env_path)).expanduser()
-    return Path.home() / "notesq.txt"
+    raw_path = GET_ENV_SETTING("--notes_path")
+    if raw_path:
+        return Path(raw_path).expanduser()
+    else:
+        return Path.home() / "yournotes.txt"
 
-def EDITOR(args): # - shutil
+
+def GET_ENV_SETTING(key=None): # - shutil, os
+    import os
     import shutil
-    editor = args[0]
-    if shutil.which(editor):
-        print("edytor dostępny")
+    settings_env = os.getenv("LISQ_SETTINGS")
+    if not settings_env:
+        print("Błąd: Zmienna środowiskowa 'LISQ_SETTINGS' nie istnieje.")
+        return None
+
+    settings = settings_env.split("--")
+    setting = [s for s in settings if key in s]
+
+    if not setting:
+        print(f"Błąd: Ustawienie '{key}' nie zostało znalezione w 'LISQ_SETTINGS'.")
+        return None
+
+    try:
+        value = setting[0].split("=")[1].strip().strip("'").strip('"')
+    except IndexError:
+        print(f"Błąd: Nieprawidłowy format ustawienia: {setting[0]}")
+        return None
+
+    if key == "editor":
+        if shutil.which(value):
+            return value
+        else:
+            print(f"Błąd: '{value}' nie istnieje w $PATH. Nie zapisano.")
+            return None
+    elif key == "notes_path":
+        return value
+    else:
+        print(f"Błąd: Nieznane ustawienie: {key}")
+        return None
 
 def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
@@ -230,6 +256,9 @@ def echo(text):
 def _test(args):
     print("args:",args)
 
+    setting = GET_ENV_SETTING(args[0])
+    print(setting)
+
 # dispatch table
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
@@ -238,13 +267,13 @@ commands = {
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: os.system(f"nano {NOTES_PATH()}"),
+    "edit": lambda args: os.system(f"{GET_ENV_SETTING("--editor")} {NOTES_PATH()}"),
     "c": clear,
     "reiterate": reiterate,
-    "--echo": lambda args: echo(" ".join(args)),
-    "--type": lambda args: type(" ".join(args)),
-    "--spinner": spinner,
-    "--test": EDITOR,
+    "echo": lambda args: echo(" ".join(args)),
+    "type": lambda args: type_write(" ".join(args)),
+    "spinner": spinner,
+    "test": _test,
 }
 
 def main(): # - sys, random
