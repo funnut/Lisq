@@ -11,10 +11,10 @@ logging.basicConfig(
 
 def _test(args):
     logging.info("Start _test(args)")
-    print ("Hello sir!")
-    print (args)
-    print (bool(args))
-    print (type(args))
+    print("Hello sir!")
+    print(args)
+    print(bool(args))
+    print(type(args))
 
 
 # dispatch table
@@ -61,3 +61,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -37,7 +37,7 @@ def spinner(args=None):
         time.sleep(0.2)
 
 def NOTES_PATH(): # - pathlib, os
-    raw_path = GET_ENV_SETTING("--notes_path")
+    raw_path = GET_ENV_SETTING("notes_path")
     if raw_path:
         return Path(raw_path).expanduser()
     else:
