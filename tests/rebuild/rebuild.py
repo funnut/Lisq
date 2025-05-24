@@ -12,7 +12,7 @@ logging.basicConfig(
 
 # Historia poleceń - readline, pathlib
 script_dir = Path(__file__).parent.resolve()
-histfile = script_dir / "_history"
+histfile = script_dir / "history.log"
 if histfile.exists():
     readline.read_history_file(histfile)
 readline.set_history_length(10000)
@@ -32,48 +32,57 @@ def spinner(args=None):
     import time
     spinner = itertools.cycle(['-', '/', '|', '\\'])
     for _ in range(20):
-        sys.stdout.write('\rŁadowanie '+next(spinner))
+        sys.stdout.write('\r'+next(spinner))
         sys.stdout.flush()
         time.sleep(0.2)
 
-def NOTES_PATH(): # - pathlib, os
-    raw_path = GET_ENV_SETTING("notes_path")
-    if raw_path:
-        return Path(raw_path).expanduser()
-    else:
-        return Path.home() / "yournotes.txt"
-
+def GET_SETTING(key): # - pathlib, os
+    if key == "notes_path":
+        raw_path = GET_ENV_SETTING(key)
+        if raw_path:
+            return Path(raw_path).expanduser()
+        else:
+            return Path.home() / "yournotes.txt"
 
 def GET_ENV_SETTING(key=None): # - shutil, os
+    """Pobiera info ze zmiennej środowiskowej."""
+    logging.info("Start GET_ENV_SETTING(%s)",key)
     import os
     import shutil
     settings_env = os.getenv("LISQ_SETTINGS")
     if not settings_env:
+        logging.error("Zmienna środowiskowa nie została znaleziona")
         print("Błąd: Zmienna środowiskowa 'LISQ_SETTINGS' nie istnieje.")
         return None
 
     settings = settings_env.split("--")
     setting = [s for s in settings if key in s]
-
+    
     if not setting:
+        logging.error("Ustawienie '%s' nie zostało znalezione",key)
         print(f"Błąd: Ustawienie '{key}' nie zostało znalezione w 'LISQ_SETTINGS'.")
         return None
 
     try:
         value = setting[0].split("=")[1].strip().strip("'").strip('"')
     except IndexError:
+        logging.error("IndexError: nieprawidłowy format: %s",setting[0])
         print(f"Błąd: Nieprawidłowy format ustawienia: {setting[0]}")
         return None
 
+    logging.debug("Zmienna value=%s",value,exc_info=True)
+    
     if key == "editor":
         if shutil.which(value):
             return value
         else:
+            logging.error("Edytor '%s' nie widnieje w $PATH.",value)
             print(f"Błąd: '{value}' nie istnieje w $PATH. Nie zapisano.")
             return None
     elif key == "notes_path":
         return value
     else:
+        logging.error("Nieznane ustawienie: %s",key)
         print(f"Błąd: Nieznane ustawienie: {key}")
         return None
 
@@ -81,10 +90,18 @@ def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
 
+def help_page(args=None):
+    print("""# About
+    From Polish "lisek / foxie" – lisq is a single file note-taking app that work with .txt files.
+    Code available under a non-commercial license (see LICENSE file).
+    Copyright © funnut https://github.com/funnut
+# Commands""")
+
 def reiterate(args=None):
+    """Reiteruje ID notatek"""
     logging.info("Start reiterate()")
     try:
-        with open(NOTES_PATH(), "r", encoding="utf-8") as f:
+        with open(GET_SETTING("notes_path"), "r", encoding="utf-8") as f:
             lines = f.readlines()
             id_ = 0
             new_lines = []
@@ -96,14 +113,14 @@ def reiterate(args=None):
                 new_id = f"i{str(id_).zfill(3)}"
                 new_line = f"{new_id} {' '.join(parts[1:])}\n"
                 new_lines.append(new_line)
-            with open(NOTES_PATH(),"w",encoding="utf-8") as f:
+            with open(GET_SETTING("notes_path"),"w",encoding="utf-8") as f:
                 f.writelines(new_lines)
             if not args:
                 print (f"Zaktualizowano identyfikatory dla {id_} linii.")
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
     except FileNotFoundError as e:
         logging.error(f"FileNotFoundError w reiterate()\n%s",e)
-        print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
+        print (f"{GET_SETTING("notes_path")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: {e}")
@@ -121,12 +138,12 @@ def delete(args):
             else:
                 args = [raw]
 
-        with open(NOTES_PATH(),"r",encoding="utf-8") as f:
+        with open(GET_SETTING("notes_path"),"r",encoding="utf-8") as f:
             lines = f.readlines()
         if args[0] == "all": # all
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y",""]:
-                open(NOTES_PATH(),"w",encoding="utf-8").close()
+                open(GET_SETTING("notes_path"),"w",encoding="utf-8").close()
                 print ("Usunięto.")
             else:
                 print ("Anulowano.")
@@ -134,12 +151,11 @@ def delete(args):
         elif args[0] in ["last","l"]: # last
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
-                with open(NOTES_PATH(),"w",encoding="utf-8") as f:
+                with open(GET_SETTING("notes_path"),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
                 print ("Usunięto.")
             else:
                 print ("Anulowano.")
-
         else:
             new_lines = [line for line in lines if not any(el in line for el in args)]
             found = [arg for arg in args if any(arg in line for line in lines)]
@@ -149,7 +165,7 @@ def delete(args):
             if number > 0:
                 yesno = input(f"Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
                 if yesno in ["yes","y",""]:
-                    with open(NOTES_PATH(),"w",encoding="utf-8") as f:
+                    with open(GET_SETTING("notes_path"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
                     reiterate(True)
                     print ("Usunięto.")
@@ -160,7 +176,7 @@ def delete(args):
 
     except FileNotFoundError as e:
         logging.error("FileNotFoundError w delete()\n%s",e)
-        print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
+        print (f"{GET_SETTING("notes_path")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w delete({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: ",e)
@@ -170,11 +186,11 @@ def read_file(args):
     logging.info(f"Start read_file({args})")
     from random import choice
     terminal_width = os.get_terminal_size().columns
-    print (f" _id _date {'_' * (terminal_width - 12)}")
+    print (f" .id .date {'.' * (terminal_width - 12)}")
     try:
         args = args if args else "recent"
         found_notes = None
-        with open(NOTES_PATH(),"r",encoding="utf-8") as f:
+        with open(GET_SETTING("notes_path"),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
         if args == "recent":
             to_show = lines[-10:]
@@ -209,7 +225,7 @@ def read_file(args):
 
     except FileNotFoundError as e:
         logging.error("FileNotFoundError w read_file()\n%s",e)
-        print (f"{NOTES_PATH()}\n\nBłąd: Nie znaleziono notatnika")
+        print (f"{GET_SETTING("notes_path")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w read_file({args})\n%s",e,exc_info=True)
         print (f"Wystąpił inny błąd: {e}")
@@ -228,7 +244,7 @@ def write_file(args): # - datetime
         for element in args:
             args = [" ".join(element.split("\n"))]
         try:
-            with open(NOTES_PATH(),"r",encoding="utf-8") as f:
+            with open(GET_SETTING("notes_path"),"r",encoding="utf-8") as f:
                 lines = f.readlines()
             if lines:
                 last_line = lines[-1]
@@ -243,7 +259,7 @@ def write_file(args): # - datetime
 
         id_ = f"i{str(id_number).zfill(3)}"
         date_ = date.today().strftime("%Y-%m-%d")
-        with open(NOTES_PATH(),"a",encoding="utf-8") as f:
+        with open(GET_SETTING("notes_path"),"a",encoding="utf-8") as f:
             f.write(f"{id_} {date_} :: {' '.join(args)}\n")
         print ("Notatka dodana.")
     except Exception as e:
@@ -267,9 +283,10 @@ commands = {
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: os.system(f"{GET_ENV_SETTING("--editor")} {NOTES_PATH()}"),
+    "edit": lambda args: os.system(f"{GET_ENV_SETTING("editor")} {GET_SETTING("notes_path")}"), # env
     "c": clear,
     "reiterate": reiterate,
+    "help": help_page,
     "echo": lambda args: echo(" ".join(args)),
     "type": lambda args: type_write(" ".join(args)),
     "spinner": spinner,
@@ -299,6 +316,7 @@ def main(): # - sys, random
 | | \__ \ (_| |
 |_|_|___/\__, |
  cmds - help|_|{randrange(0,1000)}""")
+
     while True:
         logging.info("START GŁÓWNEJ PĘTLI")
         try:
@@ -339,3 +357,4 @@ def main(): # - sys, random
 
 if __name__ == "__main__":
     main()
+
