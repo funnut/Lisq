@@ -2,7 +2,6 @@
 # dodawanie, usuwanie i przeszukiwanie notatek
 # brak szyfrowania i koloru
 
-
 import logging
 import readline
 import os, sys

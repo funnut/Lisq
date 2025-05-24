@@ -182,11 +182,13 @@ def delete(args):
         print (f"Wystąpił inny błąd: ",e)
 
 def read_file(args):
+    import time
     """Odczyt pliku notatek""" # - random, os
     logging.info(f"Start read_file({args})")
     from random import choice
     terminal_width = os.get_terminal_size().columns
     print (f" .id .date {'.' * (terminal_width - 12)}")
+    time.sleep(0.2)
     try:
         args = args if args else "recent"
         found_notes = None
@@ -358,3 +360,7 @@ def main(): # - sys, random
 if __name__ == "__main__":
     main()
 
+#   _
+# _|_  ._ ._   _|_ 
+#  ||_|| || ||_||_ 
+#       www.github.com/funnut
