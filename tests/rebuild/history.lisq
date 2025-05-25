@@ -1,39 +1,3 @@
-q
-s
-q
-s
-q
-s
-s r
-x
-cmds
-test 12
-q
-s
-q
-s
-q
-s
-cmds
-edit
-q
-add get setting jako jedna funkcja 'podająca' ustawienia?
-s
-q
-s
-q
-s
-add tesin'
-s 1
-c
-s 1
-s
-s r
-s
-c
-s
-q
-s
 helo
 cmds
 spinner
@@ -97,4 +61,40 @@ q
 s
 q
 encryption
+q
+cmds
+h
+help
+q
+cmds
+encryption
+encrypt
+decrypt
+q
+encrypt debug.log
+q
+cmds
+encrypt debug.log
+cmds
+decrypt debug.log
+decrypt colors.py
+encrypt colors.py
+decrypt colors.py
+encrypt co
+decrypt colors.py
+encrypt notespath
+s
+decrypt notespath
+s
+encrypt notespath
+s
+q
+cmds
+--help
+edit
+c
+--help
+q
+c
+h
 q

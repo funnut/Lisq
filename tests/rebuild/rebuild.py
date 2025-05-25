@@ -1,6 +1,6 @@
 import logging
 import readline
-import os, sys
+import os, sys, shutil, json
 from pathlib import Path
 
 # Konfiguracja log - logging
@@ -17,24 +17,6 @@ if histfile.exists():
     readline.read_history_file(histfile)
 readline.set_history_length(100)
 
-def type_write(text, delay=0.05):
-    import time
-    import sys
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()
-
-def spinner(args=None):
-    import itertools
-    import sys
-    import time
-    spinner = itertools.cycle(['-', '/', '|', '\\'])
-    for _ in range(20):
-        sys.stdout.write('\r'+next(spinner))
-        sys.stdout.flush()
-        time.sleep(0.2)
 
 def generate_key(save_to_file=False, confirm_pass=False):
     import getpass
@@ -63,6 +45,7 @@ def generate_key(save_to_file=False, confirm_pass=False):
             return None
 
     return Fernet(key)
+
 
 def encrypt(filepath, fernet=None):
     from cryptography.fernet import Fernet
@@ -144,13 +127,14 @@ def decrypt(filepath, fernet=None):
     except Exception as e:
         raise Exception(f"Błąd podczas odszyfrowania: {e!r} {e}")
 
+
 def GET_SETTING(key): # - pathlib, os
     if key == "notespath":
         raw_path = GET_ENV_SETTING(key)
         if raw_path:
             return Path(raw_path).expanduser()
         else:
-            return Path.home() / "yournotes.txt"
+            return Path.home() / "notesfile.txt"
     elif key == "keypath":
         raw_path = GET_ENV_SETTING(key)
         if raw_path:
@@ -162,77 +146,112 @@ def GET_SETTING(key): # - pathlib, os
     elif key == "encryption": # czy uzywać tego?
         value = GET_ENV_SETTING(key)
         return value
+    elif key == "all":
+        settings = {
+        "notespath": GET_SETTING("notespath"),
+        "keypath": GET_SETTING("keypath"),
+        "encryption": GET_SETTING("encryption")}
+        return settings
 
 
-def GET_ENV_SETTING(key=None): # - shutil, os
+def GET_ENV_SETTING(key=None):
     """Pobiera info ze zmiennej środowiskowej."""
-    logging.info("Start GET_ENV_SETTING(%s)",key)
-    import os
-    import shutil
+    logging.info("Start GET_ENV_SETTING(%s)", key)
+
     settings_env = os.getenv("LISQ_SETTINGS")
     if not settings_env:
         logging.error("Zmienna środowiskowa nie została znaleziona")
-        print("Błąd: Zmienna środowiskowa 'LISQ_SETTINGS' nie istnieje.")
         return None
 
-    settings = settings_env.split("--")
-    setting = [s for s in settings if key in s]
-    
-    if not setting:
-        logging.info("Ustawienie '%s' nie zostało znalezione",key)
+    settings = [s.strip() for s in settings_env.split("--") if s.strip()]
+
+    if key == "all":
+        return settings
+
+    # Szukaj ustawienia, które zawiera dany klucz
+    matching = [s for s in settings if s.startswith(key + "=")]
+    if not matching:
+        logging.info("Ustawienie '%s' nie zostało znalezione", key)
         return None
+
     try:
-        value = setting[0].split("=")[1].strip().strip("'").strip('"')
+        value = matching[0].split("=", 1)[1].strip().strip("'\"")
     except IndexError:
-        logging.error("IndexError: nieprawidłowy format: %s",setting[0])
-        print(f"Błąd: Nieprawidłowy format ustawienia: {setting[0]}")
+        logging.error("IndexError: nieprawidłowy format: %s", matching[0])
+        print(f"Błąd: Nieprawidłowy format ustawienia: {matching[0]}")
         return None
 
-    logging.debug("Zmienna value=%s",value,exc_info=True)
-    
+    logging.debug("Zmienna value=%s", value, exc_info=True)
+
+    # Obsługa znanych kluczy
     if key == "editor":
         if shutil.which(value):
             return value
         else:
-            logging.error("Edytor '%s' nie widnieje w $PATH.",value)
+            logging.error("Edytor '%s' nie widnieje w $PATH.", value)
             print(f"Błąd: '{value}' nie istnieje w $PATH. Nie zapisano.")
             return None
     elif key == "notespath":
         return value
     elif key == "encryption":
-        return value.lower() if value.lower() in ["set","on"] else None
+        return value.lower() if value.lower() in ["set", "on"] else None
     else:
-        logging.error("Nieznane ustawienie: %s",key)
+        logging.error("Nieznane ustawienie: %s", key)
         print(f"Błąd: Nieznane ustawienie: {key}")
         return None
+
 
 def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
 
+
 def help_page(args=None):
-    print("""# About    
+    print("""# ABOUT
     From Polish "lisek / foxie" – lisq is a single file note-taking app that work with .txt files.
     Code available under a non-commercial license (see LICENSE file).
     Copyright © funnut https://github.com/funnut
 
-# Commands
+# CLI USAGE
+    lisq [command] [arg] [arg-1] ...
+    lisq add \"my new note\"
+
+# COMMANDS
 : quit, q, exit
-: clear, c        - clear screen
+: c         - clear screen
+: cmds      - list of available commands
 :
-: show, s         - show recent notes (default 10)
-: show [int]      - show number of recent notes
-: show [str]      - show notes containing [string]
-: show all        - show all notes
-: show random, r  - show a random note
+: show, s           - show recent notes (default 10)
+: show [int]        - show number of recent notes
+: show [str]        - show notes containing [string]
+: show all          - show all notes
+: show random, r    - show a random note
 :
 : del [str]      - delete notes containing [string]
 : del last, l    - delete the last note
 : del all        - delete all notes
+:
+: encryption on, off or set - password is stored and not requested
+:
+: encrypt ~/file.txt    - encrypting any file
+: decrypt ~/file.txt    - decrypting any file
+:
+: reiterate   - renumber notes' IDs
+: edit        - open the notes file in editor
 
-# CLI Usage
-    lisq [command] [arg0] [arg1] ...
-    lisq add \"my new note\"""")
+# SETTINGS
+    * default path to your notes is ~/notesfile.txt
+    * default editor is `nano`
+
+To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
+
+export LISQ_SETTINGS=\"\\
+  --editor=nano \\
+  --notespath='~/path/notesfile.txt' \\
+  --encryption=off\"
+
+source your startup file (restart terminal)""")
+
 
 def reiterate(args=None):
     """Reiteruje ID notatek"""
@@ -261,6 +280,7 @@ def reiterate(args=None):
     except Exception as e:
         logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
+
 
 def delete(args):
     """Usuwanie notatek."""
@@ -318,6 +338,7 @@ def delete(args):
         logging.error(f"Exception w delete({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: ",e)
 
+
 def read_file(args):
     """Odczyt pliku notatek""" # - random, os
     logging.info(f"Start read_file({args})")
@@ -367,6 +388,7 @@ def read_file(args):
         logging.error(f"Exception w read_file({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
 
+
 def write_file(args): # - datetime
     """Zapisywanie notatek do pliku w ustalonym formacie."""
     from datetime import date
@@ -403,14 +425,24 @@ def write_file(args): # - datetime
         logging.error(f"Exception w write_file({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
 
+
+def type_write(text, delay=0.05):
+    import time
+    import sys
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+
 def echo(text):
     print(text)
+
 
 def _test(args):
     print("args:",args)
 
-    setting = GET_ENV_SETTING(args[0])
-    print(setting)
 
 # dispatch table
 commands = {
@@ -423,21 +455,25 @@ commands = {
     "edit": lambda args: os.system(f"{GET_ENV_SETTING("editor")} {GET_SETTING("notespath")}"), # env
     "c": clear,
     "reiterate": reiterate,
-    "help": help_page,
-    "echo": lambda args: echo(" ".join(args)),
-    "type": lambda args: type_write(" ".join(args)),
-    "spinner": spinner,
-    "test": _test,
+    "encryption": lambda args: print(f"Encryption is set to: {GET_ENV_SETTING("encryption")}"),
     "encrypt": encrypt,
     "decrypt": decrypt,
-    "encryption": lambda args: print(f"Encryption is set to: {GET_ENV_SETTING("encryption")}"),
+    "settings-env": lambda args: print(GET_ENV_SETTING("all")),
+    "settings": lambda args: print(GET_SETTING("all")),
+    "--help": help_page,
+    "-help": help_page,
+    "help": help_page,
+    "h": help_page,
+    "echo": lambda args: echo(" ".join(args)),
+    "type": lambda args: type_write(" ".join(args)),
+    "test": _test,
 }
 
 def main(): # - sys, random
     logging.info("START FUNKCJI main()")
     if len(sys.argv) > 1:
         """CLI Usage"""
-        logging.info(f"Start if sys.argv({sys.argv})")
+        logging.info(f"Start if CLI({sys.argv})")
         cmd = sys.argv[1].lower()
         args = sys.argv[2:]
 
