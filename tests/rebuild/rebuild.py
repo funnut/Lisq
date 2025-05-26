@@ -35,7 +35,7 @@ def generate_key(save_to_file=False, confirm_pass=False):
     key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 
     if save_to_file:
-        key_path = GET_SETTING("keypath")
+        key_path = get_setting("keypath")
         try:
             with open(key_path, "wb") as f:
                 f.write(key)
@@ -53,7 +53,7 @@ def encrypt(filepath, fernet=None):
     if not filepath:
         return
     if filepath[0] == "notespath":
-        filepath = GET_SETTING("notespath")
+        filepath = get_setting("notespath")
         fernet = generate_key(confirm_pass=True)
         if not fernet:
             return
@@ -63,7 +63,7 @@ def encrypt(filepath, fernet=None):
         if not fernet:
             return
 
-    keypath = GET_SETTING("keypath")
+    keypath = get_setting("keypath")
     try:
         if fernet:
             pass
@@ -94,13 +94,13 @@ def decrypt(filepath, fernet=None):
     if not filepath:
         return
     if filepath[0] == "notespath":
-        filepath = GET_SETTING("notespath")
+        filepath = get_setting("notespath")
         fernet = generate_key() # nie tworzy nowego key.lisq
     else:
         filepath = Path(filepath[0]).expanduser()
         fernet = generate_key()
 
-    keypath = GET_SETTING("keypath")
+    keypath = get_setting("keypath")
     try:
         if fernet:
             pass
@@ -128,83 +128,66 @@ def decrypt(filepath, fernet=None):
         raise Exception(f"Błąd podczas odszyfrowania: {e!r} {e}")
 
 
-def GET_SETTING(key): # - pathlib, os
-    if key == "notespath":
-        raw_path = GET_ENV_SETTING(key)
-        if raw_path:
-            return Path(raw_path).expanduser()
-        else:
-            return Path.home() / "notesfile.txt"
-    elif key == "keypath":
-        raw_path = GET_ENV_SETTING(key)
-        if raw_path:
-            return Path(raw_path).expanduser()
-        else:
-            script_dir = Path(__file__).parent.resolve()
-            keyfile = script_dir / "key.lisq"
-            return keyfile
-    elif key == "encryption": # czy uzywać tego?
-        value = GET_ENV_SETTING(key)
-        return value
-    elif key == "all":
-        settings = {
-        "notespath": GET_SETTING("notespath"),
-        "keypath": GET_SETTING("keypath"),
-        "encryption": GET_SETTING("encryption")}
-        return settings
-
-
-def GET_ENV_SETTING(key=None):
-    """Pobiera info ze zmiennej środowiskowej."""
-    logging.info("Start GET_ENV_SETTING(%s)", key)
-
-    settings_env = os.getenv("LISQ_SETTINGS")
-    if not settings_env:
-        logging.error("Zmienna środowiskowa nie została znaleziona")
-        return None
-
-    settings = [s.strip() for s in settings_env.split("--") if s.strip()]
+def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
+    raw = os.getenv(env_var, "{}")
+    try:
+        settings = json.loads(raw)
+    except json.JSONDecodeError:
+        return None if key != "all" else {}
 
     if key == "all":
         return settings
+    return settings.get(key)
 
-    # Szukaj ustawienia, które zawiera dany klucz
-    matching = [s for s in settings if s.startswith(key + "=")]
-    if not matching:
-        logging.info("Ustawienie '%s' nie zostało znalezione", key)
-        return None
 
-    try:
-        value = matching[0].split("=", 1)[1].strip().strip("'\"")
-    except IndexError:
-        logging.error("IndexError: nieprawidłowy format: %s", matching[0])
-        print(f"Błąd: Nieprawidłowy format ustawienia: {matching[0]}")
-        return None
-
-    logging.debug("Zmienna value=%s", value, exc_info=True)
-
-    # Obsługa znanych kluczy
-    if key == "editor":
-        if shutil.which(value):
-            return value
+def get_setting(key): # - pathlib, os
+    logging.info("Start get_setting(%s)",key)
+    if key == "notespath":
+        raw_path = get_env_setting(key)
+        if not raw_path:
+            return Path.home() / "notesfile.txt"
+        path = Path(raw_path).expanduser().with_suffix(".txt")
+        if path.parent.is_dir():
+            return path
         else:
-            logging.error("Edytor '%s' nie widnieje w $PATH.", value)
-            print(f"Błąd: '{value}' nie istnieje w $PATH. Nie zapisano.")
-            return None
-    elif key == "notespath":
-        return value
+            raise ValueError(f"Katalog {path} nie istnieje. Nie zapisano.")
+    elif key == "keypath":
+        raw_path = get_env_setting(key)
+        if not raw_path:
+            script_dir = Path(__file__).parent.resolve()
+            default_p = script_dir / "key.lisq"
+            return default_p
+        path = Path(raw_path).expanduser().with_suffix(".lisq")
+        if path.parent.is_dir():
+            return path
+        else:
+            raise ValueError(f"Katalog {path} nie istnieje. Nie zapisano.")
     elif key == "encryption":
-        return value.lower() if value.lower() in ["set", "on"] else None
-    else:
-        logging.error("Nieznane ustawienie: %s", key)
-        print(f"Błąd: Nieznane ustawienie: {key}")
-        return None
-
+        value = get_env_setting(key)
+        return value.lower() if value.lower() in ["on", "set"] else None
+    elif key == "editor":
+        editor = get_env_setting(key)
+        default_editor = "nano"
+        if not editor:
+            return default_editor
+        if shutil.which(editor):
+            return editor
+        else:
+            logging.error("Edytor '%s' nie widnieje w $PATH.", editor)
+            print(f"Błąd: Edytor '{editor}' nie istnieje w $PATH.")
+            print(f"Ustawiono domyślny: '{default_editor}'")
+            return default_editor
+    elif key == "all":
+        settings = {
+        "notespath": str(get_setting("notespath")),
+        "keypath": str(get_setting("keypath")),
+        "editor": get_setting("editor"),
+        "encryption": get_setting("encryption")}
+        return settings
 
 def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
-
 
 def help_page(args=None):
     print("""# ABOUT
@@ -213,7 +196,7 @@ def help_page(args=None):
     Copyright © funnut https://github.com/funnut
 
 # CLI USAGE
-    lisq [command] [arg] [arg-1] ...
+    lisq [command] [arg] [arg1] [...]
     lisq add \"my new note\"
 
 # COMMANDS
@@ -240,24 +223,25 @@ def help_page(args=None):
 : edit        - open the notes file in editor
 
 # SETTINGS
-    * default path to your notes is ~/notesfile.txt
-    * default editor is `nano`
+    * default notes path is ~/notesfile.txt
+    * default key path is set to wherever __file__ is
+    * default editor is set to `nano`
 
 To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
 
-export LISQ_SETTINGS=\"\\
-  --editor=nano \\
-  --notespath='~/path/notesfile.txt' \\
-  --encryption=off\"
+export LISQ_SETTINGS='{
+    "notespath": "~/path/notesfile.txt",
+    "keypath": "~/path/key.lisq",
+    "editor": "nano",
+    "encryption": null}'
 
-source your startup file (restart terminal)""")
-
+* source your startup file or restart terminal""")
 
 def reiterate(args=None):
     """Reiteruje ID notatek"""
     logging.info("Start reiterate()")
     try:
-        with open(GET_SETTING("notespath"), "r", encoding="utf-8") as f:
+        with open(get_setting("notespath"), "r", encoding="utf-8") as f:
             lines = f.readlines()
             id_ = 0
             new_lines = []
@@ -269,14 +253,14 @@ def reiterate(args=None):
                 new_id = f"i{str(id_).zfill(3)}"
                 new_line = f"{new_id} {' '.join(parts[1:])}\n"
                 new_lines.append(new_line)
-            with open(GET_SETTING("notespath"),"w",encoding="utf-8") as f:
+            with open(get_setting("notespath"),"w",encoding="utf-8") as f:
                 f.writelines(new_lines)
             if not args:
                 print(f"Zaktualizowano identyfikatory dla {id_} linii.")
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
     except FileNotFoundError as e:
         logging.error(f"FileNotFoundError w reiterate()\n%s",e)
-        print(f"{GET_SETTING("notespath")}\n\nBłąd: Nie znaleziono notatnika")
+        print(f"{get_setting("notespath")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
@@ -295,12 +279,12 @@ def delete(args):
             else:
                 args = [raw]
 
-        with open(GET_SETTING("notespath"),"r",encoding="utf-8") as f:
+        with open(get_setting("notespath"),"r",encoding="utf-8") as f:
             lines = f.readlines()
         if args[0] == "all": # all
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y",""]:
-                open(GET_SETTING("notespath"),"w",encoding="utf-8").close()
+                open(get_setting("notespath"),"w",encoding="utf-8").close()
                 print("Usunięto.")
             else:
                 print("Anulowano.")
@@ -308,7 +292,7 @@ def delete(args):
         elif args[0] in ["last","l"]: # last
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
-                with open(GET_SETTING("notespath"),"w",encoding="utf-8") as f:
+                with open(get_setting("notespath"),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
                 print("Usunięto.")
             else:
@@ -322,7 +306,7 @@ def delete(args):
             if number > 0:
                 yesno = input(f"Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
                 if yesno in ["yes","y",""]:
-                    with open(GET_SETTING("notespath"),"w",encoding="utf-8") as f:
+                    with open(get_setting("notespath"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
                     reiterate(True)
                     print("Usunięto.")
@@ -333,7 +317,7 @@ def delete(args):
 
     except FileNotFoundError as e:
         logging.error("FileNotFoundError w delete()\n%s",e)
-        print(f"{GET_SETTING("notespath")}\n\nBłąd: Nie znaleziono notatnika")
+        print(f"{get_setting("notespath")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w delete({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: ",e)
@@ -348,7 +332,7 @@ def read_file(args):
     try:
         args = args if args else "recent"
         found_notes = None
-        with open(GET_SETTING("notespath"),"r",encoding="utf-8") as f:
+        with open(get_setting("notespath"),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
         if args == "recent":
             to_show = lines[-10:]
@@ -383,7 +367,7 @@ def read_file(args):
 
     except FileNotFoundError as e:
         logging.error("FileNotFoundError w read_file()\n%s",e)
-        print(f"{GET_SETTING("notespath")}\n\nBłąd: Nie znaleziono notatnika")
+        print(f"{get_setting("notespath")}\n\nBłąd: Nie znaleziono notatnika")
     except Exception as e:
         logging.error(f"Exception w read_file({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
@@ -403,7 +387,7 @@ def write_file(args): # - datetime
         for element in args:
             args = [" ".join(element.split("\n"))]
         try:
-            with open(GET_SETTING("notespath"),"r",encoding="utf-8") as f:
+            with open(get_setting("notespath"),"r",encoding="utf-8") as f:
                 lines = f.readlines()
             if lines:
                 last_line = lines[-1]
@@ -418,7 +402,7 @@ def write_file(args): # - datetime
 
         id_ = f"i{str(id_number).zfill(3)}"
         date_ = date.today().strftime("%Y-%m-%d")
-        with open(GET_SETTING("notespath"),"a",encoding="utf-8") as f:
+        with open(get_setting("notespath"),"a",encoding="utf-8") as f:
             f.write(f"{id_} {date_} :: {' '.join(args)}\n")
         print("Notatka dodana.")
     except Exception as e:
@@ -435,14 +419,12 @@ def type_write(text, delay=0.05):
         time.sleep(delay)
     print()
 
-
 def echo(text):
     print(text)
 
-
 def _test(args):
     print("args:",args)
-
+    print(get_setting("notespath"))
 
 # dispatch table
 commands = {
@@ -452,14 +434,14 @@ commands = {
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: os.system(f"{GET_ENV_SETTING("editor")} {GET_SETTING("notespath")}"), # env
+    "edit": lambda args: os.system(f"{get_setting("editor")} {get_setting("notespath")}"),
     "c": clear,
     "reiterate": reiterate,
-    "encryption": lambda args: print(f"Encryption is set to: {GET_ENV_SETTING("encryption")}"),
+    "encryption": lambda args: print(f"Encryption is set to: {get_env_setting("encryption")}"),
     "encrypt": encrypt,
     "decrypt": decrypt,
-    "settings-env": lambda args: print(GET_ENV_SETTING("all")),
-    "settings": lambda args: print(GET_SETTING("all")),
+    "settings": lambda args: print(json.dumps(get_setting("all"),indent=4)),
+    "settings-env": lambda args: print(json.dumps(get_env_setting("all"), indent=4)),
     "--help": help_page,
     "-help": help_page,
     "help": help_page,
