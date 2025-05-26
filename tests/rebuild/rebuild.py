@@ -1,6 +1,6 @@
 import logging
 import readline
-import os, sys, shutil, json
+import os, sys, json
 from pathlib import Path
 
 # Konfiguracja log - logging
@@ -129,6 +129,8 @@ def decrypt(filepath, fernet=None):
 
 
 def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
+    """Pobiera dane ze zmiennej środowiskowej"""
+    logging.info("Start get_env_setting(%s,%s)",key, env_var)
     raw = os.getenv(env_var, "{}")
     try:
         settings = json.loads(raw)
@@ -141,6 +143,7 @@ def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
 
 
 def get_setting(key): # - pathlib, os
+    """Zwraca aktualne ustawienia"""
     logging.info("Start get_setting(%s)",key)
     if key == "notespath":
         raw_path = get_env_setting(key)
@@ -150,6 +153,7 @@ def get_setting(key): # - pathlib, os
         if path.parent.is_dir():
             return path
         else:
+            logging.error("Katalog '%s' nie istnieje.",path)
             raise ValueError(f"Katalog {path} nie istnieje. Nie zapisano.")
     elif key == "keypath":
         raw_path = get_env_setting(key)
@@ -161,11 +165,13 @@ def get_setting(key): # - pathlib, os
         if path.parent.is_dir():
             return path
         else:
-            raise ValueError(f"Katalog {path} nie istnieje. Nie zapisano.")
+            logging.error("Katalog '%s' nie istnieje.",path)
+            raise ValueError(f"Katalog '{path}' nie istnieje. Nie zapisano.")
     elif key == "encryption":
         value = get_env_setting(key)
         return value.lower() if value.lower() in ["on", "set"] else None
     elif key == "editor":
+        import shutil
         editor = get_env_setting(key)
         default_editor = "nano"
         if not editor:
@@ -223,19 +229,22 @@ def help_page(args=None):
 : edit        - open the notes file in editor
 
 # SETTINGS
-    * default notes path is ~/notesfile.txt
-    * default key path is set to wherever __file__ is
-    * default editor is set to `nano`
+
+   * default notes path is ~/notesfile.txt
+   * default key path is set to wherever __file__ is
+   * default editor is set to `nano`
 
 To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
 
-export LISQ_SETTINGS='{
-    "notespath": "~/path/notesfile.txt",
-    "keypath": "~/path/key.lisq",
-    "editor": "nano",
-    "encryption": null}'
+: export LISQ_SETTINGS='{
+:     "notespath": "~/path/notesfile.txt",
+:     "keypath": "~/path/key.lisq",
+:     "editor": "nano",
+:     "encryption": null}'
 
-* source your startup file or restart terminal""")
+** source your startup file or restart terminal
+
+You can check current settings by typing settings or settings-env (drawn from LISQ_SETTINGS var).""")
 
 def reiterate(args=None):
     """Reiteruje ID notatek"""
@@ -424,7 +433,6 @@ def echo(text):
 
 def _test(args):
     print("args:",args)
-    print(get_setting("notespath"))
 
 # dispatch table
 commands = {
@@ -437,7 +445,7 @@ commands = {
     "edit": lambda args: os.system(f"{get_setting("editor")} {get_setting("notespath")}"),
     "c": clear,
     "reiterate": reiterate,
-    "encryption": lambda args: print(f"Encryption is set to: {get_env_setting("encryption")}"),
+    "encryption": lambda args: print(f"Encryption is set to: {get_setting("encryption")}"),
     "encrypt": encrypt,
     "decrypt": decrypt,
     "settings": lambda args: print(json.dumps(get_setting("all"),indent=4)),
