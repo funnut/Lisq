@@ -10,58 +10,57 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Historia poleceń - readline, pathlib
-script_dir = Path(__file__).parent.resolve()
-histfile = script_dir / "history.lisq"
-if histfile.exists():
-    readline.read_history_file(histfile)
-readline.set_history_length(100)
-
 
 def generate_key(save_to_file=False, confirm_pass=False):
     import getpass
     import base64
     from cryptography.fernet import Fernet
+    try:
+        if confirm_pass:
+            password = getpass.getpass("Ustaw hasło: ").encode("utf-8")
+            confirm = getpass.getpass("Powtórz hasło: ").encode("utf-8")
+            if password != confirm:
+                print("Hasła nie pasują. Spróbuj ponownie.")
+                return None
+        else:
+            password = getpass.getpass("hasło : ").encode("utf-8")
 
-    if confirm_pass:
-        password = getpass.getpass("Ustaw hasło: ").encode("utf-8")
-        confirm = getpass.getpass("Powtórz hasło: ").encode("utf-8")
-        if password != confirm:
-            print("Hasła nie pasują. Spróbuj ponownie.")
-            return None
-    else:
-        password = getpass.getpass("hasło : ").encode("utf-8")
+        key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 
-    key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
+        if save_to_file:
+            key_path = get_setting("keypath")
+            try:
+                with open(key_path, "wb") as f:
+                    f.write(key)
+                print(f"Klucz zapisany w {key_path}")
+            except Exception as e:
+                print(f"Nie udało się zapisać klucza: {e}")
+                return None
 
-    if save_to_file:
-        key_path = get_setting("keypath")
-        try:
-            with open(key_path, "wb") as f:
-                f.write(key)
-            print(f"Klucz zapisany w {key_path}")
-        except Exception as e:
-            print(f"Nie udało się zapisać klucza: {e}")
-            return None
+        return Fernet(key)
 
-    return Fernet(key)
+    except KeyboardInterrupt:
+        print("\nPrzerwano przez użytkownika (Ctrl+C).")
+        logging.warning("Użytkownik przerwał działanie przy generowaniu klucza.")
+        raise SystemExit(1)
 
 
-def encrypt(filepath, fernet=None):
+def encrypt(filepath, fernet=None): # filepath moze byc str, lista lub posix
     from cryptography.fernet import Fernet
 
     if not filepath:
         return
-    if filepath[0] == "notespath":
-        filepath = get_setting("notespath")
-        fernet = generate_key(confirm_pass=True)
-        if not fernet:
-            return
-    else:
-        filepath = Path(filepath[0]).expanduser()
-        fernet = generate_key(confirm_pass=True)
-        if not fernet:
-            return
+    if isinstance(filepath,list):
+        if filepath[0] == "notes":
+            filepath = get_setting("notespath")
+            fernet = generate_key(confirm_pass=True)
+            if not fernet:
+                return
+        else:
+            filepath = Path(filepath[0]).expanduser()
+            fernet = generate_key(confirm_pass=True)
+            if not fernet:
+                return
 
     keypath = get_setting("keypath")
     try:
@@ -93,12 +92,13 @@ def decrypt(filepath, fernet=None):
 
     if not filepath:
         return
-    if filepath[0] == "notespath":
-        filepath = get_setting("notespath")
-        fernet = generate_key() # nie tworzy nowego key.lisq
-    else:
-        filepath = Path(filepath[0]).expanduser()
-        fernet = generate_key()
+    if isinstance(filepath,list):
+        if filepath[0] == "notes":
+            filepath = get_setting("notespath")
+            fernet = generate_key() # nie tworzy nowego key.lisq
+        else:
+            filepath = Path(filepath[0]).expanduser()
+            fernet = generate_key()
 
     keypath = get_setting("keypath")
     try:
@@ -167,9 +167,21 @@ def get_setting(key): # - pathlib, os
         else:
             logging.error("Katalog '%s' nie istnieje.",path)
             raise ValueError(f"Katalog '{path}' nie istnieje. Nie zapisano.")
+    elif key == "histpath":
+        raw_path = get_env_setting(key)
+        if not raw_path:
+            script_dir = Path(__file__).parent.resolve()
+            default_p = script_dir / "history.lisq"
+            return default_p
+        path = Path(raw_path).expanduser().with_suffix(".lisq")
+        if path.parent.is_dir():
+            return path
+        else:
+            logging.error("Katalog '%s' nie istnieje.",path)
+            raise ValueError(f"Katalog '{path}' nie istnieje. Nie zapisano.")
     elif key == "encryption":
         value = get_env_setting(key)
-        return value.lower() if value.lower() in ["on", "set"] else None
+        return value.lower() if value and value.lower() in {"on", "set"} else None
     elif key == "editor":
         import shutil
         editor = get_env_setting(key)
@@ -419,6 +431,13 @@ def write_file(args): # - datetime
         print(f"Wystąpił inny błąd: {e}")
 
 
+""" Historia poleceń - readline, pathlib """
+histfile = get_setting("histpath")
+if histfile.exists():
+    readline.read_history_file(histfile)
+readline.set_history_length(100)
+
+
 def type_write(text, delay=0.05):
     import time
     import sys
@@ -434,6 +453,54 @@ def echo(text):
 def _test(args):
     print("args:",args)
 
+    filepath = "string"
+    print(type(filepath))
+    if isinstance(filepath,str):
+        print("True")
+
+    filepath = ["lista"]
+    print(type(filepath))
+    if isinstance(filepath,list):
+        print("True")
+ 
+    filepath = Path("posix")
+    print(type(filepath))
+    if isinstance(filepath,Path):
+        print("True")
+
+def changepass(args):
+    generate_key(save_to_file=True, confirm_pass=True)
+
+def login(notes,encryption):
+    key = get_setting("keypath")
+    try:
+        if encryption and not key.exists():
+            result = generate_key(save_to_file=True, confirm_pass=True)
+            if not result:
+                return
+        elif not encryption and key.exists():
+            decrypt(notes)
+            key.unlink()
+        else:
+            if encryption == "on":
+                for attemt in range(3):
+                    fernet = generate_key()
+                    try:
+                        result = decrypt(notes,fernet)
+                        if result:
+                            break
+                    except ValueError:
+                        print("Nieprawidłowy token.")
+                else:
+                    print("Zbyt wiele nieudanych prób. Spróbuj później.")
+                    raise SystemExit
+            elif encryption == "set":
+                decrypt(notes)
+    except Exception as e:
+        print(f"Błąd: {e}")
+
+
+
 # dispatch table
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
@@ -446,6 +513,7 @@ commands = {
     "c": clear,
     "reiterate": reiterate,
     "encryption": lambda args: print(f"Encryption is set to: {get_setting("encryption")}"),
+    "changepass": changepass,
     "encrypt": encrypt,
     "decrypt": decrypt,
     "settings": lambda args: print(json.dumps(get_setting("all"),indent=4)),
@@ -461,9 +529,14 @@ commands = {
 
 def main(): # - sys, random
     logging.info("START FUNKCJI main()")
+
+    encryption = get_setting("encryption")
+    notes = get_setting("notespath")
+    login(notes,encryption)
+
     if len(sys.argv) > 1:
         """CLI Usage"""
-        logging.info(f"Start if CLI({sys.argv})")
+        logging.info(f"Start in CLI({sys.argv})")
         cmd = sys.argv[1].lower()
         args = sys.argv[2:]
 
@@ -472,14 +545,32 @@ def main(): # - sys, random
                 commands[cmd](args)
                 
             except ValueError as e:
-                logging.error("ValueError w komendzie CLI: %s", e)
+                logging.warning("ValueError w komendzie CLI: %s", e)
                 print(f"Błąd: {e}")
+            except KeyboardInterrupt as e:
+                print("\nPrzerwano przez użytkownika (Ctrl+C).")
+                logging.warning("Użytkownik przerwał działanie z CLI (Ctrl+C).")
+                readline.write_history_file(histfile)
+                if encryption:
+                    encrypt(notes)
+                raise SystemExit(1)
+            except EOFError as e:
+                logging.warning("\nUżytkownik przerwał działanie z CLI (Ctrl+D).")
+                readline.write_history_file(histfile)
+                if encryption:
+                    encrypt(notes)
+                else:
+                    print('')
+                return
             except Exception as e:
                 logging.error("Nieoczekiwany błąd w komendzie CLI: %s", e, exc_info=True)
                 print(f"Inny błąd: {e}")
         else:
             logging.error(f"Nieprawidłowe polecenie: sys.argv={sys.argv}")
             print("Błąd: Nieprawidłowe polecenie.")
+
+        if encryption:
+            encrypt(notes)
         return
 
     from random import randrange
@@ -494,13 +585,15 @@ def main(): # - sys, random
     while True:
         logging.info("START GŁÓWNEJ PĘTLI")
         try:
-            raw = input(f"> ").strip()
+            raw = input("> ").strip()
             if not raw:
                 write_file(args=None)
                 continue
             if raw in ["quit","q"]:
                 logging.info("WYJŚCIE Z PROGRAMU ( quit, q )")
                 readline.write_history_file(histfile)
+                if encryption:
+                    encrypt(notes)
                 return
 
             parts = raw.split()
@@ -513,17 +606,23 @@ def main(): # - sys, random
                 raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args}")
 
         except ValueError as e:
-            logging.error("ValueError: %s", e)
+            logging.warning("ValueError: %s", e)
             print(f"Błąd: {e}")
             continue
         except KeyboardInterrupt as e:
-            logging.error("Odebrano KeyboardInterrupt: %s", e, exc_info=True)
-            print("Błąd: KeyboardInterrupt")
-            return
-        except EOFError as e:
-            logging.info("WYJŚCIE Z PROGRAMU - EOFError", exc_info=False)
+            print("\nPrzerwano przez użytkownika (Ctrl+C).")
+            logging.warning("Użytkownik przerwał działanie przy generowaniu klucza.")
             readline.write_history_file(histfile)
-            print('')
+            if encryption:
+                encrypt(notes)
+            raise SystemExit(1)
+        except EOFError as e:
+            logging.warning("WYJŚCIE Z PROGRAMU - EOFError", exc_info=False)
+            readline.write_history_file(histfile)
+            if encryption:
+                encrypt(notes)
+            else:
+                print('')
             return
         except Exception as e:
             logging.error("Inny błąd: %s", e, exc_info=True)
