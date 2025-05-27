@@ -11,12 +11,13 @@ logging.basicConfig(
 )
 
 
-def generate_key(save_to_file=False, confirm_pass=False):
+def generate_key(save_to_file=False, confirm=False):
+    logging.info("start generate_key(%s,%s)",save_to_file,confirm)
     import getpass
     import base64
     from cryptography.fernet import Fernet
     try:
-        if confirm_pass:
+        if confirm:
             password = getpass.getpass("Ustaw hasło: ").encode("utf-8")
             confirm = getpass.getpass("Powtórz hasło: ").encode("utf-8")
             if password != confirm:
@@ -34,22 +35,30 @@ def generate_key(save_to_file=False, confirm_pass=False):
                     f.write(key)
                 print(f"Klucz zapisany w {key_path}")
             except Exception as e:
+                logging.error("Nieudany zapis klucza: %s",e,exc_info=True)
                 print(f"Nie udało się zapisać klucza: {e}")
                 return None
 
         return Fernet(key)
 
     except KeyboardInterrupt:
-        logging.warning("Użytkownik przerwał działanie przy generowaniu klucza (Ctrl+C).")
+        logging.warning("Przerwane generowanie klucza (Ctrl+C).")
         print("\nPrzerwano przez użytkownika (Ctrl+C).")
-        raise SystemExit(1)
+        raise SystemExit
     except EOFError:
-        logging.warning("Użytkownik przerwał działanie przy generowaniu klucza (Ctrl+D).")
+        logging.warning("Przerwane generowanie klucza (Ctrl+D).")
         print("\nPrzerwano przez użytkownika (Ctrl+D).")
-        raise SystemExit(1)
+        raise SystemExit
+    except FileNotFoundError as e:
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
+    except Exception as e:
+        logging.error("Wystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
+        print(f"Wystąpił inny błąd podczas generowania klucza: {e}")
 
 
-def encrypt(filepath, fernet=None): # filepath moze byc str, lista lub posix
+def encrypt(filepath, fernet=None):
+    logging.info("start encrypt (%s,%s)",filepath,fernet)
     from cryptography.fernet import Fernet
 
     if not filepath:
@@ -57,15 +66,14 @@ def encrypt(filepath, fernet=None): # filepath moze byc str, lista lub posix
     if isinstance(filepath,list):
         if filepath[0] == "notes":
             filepath = get_setting("notes-path")
-            fernet = generate_key(confirm_pass=True)
+            fernet = generate_key(confirm=True)
             if not fernet:
                 return
         else:
             filepath = Path(filepath[0]).expanduser()
-            fernet = generate_key(confirm_pass=True)
+            fernet = generate_key(confirm=True)
             if not fernet:
                 return
-
     keypath = get_setting("key-path")
     try:
         if fernet:
@@ -87,11 +95,16 @@ def encrypt(filepath, fernet=None): # filepath moze byc str, lista lub posix
 
         print("encrypted")
 
+    except FileNotFoundError as e:
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
     except Exception as e:
-        raise Exception(f"Błąd podczas szyfrowania: {e!r} {e}")
+        logging.error("Błąd podczas szyfrowania: %s",e,exc_info=True)
+        print(f"Błąd podczas szyfrowania: {e}")
 
 
 def decrypt(filepath, fernet=None):
+    logging.info("start decrypt (%s,%s)",filepath,fernet)
     from cryptography.fernet import Fernet, InvalidToken
 
     if not filepath:
@@ -127,14 +140,19 @@ def decrypt(filepath, fernet=None):
         return True
 
     except InvalidToken:
-        raise ValueError("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+        logging.warning("Nieprawidłowy token.)")
+        print("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+    except FileNotFoundError as e:
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
     except Exception as e:
-        raise Exception(f"Błąd podczas odszyfrowania: {e!r} {e}")
+        logging.error("Błąd podczas odszyfrowania: %s",e,exc_info=True)
+        print(f"Błąd podczas odszyfrowania: {e}")
 
 
 def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
     """Pobiera dane ze zmiennej środowiskowej"""
-    logging.info("Start get_env_setting(%s,%s)",key, env_var)
+    logging.info("start get_env_setting(%s,%s)",key, env_var)
     raw = os.getenv(env_var, "{}")
     try:
         settings = json.loads(raw)
@@ -148,7 +166,7 @@ def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
 
 def get_setting(key): # - pathlib, os
     """Zwraca aktualne ustawienia"""
-    logging.info("Start get_setting(%s)",key)
+    logging.info("start get_setting(%s)",key)
     if key == "notes-path":
         raw_path = get_env_setting(key)
         if not raw_path:
@@ -238,34 +256,41 @@ def help_page(args=None):
 : del all        - delete all notes
 :
 : encryption on, off or set - password is stored and not requested
+: changepass - changing password    
 :
 : encrypt ~/file.txt    - encrypting any file
 : decrypt ~/file.txt    - decrypting any file
 :
+: settings    - lists all settings
+: settings-env  - lists env settings
 : reiterate   - renumber notes' IDs
 : edit        - open the notes file in editor
 
 # SETTINGS
 
    * default notes path is ~/notesfile.txt
-   * default key path is set to wherever __file__ is
+   * default key path is set to wherever main __file__ is
+   * default history path is set to wherever the main __file__ is
    * default editor is set to `nano`
+   * default encryption is set to off
 
 To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
 
 : export LISQ_SETTINGS='{
 :     "notes-path": "~/path/notesfile.txt",
 :     "key-path": "~/path/key.lisq",
+:     "hist-path": "~/path/history.lisq",
 :     "editor": "nano",
-:     "encryption": null}'
+:     "encryption": "set"}'
 
 ** source your startup file or restart terminal
 
 You can check current settings by typing settings or settings-env (drawn from LISQ_SETTINGS var).""")
 
+
 def reiterate(args=None):
     """Reiteruje ID notatek"""
-    logging.info("Start reiterate()")
+    logging.info("start reiterate()")
     try:
         with open(get_setting("notes-path"), "r", encoding="utf-8") as f:
             lines = f.readlines()
@@ -285,8 +310,8 @@ def reiterate(args=None):
                 print(f"Zaktualizowano identyfikatory dla {id_} linii.")
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
     except FileNotFoundError as e:
-        logging.error(f"FileNotFoundError w reiterate()\n%s",e)
-        print(f"{get_setting("notes-path")}\n\nBłąd: Nie znaleziono notatnika")
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
     except Exception as e:
         logging.error(f"Exception w reiterate({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
@@ -294,7 +319,7 @@ def reiterate(args=None):
 
 def delete(args):
     """Usuwanie notatek."""
-    logging.info(f"Start delete({args}){len(args)}")
+    logging.info("start delete(%s)",args)
     try:
         while not args:
             raw = input(" - ").strip()
@@ -342,16 +367,16 @@ def delete(args):
                 print("Nie znaleziono pasujących notatek.")
 
     except FileNotFoundError as e:
-        logging.error("FileNotFoundError w delete()\n%s",e)
-        print(f"{get_setting("notes-path")}\n\nBłąd: Nie znaleziono notatnika")
+        logging.error("Nie znaleziono notatnika: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
     except Exception as e:
-        logging.error(f"Exception w delete({args})\n%s",e,exc_info=True)
-        print(f"Wystąpił inny błąd: ",e)
+        logging.error("Inny błąd: %s",e,exc_info=True)
+        print(f"Wystąpił inny błąd: {e}")
 
 
 def read_file(args):
     """Odczyt pliku notatek""" # - random, os
-    logging.info(f"Start read_file({args})")
+    logging.info("start read_file(%s)",args)
     from random import choice
     terminal_width = os.get_terminal_size().columns
     print(f" .id .date {'.' * (terminal_width - 12)}")
@@ -392,17 +417,17 @@ def read_file(args):
             print(f"Znaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError as e:
-        logging.error("FileNotFoundError w read_file()\n%s",e)
-        print(f"{get_setting("notes-path")}\n\nBłąd: Nie znaleziono notatnika")
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
     except Exception as e:
-        logging.error(f"Exception w read_file({args})\n%s",e,exc_info=True)
+        logging.error("Inny błąd: %s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
 
 
 def write_file(args): # - datetime
     """Zapisywanie notatek do pliku w ustalonym formacie."""
     from datetime import date
-    logging.info(f"Start write_file({args})")
+    logging.info("start write_file(%s)",args)
     try:
         if not args:
             args = input(" : ").strip().split()
@@ -422,7 +447,7 @@ def write_file(args): # - datetime
             else:
                 id_number = 1
         except FileNotFoundError as e:
-            logging.error("FileNotFoundError w write_file()\n%s",e)
+            logging.warning("Nie znaleziono notatnika: %s",e)
             print("Utworzono nowy notatnik.")
             id_number = 1
 
@@ -434,13 +459,6 @@ def write_file(args): # - datetime
     except Exception as e:
         logging.error(f"Exception w write_file({args})\n%s",e,exc_info=True)
         print(f"Wystąpił inny błąd: {e}")
-
-
-""" Historia poleceń - readline, pathlib """
-histfile = get_setting("hist-path")
-if histfile.exists():
-    readline.read_history_file(histfile)
-readline.set_history_length(100)
 
 
 def type_write(text, delay=0.05):
@@ -495,10 +513,10 @@ def handle_CLI():
 
     login(close=True)
 
-    raise SystemExit(0)
+    raise SystemExit
 
 def changepass(args):
-    generate_key(save_to_file=True, confirm_pass=True)
+    generate_key(save_to_file=True, confirm=True)
 
 def login(close=False):
     encryption = get_setting("encryption")
@@ -509,34 +527,34 @@ def login(close=False):
         if close and encryption:
             readline.write_history_file(histfile)
             encrypt(notes)
-        else:
-            # Tworzy nowe hasło
-            if encryption and not key.exists():
-                result = generate_key(save_to_file=True, confirm_pass=True)
-                if not result:
-                    return
-            # Wejście OFF
-            elif not encryption and key.exists():
-                decrypt(notes)
-                key.unlink()
-                return
-            else:
-                # Wejście ON
-                if encryption == "on":
-                    for attemt in range(3):
-                        fernet = generate_key()
-                        try:
-                            result = decrypt(notes,fernet)
-                            if result:
-                                break
-                        except ValueError:
-                            print("Nieprawidłowy token.")
-                    else:
-                        print("Zbyt wiele nieudanych prób. Spróbuj później.")
-                        raise SystemExit(1)
-                # Wejście SET
-                elif encryption == "set":
-                    decrypt(notes)
+            return
+
+        # Tworzy nowe hasło
+        if encryption and not key.exists():
+            result = generate_key(save_to_file=True, confirm=True)
+            if not result:
+                raise SystemExit
+        # Wejście OFF
+        elif not encryption and key.exists():
+            decrypt(notes)
+            key.unlink()
+            return
+
+        # Wejście ON
+        elif encryption == "on":
+            for attemt in range(3):
+                fernet = generate_key()
+                try:
+                    result = decrypt(notes,fernet)
+                    if result:
+                        return
+                except ValueError:
+                    print("Nieprawidłowy token.")
+            print("Zbyt wiele nieudanych prób. Spróbuj później.")
+            raise SystemExit
+        # Wejście SET
+        elif encryption == "set":
+            decrypt(notes)
     except Exception as e:
         logging.error("Inny błąd w funkcji login(): %s", e, exc_info=True)
         print(f"Błąd: {e}")
@@ -570,6 +588,16 @@ commands = {
 
 def main(): # - random
     logging.info("START FUNKCJI main()")
+
+    """ Historia poleceń - readline, pathlib """
+    histfile = get_setting("hist-path")
+    try:
+        if histfile.exists():
+            readline.read_history_file(histfile)
+        readline.set_history_length(100)
+    except FileNotFoundError as e:
+        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
+        print(f"Błąd: Nie znaleziono pliku: {e}")
 
     login()
 
@@ -614,16 +642,16 @@ def main(): # - random
             logging.warning("WYJŚCIE Z PROGRAMU (Ctrl+C).")
             print("\nWyjście z programu (Ctrl+C).")
             login(close=True)
-            raise SystemExit(1)
+            raise SystemExit
         except EOFError as e:
             logging.warning("WYJŚCIE Z PROGRAMU (Ctrl+D).")
             print("\nWyjście z programu (Ctrl+D).")
             login(close=True)
-            raise SystemExit(1)
+            raise SystemExit
         except Exception as e:
             logging.error("Inny błąd: %s", e, exc_info=True)
             print(f"Inny błąd: {e}")
-            raise SystemExit(1)
+            raise SystemExit
 
 
 if __name__ == "__main__":
