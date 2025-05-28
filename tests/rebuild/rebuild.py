@@ -7,12 +7,12 @@ from datetime import date
 
 # Konfiguracja log - logging
 logging.basicConfig(
-    level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    level=logging.ERROR, # DEBUG, INFO, WARNING, ERROR, CRITICAL
     filename="debug.log",  # rm by logować na konsolę
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
-def generate_key(save_to_file=False, confirm=False):
+def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     # """ Tworzenie i zapis klucza """
     logging.info("generate_key(%s,%s)",save_to_file,confirm)
     import getpass
@@ -59,7 +59,7 @@ def generate_key(save_to_file=False, confirm=False):
         print(f"Wystąpił błąd podczas generowania klucza: {e}")
 
 
-def encrypt(filepath, fernet=None):
+def encrypt(filepath, fernet=None): # - fernet, pathlib
     # """ Szyfrowanie plików """
     logging.info("encrypt (%s,%s)",filepath,fernet)
     from cryptography.fernet import Fernet
@@ -96,7 +96,7 @@ def encrypt(filepath, fernet=None):
         with open(filepath,"wb") as f:
             f.write(encrypted)
 
-#        print("encrypted")
+        print("encrypted")
 
     except FileNotFoundError as e:
         logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
@@ -106,7 +106,7 @@ def encrypt(filepath, fernet=None):
         print(f"Wystąpił błąd podczas szyfrowania: {e}")
 
 
-def decrypt(filepath, fernet=None):
+def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
     # """ Odszyfrowanie plików """
     logging.info("decrypt (%s,%s)",filepath,fernet)
     from cryptography.fernet import Fernet, InvalidToken
@@ -155,7 +155,7 @@ def decrypt(filepath, fernet=None):
         print(f"Wystąpił błąd podczas odszyfrowywania: {e}")
 
 
-def getting(key): # - pathlib, os
+def getting(key): # - pathlib, os, json
     # """ Pobiera i zwraca aktualne ustawienia """
     logging.info("  getting(%s)",key)
 
@@ -390,10 +390,9 @@ def delete(args):
         print(f"Wystąpił błąd podczas usuwania notatek: {e}")
 
 
-def read_file(args):
-    # """ Odczyt pliku notatek """ # - random, os
+def read_file(args): # - random, os
+    # """ Odczyt pliku notatek """ 
     logging.info("read_file(%s)",args)
-    from random import choice
     terminal_width = os.get_terminal_size().columns
     print(f" .id .date {'.' * (terminal_width - 12)}")
     try:
@@ -406,6 +405,7 @@ def read_file(args):
         elif isinstance(args[0],int):
             to_show = lines[-int(args[0]):]
         elif args[0] in ["random", "r"]:
+            from random import choice
             to_show = [choice(lines)]
         elif args[0] == "all":
             to_show = lines
@@ -494,7 +494,7 @@ def type_write(text, delay=0.05):
 def echo(text):
     print(text)    
 
-def handle_CLI():
+def handle_CLI(): # - ast
     # """ CLI Usage """
     logging.info("handle_CLI(%s)",sys.argv)
 
@@ -516,7 +516,7 @@ def handle_CLI():
             raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args if args else ''}")
 
     except ValueError as e:
-        logging.warning("Nieprawidłowe polecenie: %s", sys.argv)
+        logging.warning("ValueError: %s | %s",e,sys.argv)
         print(f"Błąd: {e}")
     except Exception as e:
         logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
@@ -533,7 +533,7 @@ def changepass(args):
     else:
         raise ValueError("Szyfrowanie jest wyłączone")
 
-def login(inout="in"):
+def login(inout="in"): # - readline, pathlib
     # """ Sterowanie szyfrowaniem na wejściach i wyjściach """
     logging.info("login(%s)",inout)
 
@@ -596,7 +596,7 @@ def __test_lab__(args):
 
     print("\n----")
 
-# dispatch table
+# dispatch table - os
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
     "add": write_file,
@@ -622,7 +622,7 @@ commands = {
 }
 
 
-# MAIN()
+# MAIN() - readline - random - shlex - ast
 def main():
     logging.info("START FUNKCJI main()")
 
@@ -693,12 +693,12 @@ def main():
             print(f"Błąd: {e}")
             continue
         except KeyboardInterrupt as e:
-            logging.warning("WYJŚCIE Z PROGRAMU (Ctrl+C).")
+            logging.warning("EXIT (Ctrl+C).")
             print("\nWyjście z programu (Ctrl+C).")
             login("out")
             raise SystemExit
         except EOFError as e:
-            logging.warning("WYJŚCIE Z PROGRAMU (Ctrl+D).")
+            logging.warning("EXIT (Ctrl+D).")
             print("\nWyjście z programu (Ctrl+D).")
             login("out")
             raise SystemExit
