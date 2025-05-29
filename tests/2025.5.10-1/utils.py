@@ -141,15 +141,12 @@ THEMES = {
 
 }
 
-
 THEMES["cli-text"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
 THEMES["yellow"] = {key: COLORS["yellow"] for key in THEMES["lisq"].keys()}
-
 
 def get_theme():
     theme_name = get_setting("theme", "lisq").lower()
     return THEMES.get(theme_name, THEMES["lisq"])
-
 
 # theme = get_theme()
 # print(f"{theme['header']}Tytuł{COLORS['reset']}")
