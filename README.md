@@ -80,6 +80,6 @@ export LISQ_SETTINGS='{
     "encryption": "set"}'
 ```
 
-** source your startup file or restart terminal **
+> source your startup file or restart terminal
 
-> You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).
+You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).
