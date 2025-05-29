@@ -52,8 +52,8 @@ then type `lisq`
 : edit        - open the notes file in set editor
 ```
 You can add your own functions by:
-    * defining them,
-    * then adding to **dispatch table**.
++ defining them,
++ then adding to **dispatch table**.
 
 ## SETTINGS
 
