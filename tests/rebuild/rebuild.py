@@ -1,23 +1,38 @@
+
+def type_write(text, delay=0.05): # - time, sys
+    import time
+    import sys
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+def echo(text):
+    print(text)
+
+#####################__DEFAULT_LISQ_FUNCTIONALITY__#####################
+
+from datetime import date
+from pathlib import Path
+import json, os, sys, ast
 import logging
 import shlex
 import readline
-import os, sys, json, ast
-from pathlib import Path
-from datetime import date
 
 # Konfiguracja log - logging
 logging.basicConfig(
-    level=logging.ERROR, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-    filename="debug.log",  # rm by logować na konsolę
+    level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    filename="error.log",  # rm by logować na konsolę
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     # """ Tworzenie i zapis klucza """
     logging.info("generate_key(%s,%s)",save_to_file,confirm)
+    from cryptography.fernet import Fernet
     import getpass
     import base64
-    from cryptography.fernet import Fernet
     try:
         if confirm:
             password = getpass.getpass("Ustaw hasło: ").encode("utf-8")
@@ -116,7 +131,7 @@ def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
     if isinstance(filepath,list):
         if filepath[0] == "notes":
             filepath = getting("notes-path")
-            fernet = generate_key() # nie tworzy nowego key.lisq
+            fernet = generate_key()
         else:
             filepath = Path(filepath[0]).expanduser()
             fernet = generate_key()
@@ -140,7 +155,7 @@ def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
         with open(filepath,'w',encoding='utf-8') as f:
             f.write(decrypted)
 
-#        print("decrypted")
+        # print("decrypted")
 
         return True
 
@@ -222,7 +237,6 @@ def getting(key): # - pathlib, os, json
                 return default_editor
         elif key == "all":
             settings = {
-                "name": "settings",
                 "default": {
                     "notes-path": str(getting("notes-path")),
                     "key-path": str(getting("key-path")),
@@ -243,15 +257,18 @@ def clear(args): # - os
 
 def help_page(args=None):
     print("""# ABOUT
+
     From Polish "lisek / foxie" – lisq is a single file note-taking app that work with .txt files.
     Code available under a non-commercial license (see LICENSE file).
     Copyright © funnut https://github.com/funnut
 
 # CLI USAGE
+
     lisq [command] [arg] [arg1] [...]
     lisq add \"my new note\"
 
 # COMMANDS
+
 : quit, q, exit
 : c         - clear screen
 : cmds      - list of available commands
@@ -266,7 +283,7 @@ def help_page(args=None):
 : del last, l    - delete the last note
 : del all        - delete all notes
 :
-: encryption on, off or set - password is stored and not requested
+: encryption on, off or set (password is stored and not requested)
 : changepass - changing password    
 :
 : encrypt ~/file.txt    - encrypting any file
@@ -274,15 +291,20 @@ def help_page(args=None):
 :
 : settings    - lists all settings
 : reiterate   - renumber notes' IDs
-: edit        - open the notes file in editor
+: edit        - open the notes file in set editor
+
+You can add your own functions by:
+    * defining them,
+    * then adding to 'dispatch table'.
 
 # SETTINGS
 
-   * default notes path is ~/notesfile.txt
-   * default key path is set to wherever main __file__ is
-   * default history path is set to wherever the main __file__ is
-   * default editor is set to `nano`
-   * default encryption is set to off
+Default settings:
+   * default notes path is ~/notesfile.txt,
+   * default key path is set to wherever main __file__ is,
+   * default history path is set to wherever the main __file__ is,
+   * default editor is set to `nano`,
+   * default encryption is set to off.
 
 To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
 
@@ -293,14 +315,14 @@ To change it, set the following variable in your system by adding it to a startu
 :     "editor": "nano",
 :     "encryption": "set"}'
 
-** source your startup file or restart terminal
+** source your startup file or restart terminal **
 
-You can check current settings by typing settings or settings-env (drawn from LISQ_SETTINGS var).""")
+You can check current settings by typing 'settings' (default and 'env' drawn from LISQ_SETTINGS var).""")
 
 
 def reiterate(args=None):
-    # """ Przenumerowanie ID notatek """
-    logging.info("reiterate()")
+    # """ Numerowanie ID notatek """
+    logging.info("reiterate(%s)",args)
     try:
         with open(getting("notes-path"), "r", encoding="utf-8") as f:
             lines = f.readlines()
@@ -316,7 +338,7 @@ def reiterate(args=None):
                 new_lines.append(new_line)
             with open(getting("notes-path"),"w",encoding="utf-8") as f:
                 f.writelines(new_lines)
-            if not args:
+            if args == "usr":
                 print(f"Zaktualizowano identyfikatory dla {id_} linii.")
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
     except FileNotFoundError as e:
@@ -348,7 +370,7 @@ def delete(args):
 
         with open(getting("notes-path"),"r",encoding="utf-8") as f:
             lines = f.readlines()
-        if argo[0] == "all": # all
+        if argo[0] == "all":
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y",""]:
                 open(getting("notes-path"),"w",encoding="utf-8").close()
@@ -356,7 +378,7 @@ def delete(args):
             else:
                 print("Anulowano.")
 
-        elif argo[0] in ["last","l"]: # last
+        elif argo[0] in ["last","l"]:
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
                 with open(getting("notes-path"),"w",encoding="utf-8") as f:
@@ -375,7 +397,7 @@ def delete(args):
                 if yesno in ["yes","y",""]:
                     with open(getting("notes-path"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
-                    reiterate(True)
+                    reiterate()
                     print("Usunięto.")
                 else:
                     print("Anulowano.")
@@ -482,18 +504,6 @@ def write_file(args): # - datetime
         print(f"Wystąpił błąd podczas pisania danych: {e}")
 
 
-def type_write(text, delay=0.05):
-    import time
-    import sys
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()
-
-def echo(text):
-    print(text)    
-
 def handle_CLI(): # - ast
     # """ CLI Usage """
     logging.info("handle_CLI(%s)",sys.argv)
@@ -541,7 +551,7 @@ def login(inout="in"): # - readline, pathlib
     notes = getting("notes-path")
 
     try:
-        # """ Wyjście """
+        # Wyjście
         if inout == "out":
             histfile = getting("hist-path")
             readline.write_history_file(histfile)
@@ -549,21 +559,21 @@ def login(inout="in"): # - readline, pathlib
                 encrypt(notes)
             return
 
-        # """ Tworzy nowe hasło """
+        # Tworzy nowe hasło
         key = getting("key-path")
         if encryption and not key.exists():
             result = generate_key(save_to_file=True, confirm=True)
             if not result:
                 raise SystemExit
 
-        # """ Wejście OFF """
+        # Wejście OFF
         elif not encryption and key.exists():
             decrypt(notes)
             key.unlink()
             logging.info(" usunięto klucz")
             return
 
-        # """ Wejście ON """
+        # Wejście ON
         elif encryption == "on":
             for attemt in range(3):
                 fernet = generate_key()
@@ -576,7 +586,7 @@ def login(inout="in"): # - readline, pathlib
             print("Zbyt wiele nieudanych prób. Spróbuj później.")
             raise SystemExit
 
-        # """ Wejście SET """
+        # Wejście SET
         elif encryption == "set":
             decrypt(notes)
     except Exception as e:
@@ -606,7 +616,7 @@ commands = {
     "del": delete,
     "edit": lambda args: os.system(f"{getting("editor")} {getting("notes-path")}"),
     "c": clear,
-    "reiterate": reiterate,
+    "reiterate": lambda args: reiterate("usr"),
     "encryption": lambda args: print(f"Encryption is set to: {getting("encryption")}"),
     "changepass": changepass,
     "encrypt": encrypt,
@@ -622,9 +632,9 @@ commands = {
 }
 
 
-# MAIN() - readline - random - shlex - ast
+# MAIN() - readline - random - shlex - ast - sys
 def main():
-    logging.info("START FUNKCJI main()")
+    logging.info("START main()")
 
     login()
 
@@ -635,7 +645,6 @@ def main():
     try:
         if histfile.exists():
             readline.read_history_file(histfile)
-            print("if hist file")
     except FileNotFoundError as e:
         logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
         print(f"Błąd: Nie znaleziono pliku: {e}")
@@ -663,7 +672,7 @@ def main():
                 print('}')
                 continue
             if raw in ["quit","q"]:
-                logging.info("WYJŚCIE Z PROGRAMU ( quit, q )")
+                logging.info("EXIT ( quit, q )")
                 login("out")
                 return
 
