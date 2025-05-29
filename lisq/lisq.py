@@ -292,6 +292,9 @@ def help_page(args=None):
 : settings    - lists all settings
 : reiterate   - renumber notes' IDs
 : edit        - open the notes file in set editor
+:
+: echo [str]    - echo given text
+: type [str]    - type given text
 
 You can add your own functions by:
     * defining them,
@@ -317,7 +320,7 @@ To change it, set the following variable in your system by adding it to a startu
 
 ** source your startup file or restart terminal **
 
-You can check current settings by typing 'settings' (default and 'env' drawn from LISQ_SETTINGS var).""")
+You can check current settings by typing 'settings' (both default and env drawn from LISQ_SETTINGS var).""")
 
 
 def reiterate(args=None):

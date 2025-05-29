@@ -52,6 +52,9 @@ lisq add "my new note"
 : settings    - lists all settings
 : reiterate   - renumber notes' IDs
 : edit        - open the notes file in set editor
+:
+: echo [str]    - echo given text
+: type [str]    - type given text
 ```
 You can add your own functions by:
 + defining them,
