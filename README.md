@@ -6,7 +6,7 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 
 *Code available under a non-commercial license (see LICENSE file).*
 
-**Copyright © funnut www.github.com/funnut**
+Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
@@ -22,8 +22,8 @@ then type `lisq`
 
 ## CLI USAGE
 
-lisq [command] [arg] [arg1] [...]
-lisq add "my new note"
+`lisq [command] [arg] [arg1] [...]`
+`lisq add "my new note"`
 
 ## COMMANDS
 ```bash
