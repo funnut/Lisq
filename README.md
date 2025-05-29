@@ -53,44 +53,6 @@ lisq add "my new note"
 : reiterate   - renumber notes' IDs
 : edit        - open the notes file in set editor
 ```
-
-`quit, q, exit`
-
-`c`         - clear screen
-
-`cmds`      - list of available commands
-
-
-`show, s`           - show recent notes (default 10)
-
-`show [int]`        - show number of recent notes
-
-`show [str]`        - show notes containing [string]
-
-`show all`          - show all notes
-
-`show random, r`    - show a random note
-
-
-`del [str]      - delete notes containing [string]
-
-`del last, l    - delete the last note
-
-`del all        - delete all notes
-
-`encryption on`, `off` or `set` (password is stored and not requested)
-
-`changepass` - changing password    
-
-
-`encrypt ~/file.txt`    - encrypting any file
-
-`decrypt ~/file.txt`    - decrypting any file
-
-`settings`    - lists all settings
-`reiterate`   - renumber notes' IDs
-`edit`        - open the notes file in set editor
-
 You can add your own functions by:
 + defining them,
 + then adding to *dispatch table*.
