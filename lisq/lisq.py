@@ -21,11 +21,11 @@ import shlex
 import readline
 
 # Konfiguracja log - logging
-logging.basicConfig(
-    level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-    filename="error.log",  # rm by logować na konsolę
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
+# logging.basicConfig(
+#     level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+#     filename="error.log",  # rm by logować na konsolę
+#     format="%(asctime)s - %(levelname)s - %(message)s",
+# )
 
 def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     # """ Tworzenie i zapis klucza """
@@ -160,7 +160,7 @@ def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
         return True
 
     except InvalidToken:
-        logging.warning("Nieprawidłowy token.)")
+        logging.warning("Nieprawidłowy token")
         print("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
     except FileNotFoundError as e:
         logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
