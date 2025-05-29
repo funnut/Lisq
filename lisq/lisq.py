@@ -1,4 +1,3 @@
-
 def type_write(text, delay=0.05): # - time, sys
     import time
     import sys
@@ -12,6 +11,10 @@ def echo(text):
     print(text)
 
 #####################__DEFAULT_LISQ_FUNCTIONALITY__#####################
+#   _
+# _|_  ._ ._   _|_
+#  ||_|| || ||_||_
+#       www.github.com/funnut
 
 from datetime import date
 from pathlib import Path
@@ -727,4 +730,3 @@ if __name__ == "__main__":
 # _|_  ._ ._   _|_ 
 #  ||_|| || ||_||_ 
 #       www.github.com/funnut
-
