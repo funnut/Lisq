@@ -26,15 +26,15 @@ then type `lisq`
 `lisq add "my new note"`
 
 ## COMMANDS
-```bash
-: quit, q, exit
-: c         - clear screen
-: cmds      - list of available commands
-:
-: show, s           - show recent notes (default 10)
-: show [int]        - show number of recent notes
-: show [str]        - show notes containing [string]
-: show all          - show all notes
+```
+quit, q, exit
+c         - clear screen
+cmds      - list of available commands
+
+show, s           - show recent notes (default 10)
+show [int]        - show number of recent notes
+show [str]        - show notes containing [string]
+show all          - show all notes
 : show random, r    - show a random note
 :
 : del [str]      - delete notes containing [string]
@@ -53,7 +53,7 @@ then type `lisq`
 ```
 You can add your own functions by:
 + defining them,
-+ then adding to **dispatch table**.
++ then adding to *dispatch table*.
 
 ## SETTINGS
 
@@ -77,7 +77,7 @@ export LISQ_SETTINGS='{
 
 ** source your startup file or restart terminal **
 
-You can check current settings by typing `settings` (default and 'env' drawn from LISQ_SETTINGS var).""")
+You can check current settings by typing `settings` (default and 'env' drawn from *LISQ_SETTINGS* var).""")
 
 
 
