@@ -8,6 +8,8 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 
 Copyright © funnut www.github.com/funnut
 
+---
+
 ## Instalation
 
 ```bash
@@ -17,8 +19,6 @@ pip install lisq
 then type `lisq`
 
 > How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
-
----
 
 ## CLI USAGE
 
