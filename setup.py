@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="lisq",
-    version="2025.5.10",
-    description="Lightweight note-taking app that work with .txt files",
+    version="2025.5.29",
+    description="A single file note-taking app that work with .txt files",
     author="funnut",
     author_email="essdoem@yahoo.com",
     project_urls={
