@@ -22,8 +22,8 @@ then type `lisq`
 
 ## CLI USAGE
 
-    `lisq [command] [arg] [arg1] [...]`
-    `lisq add "my new note"`
+lisq [command] [arg] [arg1] [...]
+lisq add "my new note"
 
 ## COMMANDS
 ```bash
