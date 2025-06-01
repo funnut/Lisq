@@ -8,6 +8,8 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 
 Copyright © funnut www.github.com/funnut
 
+---
+
 ## Instalation
 
 ```bash
@@ -18,12 +20,10 @@ then type `lisq`
 
 > How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
----
-
 ## CLI USAGE
 
 ```
-lisq [command] [arg] [arg1] [...]
+lisq [command] [arg1] [arg2] ...
 lisq add "my new note"
 ```
 
@@ -80,6 +80,6 @@ export LISQ_SETTINGS='{
     "encryption": "set"}'
 ```
 
-** source your startup file or restart terminal **
+> source your startup file or restart terminal
 
-> You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).
+You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).
