@@ -1,4 +1,3 @@
-
 def type_write(text, delay=0.05): # - time, sys
     import time
     import sys
@@ -12,6 +11,10 @@ def echo(text):
     print(text)
 
 #####################__DEFAULT_LISQ_FUNCTIONALITY__#####################
+#   _
+# _|_  ._ ._   _|_ 
+#  ||_|| || ||_||_ 
+#       www.github.com/funnut
 
 from datetime import date
 from pathlib import Path
@@ -20,12 +23,17 @@ import logging
 import shlex
 import readline
 
+color = "\033[36m"
+reset = "\033[0m"
+
 # Konfiguracja log - logging
-# logging.basicConfig(
-#     level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-#     filename="error.log",  # rm by logować na konsolę
-#     format="%(asctime)s - %(levelname)s - %(message)s",
-# )
+logging.basicConfig(
+    level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    # filename="error.log",  # rm by logować na konsolę
+    format="%(message)s", # %(asctime)s - %(levelname)s - 
+)
+
+# logging.disable(logging.CRITICAL)
 
 def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     # """ Tworzenie i zapis klucza """
@@ -46,32 +54,27 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
         key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 
         if save_to_file:
-            key_path = getting("key-path")
+            key_path = get("key-path")
             try:
                 with open(key_path, "wb") as f:
                     f.write(key)
                 print(f"Klucz zapisany w {key_path}")
             except Exception as e:
                 logging.error("Nieudany zapis klucza: %s",e,exc_info=True)
-                print(f"Nie udało się zapisać klucza: {e}")
                 return None
 
         return Fernet(key)
 
     except KeyboardInterrupt:
-        logging.warning("Przerwane generowanie klucza (Ctrl+C).")
-        print("\nPrzerwano przez użytkownika (Ctrl+C).")
+        logging.warning("\nPrzerwane generowanie klucza (Ctrl+C).")
         raise SystemExit
     except EOFError:
-        logging.warning("Przerwane generowanie klucza (Ctrl+D).")
-        print("\nPrzerwano przez użytkownika (Ctrl+D).")
+        logging.warning("\nPrzerwane generowanie klucza (Ctrl+D).")
         raise SystemExit
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas generowania klucza: {e}")
 
 
 def encrypt(filepath, fernet=None): # - fernet, pathlib
@@ -83,7 +86,7 @@ def encrypt(filepath, fernet=None): # - fernet, pathlib
         return
     if isinstance(filepath,list):
         if filepath[0] == "notes":
-            filepath = getting("notes-path")
+            filepath = get("notes-path")
             fernet = generate_key(confirm=True)
             if not fernet:
                 return
@@ -92,7 +95,7 @@ def encrypt(filepath, fernet=None): # - fernet, pathlib
             fernet = generate_key(confirm=True)
             if not fernet:
                 return
-    keypath = getting("key-path")
+    keypath = get("key-path")
     try:
         if fernet:
             pass
@@ -114,11 +117,9 @@ def encrypt(filepath, fernet=None): # - fernet, pathlib
         print("encrypted")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas szyfrowania: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas szyfrowania: {e}")
 
 
 def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
@@ -130,13 +131,13 @@ def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
         return
     if isinstance(filepath,list):
         if filepath[0] == "notes":
-            filepath = getting("notes-path")
+            filepath = get("notes-path")
             fernet = generate_key()
         else:
             filepath = Path(filepath[0]).expanduser()
             fernet = generate_key()
 
-    keypath = getting("key-path")
+    keypath = get("key-path")
     try:
         if fernet:
             pass
@@ -160,114 +161,116 @@ def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
         return True
 
     except InvalidToken:
-        logging.warning("Nieprawidłowy token")
-        print("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+        logging.warning("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas odszyfrowywania: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas odszyfrowywania: {e}")
 
 
-def getting(key): # - pathlib, os, json
+def get(setting): # - pathlib, os, json
     # """ Pobiera i zwraca aktualne ustawienia """
-    logging.info("  getting(%s)",key)
-
-    def get_env_setting(key="all", env_var="LISQ_SETTINGS"):
+    logging.info("  get(%s)",setting)
+    def get_env_setting(setting="all", env_var="LISQ_SETTINGS"):
         # """Pobiera dane ze zmiennej środowiskowej"""
         raw = os.getenv(env_var, "{}")
         try:
             settings = json.loads(raw)
         except json.JSONDecodeError:
-            return None if key != "all" else {}
-        if key == "all":
+            return None if setting != "all" else {}
+        if setting == "all":
             return settings
-        return settings.get(key)
+        return settings.get(setting)
+
     try:
-        if key == "notes-path":
-            raw_path = get_env_setting(key)
-            if not raw_path:
-                return Path.home() / "notesfile.txt"
-            path = Path(raw_path).expanduser().with_suffix(".txt")
-            if path.parent.is_dir():
-                return path
-            else:
-                logging.warning("Katalog '%s' nie istnieje.",path)
-                raise ValueError(f"Katalog {path} nie istnieje. Nie zapisano.")
-        elif key == "key-path":
-            raw_path = get_env_setting(key)
-            if not raw_path:
-                script_dir = Path(__file__).parent.resolve()
-                default_p = script_dir / "key.lisq"
-                return default_p
-            path = Path(raw_path).expanduser().with_suffix(".lisq")
-            if path.parent.is_dir():
-                return path
-            else:
-                logging.warning("Katalog '%s' nie istnieje.",path)
-                raise ValueError(f"Katalog '{path}' nie istnieje. Nie zapisano.")
-        elif key == "hist-path":
-            raw_path = get_env_setting(key)
-            if not raw_path:
-                script_dir = Path(__file__).parent.resolve()
-                default_p = script_dir / "history.lisq"
-                return default_p
-            path = Path(raw_path).expanduser().with_suffix(".lisq")
-            if path.parent.is_dir():
-                return path
-            else:
-                logging.warning("Katalog '%s' nie istnieje.",path)
-                raise ValueError(f"Katalog '{path}' nie istnieje. Nie zapisano.")
-        elif key == "encryption":
-            value = get_env_setting(key)
+        if setting == "notes-path":
+            e_path = get_env_setting(setting)
+            if e_path:
+                path = Path(e_path).expanduser().with_suffix(".txt")
+                if path.parent.is_dir():
+                    return path
+                else:
+                    print(f"Katalog {path} nie istnieje. Nie zapisano.")
+            d_path = Path.home() / "notesfile.txt"
+            return d_path
+
+        elif setting == "key-path":
+            e_path = get_env_setting(setting)
+            if e_path:
+                path = Path(e_path).expanduser().with_suffix(".lisq")
+                if path.parent.is_dir():
+                    return path
+                else:
+                    print(f"Katalog '{path}' nie istnieje. Nie zapisano.")
+            script_dir = Path(__file__).parent.resolve()
+            d_path = script_dir / "setting.lisq"
+            return d_path
+
+        elif setting == "hist-path":
+            e_path = get_env_setting(setting)
+            if e_path:
+                path = Path(e_path).expanduser().with_suffix(".lisq")
+                if path.parent.is_dir():
+                    return path
+                else:
+                    print(f"Katalog '{path}' nie istnieje. Nie zapisano.")
+            script_dir = Path(__file__).parent.resolve()
+            d_path = script_dir / "history.lisq"
+            return d_path
+
+        elif setting == "encryption":
+            value = get_env_setting(setting)
             return value.lower() if value and value.lower() in {"on", "set"} else None
-        elif key == "editor":
+        
+        elif setting == "editor":
             import shutil
-            editor = get_env_setting(key)
-            default_editor = "nano"
+            editor = get_env_setting(setting)
+            d_editor = "nano"
             if not editor:
-                return default_editor
+                return d_editor
             if shutil.which(editor):
                 return editor
             else:
                 logging.warning("Edytor '%s' nie widnieje w $PATH.", editor)
-                print(f"Edytor '{editor}' nie istnieje w $PATH.")
-                print(f"Ustawiono domyślny: '{default_editor}'")
-                return default_editor
-        elif key == "all":
+                print(f"Ustawiono domyślny: '{d_editor}'")
+                return d_editor
+
+        elif setting == "all":
             settings = {
                 "default": {
-                    "notes-path": str(getting("notes-path")),
-                    "key-path": str(getting("key-path")),
-                    "hist-path": str(getting("hist-path")),
-                    "editor": getting("editor"),
-                    "encryption": getting("encryption")
+                    "notes-path": str(get("notes-path")),
+                    "key-path": str(get("key-path")),
+                    "hist-path": str(get("hist-path")),
+                    "editor": get("editor"),
+                    "encryption": get("encryption")
                     },
                 "env": get_env_setting()
             }
             return settings
+
+    except ValueError as e:
+        logging.warning("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas pobierania danych: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas pobierania danych: {e}")
 
 def clear(args): # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
 
 def help_page(args=None):
-    print("""# ABOUT
+
+    print(fr"""{color}# ABOUT{reset}
 
     From Polish "lisek / foxie" – lisq is a single file note-taking app that work with .txt files.
     Code available under a non-commercial license (see LICENSE file).
     Copyright © funnut www.github.com/funnut
 
-# CLI USAGE
+{color}# CLI USAGE{reset}
 
-    lisq [command] [arg] [arg1] [...]
-    lisq add \"my new note\"
+    lisq [command] [arg1] [arg2] ...
+    lisq add "my new note"
 
-# COMMANDS
+{color}# COMMANDS{reset}
 
 : quit, q, exit
 : c         - clear screen
@@ -298,36 +301,36 @@ def help_page(args=None):
 
 You can add your own functions by:
     * defining them,
-    * then adding to 'dispatch table'.
+    * then adding to `dispatch table`.
 
-# SETTINGS
+{color}# SETTINGS{reset}
 
 Default settings:
-   * default notes path is ~/notesfile.txt,
+   * default notes path is `~/notesfile.txt`,
    * default key path is set to wherever main __file__ is,
    * default history path is set to wherever the main __file__ is,
    * default editor is set to `nano`,
-   * default encryption is set to off.
+   * default encryption is set to `off`.
 
 To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
 
-: export LISQ_SETTINGS='{
+: export LISQ_SETTINGS='{{
 :     "notes-path": "~/path/notesfile.txt",
 :     "key-path": "~/path/key.lisq",
 :     "hist-path": "~/path/history.lisq",
 :     "editor": "nano",
-:     "encryption": "set"}'
+:     "encryption": "set"}}'
 
 ** source your startup file or restart terminal **
 
-You can check current settings by typing 'settings' (both default and env drawn from LISQ_SETTINGS var).""")
+You can check current settings by typing `settings` (both default and env drawn from LISQ_SETTINGS var).""")
 
 
 def reiterate(args=None):
     # """ Numerowanie ID notatek """
     logging.info("reiterate(%s)",args)
     try:
-        with open(getting("notes-path"), "r", encoding="utf-8") as f:
+        with open(get("notes-path"), "r", encoding="utf-8") as f:
             lines = f.readlines()
             id_ = 0
             new_lines = []
@@ -339,18 +342,16 @@ def reiterate(args=None):
                 new_id = f"i{str(id_).zfill(3)}"
                 new_line = f"{new_id} {' '.join(parts[1:])}\n"
                 new_lines.append(new_line)
-            with open(getting("notes-path"),"w",encoding="utf-8") as f:
+            with open(get("notes-path"),"w",encoding="utf-8") as f:
                 f.writelines(new_lines)
             if args == "usr":
                 print(f"Zaktualizowano identyfikatory dla {id_} linii.")
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
+
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas numerowania: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas numerowania: {e}")
-
 
 def delete(args):
     # """ Usuwanie notatek :
@@ -371,12 +372,12 @@ def delete(args):
         for el in args:
             argo.append(str(el))
 
-        with open(getting("notes-path"),"r",encoding="utf-8") as f:
+        with open(get("notes-path"),"r",encoding="utf-8") as f:
             lines = f.readlines()
         if argo[0] == "all":
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y",""]:
-                open(getting("notes-path"),"w",encoding="utf-8").close()
+                open(get("notes-path"),"w",encoding="utf-8").close()
                 print("Usunięto.")
             else:
                 print("Anulowano.")
@@ -384,7 +385,7 @@ def delete(args):
         elif argo[0] in ["last","l"]:
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
-                with open(getting("notes-path"),"w",encoding="utf-8") as f:
+                with open(get("notes-path"),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
                 print("Usunięto.")
             else:
@@ -398,7 +399,7 @@ def delete(args):
             if number > 0:
                 yesno = input(f"Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
                 if yesno in ["yes","y",""]:
-                    with open(getting("notes-path"),"w",encoding="utf-8") as f:
+                    with open(get("notes-path"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
                     reiterate()
                     print("Usunięto.")
@@ -408,24 +409,22 @@ def delete(args):
                 print("Nie znaleziono pasujących notatek.")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono notatnika: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono notatnika: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas usuwania notatek: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas usuwania notatek: {e}")
 
 
 def read_file(args): # - random, os
     # """ Odczyt pliku notatek """ 
     logging.info("read_file(%s)",args)
     terminal_width = os.get_terminal_size().columns
-    print(f" .id .date {'.' * (terminal_width - 12)}")
+    print(f"{color} .id .date {'.' * (terminal_width - 12)}{reset}")
     try:
-        args = args if args else "recent"
+        args = args if args else ["recent"]
         found_notes = None
-        with open(getting("notes-path"),"r",encoding="utf-8") as f:
+        with open(get("notes-path"),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
-        if args == "recent":
+        if args[0] == "recent":
             to_show = lines[-10:]
         elif isinstance(args[0],int):
             to_show = lines[-int(args[0]):]
@@ -435,9 +434,9 @@ def read_file(args): # - random, os
         elif args[0] == "all":
             to_show = lines
         else:
-            found_notes = [line for line in lines if any(arg.lower() in line.lower() for arg in args)]
-            found_args = [arg.lower() for arg in args if any(arg.lower() in line.lower() for line in lines)]
-            not_found_args = [arg.lower() for arg in args if not any(arg.lower() in line.lower() for line in lines)]
+            found_notes = [line for line in lines if any(str(arg).lower() in line.lower() for arg in args)]
+            found_args = [str(arg).lower() for arg in args if any(str(arg).lower() in line.lower() for line in lines)]
+            not_found_args = [str(arg).lower() for arg in args if not any(str(arg).lower() in line.lower() for line in lines)]
             if not found_notes:
                 print("Nie znaleziono pasujących elementów.")
                 return
@@ -447,22 +446,20 @@ def read_file(args): # - random, os
         for line in to_show:
             parts = line.split()
             date_ = "-".join(parts[1].split("-")[1:])
-            print(f"{parts[0]} {date_} {" ".join(parts[2:]).strip()}")
+            print(f"{color}{parts[0]} {date_}{reset} {" ".join(parts[2:]).strip()}")
         print('')
 
         if found_notes:
             print(f"Znaleziono {len(to_show)} notatek zawierających {found_args}")
-            if not all(any(arg.lower() in line.lower() for line in lines) for arg in args) and len(found_notes) > 0:
+            if not all(any(str(arg).lower() in line.lower() for line in lines) for arg in args) and len(found_notes) > 0:
                 print(f"Nie znaleziono {not_found_args}")
         else:
             print(f"Znaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas czytania danych: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas czytania danych: {e}")
 
 
 def write_file(args): # - datetime
@@ -483,7 +480,7 @@ def write_file(args): # - datetime
         argo = " ".join(argo)
 
         try:
-            with open(getting("notes-path"),"r",encoding="utf-8") as f:
+            with open(get("notes-path"),"r",encoding="utf-8") as f:
                 lines = f.readlines()
             if lines:
                 last_line = lines[-1]
@@ -492,19 +489,17 @@ def write_file(args): # - datetime
             else:
                 id_number = 1
         except FileNotFoundError as e:
-            logging.warning("Nie znaleziono pliku: %s",e)
             print("Utworzono nowy notatnik.")
             id_number = 1
 
         id_ = f"i{str(id_number).zfill(3)}"
         date_ = date.today().strftime("%Y-%m-%d")
-        with open(getting("notes-path"),"a",encoding="utf-8") as f:
+        with open(get("notes-path"),"a",encoding="utf-8") as f:
             f.write(f"{id_} {date_} :: {argo}\n")
         print("Notatka dodana.")
 
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas pisania danych: %s",e,exc_info=True)
-        print(f"Wystąpił błąd podczas pisania danych: {e}")
 
 
 def handle_CLI(): # - ast
@@ -529,11 +524,9 @@ def handle_CLI(): # - ast
             raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args if args else ''}")
 
     except ValueError as e:
-        logging.warning("ValueError: %s | %s",e,sys.argv)
-        print(f"Błąd: {e}")
+        logging.warning("Błąd: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
-        print(f"Wystąpił inny błąd: {e}")
 
     login("out")
     raise SystemExit
@@ -541,29 +534,29 @@ def handle_CLI(): # - ast
 def changepass(args):
     # """ Nadpis pliku klucza """
     logging.info("changepass(%s)",args)
-    if getting("encryption"):
+    if get("encryption"):
         generate_key(save_to_file=True, confirm=True)
     else:
-        raise ValueError("Szyfrowanie jest wyłączone")
+        raise ValueError("Błąd: Szyfrowanie jest wyłączone")
 
 def login(inout="in"): # - readline, pathlib
     # """ Sterowanie szyfrowaniem na wejściach i wyjściach """
     logging.info("login(%s)",inout)
 
-    encryption = getting("encryption")
-    notes = getting("notes-path")
+    encryption = get("encryption")
+    notes = get("notes-path")
 
     try:
         # Wyjście
         if inout == "out":
-            histfile = getting("hist-path")
+            histfile = get("hist-path")
             readline.write_history_file(histfile)
             if encryption:
                 encrypt(notes)
             return
 
         # Tworzy nowe hasło
-        key = getting("key-path")
+        key = get("key-path")
         if encryption and not key.exists():
             result = generate_key(save_to_file=True, confirm=True)
             if not result:
@@ -585,7 +578,7 @@ def login(inout="in"): # - readline, pathlib
                     if result:
                         return
                 except ValueError:
-                    print("Nieprawidłowy token.")
+                    print("Błąd: Nieprawidłowy token")
             print("Zbyt wiele nieudanych prób. Spróbuj później.")
             raise SystemExit
 
@@ -594,43 +587,46 @@ def login(inout="in"): # - readline, pathlib
             decrypt(notes)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas login(%s): %s", inout, e, exc_info=True)
-        print(f"Wystąpił błąd podczas logowania: {e}")
 
 def __test_lab__(args):
     print("args:",args,"\n----\n")
 
-    if not args:
-        args = ['args', 2, 1, 's', [3, 4, 'dwa']]
-        print("args:",args)
+#    if not args:
+#        args = ['args', 2, 1, 's', [3, 4, 'dwa']]
+#        print("args:",args)
 
-    argo = []
-    for el in args:
-        print(type(el),el)
+    
+    def norz(**args):
+        print(args)
+
+    norz(arg1=1,arg2=5.7)
 
     print("\n----")
+
 
 # dispatch table - os
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
     "add": write_file,
+    "/": write_file,
     "show": read_file,
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: os.system(f"{getting("editor")} {getting("notes-path")}"),
+    "edit": lambda args: os.system(f"{get("editor")} {get("notes-path")}"),
     "c": clear,
     "reiterate": lambda args: reiterate("usr"),
-    "encryption": lambda args: print(f"Encryption is set to: {getting("encryption")}"),
+    "encryption": lambda args: print(f"Encryption is set to: {get("encryption")}"),
     "changepass": changepass,
     "encrypt": encrypt,
     "decrypt": decrypt,
-    "settings": lambda args: print(json.dumps(getting("all"),indent=4)),
+    "settings": lambda args: print(json.dumps(get("all"),indent=4)),
     "--help": help_page,
     "-help": help_page,
     "help": help_page,
     "h": help_page,
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
-    "type": lambda args: type_write(" ".join(args)),
+    "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": __test_lab__,
 }
 
@@ -644,13 +640,12 @@ def main():
     if len(sys.argv) > 1:
         handle_CLI()
 
-    histfile = getting("hist-path")
+    histfile = get("hist-path")
     try:
         if histfile.exists():
             readline.read_history_file(histfile)
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e,exc_info=True)
-        print(f"Błąd: Nie znaleziono pliku: {e}")
+        logging.error("Nie znaleziono pliku: %s",e)
 
     readline.set_auto_history(True)
     readline.set_history_length(100)
@@ -674,7 +669,7 @@ def main():
                 write_file(args=None)
                 print('}')
                 continue
-            if raw in ["quit","q"]:
+            if raw.lower() in ["quit","q"]:
                 logging.info("EXIT ( quit, q )")
                 login("out")
                 return
@@ -701,30 +696,24 @@ def main():
                 raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args if args else ''}")
 
         except ValueError as e:
-            logging.warning("ValueError: %s", e)
-            print(f"Błąd: {e}")
+            logging.warning("Błąd: %s", e)
             continue
         except KeyboardInterrupt as e:
             logging.warning("EXIT (Ctrl+C).")
-            print("\nWyjście z programu (Ctrl+C).")
             login("out")
             raise SystemExit
         except EOFError as e:
             logging.warning("EXIT (Ctrl+D).")
-            print("\nWyjście z programu (Ctrl+D).")
             login("out")
             raise SystemExit
         except Exception as e:
             logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
-            print(f"Wystąpił inny błąd: {e}")
 
 
 if __name__ == "__main__":
     main()
 
-
 #   _
 # _|_  ._ ._   _|_ 
 #  ||_|| || ||_||_ 
 #       www.github.com/funnut
-
