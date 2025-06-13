@@ -57,7 +57,7 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 ```
 : encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
 : changepass    - changes the password (token)
-
+:
 : encrypt ~/file.txt    - encrypts any file
 : decrypt ~/file.txt    - decrypts any file
 ```
