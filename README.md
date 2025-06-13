@@ -33,9 +33,10 @@ lisq add "my new note"
 
 ```
 Basic functionality:
-: quit, q, exit
-: c         - clear screen
-: cmds      - list of available commands
+: quit, q   - exit the program
+: cmds      - list of all available commands
+: clear, c  - clear screen
+: edit      - open the notes file in set editor
 :
 : add, /    - add a note preferably in quotation marks
 :
@@ -49,16 +50,18 @@ Basic functionality:
 : del last, l    - delete the last note
 : del all        - delete all notes
 :
+
 Additional functionality:
-: encryption on, off or set (password is stored and not requested)
-: changepass - changing password    
-:
+> You can encrypt your notes with a Base64-encoded 32-byte token.
+: encryption on, off or set     - turn on or off login functionality, set - token is stored and not requested
+: changepass - changing password (token)
+> Using build in encryption you can encrypt any other file.
+**WARNING: Use with caution!**
 : encrypt ~/file.txt    - encrypting any file
 : decrypt ~/file.txt    - decrypting any file
 :
 : settings    - lists all settings
 : reiterate   - renumber notes' IDs
-: edit        - open the notes file in set editor
 :
 : echo [str]    - echo given text
 : type [str]    - type given text

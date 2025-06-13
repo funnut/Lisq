@@ -282,7 +282,7 @@ def help_page(args=None):
 
 {color}# COMMANDS{reset}
     The three core commands are add/show/del.
-: quit, q, exit
+: quit, q
 : c         - clear screen
 : cmds      - list of available commands
 :
@@ -619,6 +619,7 @@ commands = {
     "delete": delete,
     "del": delete,
     "edit": lambda args: os.system(f"{get("editor")} {get("notes-path")}"),
+    "clear": clear,
     "c": clear,
     "reiterate": lambda args: reiterate("usr"),
     "encryption": lambda args: print(f"Encryption is set to: {get("encryption")}"),
