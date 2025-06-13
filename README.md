@@ -34,8 +34,8 @@ lisq add "my new note"
 Basic functionality:
 ```
 : quit, q   - exit the program
-: cmds      - list of all available commands
 : clear, c  - clear screen
+: cmds      - list of all available commands
 : edit      - open the notes file in set editor
 :
 : add, /    - add a note preferably in quotation marks
