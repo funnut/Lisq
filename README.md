@@ -55,20 +55,20 @@ lisq add "my new note"
 
 You can encrypt your notes with a Base64-encoded 32-byte token.
 ```
-: encryption on, off or set     - turn on or off login functionality, set - token is stored and not requested
+: encryption on, off or set - turn on or off login functionality, set - token is stored and not requested
 : changepass - changing password (token)
 ```
 Using build in encryption you can encrypt any other file (**Use with caution!**).
 ```
-: encrypt ~/file.txt    - encrypting any file
-: decrypt ~/file.txt    - decrypting any file
+: encrypt ~/file.txt - encrypting any file
+: decrypt ~/file.txt - decrypting any file
 ```
 ```
-: settings    - lists all settings
-: reiterate   - renumber notes' IDs
+: settings - lists all settings
+: reiterate - renumber notes' IDs
 :
-: echo [str]    - echo given text
-: type [str]    - type given text
+: echo [str] - echo given text
+: type [str] - type given text
 ```
 
 You can add your own functions by:
