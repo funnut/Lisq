@@ -32,9 +32,12 @@ lisq add "my new note"
 **The three core commands are `add`/`show`/`del`.**
 
 ```
+Basic functionality:
 : quit, q, exit
 : c         - clear screen
 : cmds      - list of available commands
+:
+: add, /    - add a note preferably in quotation marks
 :
 : show, s           - show recent notes (default 10)
 : show [int]        - show number of recent notes
@@ -46,6 +49,7 @@ lisq add "my new note"
 : del last, l    - delete the last note
 : del all        - delete all notes
 :
+Additional functionality:
 : encryption on, off or set (password is stored and not requested)
 : changepass - changing password    
 :
