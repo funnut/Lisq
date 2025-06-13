@@ -53,7 +53,7 @@ lisq add "my new note"
 
 * Additional functionality:
 
-You can encrypt your notes or any other file with a Base64-encoded 32-byte token (use with caution!).
+You can encrypt your notes or any other file with a Base64-encoded 32-byte token (***use with caution!***).
 ```
 : encryption on, off or set - turn on or off login functionality, set - token is stored and not requested
 : changepass - changing password (token)
