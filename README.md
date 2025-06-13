@@ -29,7 +29,7 @@ lisq add "my new note"
 
 ## COMMANDS
 
-The three core commands are **`add`/`show`/`del`**.
+**The three core commands are `add`/`show`/`del`.**
 
 ```
 : quit, q, exit
