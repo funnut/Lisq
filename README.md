@@ -52,13 +52,13 @@ Basic functionality:
 ```
 
 Additional functionality:
-> You can encrypt your notes with a Base64-encoded 32-byte token.
+You can encrypt your notes with a Base64-encoded 32-byte token.
 ```
 : encryption on, off or set     - turn on or off login functionality, set - token is stored and not requested
 : changepass - changing password (token)
 ```
-> Using build in encryption you can encrypt any other file.
-**WARNING: Use with caution!**
+Using build in encryption you can encrypt any other file.
+**ATTENTION!: Use with caution.**
 ```
 : encrypt ~/file.txt    - encrypting any file
 : decrypt ~/file.txt    - decrypting any file
