@@ -62,10 +62,11 @@ You can add your own functions by:
 
 ## SETTINGS
 
-Default settings:
+Default settings are:
    * default notes path is `~/notesfile.txt`,
    * default key path is set to wherever main __file__ is,
    * default history path is set to wherever the main __file__ is,
+   * default color accent is cyan,
    * default editor is set to `nano`,
    * default encryption is set to `off`.
 
@@ -76,6 +77,7 @@ export LISQ_SETTINGS='{
     "notes-path": "~/path/notesfile.txt",
     "key-path": "~/path/key.lisq",
     "hist-path": "~/path/history.lisq",
+    "color-accent": "\\033[34m",
     "editor": "nano",
     "encryption": "set"}'
 ```
