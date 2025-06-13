@@ -59,10 +59,13 @@ You can encrypt your notes with a Base64-encoded 32-byte token.
 : changepass - changing password (token)
 ```
 Using build in encryption you can encrypt any other file.
-    ATTENTION!: Use with caution.
+
+ATTENTION!: Use with caution.
+```
 : encrypt ~/file.txt    - encrypting any file
 : decrypt ~/file.txt    - decrypting any file
-:
+```
+```
 : settings    - lists all settings
 : reiterate   - renumber notes' IDs
 :
