@@ -60,8 +60,7 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 :
 : encrypt ~/file.txt    - encrypts any file
 : decrypt ~/file.txt    - decrypts any file
-```
-```
+:
 : settings - lists all settings
 : reiterate - renumber notes' IDs
 :
