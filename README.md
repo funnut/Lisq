@@ -28,6 +28,9 @@ lisq add "my new note"
 ```
 
 ## COMMANDS
+
+The three core commands are add/show/del.
+
 ```
 : quit, q, exit
 : c         - clear screen
@@ -56,6 +59,7 @@ lisq add "my new note"
 : echo [str]    - echo given text
 : type [str]    - type given text
 ```
+
 You can add your own functions by:
 + defining them,
 + then adding to *dispatch table*.
