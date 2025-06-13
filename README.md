@@ -69,9 +69,9 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 : type [str] - types the given text
 ```
 
-You can add your own functions by:
-+ defining them,
-+ then adding to *dispatch table*.
+> You can add your own functions by:
+> + defining them,
+> + then adding to *dispatch table*.
 
 ## SETTINGS
 
