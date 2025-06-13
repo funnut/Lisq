@@ -31,8 +31,8 @@ lisq add "my new note"
 
 **The three core commands are `add`/`show`/`del`.**
 
-```
 Basic functionality:
+```
 : quit, q   - exit the program
 : cmds      - list of all available commands
 : clear, c  - clear screen
@@ -49,14 +49,17 @@ Basic functionality:
 : del [str]      - delete notes containing [string]
 : del last, l    - delete the last note
 : del all        - delete all notes
-:
+```
 
 Additional functionality:
 > You can encrypt your notes with a Base64-encoded 32-byte token.
+```
 : encryption on, off or set     - turn on or off login functionality, set - token is stored and not requested
 : changepass - changing password (token)
+```
 > Using build in encryption you can encrypt any other file.
 **WARNING: Use with caution!**
+```
 : encrypt ~/file.txt    - encrypting any file
 : decrypt ~/file.txt    - decrypting any file
 :
