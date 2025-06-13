@@ -38,17 +38,17 @@ lisq add "my new note"
 : cmds      - list of all available commands
 : edit      - open the notes file in set editor
 :
-: add, /    - add a note preferably in quotation marks
+: add, / [str]   - adds a note (preferably enclosed in quotation marks)
 :
 : show, s           - show recent notes (default 10)
-: show [int]        - show number of recent notes
-: show [str]        - show notes containing [string]
-: show all          - show all notes
-: show random, r    - show a random note
+:      [int]        - show number of recent notes
+:      [str]        - show notes containing [string]
+:      all          - show all notes
+:      random, r    - show a random note
 :
 : del [str]      - delete notes containing [string]
-: del last, l    - delete the last note
-: del all        - delete all notes
+:     last, l    - delete the last note
+:     all        - delete all notes
 ```
 
 * Additional functionality:
