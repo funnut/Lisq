@@ -281,6 +281,7 @@ def help_page(args=None):
     lisq / ...
 
 {color}# COMMANDS{reset}
+    The three core commands are add/show/del.
 : quit, q, exit
 : c         - clear screen
 : cmds      - list of available commands
