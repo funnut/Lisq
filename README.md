@@ -70,7 +70,7 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 
 > You can add your own functions by:
 > + defining them,
-> + then adding to ***dispatch table***.
+> + then adding to *dispatch table*.
 
 ## SETTINGS
 

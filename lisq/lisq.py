@@ -277,43 +277,52 @@ def help_page(args=None):
 
 {color}# CLI USAGE{reset}
     lisq [command] [arg1] [arg2] ...
-    lisq add "here's first!"
-    lisq / ...
+    lisq add "A sample note."
 
 {color}# COMMANDS{reset}
-    The three core commands are add/show/del.
-: quit, q
-: c         - clear screen
-: cmds      - list of available commands
+    **The three core commands are add/show/del.**
+
+* Basic functionality:
+
+: quit, q   - exit the program
+: clear, c  - clear screen
+: cmds      - list of all available commands
+: edit      - open the notes file in set editor
+:
+: add, / [str]   - adds a note (preferably enclosed in quotation marks)
 :
 : show, s           - show recent notes (default 10)
-: show [int]        - show number of recent notes
-: show [str]        - show notes containing [string]
-: show all          - show all notes
-: show random, r    - show a random note
+:      [int]        - show number of recent notes
+:      [str]        - show notes containing [string]
+:      all          - show all notes
+:      random, r    - show a random note
 :
 : del [str]      - delete notes containing [string]
-: del last, l    - delete the last note
-: del all        - delete all notes
-:
-: encryption on, off or set (password is stored and not requested)
-: changepass - changing password    
-:
-: encrypt ~/file.txt    - encrypting any file
-: decrypt ~/file.txt    - decrypting any file
-:
-: settings    - lists all settings
-: reiterate   - renumber notes' IDs
-: edit        - open the notes file in set editor
-:
-: echo [str]    - echo given text
-: type [str]    - type given text
+:     last, l    - delete the last note
+:     all        - delete all notes
 
-You can add your own functions by:
-    * defining them,
-    * then adding to `dispatch table`.
+* Additional functionality:
+
+You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (*** use with caution! ***).
+
+: encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
+: changepass    - changes the password (token)
+:
+: encrypt ~/file.txt    - encrypts any file
+: decrypt ~/file.txt    - decrypts any file
+:
+: settings - lists all settings
+: reiterate - renumber notes' IDs
+:
+: echo [str] - prints the given text
+: type [str] - types the given text
+
+> You can add your own functions by:
+> + defining them,
+> + then adding to *dispatch table*.
 
 {color}# SETTINGS{reset}
+
 Default settings are:
    * default notes path is `~/notesfile.txt`,
    * default key path is set to wherever main __file__ is,
@@ -322,7 +331,7 @@ Default settings are:
    * default editor is set to `nano`,
    * default encryption is set to `off`.
 
-To change it, set the following variable in your system by adding it to a startup file ~/.bashrc or ~/.zshrc.
+To change it, set the following variable in your system by adding it to a startup file `~/.bashrc` or `~/.zshrc`.
 
 ```bash
 export LISQ_SETTINGS='{{
@@ -334,10 +343,9 @@ export LISQ_SETTINGS='{{
     "encryption": "set"}}'
 ```
 
-** source your startup file or restart terminal **
+> Source your startup file or restart terminal.
 
-You can check current settings by typing `settings` (for both default and env settings drawn from LISQ_SETTINGS var).""")
-
+You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).""")
 
 def reiterate(args=None):
     """ Numerowanie ID notatek """
