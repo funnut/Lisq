@@ -12,6 +12,8 @@ Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
+You can copy lisq.py in your $PATH or
+
 ```bash
 pip install lisq
 ```
