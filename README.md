@@ -65,7 +65,6 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 :
 : settings - lists all settings
 : reiterate - renumber notes' IDs
-:
 : echo [str] - prints the given text
 : type [str] - types the given text
 ```
