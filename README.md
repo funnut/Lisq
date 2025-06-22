@@ -83,7 +83,7 @@ Default settings are:
    * default editor is set to `nano`,
    * default encryption is set to `off`.
 
-To change it, set the following variable in your system by adding it to a startup file `~/.bashrc` or `~/.zshrc`.
+To change it, set the following variable in your system by adding it to a startup file (eg. `~/.bashrc`).
 
 ```bash
 export LISQ_SETTINGS='{
