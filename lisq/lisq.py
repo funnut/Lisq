@@ -1,4 +1,6 @@
-def type_write(text, delay=0.05): # - time, sys
+#!/usr/bin/python
+
+def type_write(text, delay=0.05) -> None:
     import time
     import sys
     for char in text:
@@ -7,13 +9,13 @@ def type_write(text, delay=0.05): # - time, sys
         time.sleep(delay)
     print()
 
-def echo(text):
+def echo(text) -> None:
     print(text)
 
 # # # # # # # # # # #__DEFAULT_LISQ_FUNCTIONALITY__# # # # # # # # # # #
 #   _
-# _|_  ._ ._   _|_ 
-#  ||_|| || ||_||_ 
+# _|_  ._ ._   _|_
+#  ||_|| || ||_||_
 #       www.github.com/funnut
 
 from datetime import datetime
@@ -22,15 +24,14 @@ import json, os, sys, ast
 import logging
 import shlex
 import readline
-
+import subprocess
 
 # Konfiguracja log - logging
 logging.basicConfig(
     level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-    # filename="error.log",  # rm by logować na konsolę
-    format="%(message)s", # %(asctime)s - %(levelname)s - 
+    #filename="lisq.log",  # rm to console log
+    format="%(levelname)s %(message)s"
 )
-
 # logging.disable(logging.CRITICAL)
 
 def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
@@ -65,17 +66,17 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
 
     except KeyboardInterrupt:
         logging.warning("\nPrzerwane generowanie klucza (Ctrl+C).")
-        raise SystemExit
+        raise SystemExit(1)
     except EOFError:
         logging.warning("\nPrzerwane generowanie klucza (Ctrl+D).")
-        raise SystemExit
+        raise SystemExit(0)
     except FileNotFoundError as e:
         logging.error("Nie znaleziono pliku: %s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
 
 
-def encrypt(filepath, fernet=None): # - fernet, pathlib
+def encrypt(filepath, fernet=None) -> None: # - fernet, pathlib
     """ Szyfrowanie plików """
     logging.info("encrypt (%s,%s)",filepath,fernet) # bez sensu
     from cryptography.fernet import Fernet
@@ -120,7 +121,7 @@ def encrypt(filepath, fernet=None): # - fernet, pathlib
         logging.error("Wystąpił inny błąd podczas szyfrowania: %s",e,exc_info=True)
 
 
-def decrypt(filepath, fernet=None): # - fernet, InvalidToken, pathlib
+def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
     """ Odszyfrowanie plików """
     logging.info("decrypt (%s,%s)",filepath,fernet)
     from cryptography.fernet import Fernet, InvalidToken
@@ -170,7 +171,7 @@ def get(setting): # - pathlib, os, json
     """ Pobiera i zwraca aktualne ustawienia """
     logging.info("  get(%s)",setting)
     def get_env_setting(setting="all", env_var="LISQ_SETTINGS"):
-        # """Pobiera dane ze zmiennej środowiskowej"""
+        """Pobiera dane ze zmiennej środowiskowej"""
         raw = os.getenv(env_var, "{}")
         try:
             settings = json.loads(raw)
@@ -179,7 +180,6 @@ def get(setting): # - pathlib, os, json
         if setting == "all":
             return settings
         return settings.get(setting)
-
     try:
         if setting == "notes-path":
             e_path = get_env_setting(setting)
@@ -219,7 +219,7 @@ def get(setting): # - pathlib, os, json
         elif setting == "encryption":
             value = get_env_setting(setting)
             return value.lower() if value and value.lower() in {"on", "set"} else None
-        
+
         elif setting == "editor":
             import shutil
             editor = get_env_setting(setting)
@@ -235,7 +235,7 @@ def get(setting): # - pathlib, os, json
 
         elif setting == "color-accent":
             color_accent = get_env_setting(setting)
-            d_color = "\033[36m" # cyan
+            d_color = "\033[0m" # default
             if color_accent:
                 color_accent = color_accent.encode().decode("unicode_escape")
                 return color_accent
@@ -260,29 +260,19 @@ def get(setting): # - pathlib, os, json
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas pobierania danych: %s",e,exc_info=True)
 
-
 color = get("color-accent")
 reset = "\033[0m"
 
-def clear(args): # - os
+def clear(args) -> None: # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
 
-def help_page(args=None):
-
-    print(fr"""{color}# ABOUT{reset}
-    From Polish "lisek / foxie" – lisq is a single file note-taking app that work with .txt files.
-    Code available under a non-commercial license (see LICENSE file).
-    Copyright © funnut www.github.com/funnut
-
-{color}# CLI USAGE{reset}
-    lisq [command] [arg1] [arg2] ...
-    lisq add "A sample note."
+def help_page(args=None) -> None:
+    print(fr"""lisq [command] [arg1] [arg2] ...
+lisq add "sample note"
 
 {color}# COMMANDS{reset}
-    **The three core commands are add/show/del.**
-
-* Basic functionality:
+    * Basic functionality:
 
 : quit, q   - exit the program
 : clear, c  - clear screen
@@ -299,55 +289,9 @@ def help_page(args=None):
 :
 : del [str]      - delete notes containing [string]
 :     last, l    - delete the last note
-:     all        - delete all notes
+:     all        - delete all notes""")
 
-* Additional functionality:
-
-You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (*** use with caution! ***).
-
-: encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
-: changepass    - changes the password (token)
-:
-: encrypt ~/file.txt    - encrypts any file
-: decrypt ~/file.txt    - decrypts any file
-:
-: settings - lists all settings
-: reiterate - renumber notes' IDs
-:
-: echo [str] - prints the given text
-: type [str] - types the given text
-
-> You can add your own functions by:
-> + defining them,
-> + then adding to *dispatch table*.
-
-{color}# SETTINGS{reset}
-
-Default settings are:
-   * default notes path is `~/notesfile.txt`,
-   * default key path is set to wherever main __file__ is,
-   * default history path is set to wherever the main __file__ is,
-   * default color accent is cyan,
-   * default editor is set to `nano`,
-   * default encryption is set to `off`.
-
-To change it, set the following variable in your system by adding it to a startup file `~/.bashrc` or `~/.zshrc`.
-
-```bash
-export LISQ_SETTINGS='{{
-    "notes-path": "~/path/notesfile.txt",
-    "key-path": "~/path/key.lisq",
-    "hist-path": "~/path/history.lisq",
-    "color-accent": "\\033[34m",
-    "editor": "nano",
-    "encryption": "set"}}'
-```
-
-> Source your startup file or restart terminal.
-
-You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).""")
-
-def reiterate(args=None):
+def reiterate(args=None) -> None:
     """ Numerowanie ID notatek """
     logging.info("reiterate(%s)",args)
     try:
@@ -374,7 +318,7 @@ def reiterate(args=None):
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas numerowania: %s",e,exc_info=True)
 
-def delete(args):
+def delete(args) -> None:
     """ Usuwanie notatek :
         - Wszystkich, pojedynczych lub ostatniej """
     logging.info("delete(%s)",args)
@@ -435,8 +379,8 @@ def delete(args):
         logging.error("Wystąpił inny błąd podczas usuwania notatek: %s",e,exc_info=True)
 
 
-def read_file(args): # - random, os
-    """ Odczyt pliku notatek """ 
+def read_file(args) -> None: # - random, os
+    """ Odczyt pliku notatek """
     logging.info("read_file(%s)",args)
     terminal_width = os.get_terminal_size().columns
     print(f"{color} .id .date {'.' * (terminal_width - 12)}{reset}")
@@ -483,7 +427,7 @@ def read_file(args): # - random, os
         logging.error("Wystąpił inny błąd podczas czytania danych: %s",e,exc_info=True)
 
 
-def write_file(args): # - datetime
+def write_file(args) -> None: # - datetime
     """ Zapisywanie notatek do pliku w ustalonym formacie """
     logging.info("write_file(%s)",args)
     try:
@@ -523,7 +467,7 @@ def write_file(args): # - datetime
         logging.error("Wystąpił inny błąd podczas pisania danych: %s",e,exc_info=True)
 
 
-def handle_CLI(): # - ast
+def handle_CLI() -> None: # - ast
     """ CLI Usage """
     logging.info("handle_CLI(%s)",sys.argv)
 
@@ -540,19 +484,19 @@ def handle_CLI(): # - ast
             args.append(val)
 
         if cmd in commands:
-            commands[cmd](args)    
+            commands[cmd](args)
         else:
-            raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args if args else ''}")
+            raise ValueError(f"Invalid command: {cmd} {args if args else ''}")
 
     except ValueError as e:
-        logging.warning("Błąd: %s",e)
+        logging.warning("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
 
     login("out")
-    raise SystemExit
+    raise SystemExit(0)
 
-def changepass(args):
+def changepass(args) -> None:
     """ Nadpis pliku klucza """
     logging.info("changepass(%s)",args)
     if get("encryption"):
@@ -581,7 +525,7 @@ def login(mod="in"): # - readline, pathlib
         if encryption and not key.exists():
             result = generate_key(save_to_file=True, confirm=True)
             if not result:
-                raise SystemExit
+                raise SystemExit(1)
 
         # Wejście OFF
         elif not encryption and key.exists():
@@ -601,7 +545,7 @@ def login(mod="in"): # - readline, pathlib
                 except ValueError:
                     print("Błąd: Nieprawidłowy token")
             print("Zbyt wiele nieudanych prób. Spróbuj później.")
-            raise SystemExit
+            raise SystemExit(0)
 
         # Wejście SET
         elif encryption == "set":
@@ -613,9 +557,13 @@ def __test_lab__(args):
     print("args:",args,"\n----\n")
 
     if args[0] == "on":
-        os.system("termux-torch on")
+        result = subprocess.run(["termux-torch", "on"])
+        print(result)
     elif args[0] == "off":
-        os.system("termux-torch off")
+        result = subprocess.run(["termux-torch", "off"])
+        print(result)
+
+    print('')
 
 # dispatch table - os
 commands = {
@@ -626,7 +574,7 @@ commands = {
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: os.system(f"{get("editor")} {get("notes-path")}"),
+    "edit": lambda args: subprocess.run([get("editor"),get("notes-path")]),
     "clear": clear,
     "c": clear,
     "reiterate": lambda args: reiterate("usr"),
@@ -636,9 +584,7 @@ commands = {
     "decrypt": decrypt,
     "settings": lambda args: print(json.dumps(get("all"),indent=4)),
     "--help": help_page,
-    "-help": help_page,
     "help": help_page,
-    "h": help_page,
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": __test_lab__,
@@ -664,14 +610,14 @@ def main():
     readline.set_auto_history(True)
     readline.set_history_length(100)
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
-    print(fr"""{color}  __      __   ____   ______
- / /___  / /: / -_ : / _   /: {now}
+    now = datetime.now().strftime("%H:%M %b %d")
+    print(fr"""  __      __   ____   ______
+ / /___  / /: / -_ : / _   /: 
 /_____/:/_/:/_____/:/___\_\:' cmds - help
-':::::: ':: ':::::  '::::: '{reset}""")
+':::::: ':: ':::::  '::::: '  {now}""")
 
     while True:
-        logging.info("START GŁÓWNEJ PĘTLI")
+        logging.info("START while True")
         try:
             raw = input("> ").strip()
 
@@ -698,19 +644,19 @@ def main():
             if cmd in commands:
                 commands[cmd](args)
             else:
-                raise ValueError(f"Nieprawidłowe polecenie: {cmd} {args if args else ''}")
+                raise ValueError(f"Invalid command: {cmd} {args if args else ''}")
 
         except ValueError as e:
-            logging.warning("Błąd: %s", e)
+            logging.warning("%s", e)
             continue
         except KeyboardInterrupt:
             logging.warning("EXIT (Ctrl+C).\n")
             login("out")
-            raise SystemExit
+            raise SystemExit(1)
         except EOFError:
-            logging.warning("EXIT (Ctrl+D).\n")
+            print("EXIT (Ctrl+D).\n")
             login("out")
-            raise SystemExit
+            raise SystemExit(0)
         except Exception as e:
             logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
 
@@ -720,6 +666,6 @@ if __name__ == "__main__":
 
 
 #   _
-# _|_  ._ ._   _|_ 
-#  ||_|| || ||_||_ 
+# _|_  ._ ._   _|_
+#  ||_|| || ||_||_
 #       www.github.com/funnut
