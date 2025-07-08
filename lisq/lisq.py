@@ -611,10 +611,12 @@ def main():
     readline.set_history_length(100)
 
     now = datetime.now().strftime("%H:%M %b %d")
-    print(fr"""  __      __   ____   ______
- / /___  / /: / -_ : / _   /: 
-/_____/:/_/:/_____/:/___\_\:' cmds - help
-':::::: ':: ':::::  '::::: '  {now}""")
+    print(fr""" _ _
+| (_)___  __ _
+| | / __|/ _` |
+| | \__ \ (_| |
+|_|_|___/\__, |
+ cmd - help |_| {now}""")
 
     while True:
         logging.info("START while True")
