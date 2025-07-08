@@ -1,3 +1,5 @@
+# The code below is not part of the program (since v2025.5.29) but rather an invitation to create your own implementations.
+
 COLORS = {
     "reset": "\033[0m",
     "bold": "\033[1m",
@@ -138,5 +140,3 @@ THEMES = {
 # single themes
 THEMES["cli-text"] = {key: COLORS["reset"] for key in THEMES["lisq"].keys()}
 THEMES["yellow"] = {key: COLORS["yellow"] for key in THEMES["lisq"].keys()}
-
-
