@@ -10,7 +10,7 @@ Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
-You can copy **lisq.py** somewhere in your $PATH *(remeber to make it executable)* or install by pip *(python language package manager)*:
+You can copy **lisq.py** somewhere in your $PATH *(remeber to make it executable)* or install by pip* : 
 
 ```bash
 pip install lisq
@@ -18,6 +18,7 @@ pip install lisq
 
 then type `lisq`
 
+* *Python language package manager*
 > How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 ## CLI USAGE
