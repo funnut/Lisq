@@ -268,8 +268,9 @@ def clear(args) -> None: # - os
     print("\n"*terminal_hight*2)
 
 def help_page(args=None) -> None:
-    print(fr"""lisq [command] [arg1] [arg2] ...
-lisq add "sample note"
+    print(fr"""{color}# CLI USAGE{reset}
+    lisq [command [arg1] [arg2] ...]
+    lisq add "sample note" // alternatively use / instead of add
 
 {color}# COMMANDS{reset}
     * Basic functionality:
@@ -289,7 +290,53 @@ lisq add "sample note"
 :
 : del [str]      - delete notes containing [string]
 :     last, l    - delete the last note
-:     all        - delete all notes""")
+:     all        - delete all notes
+
+* Additional functionality:
+
+You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
+```
+: encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
+: changepass    - changes the password (token)
+:
+: encrypt ~/file.txt    - encrypts any file
+: decrypt ~/file.txt    - decrypts any file
+:
+: settings - lists all settings
+: reiterate - renumber notes' IDs
+: echo [str] - prints the given text
+: type [str] - types the given text
+```
+
+> You can add your own functions by:
+> + defining them,
+> + then adding to *dispatch table*.
+
+## SETTINGS
+
+Default settings are:
+   * default notes path is `~/notesfile.txt`,
+   * default key path is set to wherever main __file__ is,
+   * default history path is set to wherever the main __file__ is,
+   * default color accent is cyan,
+   * default editor is set to `nano`,
+   * default encryption is set to `off`.
+
+To change it, set the following variable in your system by adding it to a startup file (eg. `~/.bashrc`).
+
+```bash
+export LISQ_SETTINGS='{{
+    "notes-path": "~/path/notesfile.txt",
+    "key-path": "~/path/key.lisq",
+    "hist-path": "~/path/history.lisq",
+    "color-accent": "\\033[34m",
+    "editor": "nano",
+    "encryption": "set"}}'
+```
+
+> Source your startup file or restart terminal.
+
+You can check current settings by typing `settings` ( both default and environmental drawn from *LISQ_SETTINGS* var).""")
 
 def reiterate(args=None) -> None:
     """ Numerowanie ID notatek """
@@ -616,7 +663,7 @@ def main():
 | | / __|/ _` |
 | | \__ \ (_| |
 |_|_|___/\__, |
- cmd - help |_| {now}""")
+ cmds - help |_| {now}""")
 
     while True:
         logging.info("START while True")

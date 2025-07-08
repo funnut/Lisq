@@ -98,4 +98,4 @@ export LISQ_SETTINGS='{
 
 > Source your startup file or restart terminal.
 
-You can check current settings by typing `settings` ( both *default* and *env* drawn from *LISQ_SETTINGS* var).
+You can check current settings by typing `settings` ( both default and environmental drawn from *LISQ_SETTINGS* var).
