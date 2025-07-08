@@ -10,7 +10,7 @@ Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
-You can copy *lisq.py* in your $PATH and rename it or
+You can copy *lisq.py* somewhere in your $PATH or install pip package:
 
 ```bash
 pip install lisq
