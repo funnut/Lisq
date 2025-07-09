@@ -30,7 +30,7 @@ import subprocess
 logging.basicConfig(
     level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
     #filename="lisq.log",  # rm to console log
-    format="%(levelname)s %(message)s"
+    format="%(message)s"
 )
 # logging.disable(logging.CRITICAL)
 
@@ -235,7 +235,7 @@ def get(setting): # - pathlib, os, json
 
         elif setting == "color-accent":
             color_accent = get_env_setting(setting)
-            d_color = "\033[0m" # default
+            d_color = "\033[32m" # default
             if color_accent:
                 color_accent = color_accent.encode().decode("unicode_escape")
                 return color_accent
@@ -312,7 +312,7 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 > + defining them,
 > + then adding to *dispatch table*.
 
-## SETTINGS
+{color}## SETTINGS{reset}
 
 Default settings are:
    * default notes path is `~/notesfile.txt`,
@@ -603,6 +603,9 @@ def login(mod="in"): # - readline, pathlib
 def __test_lab__(args):
     print("args:",args,"\n----\n")
 
+    if not args:
+        print("Give arg on | off")
+        return
     if args[0] == "on":
         result = subprocess.run(["termux-torch", "on"])
         print(result)
@@ -663,7 +666,7 @@ def main():
 | | / __|/ _` |
 | | \__ \ (_| |
 |_|_|___/\__, |
- cmds - help |_| {now}""")
+cmds - help |_| {now}""")
 
     while True:
         logging.info("START while True")

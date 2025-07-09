@@ -80,7 +80,7 @@ Default settings are:
    * default notes path is `~/notesfile.txt`,
    * default key path is set to wherever main __file__ is,
    * default history path is set to wherever the main __file__ is,
-   * default color accent is cyan,
+   * default color accent is green,
    * default editor is set to `nano`,
    * default encryption is set to `off`.
 
