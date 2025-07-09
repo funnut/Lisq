@@ -1,0 +1,75 @@
+* git branch -a (all) wyswietla lokalne i zdalne gałęzie
+* git checkout -b nazwa-gałęzi lub git branch nazwa-gałęzi
+* git push -u origin nazwa-gałęzi 
+
+Świetnie! Oto krok po kroku, jak przygotować repozytorium do dalszej pracy po wypuszczeniu wersji na PyPI:
+
+
+---
+
+1. Przejdź do swojego repozytorium
+
+Jeśli nie jesteś jeszcze w katalogu repo:
+
+cd /ścieżka/do/twojego/repozytorium
+
+
+---
+
+2. Upewnij się, że jesteś na gałęzi main (lub master)
+
+git checkout main
+
+
+---
+
+3. Oznacz aktualną wersję tagiem
+
+Załóżmy, że wczoraj wypuściłeś wersję 1.0.0:
+
+git tag v1.0.0
+git push origin v1.0.0
+
+To zapisze aktualny stan kodu jako wersję v1.0.0.
+
+
+---
+
+4. Utwórz gałąź rozwojową
+
+git checkout -b dev
+git push -u origin dev
+
+Teraz jesteś na gałęzi dev i możesz bezpiecznie wprowadzać zmiany.
+
+
+---
+
+5. Pracuj nad kodem na gałęzi dev
+
+Wprowadzaj zmiany, commity itd. Gdy wszystko będzie gotowe do nowego wydania, przechodzisz dalej:
+
+
+---
+
+6. Gdy nowa wersja jest gotowa: scal do main
+
+git checkout main
+git merge dev
+git push
+
+
+---
+
+7. Oznacz nową wersję i wypuść ją na PyPi
+
+git tag v1.1.0
+git push origin v1.1.0
+
+Następnie wypuść nową wersję na PyPI (np. przez twine).
+
+
+---
+
+Chcesz, żebym przygotował dla Ciebie skrypt bashowy, który robi to wszystko półautomatycznie?
+
