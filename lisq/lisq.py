@@ -71,7 +71,7 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
         logging.warning("\nPrzerwane generowanie klucza (Ctrl+D).")
         raise SystemExit(0)
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
 
@@ -116,7 +116,7 @@ def encrypt(filepath, fernet=None) -> None: # - fernet, pathlib
         print("encrypted")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas szyfrowania: %s",e,exc_info=True)
 
@@ -162,7 +162,7 @@ def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
     except InvalidToken:
         logging.warning("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas odszyfrowywania: %s",e,exc_info=True)
 
@@ -235,7 +235,7 @@ def get(setting): # - pathlib, os, json
 
         elif setting == "color-accent":
             color_accent = get_env_setting(setting)
-            d_color = "\033[32m" # default
+            d_color = "\033[1;32m" # default
             if color_accent:
                 color_accent = color_accent.encode().decode("unicode_escape")
                 return color_accent
@@ -263,6 +263,15 @@ def get(setting): # - pathlib, os, json
 color = get("color-accent")
 reset = "\033[0m"
 
+histfile = get("hist-path")
+try:
+    if histfile.exists():
+        readline.read_history_file(histfile)
+except FileNotFoundError as e:
+    logging.error("%s",e)
+readline.set_auto_history(True)
+readline.set_history_length(100)
+
 def clear(args) -> None: # - os
     terminal_hight = os.get_terminal_size().lines
     print("\n"*terminal_hight*2)
@@ -278,6 +287,7 @@ def help_page(args=None) -> None:
 : quit, q   - exit the program
 : clear, c  - clear screen
 : cmds      - list of all available commands
+: help      - show help page
 : edit      - open the notes file in set editor
 :
 : add, / [str]   - adds a note (preferably enclosed in quotation marks)
@@ -318,11 +328,11 @@ Default settings are:
    * default notes path is `~/notesfile.txt`,
    * default key path is set to wherever main __file__ is,
    * default history path is set to wherever the main __file__ is,
-   * default color accent is cyan,
+   * default color accent is green,
    * default editor is set to `nano`,
    * default encryption is set to `off`.
 
-To change it, set the following variable in your system by adding it to a startup file (eg. `~/.bashrc`).
+To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
 ```bash
 export LISQ_SETTINGS='{{
@@ -336,7 +346,7 @@ export LISQ_SETTINGS='{{
 
 > Source your startup file or restart terminal.
 
-You can check current settings by typing `settings` ( both default and environmental drawn from *LISQ_SETTINGS* var).""")
+You can check current settings by typing `settings` ( both default and environmental drawn from LISQ_SETTINGS var).""")
 
 def reiterate(args=None) -> None:
     """ Numerowanie ID notatek """
@@ -361,7 +371,7 @@ def reiterate(args=None) -> None:
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas numerowania: %s",e,exc_info=True)
 
@@ -371,7 +381,7 @@ def delete(args) -> None:
     logging.info("delete(%s)",args)
     try:
         if not args:
-            raw = input("** / ").strip()
+            raw = input("DEL: ").strip()
             if raw in ["q",""]:
                 return
 
@@ -421,7 +431,7 @@ def delete(args) -> None:
                 print("Nie znaleziono pasujących notatek.")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono notatnika: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas usuwania notatek: %s",e,exc_info=True)
 
@@ -430,7 +440,7 @@ def read_file(args) -> None: # - random, os
     """ Odczyt pliku notatek """
     logging.info("read_file(%s)",args)
     terminal_width = os.get_terminal_size().columns
-    print(f"{color} .id .date {'.' * (terminal_width - 12)}{reset}")
+    print(f" .id .date {'.' * (terminal_width - 12)}")
     try:
         args = args if args else ["recent"]
         found_notes = None
@@ -458,7 +468,7 @@ def read_file(args) -> None: # - random, os
         for line in to_show:
             parts = line.split()
             date_ = "-".join(parts[1].split("-")[1:])
-            print(f"{color}{parts[0]} {date_}{reset} {" ".join(parts[2:]).strip()}")
+            print(f"{parts[0]} {date_} {color}{" ".join(parts[2:]).strip()}{reset}")
         print('')
 
         if found_notes:
@@ -469,7 +479,7 @@ def read_file(args) -> None: # - random, os
             print(f"Znaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
+        logging.error("%s",e)
     except Exception as e:
         logging.error("Wystąpił inny błąd podczas czytania danych: %s",e,exc_info=True)
 
@@ -479,7 +489,7 @@ def write_file(args) -> None: # - datetime
     logging.info("write_file(%s)",args)
     try:
         if not args:
-            args = input("add / ").strip().split()
+            args = input("ADD: ").strip().split()
             if not args:
                 return
 
@@ -650,16 +660,6 @@ def main():
     if len(sys.argv) > 1:
         handle_CLI()
 
-    histfile = get("hist-path")
-    try:
-        if histfile.exists():
-            readline.read_history_file(histfile)
-    except FileNotFoundError as e:
-        logging.error("Nie znaleziono pliku: %s",e)
-
-    readline.set_auto_history(True)
-    readline.set_history_length(100)
-
     now = datetime.now().strftime("%H:%M %b %d")
     print(fr""" _ _
 | (_)___  __ _
@@ -671,13 +671,15 @@ cmds - help |_| {now}""")
     while True:
         logging.info("START while True")
         try:
+            print('')
             raw = input("> ").strip()
+            print('')
 
             if not raw:
                 write_file(args=None)
                 continue
             if raw.lower() in ["quit","q"]:
-                logging.info("EXIT ( quit, q )")
+                logging.info("EXIT (quit, q)")
                 login("out")
                 return
 
@@ -702,11 +704,11 @@ cmds - help |_| {now}""")
             logging.warning("%s", e)
             continue
         except KeyboardInterrupt:
-            logging.warning("EXIT (Ctrl+C).\n")
+            logging.warning("EXIT (Ctrl+C)\n")
             login("out")
             raise SystemExit(1)
         except EOFError:
-            print("EXIT (Ctrl+D).\n")
+            print("EXIT (Ctrl+D)\n")
             login("out")
             raise SystemExit(0)
         except Exception as e:

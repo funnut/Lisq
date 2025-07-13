@@ -32,7 +32,7 @@ lisq add "my new note" // alternatively use / instead of add
 
 ## COMMANDS
 
-**The three core commands are `add`/`show`/`del`.**
+The three core commands are `add`/`show`/`del`.
 
 * Basic functionality:
 ```
@@ -57,6 +57,7 @@ lisq add "my new note" // alternatively use / instead of add
 * Additional functionality:
 
 You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
+*Requires installing cryptography package - pip install -r requirements.txt*
 ```
 : encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
 : changepass    - changes the password (token)
