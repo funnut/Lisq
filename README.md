@@ -59,7 +59,8 @@ The three core commands are `add`/`show`/`del`.
 ### Additional functionality:
 
 You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
-> Important! It requires cryptography package run `pip install -r requirements.txt` if not installed by package manager.
+> [!IMPORTANT]
+> It requires cryptography package run `pip install -r requirements.txt` if not installed by package manager.
 
 ```
 : encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
