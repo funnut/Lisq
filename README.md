@@ -4,7 +4,7 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 
 It's meant to use as terminal aplication. Text file is where information is stored.
 
-*Code available under a non-commercial license (see LICENSE file).*
+Code available under a non-commercial license *(see LICENSE file)*.
 
 Copyright © funnut www.github.com/funnut
 
