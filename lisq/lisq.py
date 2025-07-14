@@ -294,11 +294,11 @@ lisq add "sample note" # alternatively use / instead of add
 :
 : add, / [str]   # adds a note (preferably enclosed in quotation marks)
 :
-: show, s           # show recent notes (default 10)
-:      [int]        # show number of recent notes
-:      [str]        # show notes containing [string]
-:      all          # show all notes
-:      random, r    # show a random note
+: show, s        # show recent notes (default 10)
+:      [int]     # show number of recent notes
+:      [str]     # show notes containing [string]
+:      all       # show all notes
+:      random, r # show a random note
 :
 : del [str]      # delete notes containing [string]
 :     last, l    # delete the last note
@@ -310,10 +310,10 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 > Important! It requires cryptography package run pip install -r requirements.txt if not installed by package manager.
 
 : encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
-: changepass        # changes the password (token)
+: changepass         # changes the password (token)
 :
-: encrypt ~/file.txt    # encrypts any file
-: decrypt ~/file.txt    # decrypts any file
+: encrypt ~/file.txt # encrypts any file
+: decrypt ~/file.txt # decrypts any file
 :
 : settings      # lists all settings
 : reiterate     # renumber notes' IDs

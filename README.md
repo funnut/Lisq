@@ -45,11 +45,11 @@ The three core commands are `add`/`show`/`del`.
 :
 : add, / [str]   # adds a note (preferably enclosed in quotation marks)
 :
-: show, s           # show recent notes (default 10)
-:      [int]        # show number of recent notes
-:      [str]        # show notes containing [string]
-:      all          # show all notes
-:      random, r    # show a random note
+: show, s        # show recent notes (default 10)
+:      [int]     # show number of recent notes
+:      [str]     # show notes containing [string]
+:      all       # show all notes
+:      random, r # show a random note
 :
 : del [str]      # delete notes containing [string]
 :     last, l    # delete the last note
