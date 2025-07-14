@@ -12,7 +12,7 @@ Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
-With installed python, you can run it from your $PATH (copy src/**lisq.py** inside $PATH) or install lisq by pip* :
+With installed python, you can run it from your $PATH (copy src/**lisq.py** inside $PATH folder) also you can install lisq by pip* :
 
 ```bash
 pip install lisq
