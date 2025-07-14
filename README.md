@@ -27,7 +27,7 @@ then type `lisq`
 
 ```
 lisq [command [arg1] [arg2] ...]
-lisq add "my new note" // alternatively use / instead of add
+lisq add "my new note" # alternatively use / instead of add
 ```
 
 ## COMMANDS

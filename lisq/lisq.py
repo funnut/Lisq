@@ -280,7 +280,7 @@ def help_page(args=None) -> None:
     print(fr"""{color}# CLI USAGE{reset}
 
 lisq [command [arg1] [arg2] ...]
-lisq add "sample note" // alternatively use / instead of add
+lisq add "sample note" # alternatively use / instead of add
 
 {color}# COMMANDS{reset}
 
