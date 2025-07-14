@@ -2,7 +2,7 @@
 
 From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/lisq/lisq.py) note-taking app that work with `.txt` files.
 
-It's meant to use as terminal aplication.
+It's meant to use as terminal aplication. Designed to be lightweight, fast and portable.
 
 Code available under a non-commercial license *(see LICENSE file)*.
 
