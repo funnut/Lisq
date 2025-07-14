@@ -60,7 +60,6 @@ The three core commands are `add`/`show`/`del`.
 
 You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
 > Important!
-
 > Requires cryptography package run `pip install -r requirements.txt` if not installed by package manager otherwise it should be already installed.
 
 ```
