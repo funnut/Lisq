@@ -1,3 +1,5 @@
 include README.md
 include LICENSE
+include python-version.txt
+include requirements.txt
 include colors.py
