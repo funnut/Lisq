@@ -46,7 +46,7 @@ The three core commands are `add`/`show`/`del`.
 : show, s   # show recent notes (default 10)
 :      <int>    # show number of recent notes
 :      <str>    # show notes containing <string>
-:      all  # show all notes
+:      all      # show all notes
 :      random, r    # show a random note
 :
 : del <str>     # delete notes containing <string>
