@@ -278,51 +278,53 @@ def clear(args) -> None: # - os
 
 def help_page(args=None) -> None:
     print(fr"""{color}# CLI USAGE{reset}
-    lisq [command [arg1] [arg2] ...]
-    lisq add "sample note" // alternatively use / instead of add
+
+lisq [command [arg1] [arg2] ...]
+lisq add "sample note" // alternatively use / instead of add
 
 {color}# COMMANDS{reset}
-    * Basic functionality:
 
-: quit, q   - exit the program
-: clear, c  - clear screen
-: cmds      - list of all available commands
-: help      - show help page
-: edit      - open the notes file in set editor
-:
-: add, / [str]   - adds a note (preferably enclosed in quotation marks)
-:
-: show, s           - show recent notes (default 10)
-:      [int]        - show number of recent notes
-:      [str]        - show notes containing [string]
-:      all          - show all notes
-:      random, r    - show a random note
-:
-: del [str]      - delete notes containing [string]
-:     last, l    - delete the last note
-:     all        - delete all notes
+## Basic functionality:
 
-* Additional functionality:
+: quit, q   # exit the program
+: clear, c  # clear screen
+: cmds      # list of all available commands
+: help      # show help page
+: edit      # open the notes file in set editor
+:
+: add, / [str]   # adds a note (preferably enclosed in quotation marks)
+:
+: show, s           # show recent notes (default 10)
+:      [int]        # show number of recent notes
+:      [str]        # show notes containing [string]
+:      all          # show all notes
+:      random, r    # show a random note
+:
+: del [str]      # delete notes containing [string]
+:     last, l    # delete the last note
+:     all        # delete all notes
 
-You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
-```
-: encryption on|off|set - enables or disables login functionality; 'set' stores the token so it won't be requested again
-: changepass    - changes the password (token)
+## Additional functionality:
+
+You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (*** use with caution! ***).
+> Requires installing cryptography package run `pip install -r requirements.txt`
+
+: encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
+: changepass        # changes the password (token)
 :
-: encrypt ~/file.txt    - encrypts any file
-: decrypt ~/file.txt    - decrypts any file
+: encrypt ~/file.txt    # encrypts any file
+: decrypt ~/file.txt    # decrypts any file
 :
-: settings - lists all settings
-: reiterate - renumber notes' IDs
-: echo [str] - prints the given text
-: type [str] - types the given text
-```
+: settings      # lists all settings
+: reiterate     # renumber notes' IDs
+: echo [str]    # prints the given text
+: type [str]    # types the given text
 
 > You can add your own functions by:
 > + defining them,
 > + then adding to *dispatch table*.
 
-{color}## SETTINGS{reset}
+{color}# SETTINGS{reset}
 
 Default settings are:
    * default notes path is `~/notesfile.txt`,
@@ -334,19 +336,18 @@ Default settings are:
 
 To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
-```bash
 export LISQ_SETTINGS='{{
     "notes-path": "~/path/notesfile.txt",
     "key-path": "~/path/key.lisq",
     "hist-path": "~/path/history.lisq",
     "color-accent": "\\033[34m",
     "editor": "nano",
-    "encryption": "set"}}'
-```
+    "encryption": "set"
+    }}'
 
 > Source your startup file or restart terminal.
 
-You can check current settings by typing `settings` ( both default and environmental drawn from LISQ_SETTINGS var).""")
+You can check current settings by typing `settings` (both default and environmental drawn from LISQ_SETTINGS var).""")
 
 def reiterate(args=None) -> None:
     """ Numerowanie ID notatek """
