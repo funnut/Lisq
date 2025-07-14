@@ -97,7 +97,8 @@ export LISQ_SETTINGS='{
     "hist-path": "~/path/history.lisq",
     "color-accent": "\\033[34m",
     "editor": "nano",
-    "encryption": "set"}'
+    "encryption": "set"
+    }'
 ```
 
 > Source your startup file or restart terminal.
