@@ -51,9 +51,9 @@ The three core commands are `add`/`show`/`del`.
 :      all       # show all notes
 :      random, r # show a random note
 :
-: del [str]      # delete notes containing [string]
-:     last, l    # delete the last note
-:     all        # delete all notes
+: del [str]    # delete notes containing [string]
+:     last, l  # delete the last note
+:     all      # delete all notes
 ```
 
 ### Additional functionality:
@@ -66,8 +66,8 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 : encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
 : changepass            # changes the password (token)
 :
-: encrypt ~/file.txt    # encrypts any file
-: decrypt ~/file.txt    # decrypts any file
+: encrypt ~/file.txt # encrypts any file
+: decrypt ~/file.txt # decrypts any file
 :
 : settings      # lists all settings
 : reiterate     # renumber notes' IDs
