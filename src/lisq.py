@@ -307,7 +307,8 @@ lisq add "sample note" # alternatively use / instead of add
 ## Additional functionality:
 
 You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (*** use with caution! ***).
-> Important! It requires cryptography package run pip install -r requirements.txt if not installed by package manager.
+
+> This functionality requires the cryptography package. If it is not already installed via package manager, please run: pip install -r requirements.txt
 
 : encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
 : changepass         # changes the password (token)
@@ -327,12 +328,12 @@ You can add your own functions by:
 {color}# SETTINGS{reset}
 
 Default settings are:
-   * default notes path is `~/notesfile.txt`,
-   * default key path is set to wherever main __file__ is,
-   * default history path is set to wherever the main __file__ is,
-   * default color accent is green,
-   * default editor is set to `nano`,
-   * default encryption is set to `off`.
+   + default notes path is `~/notesfile.txt`,
+   + default key path is set to wherever main __file__ is,
+   + default history path is set to wherever the main __file__ is,
+   + default color accent is green,
+   + default editor is set to `nano`,
+   + default encryption is set to `off`.
 
 To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
