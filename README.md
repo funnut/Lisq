@@ -43,7 +43,7 @@ The three core commands are `add`/`show`/`del`.
 : help      # show help page
 : edit      # open the notes file in set editor
 :
-: add, / [str]   # adds a note (preferably enclosed in quotation marks)
+: add, / [str] # adds a note (preferably enclosed in quotation marks)
 :
 : show, s        # show recent notes (default 10)
 :      [int]     # show number of recent notes
