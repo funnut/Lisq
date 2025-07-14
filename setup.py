@@ -19,7 +19,7 @@ setup(
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "lisq = lisq.lisq:main"
+            "lisq = src.lisq:main"
         ]
     },
     classifiers=[

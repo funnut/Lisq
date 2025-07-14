@@ -1,6 +1,6 @@
 # Lisq
 
-From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/lisq/lisq.py) note-taking app that work with `.txt` files.
+From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/src/lisq.py) note-taking app that work with `.txt` files.
 
 Lightweight, fast and portable. It's meant to be used as terminal aplication.
 
@@ -12,7 +12,7 @@ Copyright © funnut www.github.com/funnut
 
 ## Instalation
 
-With installed python, you can run it from your $PATH (copy lisq/**lisq.py** inside $PATH) or install lisq by pip* :
+With installed python, you can run it from your $PATH (copy src/**lisq.py** inside $PATH) or install lisq by pip* :
 
 ```bash
 pip install lisq
