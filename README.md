@@ -18,7 +18,6 @@ With installed Python,
 + Alternatively you can install lisq by pip* : `pip install lisq`
 
 \* *Python language Package Manager*
-
 > How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 ## CLI USAGE
