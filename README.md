@@ -15,7 +15,6 @@ Copyright © funnut www.github.com/funnut
 With installed python,
 
 + Copy src/**lisq.py** somewhere inside $PATH folder, then make it executable ( `chmod +x filename` ) and start by typing *filename*.
-
 + Alternatively you can install lisq by pip* : `pip install lisq`
 
 \* *python language package manager*
@@ -26,7 +25,7 @@ With installed python,
 
 ```
 lisq [command [arg1] [arg2] ...]
-lisq add "my new note" # alternatively use / instead of add
+lisq add "my new note"  # alternatively use / instead of add
 ```
 
 ## COMMANDS
@@ -38,21 +37,21 @@ The three core commands are `add`/`show`/`del`.
 ```
 : quit, q   # exit the program
 : clear, c  # clear screen
-: cmds      # list of all available commands
-: help      # show help page
-: edit      # open the notes file in set editor
+: cmds  # list of all available commands
+: help  # show help page
+: edit  # open the notes file in set editor
 :
-: add, / [str] # adds a note (preferably enclosed in quotation marks)
+: add, / <str>  # adds a note (preferably enclosed in quotation marks)
 :
-: show, s        # show recent notes (default 10)
-:      [int]     # show number of recent notes
-:      [str]     # show notes containing [string]
-:      all       # show all notes
-:      random, r # show a random note
+: show, s   # show recent notes (default 10)
+:      <int>    # show number of recent notes
+:      <str>    # show notes containing <string>
+:      all  # show all notes
+:      random, r    # show a random note
 :
-: del [str]    # delete notes containing [string]
-:     last, l  # delete the last note
-:     all      # delete all notes
+: del <str>     # delete notes containing <string>
+:     last, l   # delete the last note
+:     all   # delete all notes
 ```
 
 ### Additional functionality:
@@ -62,16 +61,16 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 > **This functionality requires the cryptography package.** If it is not already installed via package manager, please run: `pip install -r requirements.txt`
 
 ```
-: encryption on|off|set # enables or disables login functionality; 'set' stores the token so it won't be requested again
-: changepass            # changes the password (token)
+: encryption on|off|set     # enables or disables login functionality; 'set' stores the token so it won't be requested again
+: changepass    # changes the password (token)
 :
-: encrypt ~/file.txt # encrypts any file
-: decrypt ~/file.txt # decrypts any file
+: encrypt ~/file.txt    # encrypts any file
+: decrypt ~/file.txt    # decrypts any file
 :
-: settings      # lists all settings
+: settings  # lists all settings
 : reiterate     # renumber notes' IDs
-: echo [str]    # prints the given text
-: type [str]    # types the given text
+: echo <str>    # prints the given text
+: type <str>    # types the given text
 ```
 
 You can add your own functions by:
@@ -81,12 +80,12 @@ You can add your own functions by:
 ## SETTINGS
 
 Default settings are:
-   * default notes path is `~/notesfile.txt`,
-   * default key path is set to wherever main __file__ is,
-   * default history path is set to wherever the main __file__ is,
-   * default color accent is green,
-   * default editor is set to `nano`,
-   * default encryption is set to `off`.
+   + default notes path is `~/notesfile.txt`,
+   + default key path is set to wherever main __file__ is,
+   + default history path is set to wherever the main __file__ is,
+   + default color accent is green,
+   + default editor is set to `nano`,
+   + default encryption is set to `off`.
 
 To change it, set the following variable in your system by adding it to a startup file (eg. `~/.bashrc`).
 
