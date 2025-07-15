@@ -35,11 +35,11 @@ lisq add "my new note"  # alternatively use / instead of add
 The three core commands are `add`/`show`/`del`.
 
 ```
-: quit, q   # exit the program
-: clear, c  # clear screen
-: cmds  # list of all available commands
-: help  # show help page
-: edit  # open the notes file in set editor
+: quit, q       # exit the program
+: clear, c      # clear screen
+: cmds      # list of all available commands
+: help      # show help page
+: edit      # open the notes file in set editor
 :
 : add, / <str>  # adds a note (preferably enclosed in quotation marks)
 :
