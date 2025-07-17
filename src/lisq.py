@@ -288,9 +288,10 @@ lisq add "sample note"  # alternatively use / instead of add
 
 : quit, q   # exit the program
 : clear, c  # clear screen
-: cmds  # list of all available commands
-: help  # show help page
-: edit  # open the notes file in set editor
+: cmds      # list of all available commands
+: edit      # open the notes file in set editor
+: [--]help      # show help page
+: [--]version   # show version
 :
 : add, / <str>  # adds a note (preferably enclosed in quotation marks)
 :
@@ -644,6 +645,7 @@ commands = {
     "--help": help_page,
     "help": help_page,
     "--version": lambda args: print("v2025.6.1-1"),
+    "version": lambda args: print("v2025.6.1-1"),
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": __test_lab__,
@@ -665,7 +667,7 @@ def main():
 | | / __|/ _` |
 | | \__ \ (_| |
 |_|_|___/\__, |
-cmds - help |_| {now}""")
+cmds — help |_| {now}""")
 
     while True:
         logging.info("START while True")
