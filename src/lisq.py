@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 def type_write(text, delay=0.05) -> None:
     import time
@@ -59,21 +59,21 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
                     f.write(key)
                 print(f"Klucz zapisany w {key_path}")
             except Exception as e:
-                logging.error("Nieudany zapis klucza: %s",e,exc_info=True)
+                logging.error("\aNieudany zapis klucza: %s",e,exc_info=True)
                 return None
 
         return Fernet(key)
 
     except KeyboardInterrupt:
-        logging.warning("\nPrzerwane generowanie klucza (Ctrl+C).")
+        logging.warning("\n\aPrzerwane generowanie klucza (Ctrl+C).")
         raise SystemExit(1)
     except EOFError:
-        logging.warning("\nPrzerwane generowanie klucza (Ctrl+D).")
+        logging.warning("\n\aPrzerwane generowanie klucza (Ctrl+D).")
         raise SystemExit(0)
     except FileNotFoundError as e:
         logging.error("%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
+        logging.error("\aWystąpił inny błąd podczas generowania klucza: %s",e,exc_info=True)
 
 
 def encrypt(filepath, fernet=None) -> None: # - fernet, pathlib
@@ -116,9 +116,9 @@ def encrypt(filepath, fernet=None) -> None: # - fernet, pathlib
         print("encrypted")
 
     except FileNotFoundError as e:
-        logging.error("%s",e)
+        logging.error("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas szyfrowania: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas szyfrowania: %s",e,exc_info=True)
 
 
 def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
@@ -160,11 +160,11 @@ def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
         return True
 
     except InvalidToken:
-        logging.warning("Nieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+        logging.warning("\aNieprawidłowy klucz lub plik nie jest zaszyfrowany.")
     except FileNotFoundError as e:
-        logging.error("%s",e)
+        logging.error("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas odszyfrowywania: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas odszyfrowywania: %s",e,exc_info=True)
 
 
 def get(setting): # - pathlib, os, json
@@ -188,7 +188,7 @@ def get(setting): # - pathlib, os, json
                 if path.parent.is_dir():
                     return path
                 else:
-                    print(f"Katalog {path} nie istnieje. Nie zapisano.")
+                    print(f"\aKatalog {path} nie istnieje. Nie zapisano.")
             d_path = Path.home() / "notesfile.txt"
             return d_path
 
@@ -199,7 +199,7 @@ def get(setting): # - pathlib, os, json
                 if path.parent.is_dir():
                     return path
                 else:
-                    print(f"Katalog '{path}' nie istnieje. Nie zapisano.")
+                    print(f"\aKatalog '{path}' nie istnieje. Nie zapisano.")
             script_dir = Path(__file__).parent.resolve()
             d_path = script_dir / "key.lisq"
             return d_path
@@ -211,7 +211,7 @@ def get(setting): # - pathlib, os, json
                 if path.parent.is_dir():
                     return path
                 else:
-                    print(f"Katalog '{path}' nie istnieje. Nie zapisano.")
+                    print(f"\aKatalog '{path}' nie istnieje. Nie zapisano.")
             script_dir = Path(__file__).parent.resolve()
             d_path = script_dir / "history.lisq"
             return d_path
@@ -256,9 +256,9 @@ def get(setting): # - pathlib, os, json
             return settings
 
     except ValueError as e:
-        logging.warning("%s",e)
+        logging.warning("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas pobierania danych: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas pobierania danych: %s",e,exc_info=True)
 
 color = get("color-accent")
 reset = "\033[0m"
@@ -268,7 +268,7 @@ try:
     if histfile.exists():
         readline.read_history_file(histfile)
 except FileNotFoundError as e:
-    logging.error("%s",e)
+    logging.error("\a%s",e)
 readline.set_auto_history(True)
 readline.set_history_length(100)
 
@@ -373,9 +373,9 @@ def reiterate(args=None) -> None:
             logging.info(f"Zaktualizowano identyfikatory dla {id_} linii.")
 
     except FileNotFoundError as e:
-        logging.error("%s",e)
+        logging.error("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas numerowania: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas numerowania: %s",e,exc_info=True)
 
 def delete(args) -> None:
     """ Usuwanie notatek :
@@ -433,9 +433,9 @@ def delete(args) -> None:
                 print("Nie znaleziono pasujących notatek.")
 
     except FileNotFoundError as e:
-        logging.error("%s",e)
+        logging.error("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas usuwania notatek: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas usuwania notatek: %s",e,exc_info=True)
 
 
 def read_file(args) -> None: # - random, os
@@ -481,9 +481,9 @@ def read_file(args) -> None: # - random, os
             print(f"Znaleziono {len(to_show)} pasujących elementów.")
 
     except FileNotFoundError as e:
-        logging.error("%s",e)
+        logging.error("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas czytania danych: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas czytania danych: %s",e,exc_info=True)
 
 
 def write_file(args) -> None: # - datetime
@@ -523,7 +523,7 @@ def write_file(args) -> None: # - datetime
         print("Notatka dodana.")
 
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas pisania danych: %s",e,exc_info=True)
+        logging.error("\aWystąpił błąd podczas pisania danych: %s",e,exc_info=True)
 
 
 def handle_CLI() -> None: # - ast
@@ -545,12 +545,12 @@ def handle_CLI() -> None: # - ast
         if cmd in commands:
             commands[cmd](args)
         else:
-            raise ValueError(f"Invalid command: {cmd} {args if args else ''}")
+            raise ValueError(f"\aInvalid command: {cmd} {args if args else ''}")
 
     except ValueError as e:
-        logging.warning("%s",e)
+        logging.warning("\a%s",e)
     except Exception as e:
-        logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
+        logging.error("\aWystąpił błąd: %s", e, exc_info=True)
 
     login("out")
     raise SystemExit(0)
@@ -561,7 +561,7 @@ def changepass(args) -> None:
     if get("encryption"):
         generate_key(save_to_file=True, confirm=True)
     else:
-        raise ValueError("Błąd: Szyfrowanie jest wyłączone")
+        raise ValueError("\aBłąd: Szyfrowanie jest wyłączone")
 
 def login(mod="in"): # - readline, pathlib
     """ Sterowanie szyfrowaniem na wejściach i wyjściach """
@@ -603,29 +603,25 @@ def login(mod="in"): # - readline, pathlib
                         return
                 except ValueError:
                     print("Błąd: Nieprawidłowy token")
-            print("Zbyt wiele nieudanych prób. Spróbuj później.")
+            print("\aZbyt wiele nieudanych prób. Spróbuj później.")
             raise SystemExit(0)
 
         # Wejście SET
         elif encryption == "set":
             decrypt(notes)
     except Exception as e:
-        logging.error("Wystąpił inny błąd podczas login(%s): %s", mod, e, exc_info=True)
+        logging.error("\aWystąpił błąd podczas login(%s): %s", mod, e, exc_info=True)
 
 def __test_lab__(args):
     print("args:",args,"\n----\n")
 
-    if not args:
-        print("Give arg on | off")
+    if not args or args[0] not in ['on','off']:
+        print("Give arg on|off")
         return
-    if args[0] == "on":
-        result = subprocess.run(["termux-torch", "on"])
-        print(result)
-    elif args[0] == "off":
-        result = subprocess.run(["termux-torch", "off"])
+    else:
+        result = subprocess.run(["termux-torch", args[0]])
         print(result)
 
-    print('')
 
 # dispatch table - os
 commands = {
@@ -647,6 +643,7 @@ commands = {
     "settings": lambda args: print(json.dumps(get("all"),indent=4)),
     "--help": help_page,
     "help": help_page,
+    "--version": lambda args: print("v2025.6.1-1"),
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": __test_lab__,
@@ -700,7 +697,7 @@ cmds - help |_| {now}""")
             if cmd in commands:
                 commands[cmd](args)
             else:
-                raise ValueError(f"Invalid command: {cmd} {args if args else ''}")
+                raise ValueError(f"\aInvalid command: {cmd} {args if args else ''}")
 
         except ValueError as e:
             logging.warning("%s", e)
@@ -714,7 +711,7 @@ cmds - help |_| {now}""")
             login("out")
             raise SystemExit(0)
         except Exception as e:
-            logging.error("Wystąpił inny błąd: %s", e, exc_info=True)
+            logging.error("\aWystąpił błąd: %s", e, exc_info=True)
 
 
 if __name__ == "__main__":
