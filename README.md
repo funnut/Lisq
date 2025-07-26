@@ -1,4 +1,10 @@
-# Lisq
+ ___      ___   _______  _______
+|   |    |   | |       ||       |
+|   |    |   | |  _____||   _   |
+|   |    |   | | |_____ |  | |  |
+|   |___ |   | |_____  ||  |_|  |
+|       ||   |  _____| ||      |
+|_______||___| |_______||____||_|
 
 From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/src/lisq.py) note-taking app that work with `.txt` files.
 
@@ -75,8 +81,8 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 ```
 
 You can add your own functions by:
-+ defining them,
-+ then adding to *dispatch table*.
+   + defining them,
+   + then adding to *dispatch table*.
 
 ## SETTINGS
 

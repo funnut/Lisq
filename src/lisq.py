@@ -323,18 +323,18 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 : type <str>    # types the given text
 
 You can add your own functions by:
-+ defining them,
-+ then adding to *dispatch table*.
+    + defining them,
+    + then adding to *dispatch table*.
 
 {color}# SETTINGS{reset}
 
 Default settings are:
-   + default notes path is `~/notesfile.txt`,
-   + default key path is set to wherever main __file__ is,
-   + default history path is set to wherever the main __file__ is,
-   + default color accent is green,
-   + default editor is set to `nano`,
-   + default encryption is set to `off`.
+    + default notes path is `~/notesfile.txt`,
+    + default key path is set to wherever main __file__ is,
+    + default history path is set to wherever the main __file__ is,
+    + default color accent is green,
+    + default editor is set to `nano`,
+    + default encryption is set to `off`.
 
 To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
@@ -450,7 +450,7 @@ def read_file(args) -> None: # - random, os
         with open(get("notes-path"),"r",encoding="utf-8") as f:
             lines = [linia for linia in f.readlines() if linia.strip()]
         if args[0] == "recent":
-            to_show = lines[-10:]
+            to_show = lines[-10:] # Default for `show` command
         elif isinstance(args[0],int):
             to_show = lines[-int(args[0]):]
         elif args[0] in ["random", "r"]:
@@ -467,7 +467,6 @@ def read_file(args) -> None: # - random, os
                 return
             else:
                 to_show = found_notes
-
         for line in to_show:
             parts = line.split()
             date_ = "-".join(parts[1].split("-")[1:])
@@ -662,19 +661,19 @@ def main():
         handle_CLI()
 
     now = datetime.now().strftime("%H:%M %b %d")
-    print(fr""" _ _
-| (_)___  __ _
-| | / __|/ _` |
-| | \__ \ (_| |
-|_|_|___/\__, |
-cmds — help |_| {now}""")
+    print(r""" ___      ___   _______  _______
+|   |    |   | |       ||       |
+|   |    |   | |  _____||   _   |
+|   |    |   | | |_____ |  | |  |
+|   |___ |   | |_____  ||  |_|  |
+|       ||   |  _____| ||      |
+|_______||___| |_______||____||_|""")
+    print(f"       cmds - help - {now}")
 
     while True:
         logging.info("START while True")
         try:
-            print('')
             raw = input("> ").strip()
-            print('')
 
             if not raw:
                 write_file(args=None)
