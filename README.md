@@ -1,3 +1,4 @@
+```
  ___      ___   _______  _______
 |   |    |   | |       ||       |
 |   |    |   | |  _____||   _   |
@@ -5,6 +6,7 @@
 |   |___ |   | |_____  ||  |_|  |
 |       ||   |  _____| ||      |
 |_______||___| |_______||____||_|
+```
 
 From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com/funnut/Lisq/blob/main/src/lisq.py) note-taking app that work with `.txt` files.
 
