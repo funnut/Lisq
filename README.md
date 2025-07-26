@@ -40,7 +40,7 @@ lisq add "my new note"  # alternatively use / instead of add
 
 ### Basic functionality:
 
-The three core commands are `add`/`show`/`del`.
+It's design to be simple so there are just three core commands: `add`/`show`/`del`.
 
 ```
 : quit, q       # exit the program
