@@ -21,6 +21,7 @@ def echo(text) -> None:
 from datetime import datetime
 from pathlib import Path
 import json, os, sys, ast
+import shutil
 import logging
 import shlex
 import readline
@@ -323,18 +324,18 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 : type <str>    # types the given text
 
 You can add your own functions by:
-    + defining them,
-    + then adding to *dispatch table*.
+  + defining them,
+  + then adding to *dispatch table*.
 
 {color}# SETTINGS{reset}
 
 Default settings are:
-    + default notes path is `~/notesfile.txt`,
-    + default key path is set to wherever main __file__ is,
-    + default history path is set to wherever the main __file__ is,
-    + default color accent is green,
-    + default editor is set to `nano`,
-    + default encryption is set to `off`.
+  + default notes path is `~/notesfile.txt`,
+  + default key path is set to wherever main __file__ is,
+  + default history path is set to wherever the main __file__ is,
+  + default color accent is green,
+  + default editor is set to `nano`,
+  + default encryption is set to `off`.
 
 To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
@@ -400,7 +401,7 @@ def delete(args) -> None:
         with open(get("notes-path"),"r",encoding="utf-8") as f:
             lines = f.readlines()
         if argo[0] == "all":
-            yesno = input("  Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
+            yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
             if yesno in ["yes","y",""]:
                 open(get("notes-path"),"w",encoding="utf-8").close()
                 print("Usunięto.")
@@ -408,7 +409,7 @@ def delete(args) -> None:
                 print("Anulowano.")
 
         elif argo[0] in ["last","l"]:
-            yesno = input("  Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
+            yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
             if yesno in ["y",""]:
                 with open(get("notes-path"),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
@@ -422,7 +423,7 @@ def delete(args) -> None:
             if not all(any(arg in line for line in lines) for arg in argo) and number:
                 print("Nie wszystkie elementy zostały znalezione.")
             if number > 0:
-                yesno = input(f"  Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
+                yesno = input(f"Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
                 if yesno in ["yes","y",""]:
                     with open(get("notes-path"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
@@ -442,7 +443,7 @@ def delete(args) -> None:
 def read_file(args) -> None: # - random, os
     """ Odczyt pliku notatek """
     logging.info("read_file(%s)",args)
-    terminal_width = os.get_terminal_size().columns
+    terminal_width = shutil.get_terminal_size().columns
     print(f" .id .date {'.' * (terminal_width - 12)}")
     try:
         args = args if args else ["recent"]
