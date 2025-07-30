@@ -32,7 +32,7 @@ With installed Python,
 ## CLI USAGE
 
 ```
-lisq [command [arg1] [arg2] ...]
+lisq [command [arg1] [arg2] ... ]
 lisq add "my new note"  # alternatively use / instead of add
 ```
 
