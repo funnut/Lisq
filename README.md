@@ -43,12 +43,12 @@ lisq add "my new note"  # alternatively use / instead of add
 It's design to be simple so there are just three core commands: `add`/`show`/`del`.
 
 ```
+: [--]version   # show version
+: [--]help      # show help page
 : quit, q       # exit the program
 : clear, c      # clear screen
 : cmds      # list of all available commands
 : edit      # open the notes file in set editor
-: [--]help      # show help page
-: [--]version   # show version
 :
 : add, / <str>  # adds a note (preferably enclosed in quotation marks)
 :
