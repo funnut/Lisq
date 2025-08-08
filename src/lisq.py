@@ -43,13 +43,13 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     import base64
     try:
         if confirm:
-            password = getpass.getpass("Ustaw hasło: ").encode("utf-8")
-            confirm = getpass.getpass("Powtórz hasło: ").encode("utf-8")
+            password = getpass.getpass("Podaj hasło -> ").encode("utf-8")
+            confirm = getpass.getpass("Potwierdź hasło -> ").encode("utf-8")
             if password != confirm:
                 print("Hasła nie pasują. Spróbuj ponownie.")
                 return None
         else:
-            password = getpass.getpass("hasło : ").encode("utf-8")
+            password = getpass.getpass("hasło -> ").encode("utf-8")
 
         key = base64.urlsafe_b64encode(password.ljust(32, b'0')[:32])
 
@@ -66,10 +66,10 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
         return Fernet(key)
 
     except KeyboardInterrupt:
-        logging.warning("\n\aPrzerwane generowanie klucza (Ctrl+C).")
+        logging.warning("\n\aPrzerwano generowanie klucza (Ctrl+C).")
         raise SystemExit(1)
     except EOFError:
-        logging.warning("\n\aPrzerwane generowanie klucza (Ctrl+D).")
+        logging.warning("\n\aPrzerwano generowanie klucza (Ctrl+D).")
         raise SystemExit(0)
     except FileNotFoundError as e:
         logging.error("%s",e)
@@ -161,7 +161,7 @@ def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
         return True
 
     except InvalidToken:
-        logging.warning("\aNieprawidłowy klucz lub plik nie jest zaszyfrowany.")
+       logging.warning("\aNieprawidłowy klucz lub plik nie jest zaszyfrowany.")
     except FileNotFoundError as e:
         logging.error("\a%s",e)
     except Exception as e:
@@ -598,12 +598,9 @@ def login(mod="in"): # - readline, pathlib
         elif encryption == "on":
             for attemt in range(3):
                 fernet = generate_key()
-                try:
-                    result = decrypt(notes,fernet)
-                    if result:
-                        return
-                except ValueError:
-                    print("Błąd: Nieprawidłowy token")
+                result = decrypt(notes,fernet)
+                if result:
+                    return
             print("\aZbyt wiele nieudanych prób. Spróbuj później.")
             raise SystemExit(0)
 
@@ -617,7 +614,7 @@ def __test_lab__(args):
     print("args:",args,"\n----\n")
 
     if not args or args[0] not in ['on','off']:
-        print("Give arg on|off")
+        print("test [on|off]")
         return
     else:
         result = subprocess.run(["termux-torch", args[0]])
@@ -644,8 +641,8 @@ commands = {
     "settings": lambda args: print(json.dumps(get("all"),indent=4)),
     "--help": help_page,
     "help": help_page,
-    "--version": lambda args: print("v2025.7.29"),
-    "version": lambda args: print("v2025.7.29"),
+    "--version": lambda args: print("v2025.7.29-1"),
+    "version": lambda args: print("v2025.7.29-1"),
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": __test_lab__,
@@ -705,11 +702,11 @@ def main():
             logging.warning("%s", e)
             continue
         except KeyboardInterrupt:
-            logging.warning("EXIT (Ctrl+C)\n")
+            logging.warning("EXIT (Ctrl+C)")
             login("out")
             raise SystemExit(1)
         except EOFError:
-            print("EXIT (Ctrl+D)\n")
+            print("EXIT (Ctrl+D)")
             login("out")
             raise SystemExit(0)
         except Exception as e:
