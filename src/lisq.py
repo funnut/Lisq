@@ -245,14 +245,15 @@ def get(setting): # - pathlib, os, json
 
         elif setting == "all":
             settings = {
-                "default": {
+                "all current settings": {
                     "notes-path": str(get("notes-path")),
                     "key-path": str(get("key-path")),
                     "hist-path": str(get("hist-path")),
                     "editor": get("editor"),
-                    "encryption": get("encryption")
+                    "encryption": get("encryption"),
+                    "color-accent": get("color-accent")
                     },
-                "LISQ_SETTINGS": get_env_setting()
+#                "LISQ_SETTINGS": get_env_setting()
             }
             return settings
 
@@ -671,7 +672,7 @@ def main():
     while True:
         logging.info("START while True")
         try:
-            raw = input("> ").strip()
+            raw = input(">> ").strip()
 
             if not raw:
                 write_file(args=None)
