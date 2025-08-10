@@ -190,7 +190,7 @@ def get(setting): # - pathlib, os, json
                     return path
                 else:
                     print(f"\aKatalog {path} nie istnieje. Nie zapisano.")
-            d_path = Path.home() / "notesfile.txt"
+            d_path = Path.home() / "noteslisq.txt"
             return d_path
 
         elif setting == "key-path":
@@ -331,7 +331,7 @@ You can add your own functions by:
 {color}# SETTINGS{reset}
 
 Default settings are:
-  + default notes path is `~/notesfile.txt`,
+  + default notes path is `~/noteslisq.txt`,
   + default key path is set to wherever main __file__ is,
   + default history path is set to wherever the main __file__ is,
   + default color accent is green,
@@ -341,7 +341,7 @@ Default settings are:
 To change it, set the following variable in your system by adding it to a startup file (eg. ~/.bashrc).
 
 export LISQ_SETTINGS='{{
-    "notes-path": "~/path/notesfile.txt",
+    "notes-path": "~/path/noteslisq.txt",
     "key-path": "~/path/key.lisq",
     "hist-path": "~/path/history.lisq",
     "color-accent": "\\033[34m",
