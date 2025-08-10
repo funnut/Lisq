@@ -29,6 +29,6 @@ setup(
     ],
     python_requires=">=3.6",
     install_requires=[
-        "cryptography==45.0.4",
+        "cryptography==45.0.6",
     ]
 )
