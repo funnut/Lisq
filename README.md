@@ -22,9 +22,11 @@ Copyright © funnut www.github.com/funnut
 
 With installed Python,
 
-+ you can install by pip* : 
++ Installation by pip* : 
 
-```pip install lisq```
+```bash
+pip install lisq
+```
 
 \* *Python language Package Manager*
 
