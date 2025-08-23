@@ -249,9 +249,9 @@ def get(setting): # - pathlib, os, json
                     "notes-path": str(get("notes-path")),
                     "key-path": str(get("key-path")),
                     "hist-path": str(get("hist-path")),
+                    "color-accent": get("color-accent"),
                     "editor": get("editor"),
-                    "encryption": get("encryption"),
-                    "color-accent": get("color-accent")
+                    "encryption": get("encryption")
                     },
 #                "LISQ_SETTINGS": get_env_setting()
             }
