@@ -23,7 +23,7 @@ Copyright © funnut www.github.com/funnut
 With installed Python,
 
 + Copy src/**lisq.py** somewhere inside $PATH folder, then make it executable (`chmod +x filename`) and start by typing *filename*.
-+ Alternatively you can install Lisq by pip* : `pip install lisq`
++ Alternatively you can install by pip* : `pip install lisq`
 
 \* *Python language Package Manager*
 
