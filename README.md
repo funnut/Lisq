@@ -33,7 +33,7 @@ With installed Python,
 
 ```
 lisq [command [arg1] [arg2] ... ]
-lisq add "my new note"  # alternatively use / instead of add
+lisq add "my new note"  # alternatively use '/' instead of 'add'
 ```
 
 ## COMMANDS
@@ -90,8 +90,8 @@ You can add your own functions by:
 
 Default settings are:
    + default notes path is `~/noteslisq.txt`,
-   + default key path is set to wherever main __file__ is,
-   + default history path is set to wherever the main __file__ is,
+   + default key path is set to wherever main `__file__` is,
+   + default history path is set to wherever the main `__file__` is,
    + default color accent is green,
    + default editor is set to `nano`,
    + default encryption is set to `off`.

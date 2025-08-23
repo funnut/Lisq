@@ -43,7 +43,7 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     import base64
     try:
         if confirm:
-            password = getpass.getpass("Podaj hasło -> ").encode("utf-8")
+            password = getpass.getpass("Podaj nowe hasło -> ").encode("utf-8")
             confirm = getpass.getpass("Potwierdź hasło -> ").encode("utf-8")
             if password != confirm:
                 print("Hasła nie pasują. Spróbuj ponownie.")
@@ -282,7 +282,7 @@ def help_page(args=None) -> None:
     print(fr"""{color}# CLI USAGE{reset}
 
 lisq [command [arg1] [arg2] ...]
-lisq add "sample note"  # alternatively use / instead of add
+lisq add "sample note"  # alternatively use '/' instead of 'add'
 
 {color}# COMMANDS{reset}
 
@@ -622,7 +622,7 @@ def __test_lab__(args):
         print(result)
 
 
-# dispatch table - os
+# dispatch table - subprocess
 commands = {
     "cmds": lambda args: print(", ".join(commands.keys())),
     "add": write_file,
@@ -716,7 +716,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 #   _
 # _|_  ._ ._   _|_
