@@ -90,8 +90,8 @@ You can add your own functions by:
 
 Default settings are:
    + default notes path is `~/noteslisq.txt`,
-   + default key path is set to wherever main *** executable *** is,
-   + default history path is set to wherever the main *** executable *** is,
+   + default key path is set to wherever main ***executable*** is,
+   + default history path is set to wherever the main ***executable*** is,
    + default color accent is green,
    + default editor is set to `nano`,
    + default encryption is set to `off`.
