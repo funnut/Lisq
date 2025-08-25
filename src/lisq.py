@@ -62,7 +62,6 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
             except Exception as e:
                 logging.error("\aNieudany zapis klucza: %s",e,exc_info=True)
                 return None
-
         return Fernet(key)
 
     except KeyboardInterrupt:
@@ -672,7 +671,7 @@ def main():
     while True:
         logging.info("START while True")
         try:
-            raw = input(">> ").strip()
+            raw = input(f"{color}>> {reset}").strip()
 
             if not raw:
                 write_file(args=None)
