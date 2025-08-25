@@ -69,7 +69,7 @@ It's design to be simple so there are just three core commands: `add`/`show`/`de
 ### Additional functionality:
 
 You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
-> [!WARNING]
+> [!IMPORTANT]
 > **This functionality requires the cryptography package.** If it is not already installed via package manager, please run: `pip install -r requirements.txt`
 
 ```

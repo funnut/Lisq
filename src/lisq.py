@@ -12,7 +12,7 @@ def type_write(text, delay=0.05) -> None:
 def echo(text) -> None:
     print(text)
 
-# # # # # # # # # # #__DEFAULT_LISQ_FUNCTIONALITY__# # # # # # # # # # #
+# # # # # # # # # # # __DEFAULT_LISQ_FUNCTIONALITY__ # # # # # # # # # # #
 #   _
 # _|_  ._ ._   _|_
 #  ||_|| || ||_||_
@@ -44,7 +44,7 @@ def generate_key(save_to_file=False, confirm=False): # - getpass, base64, fernet
     try:
         if confirm:
             password = getpass.getpass("Podaj nowe hasło -> ").encode("utf-8")
-            confirm = getpass.getpass("Potwierdź hasło -> ").encode("utf-8")
+            confirm = getpass.getpass("Potwierdź nowe hasło -> ").encode("utf-8")
             if password != confirm:
                 print("Hasła nie pasują. Spróbuj ponownie.")
                 return None
