@@ -715,8 +715,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#   _
-# _|_  ._ ._   _|_
-#  ||_|| || ||_||_
-#       www.github.com/funnut
