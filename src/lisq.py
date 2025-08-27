@@ -630,7 +630,7 @@ commands = {
     "s": read_file,
     "delete": delete,
     "del": delete,
-    "edit": lambda args: subprocess.run([get("editor"),get("notes-path")]),
+    "edit": lambda args: subprocess.run([get("editor"),f"+{args[0] if args else ''}",get("notes-path")]),
     "clear": clear,
     "c": clear,
     "reiterate": lambda args: reiterate("usr"),
