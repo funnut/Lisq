@@ -610,7 +610,7 @@ def login(mod="in"): # - readline, pathlib
     except Exception as e:
         logging.error("\aWystąpił błąd podczas login(%s): %s", mod, e, exc_info=True)
 
-def __test_lab__(args):
+def _test(args):
     print("args:",args,"\n----\n")
 
     if not args or args[0] not in ['on','off']:
@@ -645,7 +645,7 @@ commands = {
     "version": lambda args: print("v2025.7.29-1"),
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
-    "test": __test_lab__,
+    "test": _test,
 }
 
 
