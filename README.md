@@ -113,4 +113,4 @@ export LISQ_SETTINGS='{
 
 > Source your startup file or restart terminal.
 
-You can check current settings by typing `settings`.
+To check current settings type `settings`.
