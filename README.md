@@ -20,7 +20,7 @@ Copyright © funnut www.github.com/funnut
 
 ## Installation
 
-With installed python,
+With installed Python >=3.6,
 
 + Installation from [PyPI](https://pypi.org/project/lisq/) : 
 
