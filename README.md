@@ -54,24 +54,24 @@ lisq add "my first note"
 To stay simple there are just three base commands to interact with your notes: `add`/`show`/`del`.
 
 ```
-: [--]version   # show version
-: [--]help      # show help page
-: quit, q       # exit the program
-: clear, c      # clear screen
-: cmds      # list of all available commands
-: edit      # open the notes file in set editor
-:
-: add, / <str>  # adds a note (preferably enclosed in quotation marks)
-:
-: show, s   # show recent notes (default 10)
-:      <int>    # show number of recent notes
-:      <str>    # show notes containing <string>
-:      all      # show all notes
-:      random, r    # show a random note
-:
-: del <str>     # delete notes containing <string>
-:     last, l   # delete the last note
-:     all   # delete all notes
+[--]version   # show version
+[--]help      # show help page
+quit, q       # exit the program
+clear, c      # clear screen
+cmds      # list of all available commands
+edit      # open the notes file in set editor
+
+add, / <str>  # adds a note (preferably enclosed in quotation marks)
+
+show, s   # show recent notes (default 10)
+    <int>    # show number of recent notes
+    <str>    # show notes containing <string>
+    all      # show all notes
+    random, r    # show a random note
+
+del <str>     # delete notes containing <string>
+    last, l   # delete the last note
+    all   # delete all notes
 ```
 
 ### Additional functionality:
@@ -81,16 +81,16 @@ Encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte toke
 > **This functionality requires the cryptography package.** If it is not already installed via package manager, please run: `pip install -r requirements.txt`
 
 ```
-: encryption on|off|set     # enables or disables login functionality; 'set' stores the token so it won't be requested again
-: changepass    # changes the password (token)
-:
-: encrypt ~/file.txt    # encrypts any file
-: decrypt ~/file.txt    # decrypts any file
-:
-: settings  # lists all settings
-: reiterate     # renumber notes' IDs
-: echo <str>    # prints the given text
-: type <str>    # types the given text
+encryption on|off|set     # enables or disables login functionality; 'set' stores the token so it won't be requested again
+changepass    # changes the password (token)
+
+encrypt ~/file.txt    # encrypts any file
+decrypt ~/file.txt    # decrypts any file
+
+settings  # lists all settings
+reiterate     # renumber notes' IDs
+echo <str>    # prints the given text
+type <str>    # types the given text
 ```
 To add your own functions:
    + define them,
