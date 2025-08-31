@@ -125,4 +125,4 @@ To check current settings type `settings`.
 
 ---
 
-Leaving a <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a> to help growing this project!
+Leave a <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a> to help growing this project!
