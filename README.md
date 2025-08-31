@@ -45,7 +45,7 @@ lisq [command [arg1] [arg2] ... ]
 lisq add "my first note"
 ```
 > [!TIP]
-> To type fast use `/` instead of `add`
+> To type fast use `/` instead of `add` 🌟
 
 ## COMMANDS
 
