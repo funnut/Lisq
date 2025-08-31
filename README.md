@@ -45,8 +45,7 @@ lisq [command [arg1] [arg2] ... ]
 lisq add "my first note"
 ```
 > [!TIP]
-> To type fast use `/` instead of `add` <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">Star</a>
+> To type fast use `/` instead of `add` <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a>
 
 ## COMMANDS
 
