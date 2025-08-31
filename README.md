@@ -1,6 +1,3 @@
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
 ```
  ___      ___   _______  _______
 |   |    |   | |       ||       |
@@ -49,7 +46,6 @@ lisq add "my first note"
 ```
 > [!TIP]
 > To type fast use `/` instead of `add` <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a>
-> To type fast use `/` instead of `add` <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">Star</a>
 
 ## COMMANDS
 
