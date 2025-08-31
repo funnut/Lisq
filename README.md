@@ -18,7 +18,7 @@ Copyright © funnut www.github.com/funnut
 
 ---
 
-## Installation
+## INSTALLATION
 
 With installed Python >=3.6,
 
