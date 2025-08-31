@@ -14,10 +14,6 @@ Lightweight, fast, and portable. Designed to run as a terminal application.
 
 If you're just starting your journey with terminals and Python, studying this program will give you a solid understanding!
 
-Code available under a non-commercial license *(see LICENSE file)*.
-
-Copyright © funnut www.github.com/funnut
-
 ---
 
 ## INSTALLATION
@@ -123,4 +119,10 @@ export LISQ_SETTINGS='{
 
 To check current settings type `settings`.
 
-**Leave <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">a ⭐ to help</a> this project grow!**
+---
+
+**<a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">Leave a ⭐ to help this project grow!</a>**
+
+Code available under a non-commercial license *(see LICENSE file)*.
+
+Copyright © funnut www.github.com/funnut
