@@ -45,7 +45,7 @@ lisq [command [arg1] [arg2] ... ]
 lisq add "my first note"
 ```
 > [!TIP]
-> lisq `/` Type fast using slash when adding a note.
+> lisq `/` Type fast using *slash* when adding a note.
 
 ## COMMANDS
 
