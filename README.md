@@ -34,7 +34,7 @@ git clone https://github.com/funnut/Lisq.git
 ```
 Place executable inside $PATH folder.
 
-> \*pip *Python language Package Manager* - How to install python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+> \*pip *Python language Package Manager* - how to install python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
 ## CLI USAGE
 
