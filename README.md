@@ -123,4 +123,4 @@ export LISQ_SETTINGS='{
 
 To check current settings type `settings`.
 
-<a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">Leave a ⭐ to help this project grow!</a>
+Leave <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">a ⭐ to help</a> this project grow!
