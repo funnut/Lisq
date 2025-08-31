@@ -22,12 +22,12 @@ Copyright © funnut www.github.com/funnut
 
 With installed Python >=3.6,
 
-+ Installation from [PyPI](https://pypi.org/project/lisq/) : 
++ Installation from [PyPI](https://pypi.org/project/lisq/)
 
 ```bash
 pip install lisq
 ```
-+ Installation from github:
++ Installation from [Github](https://github.com/funnut/Lisq.git)
 
 ```bash
 git clone https://github.com/funnut/Lisq.git
