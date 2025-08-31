@@ -45,7 +45,7 @@ lisq [command [arg1] [arg2] ... ]
 lisq add "my first note"
 ```
 > [!TIP]
-> To type fast use `/` instead of `add` <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a>
+> To type fast use `/` instead of `add`.
 
 ## COMMANDS
 
@@ -122,3 +122,5 @@ export LISQ_SETTINGS='{
 > Source startup file or restart terminal.
 
 To check current settings type `settings`.
+
+Help to grow this project leaving a <a class="github-button" href="https://github.com/funnut/Lisq" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star funnut/Lisq on GitHub">⭐</a> !
