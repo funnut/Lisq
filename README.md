@@ -27,7 +27,7 @@ With installed Python >=3.6,
 ```bash
 pip install lisq
 ```
-+ Installation from [Github](https://github.com/funnut/Lisq.git)
++ Installation from [GitHub](https://github.com/funnut/Lisq.git)
 
 ```bash
 git clone https://github.com/funnut/Lisq.git
