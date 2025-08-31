@@ -13,6 +13,7 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 Lightweight, fast and portable. It's meant to be used as terminal aplication.
 
 Code available under a non-commercial license *(see LICENSE file)*.
+
 Copyright © funnut www.github.com/funnut
 
 ---
