@@ -13,14 +13,13 @@ From Polish *"lisek / foxie"* – lisq is a [**single file**](https://github.com
 Lightweight, fast and portable. It's meant to be used as terminal aplication.
 
 Code available under a non-commercial license *(see LICENSE file)*.
-
 Copyright © funnut www.github.com/funnut
 
 ---
 
 ## Instalation
 
-With installed Python,
+With installed python,
 
 + Installation by pip* : 
 
@@ -43,7 +42,7 @@ lisq add "my new note"  # alternatively use '/' instead of 'add'
 
 ### Basic functionality:
 
-It's design to be simple so there are just three core commands: `add`/`show`/`del`.
+To stay simple there are just three base commands: `add`/`show`/`del`.
 
 ```
 : [--]version   # show version
@@ -68,7 +67,7 @@ It's design to be simple so there are just three core commands: `add`/`show`/`de
 
 ### Additional functionality:
 
-You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
+Encrypt your notes or any other file with a URL-safe Base64-encoded 32-byte token (***use with caution!***).
 > [!IMPORTANT]
 > **This functionality requires the cryptography package.** If it is not already installed via package manager, please run: `pip install -r requirements.txt`
 
@@ -84,9 +83,9 @@ You can encrypt your notes or any other file with a URL-safe Base64-encoded 32-b
 : echo <str>    # prints the given text
 : type <str>    # types the given text
 ```
-You can add your own functions by:
-   + defining them,
-   + then adding to *dispatch table*.
+To add your own functions:
+   + define them,
+   + then add to *dispatch table*.
 
 ## SETTINGS
 
@@ -98,7 +97,7 @@ Default settings that can be overwritten are:
    + default editor is set to `nano`,
    + default encryption is set to `off`.
 
-To change it, set the following variable in your system by adding it to a startup file (eg. `~/.bashrc`).
+To change it, set the following variable in the system by adding it to a startup file (eg. `~/.bashrc`).
 
 ```bash
 export LISQ_SETTINGS='{
@@ -111,6 +110,6 @@ export LISQ_SETTINGS='{
     }'
 ```
 
-> Source your startup file or restart terminal.
+> Source startup file or restart terminal.
 
 To check current settings type `settings`.
