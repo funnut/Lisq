@@ -22,13 +22,13 @@ Copyright © funnut www.github.com/funnut
 
 With installed python,
 
-+ Installation by pip* : 
++ Installation from [PyPI](https://pypi.org/project/lisq/) : 
 
 ```bash
 pip install lisq
 ```
 
-\* *Python language Package Manager*
+\* pip is a *Python language Package Manager*
 
 > How to install Python packages visit [this site.](https://packaging.python.org/en/latest/tutorials/installing-packages/)
 
