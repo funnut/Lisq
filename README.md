@@ -43,7 +43,7 @@ lisq add "my new note"  # alternatively use '/' instead of 'add'
 
 ### Basic functionality:
 
-To stay simple there are just three base commands: `add`/`show`/`del`.
+To stay simple there are just three base commands to interact with your notes: `add`/`show`/`del`.
 
 ```
 : [--]version   # show version
