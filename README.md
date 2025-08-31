@@ -44,7 +44,8 @@ Place executable inside $PATH folder.
 lisq [command [arg1] [arg2] ... ]
 lisq add "my first note"
 ```
-To type fast use '/' instead of 'add'.
+> [!TIP]
+> To type fast use '/' instead of 'add'
 
 ## COMMANDS
 
