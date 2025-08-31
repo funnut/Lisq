@@ -18,7 +18,7 @@ Copyright © funnut www.github.com/funnut
 
 ---
 
-## Instalation
+## Installation
 
 With installed python,
 
@@ -27,6 +27,12 @@ With installed python,
 ```bash
 pip install lisq
 ```
++ Installation from github:
+
+```bash
+git clone https://github.com/funnut/Lisq.git
+```
+Place executable inside $PATH folder.
 
 \* pip is a *Python language Package Manager*
 
