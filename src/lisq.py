@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-def type_write(text, delay=0.05) -> None:
+def type_write(text, delay=0.25) -> None:
     import time
     import sys
     for char in text:
@@ -213,7 +213,7 @@ def get(setting): # - pathlib, os, json
                 else:
                     print(f"\aKatalog '{path}' nie istnieje. Nie zapisano.")
             script_dir = Path(__file__).parent.resolve()
-            d_path = script_dir / "history.lisq"
+            d_path = script_dir / "lisq.log"
             return d_path
 
         elif setting == "encryption":
@@ -229,8 +229,8 @@ def get(setting): # - pathlib, os, json
             if shutil.which(editor):
                 return editor
             else:
-                logging.warning("Edytor '%s' nie widnieje w $PATH.", editor)
-                print(f"Ustawiono domyślny: '{d_editor}'")
+                logging.warning("Edytor ‘%s’ nie został odnaleziony w ścieżce systemowej.", editor)
+                print(f"Użyto domyślnego: '{d_editor}'")
                 return d_editor
 
         elif setting == "color-accent":
@@ -342,7 +342,7 @@ To change it, set the following variable in your system by adding it to a startu
 export LISQ_SETTINGS='{{
     "notes-path": "~/path/noteslisq.txt",
     "key-path": "~/path/key.lisq",
-    "hist-path": "~/path/history.lisq",
+    "hist-path": "~/path/lisq.log",
     "color-accent": "\\033[34m",
     "editor": "nano",
     "encryption": "set"
@@ -385,7 +385,7 @@ def delete(args) -> None:
     logging.info("delete(%s)",args)
     try:
         if not args:
-            raw = input("DEL: ").strip()
+            raw = input("Enter ID: ").strip()
             if raw in ["q",""]:
                 return
 
@@ -492,7 +492,7 @@ def write_file(args) -> None: # - datetime
     logging.info("write_file(%s)",args)
     try:
         if not args:
-            args = input("ADD: ").strip().split()
+            args = input("Enter a note: ").strip().split()
             if not args:
                 return
 
@@ -641,8 +641,8 @@ commands = {
     "settings": lambda args: print(json.dumps(get("all"),indent=4)),
     "--help": help_page,
     "help": help_page,
-    "--version": lambda args: print("v2025.9.1"),
-    "version": lambda args: print("v2025.9.1"),
+    "--version": lambda args: print("v2025.9.1-1"),
+    "version": lambda args: print("v2025.9.1-1"),
     "echo": lambda args: echo(" ".join(str(arg) for arg in args)),
     "type": lambda args: type_write(" ".join(str(arg) for arg in args)),
     "test": _test,
@@ -652,26 +652,22 @@ commands = {
 # MAIN() - readline - random - shlex - ast - sys
 def main():
     logging.info("START main()")
-
     login()
-
     if len(sys.argv) > 1:
         handle_CLI()
 
     now = datetime.now().strftime("%H:%M %b %d")
-    print(r""" ___      ___   _______  _______
-|   |    |   | |       ||       |
-|   |    |   | |  _____||   _   |
-|   |    |   | | |_____ |  | |  |
-|   |___ |   | |_____  ||  |_|  |
-|       ||   |  _____| ||      |
-|_______||___| |_______||____||_|""")
-    print(f"       cmds - help - {now}")
+    print(rf""" _ _     _
+| (_)___| | __
+| | / __| |/ /
+| | \__ \   <
+|_|_|___/_|\_\
+cmds - help - {now}""")
 
     while True:
         logging.info("START while True")
         try:
-            raw = input(f"{color}>> {reset}").strip()
+            raw = input(f"{color}/<{reset} ").strip()
 
             if not raw:
                 write_file(args=None)

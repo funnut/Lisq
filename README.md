@@ -108,7 +108,7 @@ To change it, set the following variable in the system by adding it to a startup
 export LISQ_SETTINGS='{
     "notes-path": "~/path/noteslisq.txt",
     "key-path": "~/path/key.lisq",
-    "hist-path": "~/path/history.lisq",
+    "hist-path": "~/path/lisq.log",
     "color-accent": "\\033[34m",
     "editor": "nano",
     "encryption": "set"
