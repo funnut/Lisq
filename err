@@ -4,3 +4,6 @@ Untracked files:
 	err
 
 nothing added to commit but untracked files present (use "git add" to track)
+[detached HEAD 23f9113] File(s) updated
+ 1 file changed, 6 insertions(+)
+ create mode 100644 err
