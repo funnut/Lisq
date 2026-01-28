@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/data/data/com.termux/files/usr/bin/env python3.12
 
 def type_write(text, delay=0.25) -> None:
     import time
@@ -30,7 +30,7 @@ import subprocess
 # Konfiguracja log - logging
 logging.basicConfig(
     level=logging.WARNING, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-    #filename="lisq.log",  # rm to console log
+    #filename=".lisq.log",  # rm to console log
     format="%(message)s"
 )
 # logging.disable(logging.CRITICAL)
@@ -99,7 +99,7 @@ def encrypt(filepath, fernet=None) -> None: # - fernet, pathlib
         if fernet:
             pass
         else:
-            if not keypath.exists():
+            if not Path(keypath).exists():
                 generate_key(save_to_file=True)
             with open(keypath, "rb") as f:
                 key = f.read()
@@ -141,7 +141,7 @@ def decrypt(filepath, fernet=None) -> None: # - fernet, InvalidToken, pathlib
         if fernet:
             pass
         else:
-            if not keypath.exists():
+            if not Path(keypath).exists():
                 generate_key(save_to_file=True)
             with open(keypath,'rb') as f:
                 key = f.read()
@@ -213,7 +213,7 @@ def get(setting): # - pathlib, os, json
                 else:
                     print(f"\aKatalog '{path}' nie istnieje. Nie zapisano.")
             script_dir = Path(__file__).parent.resolve()
-            d_path = script_dir / "lisq.log"
+            d_path = script_dir / ".lisq.log"
             return d_path
 
         elif setting == "encryption":
@@ -266,7 +266,7 @@ reset = "\033[0m"
 
 histfile = get("hist-path")
 try:
-    if histfile.exists():
+    if Path(histfile).exists():
         readline.read_history_file(histfile)
 except FileNotFoundError as e:
     logging.error("\a%s",e)
@@ -342,7 +342,7 @@ To change it, set the following variable in your system by adding it to a startu
 export LISQ_SETTINGS='{{
     "notes-path": "~/path/noteslisq.txt",
     "key-path": "~/path/key.lisq",
-    "hist-path": "~/path/lisq.log",
+    "hist-path": "~/path/.lisq.log",
     "color-accent": "\\033[34m",
     "editor": "nano",
     "encryption": "set"
@@ -402,7 +402,7 @@ def delete(args) -> None:
             lines = f.readlines()
         if argo[0] == "all":
             yesno = input("Czy usunąć wszystkie notatki? (y/n): ").strip().lower()
-            if yesno in ["yes","y",""]:
+            if yesno in {"yes","y",""}:
                 open(get("notes-path"),"w",encoding="utf-8").close()
                 print("Usunięto.")
             else:
@@ -410,7 +410,7 @@ def delete(args) -> None:
 
         elif argo[0] in ["last","l"]:
             yesno = input("Czy usunąć ostatnią notatkę? (y/n): ").strip().lower()
-            if yesno in ["y",""]:
+            if yesno in {"y",""}:
                 with open(get("notes-path"),"w",encoding="utf-8") as f:
                     f.writelines(lines[:-1])
                 print("Usunięto.")
@@ -424,7 +424,7 @@ def delete(args) -> None:
                 print("Nie wszystkie elementy zostały znalezione.")
             if number > 0:
                 yesno = input(f"Czy usunąć {number} notatki zawierające {found}? (y/n): ").strip().lower()
-                if yesno in ["yes","y",""]:
+                if yesno in {"yes","y",""}:
                     with open(get("notes-path"),"w",encoding="utf-8") as f:
                         f.writelines(new_lines)
                     reiterate()
@@ -582,13 +582,13 @@ def login(mod="in"): # - readline, pathlib
 
         # Tworzy nowe hasło
         key = get("key-path")
-        if encryption and not key.exists():
+        if encryption and not Path(key).exists():
             result = generate_key(save_to_file=True, confirm=True)
             if not result:
                 raise SystemExit(1)
 
         # Wejście OFF
-        elif not encryption and key.exists():
+        elif not encryption and Path(key).exists():
             decrypt(notes)
             key.unlink()
             logging.info(" usunięto klucz")
@@ -611,14 +611,14 @@ def login(mod="in"): # - readline, pathlib
         logging.error("\aWystąpił błąd podczas login(%s): %s", mod, e, exc_info=True)
 
 def _test(args):
-    print("args:",args,"\n----\n")
+    print("args:",args,"\n---")
 
     if not args or args[0] not in ['on','off']:
         print("test [on|off]")
         return
     else:
         result = subprocess.run(["termux-torch", args[0]])
-        print(result)
+        print(f'{result = }')
 
 
 # dispatch table - subprocess
@@ -667,7 +667,7 @@ cmds - help - {now}""")
     while True:
         logging.info("START while True")
         try:
-            raw = input(f"{color}/<{reset} ").strip()
+            raw = input(f"{color}>>{reset} ").strip()
 
             if not raw:
                 write_file(args=None)
